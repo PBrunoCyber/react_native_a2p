@@ -13,6 +13,7 @@ const Home = () => {
         { nome: "Escola Municipal Antônio Waquim", logradouro: "", bairro: "", cep: "", numero: "", estado: "", cidade: "", complemento: "" },
     ]
 
+
     const loadSchools = async () => {
         const jsonData = await AsyncStorage.getItem('formData');
         let data = [];
