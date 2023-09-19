@@ -1,37 +1,58 @@
-import { Stack } from 'expo-router';
-import { View, Text, Image, TextInput, FlatList } from 'react-native';
+import { Link, Stack } from 'expo-router';
+import { View, Text, Image, TextInput, FlatList, } from 'react-native';
 import styles from './home.style';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useRef, useState } from 'react';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { useRef, useState, useEffect } from 'react';
+import { Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Home = () => {
     const schools = [
-        { name: "Selecione uma escola", code: "0" },
-        { name: "Instituto Federal do Piauí", code: "1" },
-        { name: "Escola Municipal Antônio Nivaldo", code: "2" },
-        { name: "Escola Municipal Antônio Waquim", code: "3" },
+        { nome: "Instituto Federal do Piauí - Campus Floriano", logradouro: "", bairro: "", cep: "", numero: "", estado: "", cidade: "", complemento: "" },
+        { nome: "Escola Municipal Antônio Nivaldo", logradouro: "", bairro: "", cep: "", numero: "", estado: "", cidade: "", complemento: "" },
+        { nome: "Escola Municipal Antônio Waquim", logradouro: "", bairro: "", cep: "", numero: "", estado: "", cidade: "", complemento: "" },
     ]
 
+    const loadSchools = async () => {
+        const jsonData = await AsyncStorage.getItem('formData');
+        let data = [];
+        if (jsonData != null) {
+            data = JSON.parse(jsonData);
+            for (let index = 0; index < data.length; index++) {
+                schools.push(data[index])
+            }
+        }
+        setData(schools);
+        return schools;
+    }
+
+
     const [selectedSchool, setSeletedSchool] = useState('Selecione uma escola');
-    const [isClicked, setIsClicked] = useState(true);
+    const [isClicked, setIsClicked] = useState(false);
     const [data, setData] = useState(schools);
     const searchRef = useRef();
 
-    const onSearch = (txt: string) : void => {
-        if(txt !== ''){
-            let tempData = data.filter(item=> {
-                return item.name.toLowerCase().indexOf(txt.toLowerCase()) > - 1;
+    useEffect(() => {
+        loadSchools();
+    }, [isClicked])
+
+    const onSearch = async (txt: string) => {
+        const res = await loadSchools();
+
+        if (txt !== '') {
+            let tempData = res.filter(item => {
+                return item.nome.toLowerCase().includes(txt.toLowerCase());
             });
             setData(tempData);
-        }else{
-            setData(schools);
+        } else {
+            setData(res);
         }
     }
 
     return (
         <>
             <Stack.Screen options={{ title: "Home", headerShadowVisible: false }} />
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <Text style={styles.title}></Text>
                 <TouchableOpacity style={styles.dropdownSelector} onPress={() => setIsClicked(!isClicked)}>
                     <Text>{selectedSchool}</Text>
@@ -40,16 +61,25 @@ const Home = () => {
                 </TouchableOpacity>
                 {isClicked ?
                     <View style={styles.dropdownArea}>
-                        <TextInput placeholder="Pesquisar escolas" style={styles.searchInput} onChangeText={txt => {onSearch(txt)}}/>
-                        <FlatList data={data} renderItem={({item, index})=>{
+                        <TextInput placeholder="Pesquisar escolas" style={styles.searchInput} onChangeText={txt => { return onSearch(txt) }} />
+                        {data.map((item, index) => {
                             return (
-                                <TouchableOpacity style={styles.schoolsItem} onPress={()=> { setSeletedSchool(item.name); onSearch(''); setIsClicked(false);}}>
-                                    <Text>{item.name}</Text>
+                                <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedSchool(item.nome); onSearch(''); setIsClicked(false); }}>
+                                    <Text>{item.nome}</Text>
                                 </TouchableOpacity>
                             )
-                        }}/>
+                        })}
                     </View> : null}
-
+                <TouchableOpacity style={styles.button}>
+                    <Text style={{ color: '#fff', fontSize: 15, fontWeight: 'bold' }}>Abrir</Text>
+                </TouchableOpacity>
+            </ScrollView>
+            <View style={styles.containerBtn}>
+                <Link href={'/addSchool/'}>
+                    <TouchableOpacity style={styles.addBtn}>
+                        <Ionicons name='add-outline' color={'white'} size={50} />
+                    </TouchableOpacity>
+                </Link>
             </View>
         </>
     )

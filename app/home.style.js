@@ -1,13 +1,11 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: '100%',
-        marginTop: 50
     },
     title: {
-        fontSize: 20, 
+        fontSize: 20,
         fontWeight: 'bold',
         color: 'black',
         padding: 20,
@@ -15,7 +13,7 @@ const styles = StyleSheet.create({
     dropdownSelector: {
         flexDirection: 'row',
         width: '90%',
-        height: 50, 
+        height: 50,
         borderRadius: 10,
         borderWidth: 0.5,
         borderColor: 'black',
@@ -26,13 +24,13 @@ const styles = StyleSheet.create({
         paddingRight: 20
     },
     icon: {
-        width: 20, 
+        width: 20,
         height: 20
     },
     dropdownArea: {
         width: '90%',
-        height: 400,
         borderRadius: 10,
+        paddingBottom: 20,
         marginTop: 20,
         elevation: 5,
         backgroundColor: '#fff',
@@ -41,10 +39,10 @@ const styles = StyleSheet.create({
     searchInput: {
         width: '90%',
         height: 40,
-        borderRadius: 10, 
+        borderRadius: 10,
         borderWidth: 0.5,
-        paddingLeft: 20, 
-        paddingRight: 20, 
+        paddingLeft: 20,
+        paddingRight: 20,
         borderColor: "black",
         alignSelf: 'center',
         marginTop: 10,
@@ -57,6 +55,32 @@ const styles = StyleSheet.create({
         borderBottomWidth: .2,
         justifyContent: 'center',
         alignSelf: 'center'
+    },
+    button: {
+        width: "90%",
+        height: 50,
+        backgroundColor: '#287bff',
+        borderRadius: 10,
+        zIndex: -1,
+        borderColor: 'none',
+        alignItems: 'center',
+        marginTop: 20,
+        justifyContent: 'center',
+        alignSelf: 'center',
+    },
+    containerBtn: {
+        position: 'absolute',
+        bottom: 30,
+        right: 20,
+    },
+    addBtn: {
+        width: 70,
+        height: 70,
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        borderRadius: 100,
+        backgroundColor: '#287bff'
     }
 });
 
