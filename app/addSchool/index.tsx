@@ -1,5 +1,5 @@
 import { Text, TextInput, View } from 'react-native';
-import { Stack } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import styles from './addSchool.style';
 import json from '../../json/estados-cidades.json';
@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const AddSchool = () => {
+    const router = useRouter();
     const [formData, setFormData] = useState({
         nome: '',
         logradouro: '',
@@ -20,7 +21,6 @@ const AddSchool = () => {
         complemento: ''
     });
     const [formErrors, setFormErrors] = useState({ nome: '', logradouro: '', bairro: '', cep: '', numero: '', estado: '', cidade: '' });
-    const fileName = "formData.json";
 
     const handleInputChange = (key: string, input: string) => {
         setFormErrors({ nome: '', logradouro: '', bairro: '', cep: '', numero: '', estado: '', cidade: '' });
@@ -36,7 +36,7 @@ const AddSchool = () => {
         if (!formData.numero) errors.numero = "O campo número é obrigatório"
         if (!formData.estado) errors.estado = "O campo estado é obrigatório"
         if (!formData.cidade) errors.cidade = "O campo cidade é obrigatório"
-        if (Object.keys(errors).length > 0) {
+        if (errors.nome || errors.logradouro || errors.bairro || errors.cep || errors.numero || errors.estado || errors.cidade) {
             setFormErrors(errors);
             return;
         }
@@ -50,6 +50,7 @@ const AddSchool = () => {
             const jsonData = JSON.stringify(formsArray);
             await AsyncStorage.setItem('formData', jsonData);
             console.log("Dados do formulário salvos com sucesso");
+            router.push('/');
         } catch (error) {
             console.log(error);
         }
