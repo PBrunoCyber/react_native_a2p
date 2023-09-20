@@ -1,4 +1,4 @@
-import { Link, Stack } from 'expo-router';
+import { Link, Stack, useRouter } from 'expo-router';
 import { View, Text, Image, TextInput, FlatList, } from 'react-native';
 import styles from './home.style';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
@@ -31,7 +31,7 @@ const Home = () => {
     const [selectedSchool, setSeletedSchool] = useState('Selecione uma escola');
     const [isClicked, setIsClicked] = useState(false);
     const [data, setData] = useState(schools);
-    const searchRef = useRef();
+    const router = useRouter();
 
     useEffect(() => {
         loadSchools();
@@ -71,7 +71,7 @@ const Home = () => {
                             )
                         })}
                     </View> : null}
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={() => router.push(`/form/${selectedSchool}`)}>
                     <Text style={{ color: '#fff', fontSize: 15, fontWeight: 'bold' }}>Abrir</Text>
                 </TouchableOpacity>
             </ScrollView>
