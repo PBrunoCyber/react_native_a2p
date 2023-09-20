@@ -1,9 +1,9 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ViewStyle } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        marginTop: 100,
+        marginTop: 40,
+        marginBottom: 20,
         alignItems: 'center'
     },
 
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     progress: {
         width: '50%',
         height: 15,
-        backgroundColor: '#00AB55',
+        backgroundColor: '#287bff',
         borderRadius: 10,
     },
 
@@ -28,24 +28,19 @@ const styles = StyleSheet.create({
         color: '#005249',
         marginBottom: 20,
     },
-
     btn: {
-        paddingVertical: 8,
-        paddingHorizontal: 15,
-        backgroundColor: '#919EAB',
-        borderRadius: 6,
-        marginHorizontal: 10,
-        marginTop: 40,
+        height: 50,
+        marginTop: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 5,
+        backgroundColor: '#287bff'
     },
-
-    btnText: {
-        fontWeight: '500',
-        color: '#fff',
-    },
-
-    btnBox: {
+    containerBtn: {
+        flex: 1,
         flexDirection: 'row',
-    },
+        gap: 10,
+    }
 });
 
 export default styles;
