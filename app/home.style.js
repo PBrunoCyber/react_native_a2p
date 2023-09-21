@@ -1,8 +1,34 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
+    
+    cardContainer: {
+        maxWidth: 900,
+        backgroundColor: 'white',
+        padding: 30,
+        marginTop: 40,
+        borderRadius: 15,
+        width: '100%',
+        alignSelf: 'center'
+    },
+    add:{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        borderBottomWidth: 0.5,
+        paddingBottom: 10,
+        borderBottomColor: '#ccc'
+    },
+    filtros:{
+        marginTop: 30,
+        paddingBottom: 50,
+        borderBottomColor: '#ccc',
+        borderBottomWidth: 0.5,
+    },
+    txtFiltros: {
+        fontWeight: 'bold',
+        fontSize: 15,
+        color: '#555'
     },
     title: {
         fontSize: 20,
@@ -10,18 +36,40 @@ const styles = StyleSheet.create({
         color: 'black',
         padding: 20,
     },
+    inep_nome: {
+        marginTop: 20,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        gap: 20,
+    },
     dropdownSelector: {
         flexDirection: 'row',
-        width: '90%',
         height: 50,
         borderRadius: 10,
         borderWidth: 0.5,
-        borderColor: 'black',
-        alignSelf: 'center',
+        borderColor: '#ccc',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingLeft: 20,
-        paddingRight: 20
+        paddingLeft: 10,
+        minWidth: 200,
+        paddingRight: 10
+    },
+    btnCancelar: {
+        height: 40, 
+        minWidth: 120,
+        borderWidth: 0.5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 5,
+        borderColor: 'green'
+    },
+    btnPesquisar: {
+        height: 40, 
+        minWidth: 120,
+        alignItems: 'center',
+        justifyContent:'center',
+        borderRadius: 5,
+        backgroundColor: 'green'
     },
     icon: {
         width: 20,
@@ -74,13 +122,13 @@ const styles = StyleSheet.create({
         right: 20,
     },
     addBtn: {
-        width: 70,
-        height: 70,
+        width: 40,
+        height: 40,
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'center',
-        borderRadius: 100,
-        backgroundColor: '#287bff'
+        borderRadius: 5,
+        backgroundColor: 'green'
     }
 });
 

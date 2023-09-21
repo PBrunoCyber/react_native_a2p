@@ -1,0 +1,3417 @@
+[
+    {
+        "idEntidade": 130,
+        "codINEPEntidade": 22000054,
+        "nome": "CEJA PROF CONRADO AMORIM DE SOUSA"
+    },
+    {
+        "idEntidade": 758,
+        "codINEPEntidade": 22001530,
+        "nome": "U E  GERVASIO COSTA"
+    },
+    {
+        "idEntidade": 436,
+        "codINEPEntidade": 22001573,
+        "nome": "U E  MATIAS OLIMPIO"
+    },
+    {
+        "idEntidade": 628,
+        "codINEPEntidade": 22001603,
+        "nome": "U E  NOSSA SENHORA DA CONCEIÇÃO"
+    },
+    {
+        "idEntidade": 30,
+        "codINEPEntidade": 22002049,
+        "nome": "U E  CONSELHEIRO SARAIVA"
+    },
+    {
+        "idEntidade": 744,
+        "codINEPEntidade": 22002391,
+        "nome": "U E  DIRCEU ARCOVERDE"
+    },
+    {
+        "idEntidade": 127,
+        "codINEPEntidade": 22002588,
+        "nome": "CETI GAYOSO E ALMENDRA"
+    },
+    {
+        "idEntidade": 376,
+        "codINEPEntidade": 22002677,
+        "nome": "U E  MARIA MELO"
+    },
+    {
+        "idEntidade": 212,
+        "codINEPEntidade": 22002790,
+        "nome": "CETI GOV ALBERTO TAVARES SILVA"
+    },
+    {
+        "idEntidade": 227,
+        "codINEPEntidade": 22003100,
+        "nome": "U E  MIGUEL ARCOVERDE"
+    },
+    {
+        "idEntidade": 42,
+        "codINEPEntidade": 22003452,
+        "nome": "CETI VENANCIA LAGES VELOSO"
+    },
+    {
+        "idEntidade": 293,
+        "codINEPEntidade": 22004777,
+        "nome": "U E  PETRONIO PORTELA"
+    },
+    {
+        "idEntidade": 514,
+        "codINEPEntidade": 22004793,
+        "nome": "U E  ESTADO DA PARAIBA"
+    },
+    {
+        "idEntidade": 107,
+        "codINEPEntidade": 22004815,
+        "nome": "CETI JOSE NOGUEIRA DE AGUIAR"
+    },
+    {
+        "idEntidade": 96,
+        "codINEPEntidade": 22004823,
+        "nome": "CEEP LEONARDO DAS DORES"
+    },
+    {
+        "idEntidade": 552,
+        "codINEPEntidade": 22005242,
+        "nome": "U E  DOROTEU SERTAO"
+    },
+    {
+        "idEntidade": 766,
+        "codINEPEntidade": 22005315,
+        "nome": "CETI JOSE MENDES VASCONCELOS"
+    },
+    {
+        "idEntidade": 329,
+        "codINEPEntidade": 22006184,
+        "nome": "CETI JOAO FRANCISCO"
+    },
+    {
+        "idEntidade": 806,
+        "codINEPEntidade": 22006249,
+        "nome": "CEJA JOSE LOPES DE ARAUJO"
+    },
+    {
+        "idEntidade": 191,
+        "codINEPEntidade": 22006800,
+        "nome": "U E  JOAO DE ASSIS MARQUES"
+    },
+    {
+        "idEntidade": 422,
+        "codINEPEntidade": 22006850,
+        "nome": "CETI LUIS TEIXEIRA"
+    },
+    {
+        "idEntidade": 24,
+        "codINEPEntidade": 22007318,
+        "nome": "U E  AUGUSTO CESAR MAIA"
+    },
+    {
+        "idEntidade": 634,
+        "codINEPEntidade": 22007423,
+        "nome": "U E  FRANCISCO TOMAZ"
+    },
+    {
+        "idEntidade": 126,
+        "codINEPEntidade": 22007431,
+        "nome": "CETI JOSE AMAVEL"
+    },
+    {
+        "idEntidade": 769,
+        "codINEPEntidade": 22008730,
+        "nome": "CETI  CECILIA LACERDA"
+    },
+    {
+        "idEntidade": 797,
+        "codINEPEntidade": 22008780,
+        "nome": "U E  PIO XII"
+    },
+    {
+        "idEntidade": 424,
+        "codINEPEntidade": 22009019,
+        "nome": "U E PROF ARIMATHEA"
+    },
+    {
+        "idEntidade": 703,
+        "codINEPEntidade": 22009035,
+        "nome": "U E  SIGEFREDO PACHECO"
+    },
+    {
+        "idEntidade": 56,
+        "codINEPEntidade": 22010254,
+        "nome": "CETI JUDITH ALVES SANTANA"
+    },
+    {
+        "idEntidade": 141,
+        "codINEPEntidade": 22010467,
+        "nome": "CETI  JOSE NARCISO DA ROCHA FILHO"
+    },
+    {
+        "idEntidade": 670,
+        "codINEPEntidade": 22010483,
+        "nome": "CETI  BAURELIO MANGABEIRA"
+    },
+    {
+        "idEntidade": 115,
+        "codINEPEntidade": 22010505,
+        "nome": "CETI DES JOSE DE ARIMATHEA TITO"
+    },
+    {
+        "idEntidade": 644,
+        "codINEPEntidade": 22010513,
+        "nome": "CEJA PROFESSORA COTA SAMPAIO"
+    },
+    {
+        "idEntidade": 207,
+        "codINEPEntidade": 22010521,
+        "nome": "U E  PROF NENEM CAVALCANTE"
+    },
+    {
+        "idEntidade": 266,
+        "codINEPEntidade": 22010530,
+        "nome": "U E  PROFESSORA SINHA CARVALHO"
+    },
+    {
+        "idEntidade": 662,
+        "codINEPEntidade": 22010556,
+        "nome": "U E  CASSIANA ROCHA"
+    },
+    {
+        "idEntidade": 476,
+        "codINEPEntidade": 22010572,
+        "nome": "CETI EMB ESPEDITO RESENDE"
+    },
+    {
+        "idEntidade": 361,
+        "codINEPEntidade": 22010599,
+        "nome": "U E  JOAO COELHO DE RESENDE"
+    },
+    {
+        "idEntidade": 562,
+        "codINEPEntidade": 22011048,
+        "nome": "U E  OTAVIO FALCAO"
+    },
+    {
+        "idEntidade": 834,
+        "codINEPEntidade": 22011145,
+        "nome": "U E  MIGUEL NUNES DE SALES"
+    },
+    {
+        "idEntidade": 598,
+        "codINEPEntidade": 22011170,
+        "nome": "U E  SAO JOSE"
+    },
+    {
+        "idEntidade": 539,
+        "codINEPEntidade": 22012419,
+        "nome": "U E  ZEZITA SAMPAIO"
+    },
+    {
+        "idEntidade": 694,
+        "codINEPEntidade": 22012508,
+        "nome": "CEJA LEONIDAS MELO"
+    },
+    {
+        "idEntidade": 339,
+        "codINEPEntidade": 22013555,
+        "nome": "U E  JOSE BASSON"
+    },
+    {
+        "idEntidade": 125,
+        "codINEPEntidade": 22013601,
+        "nome": "U E  EMILIA SOARES ARAUJO"
+    },
+    {
+        "idEntidade": 596,
+        "codINEPEntidade": 22014160,
+        "nome": "U E  RAIMUNDO MIRANDA DE BRITO"
+    },
+    {
+        "idEntidade": 178,
+        "codINEPEntidade": 22014306,
+        "nome": "CETI MANOEL RICARDO"
+    },
+    {
+        "idEntidade": 179,
+        "codINEPEntidade": 22014314,
+        "nome": "U E  MANOEL RODRIGUES VIEIRA"
+    },
+    {
+        "idEntidade": 779,
+        "codINEPEntidade": 22014322,
+        "nome": "U E  PEDRO II"
+    },
+    {
+        "idEntidade": 787,
+        "codINEPEntidade": 22014373,
+        "nome": "U E  RICARDO AUGUSTO VELOSO"
+    },
+    {
+        "idEntidade": 121,
+        "codINEPEntidade": 22014470,
+        "nome": "CETI ZULMIRA XAVIER"
+    },
+    {
+        "idEntidade": 551,
+        "codINEPEntidade": 22014500,
+        "nome": "CEJA JONAS CORREIA"
+    },
+    {
+        "idEntidade": 568,
+        "codINEPEntidade": 22014535,
+        "nome": "CETI LIMA REBELO"
+    },
+    {
+        "idEntidade": 984,
+        "codINEPEntidade": 22014837,
+        "nome": "ESCOLA DE EDUCACAO ESPECIAL PROFA MARIA DO AMPARO PAULA"
+    },
+    {
+        "idEntidade": 730,
+        "codINEPEntidade": 22015159,
+        "nome": "U E FRANCISCO CORREIA"
+    },
+    {
+        "idEntidade": 208,
+        "codINEPEntidade": 22015221,
+        "nome": "CEEP MINISTRO PETRONIO PORTELLA"
+    },
+    {
+        "idEntidade": 144,
+        "codINEPEntidade": 22015469,
+        "nome": "U E  JONAS CORREIA"
+    },
+    {
+        "idEntidade": 267,
+        "codINEPEntidade": 22015736,
+        "nome": "CETI DR JOAO SILVA FILHO"
+    },
+    {
+        "idEntidade": 432,
+        "codINEPEntidade": 22015752,
+        "nome": "CETI JEANETE SOUSA"
+    },
+    {
+        "idEntidade": 665,
+        "codINEPEntidade": 22015787,
+        "nome": "U E  OZIAS CORREIA"
+    },
+    {
+        "idEntidade": 737,
+        "codINEPEntidade": 22015795,
+        "nome": "U E  PADRE RAIMUNDO JOSE VIEIRA"
+    },
+    {
+        "idEntidade": 805,
+        "codINEPEntidade": 22015809,
+        "nome": "CETI POLIVALENTE LIMA REBELO"
+    },
+    {
+        "idEntidade": 820,
+        "codINEPEntidade": 22015841,
+        "nome": "U E  CANDIDO OLIVEIRA"
+    },
+    {
+        "idEntidade": 128,
+        "codINEPEntidade": 22015876,
+        "nome": "U E  EDSON DA PAZ CUNHA"
+    },
+    {
+        "idEntidade": 757,
+        "codINEPEntidade": 22015884,
+        "nome": "U E  EPAMINONDAS CASTELO BRANCO"
+    },
+    {
+        "idEntidade": 226,
+        "codINEPEntidade": 22015892,
+        "nome": "U E  JOSE EUCLIDES DE MIRANDA"
+    },
+    {
+        "idEntidade": 652,
+        "codINEPEntidade": 22015973,
+        "nome": "U E  EDISON CUNHA"
+    },
+    {
+        "idEntidade": 469,
+        "codINEPEntidade": 22016040,
+        "nome": "CETI MAROCAS LIMA"
+    },
+    {
+        "idEntidade": 544,
+        "codINEPEntidade": 22016082,
+        "nome": "CETI PROFª RAQUEL MAGALHAES"
+    },
+    {
+        "idEntidade": 533,
+        "codINEPEntidade": 22016694,
+        "nome": "U E  PATRONATO IRMAOS DANTAS"
+    },
+    {
+        "idEntidade": 616,
+        "codINEPEntidade": 22016724,
+        "nome": "U E  HESICHIA DE SOUSA BRITO"
+    },
+    {
+        "idEntidade": 650,
+        "codINEPEntidade": 22016937,
+        "nome": "U E  ANISIO BRITO"
+    },
+    {
+        "idEntidade": 273,
+        "codINEPEntidade": 22017011,
+        "nome": "CETI INES DE MARIA SOUSA ROCHA"
+    },
+    {
+        "idEntidade": 780,
+        "codINEPEntidade": 22017771,
+        "nome": "U E CAZUZA BARBOSA"
+    },
+    {
+        "idEntidade": 617,
+        "codINEPEntidade": 22017992,
+        "nome": "U E  AFONSO MAFRENSE"
+    },
+    {
+        "idEntidade": 472,
+        "codINEPEntidade": 22018026,
+        "nome": "U E  ALTINA PESTANA"
+    },
+    {
+        "idEntidade": 380,
+        "codINEPEntidade": 22018042,
+        "nome": "U E  ANISIO LIMA"
+    },
+    {
+        "idEntidade": 778,
+        "codINEPEntidade": 22018107,
+        "nome": "U E  HUGO NAPOLEAO"
+    },
+    {
+        "idEntidade": 717,
+        "codINEPEntidade": 22018174,
+        "nome": "CETI MARIO RAULINO"
+    },
+    {
+        "idEntidade": 705,
+        "codINEPEntidade": 22018204,
+        "nome": "CEEP  PIO XII"
+    },
+    {
+        "idEntidade": 406,
+        "codINEPEntidade": 22018220,
+        "nome": "CETI  RAMA BOA"
+    },
+    {
+        "idEntidade": 775,
+        "codINEPEntidade": 22018654,
+        "nome": "U E LUIZ ALVES DE ALMEIDA"
+    },
+    {
+        "idEntidade": 859,
+        "codINEPEntidade": 22018670,
+        "nome": "UNIDADE ESCOLAR RAIMUNDO ARAÚJO PRADO"
+    },
+    {
+        "idEntidade": 261,
+        "codINEPEntidade": 22019294,
+        "nome": "U E  RAIMUNDO MARTINS"
+    },
+    {
+        "idEntidade": 708,
+        "codINEPEntidade": 22019740,
+        "nome": "U E  ANTONIETA RIBEIRO MORAES"
+    },
+    {
+        "idEntidade": 113,
+        "codINEPEntidade": 22019790,
+        "nome": "CETI DOMINGOS ALVES DA COSTA"
+    },
+    {
+        "idEntidade": 785,
+        "codINEPEntidade": 22019804,
+        "nome": "U E  FRANCISCO LUIS DE MORAES"
+    },
+    {
+        "idEntidade": 156,
+        "codINEPEntidade": 22019839,
+        "nome": "U E JACOB BARBOSA"
+    },
+    {
+        "idEntidade": 624,
+        "codINEPEntidade": 22019952,
+        "nome": "U. E. FIRMO JOSE DA CUNHA"
+    },
+    {
+        "idEntidade": 201,
+        "codINEPEntidade": 22020810,
+        "nome": "U E  GOV PEDRO FREITAS"
+    },
+    {
+        "idEntidade": 389,
+        "codINEPEntidade": 22020942,
+        "nome": "CETI ANTONIO FREITAS"
+    },
+    {
+        "idEntidade": 772,
+        "codINEPEntidade": 22020969,
+        "nome": "CETI FERDINAND FREITAS"
+    },
+    {
+        "idEntidade": 122,
+        "codINEPEntidade": 22021060,
+        "nome": "U E  ELON MACHADO MOITA"
+    },
+    {
+        "idEntidade": 743,
+        "codINEPEntidade": 22021310,
+        "nome": "U E  ESTADO DO ACRE"
+    },
+    {
+        "idEntidade": 114,
+        "codINEPEntidade": 22021868,
+        "nome": "U E  DR NORONHA FILHO"
+    },
+    {
+        "idEntidade": 777,
+        "codINEPEntidade": 22021922,
+        "nome": "U E  RAIMUNDO PESSOA"
+    },
+    {
+        "idEntidade": 642,
+        "codINEPEntidade": 22021990,
+        "nome": "CETI JOAO MENDES OLIMPIO DE MELO"
+    },
+    {
+        "idEntidade": 590,
+        "codINEPEntidade": 22022007,
+        "nome": "CETI PROFESSOR BALDUINO BARBOSA DE DEUS"
+    },
+    {
+        "idEntidade": 323,
+        "codINEPEntidade": 22022015,
+        "nome": "CETI PROFESSOR MELO MAGALHAES"
+    },
+    {
+        "idEntidade": 465,
+        "codINEPEntidade": 22022040,
+        "nome": "U E PROFESSOR JAMES AZEVEDO"
+    },
+    {
+        "idEntidade": 265,
+        "codINEPEntidade": 22022112,
+        "nome": "U E  DEP ATILA LIRA"
+    },
+    {
+        "idEntidade": 292,
+        "codINEPEntidade": 22022120,
+        "nome": "CETI GOVERNADOR FREITAS NETO"
+    },
+    {
+        "idEntidade": 499,
+        "codINEPEntidade": 22022147,
+        "nome": "CENTRO DE HABILITACAO ANA CORDEIRO"
+    },
+    {
+        "idEntidade": 482,
+        "codINEPEntidade": 22022287,
+        "nome": "CEJA PROFESSOR ARTUR FURTADO"
+    },
+    {
+        "idEntidade": 76,
+        "codINEPEntidade": 22022295,
+        "nome": "CEJA PROFESSOR CLAUDIO FERREIRA"
+    },
+    {
+        "idEntidade": 69,
+        "codINEPEntidade": 22022376,
+        "nome": "CETI ZACARIAS DE GOIS"
+    },
+    {
+        "idEntidade": 359,
+        "codINEPEntidade": 22023208,
+        "nome": "CEJA GAYOSO E ALMENDRA"
+    },
+    {
+        "idEntidade": 882,
+        "codINEPEntidade": 22023771,
+        "nome": "ESCOLA AGRICOLA SANTO AFONSO RODRIGUEZ"
+    },
+    {
+        "idEntidade": 776,
+        "codINEPEntidade": 22025308,
+        "nome": "CETI  GOVERNADOR DIRCEU MENDES ARCOVERDE"
+    },
+    {
+        "idEntidade": 615,
+        "codINEPEntidade": 22025316,
+        "nome": "CEEP EM SAUDE MONS. JOSE LUIS BARBOSA CORTEZ"
+    },
+    {
+        "idEntidade": 759,
+        "codINEPEntidade": 22025324,
+        "nome": "CEEP PREFEITO JOAO MENDES OLIMPIO DE MELO"
+    },
+    {
+        "idEntidade": 162,
+        "codINEPEntidade": 22026304,
+        "nome": "U E  TERESINHA NUNES"
+    },
+    {
+        "idEntidade": 326,
+        "codINEPEntidade": 22026487,
+        "nome": "CEJA PROFª MARIA RODRIGUES DAS MERCEDES"
+    },
+    {
+        "idEntidade": 369,
+        "codINEPEntidade": 22026495,
+        "nome": "CEJA PROFESSORA SHIRLEY COSTA E SILVA"
+    },
+    {
+        "idEntidade": 571,
+        "codINEPEntidade": 22026878,
+        "nome": "CETI MONSENHOR RAIMUNDO NONATO MELO"
+    },
+    {
+        "idEntidade": 315,
+        "codINEPEntidade": 22026894,
+        "nome": "CETI PROFESSOR  FELISMINO FREITAS"
+    },
+    {
+        "idEntidade": 553,
+        "codINEPEntidade": 22026908,
+        "nome": "U E  ANTONIO DE ALMENDRA FREITAS"
+    },
+    {
+        "idEntidade": 55,
+        "codINEPEntidade": 22026924,
+        "nome": "U E  GOVERNADOR JOAO CLIMACO DALMEIDA"
+    },
+    {
+        "idEntidade": 559,
+        "codINEPEntidade": 22026932,
+        "nome": "U E  DEPUTADO TERTULIANO MILTON BRANDAO"
+    },
+    {
+        "idEntidade": 39,
+        "codINEPEntidade": 22026940,
+        "nome": "U E  DESEMBARGADOR ROBERT CARVALHO FREITAS"
+    },
+    {
+        "idEntidade": 498,
+        "codINEPEntidade": 22026975,
+        "nome": "U E  DOM SEVERINO"
+    },
+    {
+        "idEntidade": 36,
+        "codINEPEntidade": 22026983,
+        "nome": "U E  DOMICIO MAGALHAES DE MELO"
+    },
+    {
+        "idEntidade": 286,
+        "codINEPEntidade": 22026991,
+        "nome": "U E  DR AGNELO PEREIRA DA SILVA"
+    },
+    {
+        "idEntidade": 605,
+        "codINEPEntidade": 22027041,
+        "nome": "U E  GOV ALBERTO TAVARES E SILVA"
+    },
+    {
+        "idEntidade": 37,
+        "codINEPEntidade": 22027068,
+        "nome": "U E  JOAO EMILIO FALCAO COSTA"
+    },
+    {
+        "idEntidade": 502,
+        "codINEPEntidade": 22027092,
+        "nome": "U E  PROFESSOR JOAO SOARES DA SILVA"
+    },
+    {
+        "idEntidade": 630,
+        "codINEPEntidade": 22027130,
+        "nome": "UNID ESC N S DO PERPETUO SOCORRO"
+    },
+    {
+        "idEntidade": 91,
+        "codINEPEntidade": 22027190,
+        "nome": "CEJA PROF ANGELINA DE MOURA LEAL"
+    },
+    {
+        "idEntidade": 457,
+        "codINEPEntidade": 22027203,
+        "nome": "CETI PROFESSOR ANTONIO MARIA MADEIRA"
+    },
+    {
+        "idEntidade": 92,
+        "codINEPEntidade": 22027238,
+        "nome": "U E  PROFESSOR JOSE CAMILO DA SILVEIRA FILHO"
+    },
+    {
+        "idEntidade": 93,
+        "codINEPEntidade": 22027262,
+        "nome": "CETI  MOACI MADEIRA CAMPOS"
+    },
+    {
+        "idEntidade": 350,
+        "codINEPEntidade": 22027289,
+        "nome": "U E  PROF ODYLO DE BRITO RAMOS"
+    },
+    {
+        "idEntidade": 809,
+        "codINEPEntidade": 22027297,
+        "nome": "CETI PROFESSOR RALDIR CAVALCANTE BASTOS"
+    },
+    {
+        "idEntidade": 523,
+        "codINEPEntidade": 22027319,
+        "nome": "CETI PROFESSOR DARCY ARAUJO"
+    },
+    {
+        "idEntidade": 488,
+        "codINEPEntidade": 22027327,
+        "nome": "CETI  PROFESSOR JOCA VIEIRA"
+    },
+    {
+        "idEntidade": 599,
+        "codINEPEntidade": 22027335,
+        "nome": "U E  PROFA ADAMIR LEAL"
+    },
+    {
+        "idEntidade": 97,
+        "codINEPEntidade": 22027343,
+        "nome": "CETI PROFª  MARIA DA CONCEICAO SALOMÉ"
+    },
+    {
+        "idEntidade": 647,
+        "codINEPEntidade": 22027360,
+        "nome": "U E  SANTA INES"
+    },
+    {
+        "idEntidade": 98,
+        "codINEPEntidade": 22027416,
+        "nome": "U E  ANITA GAYOSO"
+    },
+    {
+        "idEntidade": 213,
+        "codINEPEntidade": 22027432,
+        "nome": "U E  DEP ALBERTO MONTEIRO"
+    },
+    {
+        "idEntidade": 408,
+        "codINEPEntidade": 22027440,
+        "nome": "U E  DEP JOAQUIM GOMES CALADO"
+    },
+    {
+        "idEntidade": 343,
+        "codINEPEntidade": 22027459,
+        "nome": "U E DESEMBARGADOR HELI SOBRAL"
+    },
+    {
+        "idEntidade": 451,
+        "codINEPEntidade": 22027467,
+        "nome": "UNID ESC DES PEDRO CONDE"
+    },
+    {
+        "idEntidade": 308,
+        "codINEPEntidade": 22027475,
+        "nome": "CETI DIDACIO SILVA"
+    },
+    {
+        "idEntidade": 325,
+        "codINEPEntidade": 22027483,
+        "nome": "U E  ESTADO DE SAO PAULO"
+    },
+    {
+        "idEntidade": 101,
+        "codINEPEntidade": 22027505,
+        "nome": "CEJA FRANCISCO CESAR DE ARAUJO"
+    },
+    {
+        "idEntidade": 709,
+        "codINEPEntidade": 22027513,
+        "nome": "U E  FREI HELIODORIO"
+    },
+    {
+        "idEntidade": 102,
+        "codINEPEntidade": 22027548,
+        "nome": "U E  MARECHAL RONDON"
+    },
+    {
+        "idEntidade": 439,
+        "codINEPEntidade": 22027556,
+        "nome": "U E  MARIA MODESTINA BEZERRA"
+    },
+    {
+        "idEntidade": 105,
+        "codINEPEntidade": 22027564,
+        "nome": "U E  MATIAS OLIMPIO"
+    },
+    {
+        "idEntidade": 106,
+        "codINEPEntidade": 22027572,
+        "nome": "UNID ESC GOVERNADOR MIGUEL ROSA"
+    },
+    {
+        "idEntidade": 103,
+        "codINEPEntidade": 22027599,
+        "nome": "U E  NAIR GONCALVES"
+    },
+    {
+        "idEntidade": 528,
+        "codINEPEntidade": 22027602,
+        "nome": "CETI PEQUENA RUBIM"
+    },
+    {
+        "idEntidade": 309,
+        "codINEPEntidade": 22027610,
+        "nome": "U E  PROFESSOR PIRES DE CASTRO"
+    },
+    {
+        "idEntidade": 738,
+        "codINEPEntidade": 22027629,
+        "nome": "U E  PREFEITO FREITAS NETO"
+    },
+    {
+        "idEntidade": 681,
+        "codINEPEntidade": 22027653,
+        "nome": "CETI  PROF MILTON AGUIAR"
+    },
+    {
+        "idEntidade": 702,
+        "codINEPEntidade": 22027661,
+        "nome": "CETI PROF PINHEIRO MACHADO"
+    },
+    {
+        "idEntidade": 164,
+        "codINEPEntidade": 22027670,
+        "nome": "U E  PROFESSOR RAIMUNDO PORTELA"
+    },
+    {
+        "idEntidade": 427,
+        "codINEPEntidade": 22027700,
+        "nome": "CETI PROFESSOR EDGAR TITO"
+    },
+    {
+        "idEntidade": 745,
+        "codINEPEntidade": 22027726,
+        "nome": "CETI DESEMBARGADOR HENRIQUE COUTO"
+    },
+    {
+        "idEntidade": 639,
+        "codINEPEntidade": 22027742,
+        "nome": "CEEP PAULO FERRAZ"
+    },
+    {
+        "idEntidade": 173,
+        "codINEPEntidade": 22027769,
+        "nome": "U E  PROFESSORA AUREA FREIRE"
+    },
+    {
+        "idEntidade": 800,
+        "codINEPEntidade": 22027777,
+        "nome": "CETI PROFª JULIA NUNES ALVES"
+    },
+    {
+        "idEntidade": 224,
+        "codINEPEntidade": 22027831,
+        "nome": "U E  ANICOTA BURLAMAQUI"
+    },
+    {
+        "idEntidade": 484,
+        "codINEPEntidade": 22027874,
+        "nome": "U E  PADRE ANTONIO JOSE DO REGO"
+    },
+    {
+        "idEntidade": 671,
+        "codINEPEntidade": 22027904,
+        "nome": "U E  BARAO DE GURGUEIA"
+    },
+    {
+        "idEntidade": 825,
+        "codINEPEntidade": 22027939,
+        "nome": "U E  BENJAMIN BAPTISTA"
+    },
+    {
+        "idEntidade": 445,
+        "codINEPEntidade": 22027963,
+        "nome": "U E  CALUZINHA FREIRE"
+    },
+    {
+        "idEntidade": 824,
+        "codINEPEntidade": 22028021,
+        "nome": "CETI CRISTINO CASTELO BRANCO"
+    },
+    {
+        "idEntidade": 423,
+        "codINEPEntidade": 22028137,
+        "nome": "CETI  DR FONTES IBIAPINA"
+    },
+    {
+        "idEntidade": 477,
+        "codINEPEntidade": 22028145,
+        "nome": "CETI  DUQUE DE CAXIAS"
+    },
+    {
+        "idEntidade": 481,
+        "codINEPEntidade": 22028188,
+        "nome": "U E  ENGENHEIRO SAMPAIO"
+    },
+    {
+        "idEntidade": 353,
+        "codINEPEntidade": 22028242,
+        "nome": "U E  FIRMINA SOBREIRA"
+    },
+    {
+        "idEntidade": 80,
+        "codINEPEntidade": 22028250,
+        "nome": "U E  FLORISA SILVA"
+    },
+    {
+        "idEntidade": 467,
+        "codINEPEntidade": 22028269,
+        "nome": "CETI GABRIEL FERREIRA"
+    },
+    {
+        "idEntidade": 57,
+        "codINEPEntidade": 22028307,
+        "nome": "U E  GERVASIO COSTA"
+    },
+    {
+        "idEntidade": 281,
+        "codINEPEntidade": 22028315,
+        "nome": "U E  GODOFREDO FREIRE"
+    },
+    {
+        "idEntidade": 511,
+        "codINEPEntidade": 22028366,
+        "nome": "CETI HELVIDIO NUNES"
+    },
+    {
+        "idEntidade": 627,
+        "codINEPEntidade": 22028420,
+        "nome": "UNIDADE ESCOLAR JOEL MENDES"
+    },
+    {
+        "idEntidade": 59,
+        "codINEPEntidade": 22028439,
+        "nome": "CETI JOEL RIBEIRO"
+    },
+    {
+        "idEntidade": 60,
+        "codINEPEntidade": 22028455,
+        "nome": "CETI  PROF JOSE AMAVEL"
+    },
+    {
+        "idEntidade": 61,
+        "codINEPEntidade": 22028471,
+        "nome": "U E  JOSE CANDIDO FERRAZ"
+    },
+    {
+        "idEntidade": 218,
+        "codINEPEntidade": 22028560,
+        "nome": "CETI LOURIVAL PARENTE"
+    },
+    {
+        "idEntidade": 817,
+        "codINEPEntidade": 22028579,
+        "nome": "U E  LUCIDIO PORTELLA"
+    },
+    {
+        "idEntidade": 193,
+        "codINEPEntidade": 22028609,
+        "nome": "U E  MARIA DINA SOARES"
+    },
+    {
+        "idEntidade": 365,
+        "codINEPEntidade": 22028625,
+        "nome": "CEJA PROFESSORA MARIA DO CARMO REVERDOSA DA CRUZ"
+    },
+    {
+        "idEntidade": 154,
+        "codINEPEntidade": 22028650,
+        "nome": "CETI MARTINS NAPOLEAO"
+    },
+    {
+        "idEntidade": 360,
+        "codINEPEntidade": 22028668,
+        "nome": "U E  MELVIN JONES"
+    },
+    {
+        "idEntidade": 181,
+        "codINEPEntidade": 22028676,
+        "nome": "U E  PROF MERCEDES COSTA"
+    },
+    {
+        "idEntidade": 597,
+        "codINEPEntidade": 22028692,
+        "nome": "CETI MONSENHOR CICERO PORTELA NUNES"
+    },
+    {
+        "idEntidade": 434,
+        "codINEPEntidade": 22028820,
+        "nome": "CETI PADRE JOAQUIM NONATO GOMES"
+    },
+    {
+        "idEntidade": 474,
+        "codINEPEntidade": 22028846,
+        "nome": "U E  PETRONIO PORTELA"
+    },
+    {
+        "idEntidade": 704,
+        "codINEPEntidade": 22028900,
+        "nome": "U E  POLIVALENTE PRES CASTELO BRANCO"
+    },
+    {
+        "idEntidade": 794,
+        "codINEPEntidade": 22028951,
+        "nome": "U E  PROFESSOR AGRIPINO OLIVEIRA"
+    },
+    {
+        "idEntidade": 464,
+        "codINEPEntidade": 22028960,
+        "nome": "CETI MARIA MELO"
+    },
+    {
+        "idEntidade": 230,
+        "codINEPEntidade": 22029010,
+        "nome": "U E  PROFA OSMARINA"
+    },
+    {
+        "idEntidade": 556,
+        "codINEPEntidade": 22029028,
+        "nome": "U E  PROFESSORA MARIA DE LOURDES REBELO"
+    },
+    {
+        "idEntidade": 231,
+        "codINEPEntidade": 22029044,
+        "nome": "U E  RAIMUNDO WALL FERRAZ"
+    },
+    {
+        "idEntidade": 448,
+        "codINEPEntidade": 22029079,
+        "nome": "U E  SEVERIANO SOUSA"
+    },
+    {
+        "idEntidade": 310,
+        "codINEPEntidade": 22029087,
+        "nome": "U E  SIGEFREDO PACHECO"
+    },
+    {
+        "idEntidade": 196,
+        "codINEPEntidade": 22029117,
+        "nome": "U E  SINVAL DE CASTRO"
+    },
+    {
+        "idEntidade": 788,
+        "codINEPEntidade": 22029125,
+        "nome": "CETI  SOLANGE SINIMBU VIANA AREA LEAO"
+    },
+    {
+        "idEntidade": 821,
+        "codINEPEntidade": 22029192,
+        "nome": "U E  PROFESSOR TOMAZ AREA LEAO FILHO"
+    },
+    {
+        "idEntidade": 202,
+        "codINEPEntidade": 22029435,
+        "nome": "CEJA LUIS CARLOS BOA VISTA R MONTEIRO"
+    },
+    {
+        "idEntidade": 240,
+        "codINEPEntidade": 22029524,
+        "nome": "U E  BENEDITO MOURA"
+    },
+    {
+        "idEntidade": 364,
+        "codINEPEntidade": 22029869,
+        "nome": "U E  PROFA ELISA SOUSA"
+    },
+    {
+        "idEntidade": 456,
+        "codINEPEntidade": 22029982,
+        "nome": "CETI  FENELON CASTELO BRANCO"
+    },
+    {
+        "idEntidade": 529,
+        "codINEPEntidade": 22030018,
+        "nome": "U E MARIA CASTELO BRANCO MEDEIROS"
+    },
+    {
+        "idEntidade": 710,
+        "codINEPEntidade": 22030123,
+        "nome": "CETI BARAO DE GURGUEIA"
+    },
+    {
+        "idEntidade": 572,
+        "codINEPEntidade": 22030158,
+        "nome": "U E  FILINTO REGO"
+    },
+    {
+        "idEntidade": 750,
+        "codINEPEntidade": 22030174,
+        "nome": "U E  IRMA MARIA SIMPLICIA"
+    },
+    {
+        "idEntidade": 802,
+        "codINEPEntidade": 22030204,
+        "nome": "U E  MARCOS PARENTE"
+    },
+    {
+        "idEntidade": 620,
+        "codINEPEntidade": 22031405,
+        "nome": "U E  ANTONIO VITORIO DE SOUSA"
+    },
+    {
+        "idEntidade": 663,
+        "codINEPEntidade": 22031570,
+        "nome": "CETI ACRISIO VERAS"
+    },
+    {
+        "idEntidade": 774,
+        "codINEPEntidade": 22031596,
+        "nome": "U E  CANTIDIO SARAIVA"
+    },
+    {
+        "idEntidade": 45,
+        "codINEPEntidade": 22031804,
+        "nome": "CETI ANTONIO DEROMI SOARES"
+    },
+    {
+        "idEntidade": 793,
+        "codINEPEntidade": 22032339,
+        "nome": "CETI RAIMUNDINHO ANDRADE"
+    },
+    {
+        "idEntidade": 405,
+        "codINEPEntidade": 22033971,
+        "nome": "CEJA PROFESSORA MULATA LIMA"
+    },
+    {
+        "idEntidade": 629,
+        "codINEPEntidade": 22033998,
+        "nome": "CETI CANDIDO BORGES CASTELO BRANCO"
+    },
+    {
+        "idEntidade": 316,
+        "codINEPEntidade": 22034030,
+        "nome": "U E  PATRONATO N S DE LOURDES"
+    },
+    {
+        "idEntidade": 197,
+        "codINEPEntidade": 22034056,
+        "nome": "U E  13 DE MARCO"
+    },
+    {
+        "idEntidade": 198,
+        "codINEPEntidade": 22034072,
+        "nome": "U E  BRIOLANJA GENUÍNO DE OLIVEIRA"
+    },
+    {
+        "idEntidade": 799,
+        "codINEPEntidade": 22034102,
+        "nome": "U E  LEOPOLDO PACHECO"
+    },
+    {
+        "idEntidade": 186,
+        "codINEPEntidade": 22034145,
+        "nome": "U E  VALDIVINO TITO"
+    },
+    {
+        "idEntidade": 262,
+        "codINEPEntidade": 22034218,
+        "nome": "U E  JOSE OLIMPIO DA PAZ"
+    },
+    {
+        "idEntidade": 410,
+        "codINEPEntidade": 22034242,
+        "nome": "U E  PAULO FERRAZ"
+    },
+    {
+        "idEntidade": 531,
+        "codINEPEntidade": 22034250,
+        "nome": "U E  PETRONIO PORTELA"
+    },
+    {
+        "idEntidade": 51,
+        "codINEPEntidade": 22034781,
+        "nome": "CETI PAULO FERRAZ"
+    },
+    {
+        "idEntidade": 299,
+        "codINEPEntidade": 22035320,
+        "nome": "CETI DE JOAO ALVES DE MACEDO FILHO"
+    },
+    {
+        "idEntidade": 63,
+        "codINEPEntidade": 22035583,
+        "nome": "U E  FRANCISCO SALES MARTINS"
+    },
+    {
+        "idEntidade": 161,
+        "codINEPEntidade": 22035702,
+        "nome": "U E  EULINA CAMPOS"
+    },
+    {
+        "idEntidade": 726,
+        "codINEPEntidade": 22035907,
+        "nome": "CETI CONEGO CARDOSO"
+    },
+    {
+        "idEntidade": 335,
+        "codINEPEntidade": 22036369,
+        "nome": "CETI MARIA ISAIAS DE JESUS"
+    },
+    {
+        "idEntidade": 133,
+        "codINEPEntidade": 22037772,
+        "nome": "U E  DEPUTADO MILTON BRANDAO"
+    },
+    {
+        "idEntidade": 35,
+        "codINEPEntidade": 22038124,
+        "nome": "CETI  TERTULIANO SOLON BRANDAO"
+    },
+    {
+        "idEntidade": 635,
+        "codINEPEntidade": 22038132,
+        "nome": "UNID ESC CIPRIANO LEITE"
+    },
+    {
+        "idEntidade": 68,
+        "codINEPEntidade": 22038272,
+        "nome": "U E  MARIA MENDES MOURAO"
+    },
+    {
+        "idEntidade": 354,
+        "codINEPEntidade": 22038299,
+        "nome": "U E  TERTULIANO BRANDAO FILHO"
+    },
+    {
+        "idEntidade": 782,
+        "codINEPEntidade": 22038914,
+        "nome": "U E  JOAO MARIANO RIBEIRO"
+    },
+    {
+        "idEntidade": 545,
+        "codINEPEntidade": 22040358,
+        "nome": "U E  DONA ROSAURA MUNIZ BARRETO"
+    },
+    {
+        "idEntidade": 696,
+        "codINEPEntidade": 22040676,
+        "nome": "U E  LIMA REBELO"
+    },
+    {
+        "idEntidade": 400,
+        "codINEPEntidade": 22041222,
+        "nome": "CETI JOAO FERRY"
+    },
+    {
+        "idEntidade": 713,
+        "codINEPEntidade": 22041621,
+        "nome": "CETI MONSENHOR BOSON"
+    },
+    {
+        "idEntidade": 576,
+        "codINEPEntidade": 22041680,
+        "nome": "U E  WALL FERRAZ"
+    },
+    {
+        "idEntidade": 480,
+        "codINEPEntidade": 22041834,
+        "nome": "UNID ESC JOAO DE MOURA SANTOS"
+    },
+    {
+        "idEntidade": 263,
+        "codINEPEntidade": 22042130,
+        "nome": "U E  PROF ANTONIO CASTRO"
+    },
+    {
+        "idEntidade": 74,
+        "codINEPEntidade": 22042237,
+        "nome": "U E  DA COSTA E SILVA"
+    },
+    {
+        "idEntidade": 453,
+        "codINEPEntidade": 22042385,
+        "nome": "CETI  POLIVALENTE"
+    },
+    {
+        "idEntidade": 401,
+        "codINEPEntidade": 22042660,
+        "nome": "U E  ATILA LIRA"
+    },
+    {
+        "idEntidade": 613,
+        "codINEPEntidade": 22042679,
+        "nome": "U E  DEMERVAL LOBAO"
+    },
+    {
+        "idEntidade": 374,
+        "codINEPEntidade": 22042709,
+        "nome": "UNID ESC PROF PAULO NUNES"
+    },
+    {
+        "idEntidade": 296,
+        "codINEPEntidade": 22042830,
+        "nome": "U E  GONCALO NUNES"
+    },
+    {
+        "idEntidade": 550,
+        "codINEPEntidade": 22042938,
+        "nome": "U E  SILVESTRE ROCHA"
+    },
+    {
+        "idEntidade": 720,
+        "codINEPEntidade": 22042954,
+        "nome": "CETI ADALBERTO CORREIA LIMA"
+    },
+    {
+        "idEntidade": 697,
+        "codINEPEntidade": 22043128,
+        "nome": "U E  NOEMIA DO CARMO SANTANA"
+    },
+    {
+        "idEntidade": 431,
+        "codINEPEntidade": 22043187,
+        "nome": "CETI BENEDITO MARTINS NAPOLEAO"
+    },
+    {
+        "idEntidade": 524,
+        "codINEPEntidade": 22043438,
+        "nome": "CETI JOAO PEREIRA DE SOUSA"
+    },
+    {
+        "idEntidade": 66,
+        "codINEPEntidade": 22043659,
+        "nome": "CETI ANTONIO FREITAS"
+    },
+    {
+        "idEntidade": 38,
+        "codINEPEntidade": 22043853,
+        "nome": "U E  JOSE BORBA DE CARVALHO"
+    },
+    {
+        "idEntidade": 242,
+        "codINEPEntidade": 22044752,
+        "nome": "CETI SEBASTIAO SOARES RIBEIRO"
+    },
+    {
+        "idEntidade": 765,
+        "codINEPEntidade": 22045058,
+        "nome": "U E  COSTA E SILVA"
+    },
+    {
+        "idEntidade": 486,
+        "codINEPEntidade": 22045503,
+        "nome": "CEJA MARIA DO AMPARO MACEDO SILVA"
+    },
+    {
+        "idEntidade": 746,
+        "codINEPEntidade": 22045570,
+        "nome": "UNID ESC BENEDITO NEIVA"
+    },
+    {
+        "idEntidade": 606,
+        "codINEPEntidade": 22045686,
+        "nome": "CETI AURORA BARBOSA DE OLIVEIRA"
+    },
+    {
+        "idEntidade": 450,
+        "codINEPEntidade": 22045694,
+        "nome": "CETI ALBERTO LEAL NUNES"
+    },
+    {
+        "idEntidade": 812,
+        "codINEPEntidade": 22045716,
+        "nome": "U E  ANTONIO DE NEIVA"
+    },
+    {
+        "idEntidade": 492,
+        "codINEPEntidade": 22045767,
+        "nome": "UNID ESC JOAO NUNES"
+    },
+    {
+        "idEntidade": 108,
+        "codINEPEntidade": 22045910,
+        "nome": "U E FRANCISCO NUNES"
+    },
+    {
+        "idEntidade": 235,
+        "codINEPEntidade": 22046046,
+        "nome": "U E SEBASTIAO CRUZ"
+    },
+    {
+        "idEntidade": 146,
+        "codINEPEntidade": 22046445,
+        "nome": "U E  LANDRI SALES"
+    },
+    {
+        "idEntidade": 494,
+        "codINEPEntidade": 22046755,
+        "nome": "U E  JARBAS MARTINS"
+    },
+    {
+        "idEntidade": 454,
+        "codINEPEntidade": 22046925,
+        "nome": "U E  JEREMIAS PEREIRA DA SILVA"
+    },
+    {
+        "idEntidade": 110,
+        "codINEPEntidade": 22047484,
+        "nome": "CEEP  BENEDITO PORTELA LEAL"
+    },
+    {
+        "idEntidade": 636,
+        "codINEPEntidade": 22047590,
+        "nome": "CETI MOISES LIMA VERDE"
+    },
+    {
+        "idEntidade": 27,
+        "codINEPEntidade": 22047921,
+        "nome": "U E  LUIS DE CASTRO"
+    },
+    {
+        "idEntidade": 78,
+        "codINEPEntidade": 22048340,
+        "nome": "CETI MANOEL FERREIRA BARBOSA DE MACEDO"
+    },
+    {
+        "idEntidade": 637,
+        "codINEPEntidade": 22048413,
+        "nome": "U E  ANTONIO DE DEUS CARVALHO"
+    },
+    {
+        "idEntidade": 818,
+        "codINEPEntidade": 22048456,
+        "nome": "U E  JOAO DE DEUS CARVALHO"
+    },
+    {
+        "idEntidade": 542,
+        "codINEPEntidade": 22048766,
+        "nome": "U E  EUSTACHIO PORTELLA"
+    },
+    {
+        "idEntidade": 62,
+        "codINEPEntidade": 22048928,
+        "nome": "U E  SEN CHAGAS RODRIGUES"
+    },
+    {
+        "idEntidade": 534,
+        "codINEPEntidade": 22048995,
+        "nome": "CETI ANTONIO GENTIL DANTAS SOBRINHO"
+    },
+    {
+        "idEntidade": 139,
+        "codINEPEntidade": 22049126,
+        "nome": "U E  ENEAS NOGUEIRA"
+    },
+    {
+        "idEntidade": 471,
+        "codINEPEntidade": 22049690,
+        "nome": "U E  AMANDO MOURA"
+    },
+    {
+        "idEntidade": 342,
+        "codINEPEntidade": 22050027,
+        "nome": "U E  EUSTAQUIO PORTELA"
+    },
+    {
+        "idEntidade": 673,
+        "codINEPEntidade": 22050043,
+        "nome": "U E  RITINHA ROSA DE MOURA"
+    },
+    {
+        "idEntidade": 383,
+        "codINEPEntidade": 22050370,
+        "nome": "CETI SATURNINO MOURA"
+    },
+    {
+        "idEntidade": 150,
+        "codINEPEntidade": 22050450,
+        "nome": "CETI SANTO ANTONIO"
+    },
+    {
+        "idEntidade": 64,
+        "codINEPEntidade": 22050922,
+        "nome": "CETI DONA Mª ANTONIETA TORRES DOS REIS VELOSO"
+    },
+    {
+        "idEntidade": 217,
+        "codINEPEntidade": 22051066,
+        "nome": "U E  CONEGO ACILINO"
+    },
+    {
+        "idEntidade": 330,
+        "codINEPEntidade": 22051180,
+        "nome": "CEJA VITORIA DA COSTA LIMA"
+    },
+    {
+        "idEntidade": 355,
+        "codINEPEntidade": 22051457,
+        "nome": "U E  MARIA CANDIDA"
+    },
+    {
+        "idEntidade": 614,
+        "codINEPEntidade": 22051988,
+        "nome": "CETI PRESIDENTE VARGAS"
+    },
+    {
+        "idEntidade": 530,
+        "codINEPEntidade": 22052585,
+        "nome": "U E  CELSO ANTUNES DE SOUSA"
+    },
+    {
+        "idEntidade": 412,
+        "codINEPEntidade": 22053182,
+        "nome": "U E PROF LOURENCO FILHO"
+    },
+    {
+        "idEntidade": 140,
+        "codINEPEntidade": 22053190,
+        "nome": "U E SÃO JOSE DA ACAO SOCIAL DIVINO CORAÇÃO DE JESUS"
+    },
+    {
+        "idEntidade": 625,
+        "codINEPEntidade": 22053204,
+        "nome": "U E PROFESSORA DELFINA SOBREIRA DE QUEIROZ"
+    },
+    {
+        "idEntidade": 672,
+        "codINEPEntidade": 22053484,
+        "nome": "CETI MARIA PIRES LIMA"
+    },
+    {
+        "idEntidade": 814,
+        "codINEPEntidade": 22053620,
+        "nome": "CETI CICERO COELHO"
+    },
+    {
+        "idEntidade": 338,
+        "codINEPEntidade": 22053778,
+        "nome": "CETI JOSE PATRICIO FRANCO"
+    },
+    {
+        "idEntidade": 387,
+        "codINEPEntidade": 22053832,
+        "nome": "U E  MANOEL LEAL"
+    },
+    {
+        "idEntidade": 177,
+        "codINEPEntidade": 22054235,
+        "nome": "U E  FRUTUOSO SILVA"
+    },
+    {
+        "idEntidade": 43,
+        "codINEPEntidade": 22054766,
+        "nome": "U E  IRAPUA"
+    },
+    {
+        "idEntidade": 258,
+        "codINEPEntidade": 22054820,
+        "nome": "CETI FLORISA SILVA"
+    },
+    {
+        "idEntidade": 547,
+        "codINEPEntidade": 22054987,
+        "nome": "U E  AGOSTINHO REIS"
+    },
+    {
+        "idEntidade": 633,
+        "codINEPEntidade": 22055142,
+        "nome": "U E NOSSA SENHORA DE FATIMA"
+    },
+    {
+        "idEntidade": 313,
+        "codINEPEntidade": 22055380,
+        "nome": "CETI DR JOSE PINHEIRO MACHADO"
+    },
+    {
+        "idEntidade": 813,
+        "codINEPEntidade": 22056025,
+        "nome": "U E  ANTONIO BORGES LEAL"
+    },
+    {
+        "idEntidade": 244,
+        "codINEPEntidade": 22056297,
+        "nome": "U E  JOAO MARTINS"
+    },
+    {
+        "idEntidade": 373,
+        "codINEPEntidade": 22056564,
+        "nome": "CETI MARIANO JOSE ROBERTO"
+    },
+    {
+        "idEntidade": 595,
+        "codINEPEntidade": 22056866,
+        "nome": "U E  SANTO ANTONIO"
+    },
+    {
+        "idEntidade": 279,
+        "codINEPEntidade": 22057498,
+        "nome": "CEEP CALISTO LOBO"
+    },
+    {
+        "idEntidade": 203,
+        "codINEPEntidade": 22057790,
+        "nome": "CEJA PROFESSORA SOCORRO MENDES"
+    },
+    {
+        "idEntidade": 189,
+        "codINEPEntidade": 22058060,
+        "nome": "U E  MIRTES DEMES"
+    },
+    {
+        "idEntidade": 819,
+        "codINEPEntidade": 22058095,
+        "nome": "CETI FAUZER BUCAR"
+    },
+    {
+        "idEntidade": 573,
+        "codINEPEntidade": 22058117,
+        "nome": "CENTRO DE ATENDIMENTO EDUCACIONAL ESPECIALIZADO AGRONOMO PARENTES"
+    },
+    {
+        "idEntidade": 169,
+        "codINEPEntidade": 22058141,
+        "nome": "U E  BUCAR NETO"
+    },
+    {
+        "idEntidade": 675,
+        "codINEPEntidade": 22058150,
+        "nome": "U E  DJALMA NUNES"
+    },
+    {
+        "idEntidade": 583,
+        "codINEPEntidade": 22058192,
+        "nome": "CETI  JACOB DEMES"
+    },
+    {
+        "idEntidade": 683,
+        "codINEPEntidade": 22058230,
+        "nome": "U E  MONSENHOR LINDOLFO UCHOA"
+    },
+    {
+        "idEntidade": 557,
+        "codINEPEntidade": 22058265,
+        "nome": "U E  OSVALDO DA COSTA E SILVA"
+    },
+    {
+        "idEntidade": 676,
+        "codINEPEntidade": 22058338,
+        "nome": "U E  ZEZINHO VASCONCELOS"
+    },
+    {
+        "idEntidade": 214,
+        "codINEPEntidade": 22058648,
+        "nome": "U E  CARLOS FRANCO"
+    },
+    {
+        "idEntidade": 378,
+        "codINEPEntidade": 22058702,
+        "nome": "U E  JOAO PINHEIRO"
+    },
+    {
+        "idEntidade": 116,
+        "codINEPEntidade": 22059130,
+        "nome": "UNID ESCOLAR ANTONIO JOSE SARAIVA"
+    },
+    {
+        "idEntidade": 117,
+        "codINEPEntidade": 22059326,
+        "nome": "CETI MONSENHOR UCHOA"
+    },
+    {
+        "idEntidade": 668,
+        "codINEPEntidade": 22059610,
+        "nome": "U E  SEBASTIAO ROCHA LEAL"
+    },
+    {
+        "idEntidade": 237,
+        "codINEPEntidade": 22059920,
+        "nome": "U E  JOAO LEAL"
+    },
+    {
+        "idEntidade": 151,
+        "codINEPEntidade": 22060596,
+        "nome": "U E  JOSE SALUSTIANO DA SILVA"
+    },
+    {
+        "idEntidade": 678,
+        "codINEPEntidade": 22060600,
+        "nome": "U E  RUI  BARBOSA"
+    },
+    {
+        "idEntidade": 204,
+        "codINEPEntidade": 22061010,
+        "nome": "U E  MARIO COELHO NETO"
+    },
+    {
+        "idEntidade": 618,
+        "codINEPEntidade": 22061258,
+        "nome": "CETI MIGUEL MARINHO"
+    },
+    {
+        "idEntidade": 54,
+        "codINEPEntidade": 22061320,
+        "nome": "U E  LUIZ SOARES DA SILVA"
+    },
+    {
+        "idEntidade": 600,
+        "codINEPEntidade": 22061690,
+        "nome": "U E  CRISTAN BARREIRA PARENTE"
+    },
+    {
+        "idEntidade": 84,
+        "codINEPEntidade": 22061711,
+        "nome": "U E  JOAQUIM DIAS PARENTE"
+    },
+    {
+        "idEntidade": 546,
+        "codINEPEntidade": 22062602,
+        "nome": "U E  ARACI LUSTOSA"
+    },
+    {
+        "idEntidade": 275,
+        "codINEPEntidade": 22062610,
+        "nome": "CETI FRANKLIN DORIA"
+    },
+    {
+        "idEntidade": 187,
+        "codINEPEntidade": 22062661,
+        "nome": "CETI JOAQUIM PARENTE"
+    },
+    {
+        "idEntidade": 724,
+        "codINEPEntidade": 22062670,
+        "nome": "U E  JOSE LUSTOSA ELVAS FILHO"
+    },
+    {
+        "idEntidade": 188,
+        "codINEPEntidade": 22062700,
+        "nome": "U E INTEGRADO ADENAUER"
+    },
+    {
+        "idEntidade": 478,
+        "codINEPEntidade": 22062726,
+        "nome": "U E AGRICOLA DO DNOCS"
+    },
+    {
+        "idEntidade": 48,
+        "codINEPEntidade": 22063056,
+        "nome": "U E  JOSE FRANCISCO DE MIRANDA"
+    },
+    {
+        "idEntidade": 49,
+        "codINEPEntidade": 22063170,
+        "nome": "CETI JOAQUIM PARENTE"
+    },
+    {
+        "idEntidade": 136,
+        "codINEPEntidade": 22064206,
+        "nome": "CETI FAUSTO LUSTOSA"
+    },
+    {
+        "idEntidade": 386,
+        "codINEPEntidade": 22064249,
+        "nome": "U E  LUSTOSA SOBRINHO"
+    },
+    {
+        "idEntidade": 741,
+        "codINEPEntidade": 22064834,
+        "nome": "U E  PETRONIO PORTELA"
+    },
+    {
+        "idEntidade": 804,
+        "codINEPEntidade": 22065342,
+        "nome": "CETI MARTIN PINHEIRO"
+    },
+    {
+        "idEntidade": 109,
+        "codINEPEntidade": 22065350,
+        "nome": "U E  MIGUEL OLIVEIRA"
+    },
+    {
+        "idEntidade": 372,
+        "codINEPEntidade": 22065814,
+        "nome": "U E  PETRONIO PORTELA"
+    },
+    {
+        "idEntidade": 507,
+        "codINEPEntidade": 22065849,
+        "nome": "U E  MARCOS PARENTE"
+    },
+    {
+        "idEntidade": 82,
+        "codINEPEntidade": 22066144,
+        "nome": "CETI PROF IRACI BARROS PINTO"
+    },
+    {
+        "idEntidade": 83,
+        "codINEPEntidade": 22066179,
+        "nome": "U E  ARSENIO SANTOS"
+    },
+    {
+        "idEntidade": 209,
+        "codINEPEntidade": 22066535,
+        "nome": "CETI LETICIA MACEDO"
+    },
+    {
+        "idEntidade": 120,
+        "codINEPEntidade": 22067671,
+        "nome": "U E  BEIJA VALENTE"
+    },
+    {
+        "idEntidade": 815,
+        "codINEPEntidade": 22067701,
+        "nome": "U E  CEL AGOSTINHO VALENTE"
+    },
+    {
+        "idEntidade": 229,
+        "codINEPEntidade": 22067710,
+        "nome": "U E  CIPRIANO VIEIRA DE SA"
+    },
+    {
+        "idEntidade": 297,
+        "codINEPEntidade": 22067752,
+        "nome": "U E  FLORISA SILVA"
+    },
+    {
+        "idEntidade": 344,
+        "codINEPEntidade": 22067884,
+        "nome": "CEEP  MARIA CHAVES"
+    },
+    {
+        "idEntidade": 72,
+        "codINEPEntidade": 22068368,
+        "nome": "U E  NONATO VALENTE"
+    },
+    {
+        "idEntidade": 182,
+        "codINEPEntidade": 22069330,
+        "nome": "U E  ANTONIO SOARES ROCHA"
+    },
+    {
+        "idEntidade": 395,
+        "codINEPEntidade": 22070354,
+        "nome": "U E  DR BARROSO"
+    },
+    {
+        "idEntidade": 190,
+        "codINEPEntidade": 22070877,
+        "nome": "U E  DOM INOCENCIO"
+    },
+    {
+        "idEntidade": 21,
+        "codINEPEntidade": 22071253,
+        "nome": "U E  AREOLINO F BRAGA"
+    },
+    {
+        "idEntidade": 414,
+        "codINEPEntidade": 22071440,
+        "nome": "U E  FRANCISCO ANTONIO DA SILVA"
+    },
+    {
+        "idEntidade": 622,
+        "codINEPEntidade": 22072292,
+        "nome": "CEEP GERCILIO DE CASTRO MACEDO"
+    },
+    {
+        "idEntidade": 754,
+        "codINEPEntidade": 22072500,
+        "nome": "CETI EDITH NOBRE DE CASTRO"
+    },
+    {
+        "idEntidade": 721,
+        "codINEPEntidade": 22072667,
+        "nome": "CETI MODERNA"
+    },
+    {
+        "idEntidade": 131,
+        "codINEPEntidade": 22072691,
+        "nome": "U E  PROF JOSE LEANDRO DEUSDARA"
+    },
+    {
+        "idEntidade": 411,
+        "codINEPEntidade": 22072845,
+        "nome": "U E  PROF DEOLINDO LIMA"
+    },
+    {
+        "idEntidade": 677,
+        "codINEPEntidade": 22072985,
+        "nome": "U E  PROFESSORA MARIA DE CASTRO RIBEIRO"
+    },
+    {
+        "idEntidade": 210,
+        "codINEPEntidade": 22073418,
+        "nome": "CETI JOSE MARQUES"
+    },
+    {
+        "idEntidade": 270,
+        "codINEPEntidade": 22074210,
+        "nome": "U E  DIAMANTINO GAMA"
+    },
+    {
+        "idEntidade": 691,
+        "codINEPEntidade": 22074236,
+        "nome": "CETI DEPUTADO FERNANDO MONTEIRO"
+    },
+    {
+        "idEntidade": 725,
+        "codINEPEntidade": 22075054,
+        "nome": "U E  CEL JUSTINO CAVALCANTE BARROS"
+    },
+    {
+        "idEntidade": 205,
+        "codINEPEntidade": 22075186,
+        "nome": "CEJA MANOEL DA CUNHA"
+    },
+    {
+        "idEntidade": 442,
+        "codINEPEntidade": 22075372,
+        "nome": "U E  DES. JOAO PACHECO CAVALCANTE"
+    },
+    {
+        "idEntidade": 138,
+        "codINEPEntidade": 22075631,
+        "nome": "U E  OBERLIM DA CUNHA NOGUEIRA"
+    },
+    {
+        "idEntidade": 381,
+        "codINEPEntidade": 22075658,
+        "nome": "U E  CEL JOSE NOGUEIRA"
+    },
+    {
+        "idEntidade": 147,
+        "codINEPEntidade": 22076450,
+        "nome": "CETI DESEMBARGADOR AMARAL"
+    },
+    {
+        "idEntidade": 619,
+        "codINEPEntidade": 22076581,
+        "nome": "U E  ALIRIO GUERRA DE MACEDO"
+    },
+    {
+        "idEntidade": 444,
+        "codINEPEntidade": 22076590,
+        "nome": "U E  BENEDITO OLIVEIRA"
+    },
+    {
+        "idEntidade": 626,
+        "codINEPEntidade": 22077421,
+        "nome": "CETI RAIMUNDO LUSTOSA NOGUEIRA"
+    },
+    {
+        "idEntidade": 90,
+        "codINEPEntidade": 22077456,
+        "nome": "U E  ARISTIDES PEREIRA DE SOUSA"
+    },
+    {
+        "idEntidade": 764,
+        "codINEPEntidade": 22077693,
+        "nome": "U E ESTELA NUNES"
+    },
+    {
+        "idEntidade": 366,
+        "codINEPEntidade": 22077804,
+        "nome": "U E JOMASIO DOS SANTOS BARROS"
+    },
+    {
+        "idEntidade": 493,
+        "codINEPEntidade": 22078096,
+        "nome": "CETI DR JOSE GUSMAO"
+    },
+    {
+        "idEntidade": 786,
+        "codINEPEntidade": 22078355,
+        "nome": "U E  DR JOAO CARVALHO"
+    },
+    {
+        "idEntidade": 142,
+        "codINEPEntidade": 22078690,
+        "nome": "U E  MANOEL RIBEIRO"
+    },
+    {
+        "idEntidade": 421,
+        "codINEPEntidade": 22080333,
+        "nome": "CETI  DESEMBARGADOR PEDRO SA"
+    },
+    {
+        "idEntidade": 609,
+        "codINEPEntidade": 22080341,
+        "nome": "U E  DR JOSE COELHO REIS"
+    },
+    {
+        "idEntidade": 610,
+        "codINEPEntidade": 22080392,
+        "nome": "U E  ARMANDO BURLAMAQUI"
+    },
+    {
+        "idEntidade": 791,
+        "codINEPEntidade": 22080422,
+        "nome": "U E  COSTA ALVARENGA"
+    },
+    {
+        "idEntidade": 567,
+        "codINEPEntidade": 22080449,
+        "nome": "CETI FARMACEUTICO JOAO CARVALHO"
+    },
+    {
+        "idEntidade": 645,
+        "codINEPEntidade": 22080465,
+        "nome": "CEJA NOGUEIRA TAPETY"
+    },
+    {
+        "idEntidade": 246,
+        "codINEPEntidade": 22080481,
+        "nome": "U E  ORLANDO CARVALHO"
+    },
+    {
+        "idEntidade": 739,
+        "codINEPEntidade": 22080686,
+        "nome": "U E PEDRO EVANGELISTA CAMINHA"
+    },
+    {
+        "idEntidade": 455,
+        "codINEPEntidade": 22081291,
+        "nome": "U E NORMAL OFICIAL DE PICOS"
+    },
+    {
+        "idEntidade": 687,
+        "codINEPEntidade": 22081348,
+        "nome": "CEEP  PETRONIO PORTELA"
+    },
+    {
+        "idEntidade": 396,
+        "codINEPEntidade": 22081380,
+        "nome": "U E  OZILDO ALBANO"
+    },
+    {
+        "idEntidade": 163,
+        "codINEPEntidade": 22081860,
+        "nome": "U E  CEL FRANCISCO SANTOS"
+    },
+    {
+        "idEntidade": 684,
+        "codINEPEntidade": 22082077,
+        "nome": "U E  JULIETA NEIVA NUNES"
+    },
+    {
+        "idEntidade": 631,
+        "codINEPEntidade": 22082093,
+        "nome": "U E  LANDRI SALES"
+    },
+    {
+        "idEntidade": 611,
+        "codINEPEntidade": 22082131,
+        "nome": "CETI MARIO MARTINS"
+    },
+    {
+        "idEntidade": 119,
+        "codINEPEntidade": 22082204,
+        "nome": "CETI DESEMBARGADOR VIDAL DE FREITAS"
+    },
+    {
+        "idEntidade": 145,
+        "codINEPEntidade": 22082263,
+        "nome": "U E  ARAUJO LUZ"
+    },
+    {
+        "idEntidade": 561,
+        "codINEPEntidade": 22082280,
+        "nome": "U E  COELHO RODRIGUES"
+    },
+    {
+        "idEntidade": 219,
+        "codINEPEntidade": 22082298,
+        "nome": "U E  DIRCEU M ARCOVERDE"
+    },
+    {
+        "idEntidade": 220,
+        "codINEPEntidade": 22082336,
+        "nome": "U E  TERESINHA NUNES"
+    },
+    {
+        "idEntidade": 770,
+        "codINEPEntidade": 22082409,
+        "nome": "CETI MIGUEL LIDIANO"
+    },
+    {
+        "idEntidade": 44,
+        "codINEPEntidade": 22082417,
+        "nome": "U E  PETRONIO PORTELA"
+    },
+    {
+        "idEntidade": 487,
+        "codINEPEntidade": 22082522,
+        "nome": "U E  JORGE LEOPOLDO"
+    },
+    {
+        "idEntidade": 479,
+        "codINEPEntidade": 22082549,
+        "nome": "CETI MARCOS PARENTE"
+    },
+    {
+        "idEntidade": 232,
+        "codINEPEntidade": 22083022,
+        "nome": "CETI  SEVERO MARIA EULALIO"
+    },
+    {
+        "idEntidade": 332,
+        "codINEPEntidade": 22083065,
+        "nome": "U E  CLEMENTINO MARTINS"
+    },
+    {
+        "idEntidade": 537,
+        "codINEPEntidade": 22083189,
+        "nome": "U E  JOAQUIM BORGES DE OLIVEIRA"
+    },
+    {
+        "idEntidade": 33,
+        "codINEPEntidade": 22083480,
+        "nome": "CETI DOM EDILBERTO DINKELBORG"
+    },
+    {
+        "idEntidade": 34,
+        "codINEPEntidade": 22083510,
+        "nome": "U E  SAO SEBASTIAO"
+    },
+    {
+        "idEntidade": 345,
+        "codINEPEntidade": 22084266,
+        "nome": "U E  JOAO JOSE DE ALENCAR"
+    },
+    {
+        "idEntidade": 174,
+        "codINEPEntidade": 22084304,
+        "nome": "U E  HELVIDIO NUNES"
+    },
+    {
+        "idEntidade": 655,
+        "codINEPEntidade": 22084320,
+        "nome": "U E  ALENCAR MOTA"
+    },
+    {
+        "idEntidade": 356,
+        "codINEPEntidade": 22085068,
+        "nome": "CETI ANTONIA DE SOUSA ALENCAR"
+    },
+    {
+        "idEntidade": 795,
+        "codINEPEntidade": 22085491,
+        "nome": "U E  PROFESSOR MARIANO DA SILVA NETO"
+    },
+    {
+        "idEntidade": 784,
+        "codINEPEntidade": 22085505,
+        "nome": "U E  FRANCO RODRIGUES"
+    },
+    {
+        "idEntidade": 152,
+        "codINEPEntidade": 22085777,
+        "nome": "CETI JOSE ALVES BEZERRA"
+    },
+    {
+        "idEntidade": 428,
+        "codINEPEntidade": 22086528,
+        "nome": "U E  NOSSA SENHORA DO PATROCINIO"
+    },
+    {
+        "idEntidade": 429,
+        "codINEPEntidade": 22086625,
+        "nome": "U E  FRANCISCO SUASSUNA DE MELO"
+    },
+    {
+        "idEntidade": 40,
+        "codINEPEntidade": 22086951,
+        "nome": "CETI MARIA DE CARVALHO"
+    },
+    {
+        "idEntidade": 833,
+        "codINEPEntidade": 22086978,
+        "nome": "U E  MIGUEL BORGES DE MOURA"
+    },
+    {
+        "idEntidade": 41,
+        "codINEPEntidade": 22087095,
+        "nome": "U E  APRIGIO PEREIRA BEZERRA"
+    },
+    {
+        "idEntidade": 458,
+        "codINEPEntidade": 22087354,
+        "nome": "U E  ALICE ROCHA"
+    },
+    {
+        "idEntidade": 798,
+        "codINEPEntidade": 22087753,
+        "nome": "U E  WALDEMAR DE MOURA SANTOS"
+    },
+    {
+        "idEntidade": 134,
+        "codINEPEntidade": 22088024,
+        "nome": "U E  DR JOSE DE MOURA FE"
+    },
+    {
+        "idEntidade": 285,
+        "codINEPEntidade": 22088695,
+        "nome": "U E  CELESTINO FILHO"
+    },
+    {
+        "idEntidade": 586,
+        "codINEPEntidade": 22088806,
+        "nome": "CEJA CAROLINA MARIA BEZERRA"
+    },
+    {
+        "idEntidade": 603,
+        "codINEPEntidade": 22088814,
+        "nome": "CETI FRANCISCA PEREIRA DE SOUSA MORAIS"
+    },
+    {
+        "idEntidade": 822,
+        "codINEPEntidade": 22088857,
+        "nome": "CEEP FRANCISCO ALVES DE SOUSA (CHICO ABÍLIO)"
+    },
+    {
+        "idEntidade": 601,
+        "codINEPEntidade": 22091068,
+        "nome": "CETI ALVARO RODRIGUES DE ARAUJO"
+    },
+    {
+        "idEntidade": 475,
+        "codINEPEntidade": 22091459,
+        "nome": "U E  PROFESSORA ALAYDE RODRIGUES"
+    },
+    {
+        "idEntidade": 53,
+        "codINEPEntidade": 22093079,
+        "nome": "U E JOAO JOSE RAMOS"
+    },
+    {
+        "idEntidade": 736,
+        "codINEPEntidade": 22093222,
+        "nome": "U E  LILI SILVEIRA"
+    },
+    {
+        "idEntidade": 155,
+        "codINEPEntidade": 22093249,
+        "nome": "U E  SERAFIM JOSE DE BRITO"
+    },
+    {
+        "idEntidade": 733,
+        "codINEPEntidade": 22093354,
+        "nome": "U E  ANISIO DE ABREU"
+    },
+    {
+        "idEntidade": 367,
+        "codINEPEntidade": 22093427,
+        "nome": "CETI FRUTUOSO JUSSELINO"
+    },
+    {
+        "idEntidade": 685,
+        "codINEPEntidade": 22093834,
+        "nome": "CETI COSMA RAMOS DE SOUSA"
+    },
+    {
+        "idEntidade": 692,
+        "codINEPEntidade": 22094750,
+        "nome": "CETI DR FRANCISCO LUIZ DE MACEDO"
+    },
+    {
+        "idEntidade": 180,
+        "codINEPEntidade": 22094989,
+        "nome": "U E  CONSTANCIO CARVALHO"
+    },
+    {
+        "idEntidade": 135,
+        "codINEPEntidade": 22095225,
+        "nome": "U E  HELVIDIO NUNES"
+    },
+    {
+        "idEntidade": 810,
+        "codINEPEntidade": 22095500,
+        "nome": "U E REUNIDA DE PATOS"
+    },
+    {
+        "idEntidade": 752,
+        "codINEPEntidade": 22095608,
+        "nome": "U E  MARTINHO VIEIRA"
+    },
+    {
+        "idEntidade": 73,
+        "codINEPEntidade": 22095772,
+        "nome": "U E  PROFESSOR FRANCISCO JOSE TIBURCIO"
+    },
+    {
+        "idEntidade": 771,
+        "codINEPEntidade": 22098704,
+        "nome": "CETI PAULISTANA "
+    },
+    {
+        "idEntidade": 112,
+        "codINEPEntidade": 22099476,
+        "nome": "U E  JOAO DE SOUSA MOURA"
+    },
+    {
+        "idEntidade": 808,
+        "codINEPEntidade": 22100083,
+        "nome": "CETI SENADOR JOSE CANDIDO FERRAZ"
+    },
+    {
+        "idEntidade": 236,
+        "codINEPEntidade": 22100580,
+        "nome": "CEJA PROFESSOR ADAIL COELHO MAIA"
+    },
+    {
+        "idEntidade": 468,
+        "codINEPEntidade": 22100717,
+        "nome": "CEEP DEP. FRANCISCO ANTONIO PAES LANDIM NETO"
+    },
+    {
+        "idEntidade": 473,
+        "codINEPEntidade": 22100849,
+        "nome": "U E  SEN DIRCEU ARCOVERDE"
+    },
+    {
+        "idEntidade": 742,
+        "codINEPEntidade": 22101004,
+        "nome": "U E  SALOMAO CARVALHO"
+    },
+    {
+        "idEntidade": 159,
+        "codINEPEntidade": 22102612,
+        "nome": "CETI RAUL SERGIO"
+    },
+    {
+        "idEntidade": 449,
+        "codINEPEntidade": 22102876,
+        "nome": "U E  LUIS LOPES DOS REIS"
+    },
+    {
+        "idEntidade": 31,
+        "codINEPEntidade": 22102906,
+        "nome": "U E JOSE BENTO DE CARVALHO FILHO"
+    },
+    {
+        "idEntidade": 282,
+        "codINEPEntidade": 22104399,
+        "nome": "U E  NOEME MADEIRA MOURA FE"
+    },
+    {
+        "idEntidade": 248,
+        "codINEPEntidade": 22104682,
+        "nome": "U E  AMERICO JOSE DE SOUSA"
+    },
+    {
+        "idEntidade": 579,
+        "codINEPEntidade": 22104712,
+        "nome": "U E  FRANCISCO TEIXEIRA"
+    },
+    {
+        "idEntidade": 6,
+        "codINEPEntidade": 22104860,
+        "nome": "U E  MUNDIM FERRAZ"
+    },
+    {
+        "idEntidade": 658,
+        "codINEPEntidade": 22105117,
+        "nome": "CETI SENADOR CHAGAS RODRIGUES"
+    },
+    {
+        "idEntidade": 803,
+        "codINEPEntidade": 22105559,
+        "nome": "U E  OZANDIR TEIXEIRA"
+    },
+    {
+        "idEntidade": 318,
+        "codINEPEntidade": 22105689,
+        "nome": "U E  JOSE RODRIGUES DA SILVA"
+    },
+    {
+        "idEntidade": 260,
+        "codINEPEntidade": 22106375,
+        "nome": "U E  JOSE DE DEUS BARROS"
+    },
+    {
+        "idEntidade": 975,
+        "codINEPEntidade": 22106790,
+        "nome": "ESCOLA FAMÍLIA AGRICOLA MONTES CLAROS"
+    },
+    {
+        "idEntidade": 689,
+        "codINEPEntidade": 22106842,
+        "nome": "CEJA HELENA GOMES ROSENO OLIVEIRA"
+    },
+    {
+        "idEntidade": 520,
+        "codINEPEntidade": 22107019,
+        "nome": "U E  SAO FRANCISCO DE ASSIS"
+    },
+    {
+        "idEntidade": 170,
+        "codINEPEntidade": 22107055,
+        "nome": "CEJA OTACILIA RAMOS"
+    },
+    {
+        "idEntidade": 14,
+        "codINEPEntidade": 22108009,
+        "nome": "U E  JOAO JOSE BATISTA"
+    },
+    {
+        "idEntidade": 751,
+        "codINEPEntidade": 22108114,
+        "nome": "U E  PROFA ROSANGELA REIS"
+    },
+    {
+        "idEntidade": 756,
+        "codINEPEntidade": 22108378,
+        "nome": "CEJA TERESA ROSADO SIMOES"
+    },
+    {
+        "idEntidade": 997,
+        "codINEPEntidade": 22109269,
+        "nome": "PRE ESCOLAR TIO ARAUJO"
+    },
+    {
+        "idEntidade": 446,
+        "codINEPEntidade": 22109633,
+        "nome": "CEJA LUIZ PADRE"
+    },
+    {
+        "idEntidade": 992,
+        "codINEPEntidade": 22110224,
+        "nome": "UNIDADE ESCOLAR TEOTONIO FERREIRA BRANDAO"
+    },
+    {
+        "idEntidade": 548,
+        "codINEPEntidade": 22111450,
+        "nome": "U E  RAFAEL MANOEL DA COSTA"
+    },
+    {
+        "idEntidade": 29,
+        "codINEPEntidade": 22111891,
+        "nome": "CEEP PROF. BALDUINO BARBOSA DE DEUS"
+    },
+    {
+        "idEntidade": 863,
+        "codINEPEntidade": 22113380,
+        "nome": "ESC ESPEC PEDRO MARTINS NETO"
+    },
+    {
+        "idEntidade": 3,
+        "codINEPEntidade": 22114882,
+        "nome": "CETI HUGO NAPOLEAO"
+    },
+    {
+        "idEntidade": 4,
+        "codINEPEntidade": 22114904,
+        "nome": "U E  RAIMUNDO DA PAZ NOGUEIRA"
+    },
+    {
+        "idEntidade": 311,
+        "codINEPEntidade": 22115447,
+        "nome": "U E  PROFESSORA HELENA CARVALHO"
+    },
+    {
+        "idEntidade": 17,
+        "codINEPEntidade": 22115480,
+        "nome": "UNID ESC LELIA AVELINO"
+    },
+    {
+        "idEntidade": 979,
+        "codINEPEntidade": 22115544,
+        "nome": "ESCOLA FAMILIA AGRICOLA DO SOINHO"
+    },
+    {
+        "idEntidade": 370,
+        "codINEPEntidade": 22116389,
+        "nome": "U E  MALAQUIAS RIBEIRO DAMASCENO"
+    },
+    {
+        "idEntidade": 811,
+        "codINEPEntidade": 22117121,
+        "nome": "CEEPRU ENG. AGRONOMO VALDEMAR CARVALHO"
+    },
+    {
+        "idEntidade": 346,
+        "codINEPEntidade": 22117806,
+        "nome": "CEEPRU CÔNEGO CARDOSO"
+    },
+    {
+        "idEntidade": 491,
+        "codINEPEntidade": 22118179,
+        "nome": "CETI DOM JOAQUIM R DO REGO"
+    },
+    {
+        "idEntidade": 435,
+        "codINEPEntidade": 22118330,
+        "nome": "CEEP PROFESSORA ANGELINA MENDES BRAGA"
+    },
+    {
+        "idEntidade": 280,
+        "codINEPEntidade": 22118900,
+        "nome": "CETI JOSE ATANASIO DE SANTANA"
+    },
+    {
+        "idEntidade": 334,
+        "codINEPEntidade": 22120114,
+        "nome": "CETI DR DIONISIO RODRIGUES NOGUEIRA"
+    },
+    {
+        "idEntidade": 723,
+        "codINEPEntidade": 22121935,
+        "nome": "CETI NOSSA SENHORA DA PAZ"
+    },
+    {
+        "idEntidade": 16,
+        "codINEPEntidade": 22122044,
+        "nome": "U E  DR JERONIMO DOS SANTOS E SILVA"
+    },
+    {
+        "idEntidade": 621,
+        "codINEPEntidade": 22122567,
+        "nome": "CETI GASPARINO FERREIRA"
+    },
+    {
+        "idEntidade": 269,
+        "codINEPEntidade": 22123458,
+        "nome": "ESCOLA  FAMILIA AGRICOLA SANTA ANGELA"
+    },
+    {
+        "idEntidade": 433,
+        "codINEPEntidade": 22124136,
+        "nome": "U E  HILTON LEITE DE CARVALHO"
+    },
+    {
+        "idEntidade": 129,
+        "codINEPEntidade": 22124411,
+        "nome": "U E PROF MANOEL NASCIMENTO"
+    },
+    {
+        "idEntidade": 447,
+        "codINEPEntidade": 22124470,
+        "nome": "U E  PROFESSORA ISABEL RIBEIRO DE JESUS"
+    },
+    {
+        "idEntidade": 879,
+        "codINEPEntidade": 22124586,
+        "nome": "ESCOLA FAMÍLIA AGRÍCOLA DOM EDILBERTO II"
+    },
+    {
+        "idEntidade": 564,
+        "codINEPEntidade": 22124802,
+        "nome": "U E SANTA TERESA"
+    },
+    {
+        "idEntidade": 980,
+        "codINEPEntidade": 22124810,
+        "nome": "ESCOLA FAMILIA AGRICOLA BAIXAO DO CARLOS"
+    },
+    {
+        "idEntidade": 264,
+        "codINEPEntidade": 22124985,
+        "nome": "U E  SAO SEBASTIAO"
+    },
+    {
+        "idEntidade": 167,
+        "codINEPEntidade": 22125787,
+        "nome": "CETI PROFESSOR FRANCISCO LUIS DE OLIVEIRA"
+    },
+    {
+        "idEntidade": 385,
+        "codINEPEntidade": 22126880,
+        "nome": "CETI SANTA TERESINHA"
+    },
+    {
+        "idEntidade": 693,
+        "codINEPEntidade": 22126945,
+        "nome": "CETI JOB DE MACEDO BRITO"
+    },
+    {
+        "idEntidade": 358,
+        "codINEPEntidade": 22127020,
+        "nome": "CETI DR JOSE RIBAMAR LOPES"
+    },
+    {
+        "idEntidade": 587,
+        "codINEPEntidade": 22127160,
+        "nome": "U E  PROFESSORA AURISTELA SOARES"
+    },
+    {
+        "idEntidade": 781,
+        "codINEPEntidade": 22127275,
+        "nome": "U E  LUIZ UBIRACI DE CARVALHO"
+    },
+    {
+        "idEntidade": 740,
+        "codINEPEntidade": 22127526,
+        "nome": "CETI PROFESSOR ANTONIO DOS REIS E SILVA"
+    },
+    {
+        "idEntidade": 659,
+        "codINEPEntidade": 22128441,
+        "nome": "U E  NOSSA SENHORA DO PERPETUO SOCORRO"
+    },
+    {
+        "idEntidade": 228,
+        "codINEPEntidade": 22128450,
+        "nome": "U E RAIMUNDO NEIVA DE SOUSA"
+    },
+    {
+        "idEntidade": 513,
+        "codINEPEntidade": 22128468,
+        "nome": "UNIDADE ESCOLAR MARCOS RODRIGUES COELHO"
+    },
+    {
+        "idEntidade": 762,
+        "codINEPEntidade": 22128760,
+        "nome": "CETI PROFª CLEONICE DE CASTRO TELES"
+    },
+    {
+        "idEntidade": 171,
+        "codINEPEntidade": 22129650,
+        "nome": "CETI PEDRO COELHO DE RESENDE"
+    },
+    {
+        "idEntidade": 393,
+        "codINEPEntidade": 22129723,
+        "nome": "CETI DARCY RIBEIRO"
+    },
+    {
+        "idEntidade": 884,
+        "codINEPEntidade": 22130497,
+        "nome": "CRECHE CIDADE VERDE "
+    },
+    {
+        "idEntidade": 77,
+        "codINEPEntidade": 22131035,
+        "nome": "CETI SAO JOAO BATISTA"
+    },
+    {
+        "idEntidade": 753,
+        "codINEPEntidade": 22131043,
+        "nome": "U E  SEVERO ROCHA"
+    },
+    {
+        "idEntidade": 503,
+        "codINEPEntidade": 22131060,
+        "nome": "U E  HERMINIO BARREIRA"
+    },
+    {
+        "idEntidade": 382,
+        "codINEPEntidade": 22131078,
+        "nome": "U E  ANTONIO MASCARENHAS"
+    },
+    {
+        "idEntidade": 801,
+        "codINEPEntidade": 22131159,
+        "nome": "CETI  PEDRA MOLE"
+    },
+    {
+        "idEntidade": 790,
+        "codINEPEntidade": 22131167,
+        "nome": "U E VILA PARAISO"
+    },
+    {
+        "idEntidade": 734,
+        "codINEPEntidade": 22131426,
+        "nome": "U E  LEDA NAPOLEAO"
+    },
+    {
+        "idEntidade": 166,
+        "codINEPEntidade": 22131450,
+        "nome": "CETI PAULO FREIRE"
+    },
+    {
+        "idEntidade": 828,
+        "codINEPEntidade": 22131574,
+        "nome": "CETI DEP ALBERTO DE MOURA MONTEIRO"
+    },
+    {
+        "idEntidade": 443,
+        "codINEPEntidade": 22131590,
+        "nome": "U E  MOISANIEL ALVES DE SOUSA"
+    },
+    {
+        "idEntidade": 216,
+        "codINEPEntidade": 22131825,
+        "nome": "U E  MARIA JUSCELINA DE ALBUQUERQE E SILVA"
+    },
+    {
+        "idEntidade": 348,
+        "codINEPEntidade": 22132147,
+        "nome": "U E  MARIANO RABELO DE SEPULVIDA"
+    },
+    {
+        "idEntidade": 50,
+        "codINEPEntidade": 22132589,
+        "nome": "U E  FIRMO RODRIGUES SOBREIRA"
+    },
+    {
+        "idEntidade": 426,
+        "codINEPEntidade": 22132597,
+        "nome": "CETI ARTUR GONÇALVES DE SOUSA"
+    },
+    {
+        "idEntidade": 496,
+        "codINEPEntidade": 22132740,
+        "nome": "U E  MENINO JOAO PEDRO"
+    },
+    {
+        "idEntidade": 783,
+        "codINEPEntidade": 22132902,
+        "nome": "CETI TOMAZ FRANCISCO DE SOUSA"
+    },
+    {
+        "idEntidade": 483,
+        "codINEPEntidade": 22133070,
+        "nome": "CETI SENADOR CHAGAS RODRIGUES"
+    },
+    {
+        "idEntidade": 65,
+        "codINEPEntidade": 22133674,
+        "nome": "U E INTEGRADO ANGELIM"
+    },
+    {
+        "idEntidade": 589,
+        "codINEPEntidade": 22133682,
+        "nome": "CETI LUIZ UBIRACI DE CARVALHO"
+    },
+    {
+        "idEntidade": 829,
+        "codINEPEntidade": 22133968,
+        "nome": "CETI ROCHA NETO"
+    },
+    {
+        "idEntidade": 165,
+        "codINEPEntidade": 22133976,
+        "nome": "CETI JOSE SOARES"
+    },
+    {
+        "idEntidade": 876,
+        "codINEPEntidade": 22134018,
+        "nome": "ESCOLA FAMILIA AGRICOLA DOM EDILBERTO III"
+    },
+    {
+        "idEntidade": 490,
+        "codINEPEntidade": 22134050,
+        "nome": "CETI SAO JOAO BATISTA"
+    },
+    {
+        "idEntidade": 497,
+        "codINEPEntidade": 22134107,
+        "nome": "U E  LEDA NAPOLEAO"
+    },
+    {
+        "idEntidade": 519,
+        "codINEPEntidade": 22134310,
+        "nome": "U E  TENENTE ARAÚJO"
+    },
+    {
+        "idEntidade": 607,
+        "codINEPEntidade": 22134360,
+        "nome": "U E  VERONICA CELESTINA DIAS"
+    },
+    {
+        "idEntidade": 653,
+        "codINEPEntidade": 22134484,
+        "nome": "CETI HELVIDIO NUNES"
+    },
+    {
+        "idEntidade": 8,
+        "codINEPEntidade": 22134549,
+        "nome": "U E  PAULO FREIRE"
+    },
+    {
+        "idEntidade": 521,
+        "codINEPEntidade": 22134565,
+        "nome": "U E  ALFREDO CARLOS ALENCAR"
+    },
+    {
+        "idEntidade": 7,
+        "codINEPEntidade": 22134581,
+        "nome": "CETI MARIA DE SOUSA ANDRADE"
+    },
+    {
+        "idEntidade": 565,
+        "codINEPEntidade": 22134611,
+        "nome": "U E  JOAQUIM MALAQUIAS"
+    },
+    {
+        "idEntidade": 459,
+        "codINEPEntidade": 22134620,
+        "nome": "U E EXPEDITO CRONEMBERGER DOS REIS"
+    },
+    {
+        "idEntidade": 10,
+        "codINEPEntidade": 22134646,
+        "nome": "CETI LUCINETE SANTANA DA SILVA"
+    },
+    {
+        "idEntidade": 341,
+        "codINEPEntidade": 22134727,
+        "nome": "U E  TERESINHA DE JESUS SOARES AMORIM"
+    },
+    {
+        "idEntidade": 283,
+        "codINEPEntidade": 22134794,
+        "nome": "U E  CELSA LEMOS"
+    },
+    {
+        "idEntidade": 123,
+        "codINEPEntidade": 22134832,
+        "nome": "U E  PROFA MARIA BERONISIA DE SOUSA"
+    },
+    {
+        "idEntidade": 440,
+        "codINEPEntidade": 22134840,
+        "nome": "U E  OLEGARIO AURELIANO DE SOUSA"
+    },
+    {
+        "idEntidade": 124,
+        "codINEPEntidade": 22134859,
+        "nome": "U E  PROF VICENTE GUALBERTO RIBEIRO"
+    },
+    {
+        "idEntidade": 660,
+        "codINEPEntidade": 22134867,
+        "nome": "CETI DEUSA ROCHA"
+    },
+    {
+        "idEntidade": 19,
+        "codINEPEntidade": 22134913,
+        "nome": "U E  OSCAR GIL CASTELO BRANCO"
+    },
+    {
+        "idEntidade": 9,
+        "codINEPEntidade": 22135030,
+        "nome": "CETI SEBASTIAO DE SOUSA"
+    },
+    {
+        "idEntidade": 11,
+        "codINEPEntidade": 22135065,
+        "nome": "CETI SEBASTIAO ALVES DOS REIS"
+    },
+    {
+        "idEntidade": 669,
+        "codINEPEntidade": 22135146,
+        "nome": "U E  ARIMATHEIA TITO FILHO"
+    },
+    {
+        "idEntidade": 175,
+        "codINEPEntidade": 22135243,
+        "nome": "U E MARGARIDA DA SILVA COSTA"
+    },
+    {
+        "idEntidade": 176,
+        "codINEPEntidade": 22135260,
+        "nome": "U E  ENSINO MEDIO DE JUREMA"
+    },
+    {
+        "idEntidade": 638,
+        "codINEPEntidade": 22135324,
+        "nome": "CETI PROF UBIRACI CARVALHO"
+    },
+    {
+        "idEntidade": 995,
+        "codINEPEntidade": 22135340,
+        "nome": "ESCOLA DE EDUCACAO ESPECIAL DONA MARIANA ALEXANDRE VIANA"
+    },
+    {
+        "idEntidade": 577,
+        "codINEPEntidade": 22135383,
+        "nome": "CETI  PEDRO MENDES PESSOA"
+    },
+    {
+        "idEntidade": 563,
+        "codINEPEntidade": 22135456,
+        "nome": "CEEP LICEU PARNAIBANO"
+    },
+    {
+        "idEntidade": 711,
+        "codINEPEntidade": 22135499,
+        "nome": "CETI PROF ANTONIO TARCISO PEREIRA E SILVA"
+    },
+    {
+        "idEntidade": 504,
+        "codINEPEntidade": 22135545,
+        "nome": "U E  AREOLINO LEONCIO DA SILVA"
+    },
+    {
+        "idEntidade": 517,
+        "codINEPEntidade": 22135553,
+        "nome": "U E  SANTA FILOMENA"
+    },
+    {
+        "idEntidade": 763,
+        "codINEPEntidade": 22135561,
+        "nome": "U E  CONSELHEIRO SARAIVA"
+    },
+    {
+        "idEntidade": 23,
+        "codINEPEntidade": 22135618,
+        "nome": "U E  PADRE LUIDINO DI GUIDI"
+    },
+    {
+        "idEntidade": 830,
+        "codINEPEntidade": 22135685,
+        "nome": "U E PROFESSOR ABELARDO PEREIRA"
+    },
+    {
+        "idEntidade": 340,
+        "codINEPEntidade": 22135731,
+        "nome": "U E  AGENOR DA SILVA"
+    },
+    {
+        "idEntidade": 527,
+        "codINEPEntidade": 22135782,
+        "nome": "CETI PROFª MARIA DO SOCORRO SAMPAIO MARTINS"
+    },
+    {
+        "idEntidade": 816,
+        "codINEPEntidade": 22135863,
+        "nome": "CETI AMARO ALVES PORTELA"
+    },
+    {
+        "idEntidade": 584,
+        "codINEPEntidade": 22135880,
+        "nome": "U E  JORNALISTA JOAO EMILIO FALCAO"
+    },
+    {
+        "idEntidade": 225,
+        "codINEPEntidade": 22135901,
+        "nome": "U E  CEZAR LEAL"
+    },
+    {
+        "idEntidade": 351,
+        "codINEPEntidade": 22135987,
+        "nome": "U E  DEPUTADA FRANCISCA TRINDADE"
+    },
+    {
+        "idEntidade": 183,
+        "codINEPEntidade": 22135995,
+        "nome": "U E  OTAVIO ESCORCIO GOMES"
+    },
+    {
+        "idEntidade": 773,
+        "codINEPEntidade": 22136002,
+        "nome": "CETI AUGUSTINHO BRANDAO"
+    },
+    {
+        "idEntidade": 184,
+        "codINEPEntidade": 22136037,
+        "nome": "U E PINHEIRO MACHADO"
+    },
+    {
+        "idEntidade": 877,
+        "codINEPEntidade": 22136045,
+        "nome": "ESCOLA FAMÍLIA AGRÍCOLA DOM EDILBERTO IV"
+    },
+    {
+        "idEntidade": 2,
+        "codINEPEntidade": 22136215,
+        "nome": "CEJA JOAO ADROALDO PIRES SOARES"
+    },
+    {
+        "idEntidade": 328,
+        "codINEPEntidade": 22136401,
+        "nome": "U E  MARIANO BORGES LEAL"
+    },
+    {
+        "idEntidade": 623,
+        "codINEPEntidade": 22136410,
+        "nome": "U E  GERALDINO CLEVIS"
+    },
+    {
+        "idEntidade": 347,
+        "codINEPEntidade": 22136452,
+        "nome": "U E  FRANCISCA MARLUCE NUNES QUEIROZ"
+    },
+    {
+        "idEntidade": 612,
+        "codINEPEntidade": 22136509,
+        "nome": "U E  JOAO ANTONIO DA VERA"
+    },
+    {
+        "idEntidade": 466,
+        "codINEPEntidade": 22136525,
+        "nome": "U E  ANTONIO PEREIRA DE ARAUJO"
+    },
+    {
+        "idEntidade": 70,
+        "codINEPEntidade": 22136550,
+        "nome": "CETI SAO JOSE"
+    },
+    {
+        "idEntidade": 699,
+        "codINEPEntidade": 22136703,
+        "nome": "CETI  FRANCISCA TRINDADE"
+    },
+    {
+        "idEntidade": 593,
+        "codINEPEntidade": 22136711,
+        "nome": "CEEPRU PROFª Mª DE JESUS CARVALHO ROCHA"
+    },
+    {
+        "idEntidade": 404,
+        "codINEPEntidade": 22136746,
+        "nome": "U E  SAO RAIMUNDO NONATO"
+    },
+    {
+        "idEntidade": 602,
+        "codINEPEntidade": 22136762,
+        "nome": "U E  MONS LINDOLFO UCHOA"
+    },
+    {
+        "idEntidade": 87,
+        "codINEPEntidade": 22136886,
+        "nome": "CETI FRANCIVAL RODRIGUES DO NASCIMENTO"
+    },
+    {
+        "idEntidade": 768,
+        "codINEPEntidade": 22136983,
+        "nome": "U E  MARIA NEUSA DE SOUSA"
+    },
+    {
+        "idEntidade": 535,
+        "codINEPEntidade": 22137068,
+        "nome": "U E  DONA FAUSTA DE SOUSA CRUZ"
+    },
+    {
+        "idEntidade": 632,
+        "codINEPEntidade": 22137181,
+        "nome": "U E  JULIO CESAR DA SILVA"
+    },
+    {
+        "idEntidade": 13,
+        "codINEPEntidade": 22137211,
+        "nome": "U E  PROF PEDRO SOARES"
+    },
+    {
+        "idEntidade": 897,
+        "codINEPEntidade": 22137335,
+        "nome": "ESCOLA CASA DO SILENCIO"
+    },
+    {
+        "idEntidade": 331,
+        "codINEPEntidade": 22137530,
+        "nome": "U E  HAYDEE LAGES MONTE"
+    },
+    {
+        "idEntidade": 321,
+        "codINEPEntidade": 22137556,
+        "nome": "U E  JOAO ODORICO"
+    },
+    {
+        "idEntidade": 104,
+        "codINEPEntidade": 22137777,
+        "nome": "U E  LUCIA MARIA OLIVEIRA"
+    },
+    {
+        "idEntidade": 566,
+        "codINEPEntidade": 22137815,
+        "nome": "U E  PROFESSOR LUIZ UBIRACI DE CARVALHO"
+    },
+    {
+        "idEntidade": 688,
+        "codINEPEntidade": 22137947,
+        "nome": "CETI DEPUTADA FRANCISCA TRINDADE"
+    },
+    {
+        "idEntidade": 12,
+        "codINEPEntidade": 22138021,
+        "nome": "U E  HELIO FIGUEIREDO DA FONSECA"
+    },
+    {
+        "idEntidade": 510,
+        "codINEPEntidade": 22138056,
+        "nome": "U E  JOAQUIM ANTONIO LUSTOSA"
+    },
+    {
+        "idEntidade": 18,
+        "codINEPEntidade": 22138390,
+        "nome": "U. E. RESIDENCIAL ESPLANADA"
+    },
+    {
+        "idEntidade": 375,
+        "codINEPEntidade": 22138412,
+        "nome": "U E DE ENSINO MEDIO VILA MARIA"
+    },
+    {
+        "idEntidade": 641,
+        "codINEPEntidade": 22138420,
+        "nome": "U E  DOM HELDER CAMARA"
+    },
+    {
+        "idEntidade": 425,
+        "codINEPEntidade": 22138439,
+        "nome": "U E  CERQUEIRA DANTAS"
+    },
+    {
+        "idEntidade": 284,
+        "codINEPEntidade": 22138455,
+        "nome": "U E  DE ENSINO MEDIO SANTA FE"
+    },
+    {
+        "idEntidade": 755,
+        "codINEPEntidade": 22138935,
+        "nome": "CETI MARIA DE OLIVEIRA RODRIGUES"
+    },
+    {
+        "idEntidade": 541,
+        "codINEPEntidade": 22139923,
+        "nome": "CETI PROFESSOR FLORESTAN FERNANDES"
+    },
+    {
+        "idEntidade": 239,
+        "codINEPEntidade": 22139931,
+        "nome": "U E TAQUARI"
+    },
+    {
+        "idEntidade": 506,
+        "codINEPEntidade": 22140115,
+        "nome": "CEEPRU DEPUTADO RIBEIRO MAGALHAES"
+    },
+    {
+        "idEntidade": 581,
+        "codINEPEntidade": 22140123,
+        "nome": "U E PROFª LUZIA SEIXAS DE OLIVEIRA AQUINO"
+    },
+    {
+        "idEntidade": 222,
+        "codINEPEntidade": 22140352,
+        "nome": "U E  ARTHUR MEDEIROS CARNEIRO"
+    },
+    {
+        "idEntidade": 317,
+        "codINEPEntidade": 22140360,
+        "nome": "U E  CAMPESTRE NORTE"
+    },
+    {
+        "idEntidade": 249,
+        "codINEPEntidade": 22140379,
+        "nome": "U E  CHAGAS RODRIGUES"
+    },
+    {
+        "idEntidade": 368,
+        "codINEPEntidade": 22140387,
+        "nome": "U E  ANTONIO DILSON FERNANDES"
+    },
+    {
+        "idEntidade": 549,
+        "codINEPEntidade": 22140662,
+        "nome": "CEEP  PROFESSOR RUY LEITE BERGER FILHO"
+    },
+    {
+        "idEntidade": 569,
+        "codINEPEntidade": 22140700,
+        "nome": "CETI PROFª MARIA DE LOURDES LEAL NUNES DE ANDRADE BRANDAO"
+    },
+    {
+        "idEntidade": 580,
+        "codINEPEntidade": 22141162,
+        "nome": "CETI CORINA MACHADO VIEIRA"
+    },
+    {
+        "idEntidade": 970,
+        "codINEPEntidade": 22141170,
+        "nome": "ESCOLA FAMILIA AGRICOLA SERRA DA CAPIVARA"
+    },
+    {
+        "idEntidade": 832,
+        "codINEPEntidade": 22141405,
+        "nome": "U E  ANTONIO RODRIGUES FILHO"
+    },
+    {
+        "idEntidade": 977,
+        "codINEPEntidade": 22141570,
+        "nome": "ESCOLA FAMILIA AGRICOLA DOM EDILBERTO DONA MORENA - EFADE VI"
+    },
+    {
+        "idEntidade": 978,
+        "codINEPEntidade": 22141723,
+        "nome": "ESCOLA FAMÍLIA AGRÍCOLA DOM EDILBERTO\/ DONA JANDIRA NUNES MARTINS - EFADE VII"
+    },
+    {
+        "idEntidade": 858,
+        "codINEPEntidade": 22142240,
+        "nome": "CEEPRU FREI JOSE APICELLA"
+    },
+    {
+        "idEntidade": 922,
+        "codINEPEntidade": 22142355,
+        "nome": "U E  ELIAS RAIMUNDO DE LIMA"
+    },
+    {
+        "idEntidade": 976,
+        "codINEPEntidade": 22142584,
+        "nome": "ESCOLA FAMILIA AGRICOLA DE SÃO PEDRO DO PIAUI"
+    },
+    {
+        "idEntidade": 890,
+        "codINEPEntidade": 22142746,
+        "nome": "CENTRO DE ESTIMULACAO PARA CRIANCAS COM DEFICIENCIA SENSORIAL AUDITIVA E VISUAL- CES"
+    },
+    {
+        "idEntidade": 893,
+        "codINEPEntidade": 22142754,
+        "nome": "CENTRO DE APOIO PEDAGOGICO PARA ATENDIMENTO AS PESSOAS COM DEFICIENCIA VISUAL - CAP"
+    },
+    {
+        "idEntidade": 994,
+        "codINEPEntidade": 22142762,
+        "nome": "NUCLEO DE ATIV. DE ALTAS HABILIDADES - SUPERDOTACAO -NAAH S"
+    },
+    {
+        "idEntidade": 889,
+        "codINEPEntidade": 22142770,
+        "nome": "CENTRO DE CAPAC DE PROFISSIONAIS DA EDUC. E ATEND. AS PESSOAS COM SURDEZ-CAS"
+    },
+    {
+        "idEntidade": 996,
+        "codINEPEntidade": 22143017,
+        "nome": "CEEP PROFESSOR JOSÉ PACIFICO DE MOURA NETO"
+    },
+    {
+        "idEntidade": 981,
+        "codINEPEntidade": 22143050,
+        "nome": "ESCOLA FAMILIA DE TURISMO - EFTUR"
+    },
+    {
+        "idEntidade": 1008,
+        "codINEPEntidade": 22143300,
+        "nome": "U E  CIRILA MARIA DE JESUS"
+    },
+    {
+        "idEntidade": 1021,
+        "codINEPEntidade": 22143394,
+        "nome": "CETI PORTAL DA ESPERANÇA"
+    },
+    {
+        "idEntidade": 1020,
+        "codINEPEntidade": 22143416,
+        "nome": "CETI PROFESSOR PAULO MACHADO DE RESENDE"
+    },
+    {
+        "idEntidade": 1049,
+        "codINEPEntidade": 22143432,
+        "nome": "CEEP DOS CERRADOS"
+    },
+    {
+        "idEntidade": 1024,
+        "codINEPEntidade": 22143440,
+        "nome": "UNIDADE ESCOLAR DR. FONTES IBIAPINA"
+    },
+    {
+        "idEntidade": 1041,
+        "codINEPEntidade": 22143572,
+        "nome": "U E VALE DO GAVIÃO"
+    },
+    {
+        "idEntidade": 1023,
+        "codINEPEntidade": 22143580,
+        "nome": "U E PEDRA MOLE"
+    },
+    {
+        "idEntidade": 5,
+        "codINEPEntidade": 22143602,
+        "nome": "U E  HELENA MARIA DA CRUZ"
+    },
+    {
+        "idEntidade": 1029,
+        "codINEPEntidade": 22143653,
+        "nome": "U E  CICERO COELHO"
+    },
+    {
+        "idEntidade": 1070,
+        "codINEPEntidade": 22143890,
+        "nome": "U E PROFª HILDERACI DA COSTA SILVA"
+    },
+    {
+        "idEntidade": 1071,
+        "codINEPEntidade": 22143947,
+        "nome": "U E JOSE ALVES BEZERRA"
+    },
+    {
+        "idEntidade": 1072,
+        "codINEPEntidade": 22143963,
+        "nome": "U E SEVERO MARIA EULALIO"
+    },
+    {
+        "idEntidade": 1088,
+        "codINEPEntidade": 22144048,
+        "nome": "UNIDADE ESCOLAR PROFESSORA MARIA DO SOCORRO DE CARVALHO"
+    },
+    {
+        "idEntidade": 1089,
+        "codINEPEntidade": 22144293,
+        "nome": "CENTRO ESTADUAL DE EDUCACAO PROFISSIONAL PROFESSORA MARIA AUZENI DE SOUSA"
+    },
+    {
+        "idEntidade": 972,
+        "codINEPEntidade": 22144315,
+        "nome": "NUCLEO DE EDUCACAO PROFISSIONAL ARNALDO FERREIRA DE CARVALHO"
+    },
+    {
+        "idEntidade": 221,
+        "codINEPEntidade": 22147209,
+        "nome": "CEEPRU MANOEL OTAVIO"
+    },
+    {
+        "idEntidade": 690,
+        "codINEPEntidade": 22147403,
+        "nome": "CEEPRU PROFESSOR ANTONIO DE BRITO FORTES"
+    },
+    {
+        "idEntidade": 792,
+        "codINEPEntidade": 22149600,
+        "nome": "U E  DR EZEQUIAS COSTA"
+    },
+    {
+        "idEntidade": 878,
+        "codINEPEntidade": 22155406,
+        "nome": "ESCOLA FAMÍLIA AGRÍCOLA DOM EDILBERTO V"
+    },
+    {
+        "idEntidade": 512,
+        "codINEPEntidade": 22156801,
+        "nome": "ESCOLA TÉCNICA ESTADUAL DE TEATRO PROFESSOR JOSÉ GOMES CAMPOS"
+    },
+    {
+        "idEntidade": 81,
+        "codINEPEntidade": 22159800,
+        "nome": "U E  PADRE PEDRO DA SILVA OLIVEIRA"
+    },
+    {
+        "idEntidade": 420,
+        "codINEPEntidade": 22160400,
+        "nome": "CEEPRU FRANCISCA TRINDADE"
+    },
+    {
+        "idEntidade": 251,
+        "codINEPEntidade": 22160809,
+        "nome": "CEEPRU ALCIDES VIEIRA DE MOURA"
+    },
+    {
+        "idEntidade": 578,
+        "codINEPEntidade": 22161201,
+        "nome": "U E  LUCAS MEIRELES"
+    },
+    {
+        "idEntidade": 256,
+        "codINEPEntidade": 22161406,
+        "nome": "U E  SANTA MARIA DAS VASSOURAS"
+    },
+    {
+        "idEntidade": 253,
+        "codINEPEntidade": 22161805,
+        "nome": "CEEPRU GOVERNADOR HUGO NAPOLEAO"
+    },
+    {
+        "idEntidade": 252,
+        "codINEPEntidade": 22162011,
+        "nome": "CEEPRU PROFª MARIA AMALIA"
+    },
+    {
+        "idEntidade": 437,
+        "codINEPEntidade": 22162216,
+        "nome": "U E  LUIZ FERNANDES BORGES NASCIMENTO"
+    },
+    {
+        "idEntidade": 250,
+        "codINEPEntidade": 22162402,
+        "nome": "U E  MILTON SALVIANO DA SILVA"
+    },
+    {
+        "idEntidade": 643,
+        "codINEPEntidade": 22162607,
+        "nome": "U E  PEDRO MARIANO DE FREITAS"
+    },
+    {
+        "idEntidade": 516,
+        "codINEPEntidade": 22162615,
+        "nome": "U E  DEP FRANCISCA TRINDADE II"
+    },
+    {
+        "idEntidade": 971,
+        "codINEPEntidade": 22163603,
+        "nome": "ESCOLA FAMILIA AGRICOLA VALE DO GURGUEIA"
+    },
+    {
+        "idEntidade": 509,
+        "codINEPEntidade": 22165614,
+        "nome": "U E  ALCIDES JOSE DE MOURA"
+    },
+    {
+        "idEntidade": 729,
+        "codINEPEntidade": 22165819,
+        "nome": "U E  BARTOLOMEU DA SILVA"
+    },
+    {
+        "idEntidade": 640,
+        "codINEPEntidade": 22169601,
+        "nome": "CENTRO INTEGRADO DE EDUCACAO ESPECIAL - CIES"
+    },
+    {
+        "idEntidade": 255,
+        "codINEPEntidade": 22170600,
+        "nome": "U E  PROF JOSE CAMILLO DA SILVEIRA FILHO"
+    },
+    {
+        "idEntidade": 272,
+        "codINEPEntidade": 22177604,
+        "nome": "CEJA PROF JOSE DE SOUSA BISPO"
+    },
+    {
+        "idEntidade": 608,
+        "codINEPEntidade": 22223606,
+        "nome": "CETI WILSON NUNES MARTINS FILHO"
+    },
+    {
+        "idEntidade": 462,
+        "codINEPEntidade": 22240608,
+        "nome": "ESCOLA FAMILIA AGRICOLA DOS COCAIS"
+    },
+    {
+        "idEntidade": 94,
+        "codINEPEntidade": 22249753,
+        "nome": "CEEPRU PADRE JOSÉ DE ANCHIETA CORTEZ"
+    },
+    {
+        "idEntidade": 604,
+        "codINEPEntidade": 22253726,
+        "nome": "U E  DEP PAULO HENRIQUE PAES LANDIM"
+    },
+    {
+        "idEntidade": 767,
+        "codINEPEntidade": 22253734,
+        "nome": "U E  MARIA DO AMPARO OLIVEIRA"
+    },
+    {
+        "idEntidade": 789,
+        "codINEPEntidade": 22256725,
+        "nome": "CETI JOAO HENRIQUE DE ALMEIDA SOUZA"
+    },
+    {
+        "idEntidade": 749,
+        "codINEPEntidade": 22264710,
+        "nome": "U E  JOAQUINA LIRA DE CARVALHO"
+    },
+    {
+        "idEntidade": 324,
+        "codINEPEntidade": 22306714,
+        "nome": "CETI PEDRO MACHADO DE CERQUEIRA"
+    },
+    {
+        "idEntidade": 390,
+        "codINEPEntidade": 22310754,
+        "nome": "CETI  JOSE PEREIRA DA SILVA"
+    },
+    {
+        "idEntidade": 969,
+        "codINEPEntidade": 22319727,
+        "nome": "ESCOLA FAMILIA AGRICOLA DE ELIZEU MARTINS"
+    }
+]
