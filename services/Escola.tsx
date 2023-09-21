@@ -129,12 +129,36 @@ const getWithPagination = (limit: number, offset: number) => {
     });
 }
 
-const getNumberOfPages = (qntd: number) => {
+const getNumberOfPages = (limit: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql('SELECT COUNT(*) AS total_registros FROM escola;', [], (tx, results) => {
                 const totalRegistros = results.rows.item(0).total_registros;
-                const paginas = Math.ceil(totalRegistros / qntd);
+                const paginas = Math.ceil(totalRegistros / limit);
+                resolve(paginas);
+            });
+        });
+    });
+}
+
+const getNumberOfPagesWithNome = ( nome: string, limit: number) => {
+    return new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql("SELECT COUNT(*) AS total_registros FROM escola WHERE REPLACE(nome, '  ', ' ') LIKE ? || '%';", [nome], (tx, results) => {
+                const totalRegistros = results.rows.item(0).total_registros;
+                const paginas = Math.ceil(totalRegistros / limit);
+                resolve(paginas);
+            });
+        });
+    });
+}
+
+const getNumberOfPagesWithInep = ( inep: string, limit: number) => {
+    return new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql("SELECT COUNT(*) AS total_registros FROM escola WHERE inep LIKE ? || '%';", [inep], (tx, results) => {
+                const totalRegistros = results.rows.item(0).total_registros;
+                const paginas = Math.ceil(totalRegistros / limit);
                 resolve(paginas);
             });
         });
@@ -142,4 +166,4 @@ const getNumberOfPages = (qntd: number) => {
 }
 
 
-export default { createTBEscola, existsEscola, dropTBEscola, insertEscola, getEscolaByInep, getEscolaByNome, getNumberOfPages, getWithPagination };
+export default { createTBEscola, existsEscola, dropTBEscola, insertEscola, getEscolaByInep, getEscolaByNome, getNumberOfPages, getWithPagination, getNumberOfPagesWithNome, getNumberOfPagesWithInep };

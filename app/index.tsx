@@ -19,7 +19,7 @@ const Home = () => {
         tipo: string,
     }
     const limit: number = 10;
-    const [selectedInep, setSeletedInep] = useState<number>();
+    const [selectedInep, setSeletedInep] = useState<string>('');
     const [selectedNome, setSeletedNome] = useState<string>();
     const [inepClicked, setInepClicked] = useState(false);
     const [nomeClicked, setNomeClicked] = useState(false);
@@ -40,7 +40,7 @@ const Home = () => {
             }
         }
         if (type === 'forward') {
-            if (currentPage < 69) {
+            if (currentPage < numberOfPages) {
                 let current: number = currentPage;
                 setCurrentPage(current = current + 1);
             }
@@ -75,33 +75,43 @@ const Home = () => {
     const getInepAcrossNome = (data: Array<IData>, nomeSelected: string, id: number) => {
         const filteredItems = data.find(item => item.nome === nomeSelected && item.id === id);
         if (filteredItems) {
-            setSeletedInep(filteredItems.inep);
+            setSeletedInep(filteredItems.inep.toString());
         }
     }
 
+
     const searchDataByInep = async (inep: string) => {
-        const res: any = await Escola.getEscolaByInep(inep);
-        if (res != false) {
-            setData(res);
-        } else {
-            setData([]);
-        }
+            const res: any = await Escola.getEscolaByInep(inep);
+            const count: any = await Escola.getNumberOfPagesWithInep(inep, limit);
+            setNumberOfPages(count);
+            if (res != false) {
+                setData(res);
+            } else {
+                setData([]);
+            }
     }
 
     const searchDataByNome = async (nome: string) => {
+        nome = nome.replace('  ', ' ');
         const res: any = await Escola.getEscolaByNome(nome);
+        const count: any = await Escola.getNumberOfPagesWithNome(nome, limit);
+        setNumberOfPages(count);
         if (res != false) {
             setData(res);
         } else {
             setData([]);
         }
+    }
+
+    const getNumberOfPages = async() => {
+        const total: any = await Escola.getNumberOfPages(limit);
+        setNumberOfPages(total);
     }
 
     const initData = async () => {
         const res: any = await Escola.getWithPagination(limit, (currentPage - 1) * limit);
         if (res != false) {
-            const total: any = await Escola.getNumberOfPages(limit);
-            setNumberOfPages(total);
+            getNumberOfPages();
             setData(res);
         }
     }
@@ -114,7 +124,7 @@ const Home = () => {
     }
 
     useEffect(() => {
-        // Escola.dropTBEscola();
+       // Escola.dropTBEscola();
         createOrNotEscola();
         insertOrNotEscola();
         initData();
@@ -154,7 +164,7 @@ const Home = () => {
                                             <TextInput placeholder={'Pesquisar Inep'} placeholderTextColor={'green'} onChangeText={(text) => searchDataByInep(text)} style={styles.searchInput} />
                                             {data?.map((item, index) => {
                                                 return (
-                                                    <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedInep(item.inep); getNomeAcrossInep(data, item.inep); searchDataByInep(''); setInepClicked(false); }}>
+                                                    <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedInep(item.inep.toString()); getNomeAcrossInep(data, item.inep);searchDataByInep(item.inep.toString()); setInepClicked(false); }}>
                                                         <Text>{item.inep}</Text>
                                                     </TouchableOpacity>
                                                 )
@@ -163,7 +173,7 @@ const Home = () => {
                                 </View>
                                 <View style={{ flexGrow: 10, maxWidth: '100%' }}>
                                     <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Nome da Escola</Text>
-                                    <TouchableOpacity style={styles.dropdownSelector} onPress={() => setNomeClicked(!nomeClicked)}>
+                                    <TouchableOpacity style={styles.dropdownSelector} onPress={() => {setNomeClicked(!nomeClicked); initData()}}>
                                         <Text>{selectedNome}</Text>
                                         {nomeClicked ? <Ionicons name='chevron-up-outline' color={'green'} size={30} /> :
                                             <Ionicons name='chevron-down-outline' color={'green'} size={30} />}
@@ -173,7 +183,7 @@ const Home = () => {
                                             <TextInput placeholder="Pesquisar escolas" placeholderTextColor={'green'} style={styles.searchInput} onChangeText={txt => { return searchDataByNome(txt) }} />
                                             {data.map((item, index) => {
                                                 return (
-                                                    <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedNome(item.nome); getInepAcrossNome(data, item.nome, item.id); searchDataByNome(''); setNomeClicked(false); }}>
+                                                    <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedNome(item.nome); getInepAcrossNome(data, item.nome, item.id);searchDataByNome(item.nome);  setNomeClicked(false); }}>
                                                         <Text>{item.nome}</Text>
                                                     </TouchableOpacity>
                                                 )
@@ -182,10 +192,9 @@ const Home = () => {
                                 </View>
                             </View>
                         </View>
-                        <View style={{ flexDirection: 'row', marginTop: 10, justifyContent: 'flex-end', gap: 10, zIndex: -1 }}>
-                            <TouchableOpacity style={styles.btnCancelar}><Text style={{ color: 'green', fontWeight: 'bold' }}>Cancelar</Text></TouchableOpacity>
-                            <TouchableOpacity style={styles.btnPesquisar}><Text style={{ color: 'white', fontWeight: 'bold' }}>Pesquisar</Text></TouchableOpacity>
-                        </View>
+                    </View>
+                    <View style={{maxWidth: 900,marginTop:20, alignItems: 'flex-end', alignSelf: 'center', width: '100%'}}>
+                        <TouchableOpacity style={styles.syncBtn}><Ionicons name='reload' size={25} color={'white'}/><Text style={{color: 'white'}}>Sincronizar</Text></TouchableOpacity>
                     </View>
                     <ScrollView horizontal={true} style={{ alignSelf: 'center' }}>
                         <View style={styles.tableCard} >
@@ -231,8 +240,8 @@ const Home = () => {
                 <TouchableOpacity disabled={currentPage === 1 ? true : false} onPress={() => paginate('skipBack')}><Ionicons name='play-skip-back-outline' color={'white'} size={20} style={styles.paginationIcon} /></TouchableOpacity>
                 <TouchableOpacity disabled={currentPage === 1 ? true : false} onPress={() => paginate('back')}><Ionicons name='chevron-back-outline' color={'white'} size={20} style={styles.paginationIcon} /></TouchableOpacity>
                 <Text>{currentPage} de {numberOfPages}</Text>
-                <TouchableOpacity disabled={currentPage === 69 ? true : false} onPress={() => paginate('forward')}><Ionicons name='chevron-forward-outline' color={'white'} size={20} style={styles.paginationIcon} /></TouchableOpacity>
-                <TouchableOpacity disabled={currentPage === 69 ? true : false} onPress={() => paginate('skipForward')}><Ionicons name='play-skip-forward-outline' color={'white'} size={20} style={styles.paginationIcon} /></TouchableOpacity>
+                <TouchableOpacity disabled={currentPage === numberOfPages ? true : false} onPress={() => paginate('forward')}><Ionicons name='chevron-forward-outline' color={'white'} size={20} style={styles.paginationIcon} /></TouchableOpacity>
+                <TouchableOpacity disabled={currentPage === numberOfPages ? true : false} onPress={() => paginate('skipForward')}><Ionicons name='play-skip-forward-outline' color={'white'} size={20} style={styles.paginationIcon} /></TouchableOpacity>
             </View>
         </>
     )

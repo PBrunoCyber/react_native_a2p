@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
         maxWidth: 900,
         backgroundColor: 'white',
         padding: 30,
-        marginTop: 40,
+        marginTop: 20,
         borderRadius: 15,
         width: '100%',
         alignSelf: 'center',
@@ -172,6 +172,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         gap: 10,
         alignSelf: 'center'
+    },
+    syncBtn: {
+        height: 40,
+        width: 150,
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: 'green',
+        justifyContent: 'center',
+        borderRadius: 5,
+        gap: 10,
+        alignSelf: 'flex-end'
     }
 });
 
