@@ -210,13 +210,6 @@ const Home = () => {
                     <Text style={{ color: '#fff', fontSize: 15, fontWeight: 'bold' }}>Abrir</Text>
                 </TouchableOpacity>
             </ScrollView> */}
-            <View style={styles.containerBtn}>
-                <Link href={'/addSchool/'}>
-                    <TouchableOpacity style={styles.addBtn}>
-                        <Ionicons name='add-outline' color={'white'} size={50} />
-                    </TouchableOpacity>
-                </Link>
-            </View>
         </>
     )
 }
