@@ -66,26 +66,6 @@ const existsEscola = () => {
     });
 };
 
-const getAllEscolas = () => {
-    return new Promise((resolve) => {
-        db.transaction((tx) => {
-            tx.executeSql("SELECT * FROM escola LIMIT 10;",
-                [],
-                (_, { rows }) => {
-                    if (rows.length > 0) {
-                        const data = [];
-                        for (let index = 0; index < rows.length; index++) {
-                            data.push(rows.item(index));
-                        }
-                        resolve(data);
-                    }
-                    else resolve(false)
-                },
-                (_, error) => { resolve(false); return false; }
-            )
-        });
-    });
-}
 
 const getEscolaByInep = (inep: string) => {
     return new Promise((resolve) => {
@@ -129,5 +109,37 @@ const getEscolaByNome = (nome: string) => {
     });
 }
 
+const getWithPagination = (limit: number, offset: number) => {
+    return new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql("SELECT * FROM escola LIMIT ? OFFSET ?;",
+                [limit, offset],
+                (_, { rows }) => {
+                    if (rows.length > 0) {
+                        const data = [];
+                        for (let index = 0; index < rows.length; index++) {
+                            data.push(rows.item(index));
+                        }
+                        resolve(data);
+                    }
+                    resolve(false)
+                },
+                (_, error) => { resolve(false); return false; });
+        });
+    });
+}
 
-export default { createTBEscola, existsEscola, dropTBEscola, getAllEscolas, insertEscola, getEscolaByInep, getEscolaByNome };
+const getNumberOfPages = (qntd: number) => {
+    return new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql('SELECT COUNT(*) AS total_registros FROM escola;', [], (tx, results) => {
+                const totalRegistros = results.rows.item(0).total_registros;
+                const paginas = Math.ceil(totalRegistros / qntd);
+                resolve(paginas);
+            });
+        });
+    });
+}
+
+
+export default { createTBEscola, existsEscola, dropTBEscola, insertEscola, getEscolaByInep, getEscolaByNome, getNumberOfPages, getWithPagination };

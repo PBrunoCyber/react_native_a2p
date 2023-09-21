@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         width: '100%',
         alignSelf: 'center',
-        zIndex: -1,
+        zIndex: 999,
     },
     add: {
         flexDirection: 'row',
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     },
     btnCancelar: {
         height: 40,
-        minWidth: 120,
+        minWidth: 100,
         borderWidth: 0.5,
         alignItems: 'center',
         justifyContent: 'center',
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     },
     btnPesquisar: {
         height: 40,
-        minWidth: 120,
+        minWidth: 100,
         zIndex: -1,
         alignItems: 'center',
         justifyContent: 'center',
@@ -133,6 +133,45 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         borderRadius: 5,
         backgroundColor: 'green'
+    },
+    tableCard: {
+        maxWidth: 900,
+        backgroundColor: 'white',
+        padding: 30,
+        marginTop: 40,
+        borderRadius: 15,
+        width: '100%',
+        alignSelf: 'center',
+        zIndex: 999,
+    },
+    tableContainerContent: {
+        marginTop: 40,
+        flexDirection: 'column',
+        gap: 40,
+    },
+    tableHeader: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        minWidth: 900,
+    },
+    tableContent: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        minWidth: 900,
+    },
+    paginationIcon: {
+        backgroundColor: 'green',
+        padding: 5,
+        borderRadius: 5,
+    },
+    paginationContainer: {
+        marginTop: 20,
+        marginBottom: 40,
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10,
+        alignSelf: 'center'
     }
 });
 

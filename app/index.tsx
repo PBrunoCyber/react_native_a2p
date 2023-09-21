@@ -1,33 +1,16 @@
 import { Link, Stack, useRouter } from 'expo-router';
-import { View, Text, Image, TextInput, FlatList, } from 'react-native';
+import { View, Text, Image, TextInput, FlatList } from 'react-native';
 import styles from './home.style';
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { useRef, useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import Escola from '../services/Escola';
 import json from '../json/escolas.json';
 
+
+
 const Home = () => {
-    // const schools = [
-    //     { nome: "Instituto Federal do Piauí - Campus Floriano", logradouro: "", bairro: "", cep: "", numero: "", estado: "", cidade: "", complemento: "" },
-    //     { nome: "Escola Municipal Antônio Nivaldo", logradouro: "", bairro: "", cep: "", numero: "", estado: "", cidade: "", complemento: "" },
-    //     { nome: "Escola Municipal Antônio Waquim", logradouro: "", bairro: "", cep: "", numero: "", estado: "", cidade: "", complemento: "" },
-    // ]
-
-
-    // const loadSchools = async () => {
-    //     const jsonData = await AsyncStorage.getItem('formData');
-    //     let data = [];
-    //     if (jsonData != null) {
-    //         data = JSON.parse(jsonData);
-    //         for (let index = 0; index < data.length; index++) {
-    //             schools.push(data[index])
-    //         }
-    //     }
-    //     setData(schools);
-    //     return schools;
-    // }
 
     interface IData {
         id: number,
@@ -35,18 +18,34 @@ const Home = () => {
         inep: number,
         tipo: string,
     }
-
+    const limit: number = 10;
     const [selectedInep, setSeletedInep] = useState<number>();
     const [selectedNome, setSeletedNome] = useState<string>();
     const [inepClicked, setInepClicked] = useState(false);
     const [nomeClicked, setNomeClicked] = useState(false);
+    const [currentPage, setCurrentPage] = useState<number>(1);
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState<Array<IData>>([{ id: 0, nome: '', inep: 0, tipo: '' }]);
     const router = useRouter();
+    const [numberOfPages, setNumberOfPages] = useState<number>(1);
+    const [isChecked, setIsChecked] = useState<boolean>();
 
-    // useEffect(() => {
-    //     loadSchools();
-    // }, [isClicked])
+    const paginate = (type: string) => {
+        if (type === "skipBack") setCurrentPage(1);
+        if (type === "skipForward") setCurrentPage(numberOfPages);
+        if (type === 'back') {
+            if (currentPage > 1) {
+                let current: number = currentPage;
+                setCurrentPage(current = current - 1);
+            }
+        }
+        if (type === 'forward') {
+            if (currentPage < 69) {
+                let current: number = currentPage;
+                setCurrentPage(current = current + 1);
+            }
+        }
+    }
 
     const insertOrNotEscola = async () => {
         const res = await Escola.existsEscola();
@@ -99,7 +98,16 @@ const Home = () => {
     }
 
     const initData = async () => {
-        const res: any = await Escola.getAllEscolas();
+        const res: any = await Escola.getWithPagination(limit, (currentPage - 1) * limit);
+        if (res != false) {
+            const total: any = await Escola.getNumberOfPages(limit);
+            setNumberOfPages(total);
+            setData(res);
+        }
+    }
+
+    const getWithPagination = async () => {
+        const res: any = await Escola.getWithPagination(limit, (currentPage - 1) * limit);
         if (res != false) {
             setData(res);
         }
@@ -112,18 +120,9 @@ const Home = () => {
         initData();
     }, [])
 
-    // const onSearch = async (txt: string) => {
-    //     const res = await loadSchools();
-
-    //     if (txt !== '') {
-    //         let tempData = res.filter(item => {
-    //             return item.nome.toLowerCase().includes(txt.toLowerCase());
-    //         });
-    //         setData(tempData);
-    //     } else {
-    //         setData(res);
-    //     }
-    // }
+    useEffect(() => {
+        getWithPagination();
+    }, [currentPage]);
 
     return (
         <>
@@ -133,83 +132,108 @@ const Home = () => {
                 headerRight: () => <Ionicons name='exit-outline' color={'white'} size={30} />,
                 headerStyle: { backgroundColor: 'green' }
             }} />
-            <View style={{ margin: 20 }}>
-                <View style={styles.cardContainer}>
-                    <View style={styles.add}>
-                        <Text style={{ fontSize: 20, color: 'green', fontWeight: 'bold' }}>Estrutura Física Escolar</Text>
-                        <TouchableOpacity style={styles.addBtn}><Ionicons name='add-outline' size={40} color={'#fff'} /></TouchableOpacity>
-                    </View>
-                    <View style={styles.filtros}>
-                        <Text style={styles.txtFiltros}>FILTROS</Text>
-                        <View style={styles.inep_nome}>
-                            <View style={{ flexGrow: 1, maxWidth: 400, zIndex: 999 }}>
-                                <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Inep</Text>
-                                <TouchableOpacity style={styles.dropdownSelector} onPress={() => { setInepClicked(!inepClicked); initData() }}>
-                                    <Text>{selectedInep}</Text>
-                                    {inepClicked ? <Ionicons name='chevron-up-outline' color={'green'} size={30} /> :
-                                        <Ionicons name='chevron-down-outline' color={'green'} size={30} />}
-                                </TouchableOpacity>
-                                {inepClicked ?
-                                    <View style={styles.dropdownArea}>
-                                        <TextInput placeholder={'Pesquisar Inep'} placeholderTextColor={'green'} onChangeText={(text) => searchDataByInep(text)} style={styles.searchInput} />
-                                        {data?.map((item, index) => {
-                                            return (
-                                                <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedInep(item.inep); getNomeAcrossInep(data, item.inep); searchDataByInep(''); setInepClicked(false); }}>
-                                                    <Text>{item.inep}</Text>
-                                                </TouchableOpacity>
-                                            )
-                                        })}
-                                    </View> : null}
-                            </View>
-                            <View style={{ flexGrow: 10 }}>
-                                <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Nome da Escola</Text>
-                                <TouchableOpacity style={styles.dropdownSelector} onPress={() => setNomeClicked(!nomeClicked)}>
-                                    <Text>{selectedNome}</Text>
-                                    {nomeClicked ? <Ionicons name='chevron-up-outline' color={'green'} size={30} /> :
-                                        <Ionicons name='chevron-down-outline' color={'green'} size={30} />}
-                                </TouchableOpacity>
-                                {nomeClicked ?
-                                    <View style={styles.dropdownArea}>
-                                        <TextInput placeholder="Pesquisar escolas" placeholderTextColor={'green'} style={styles.searchInput} onChangeText={txt => { return searchDataByNome(txt) }} />
-                                        {data.map((item, index) => {
-                                            return (
-                                                <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedNome(item.nome); getInepAcrossNome(data, item.nome, item.id); searchDataByNome(''); setNomeClicked(false); }}>
-                                                    <Text>{item.nome}</Text>
-                                                </TouchableOpacity>
-                                            )
-                                        })}
-                                    </View> : null}
+            <ScrollView>
+                <View style={{ margin: 20 }}>
+                    <View style={styles.cardContainer}>
+                        <View style={styles.add}>
+                            <Text style={{ fontSize: 20, color: 'green', fontWeight: 'bold' }}>Estrutura Física Escolar</Text>
+                            <TouchableOpacity style={styles.addBtn}><Ionicons name='add-outline' size={40} color={'#fff'} /></TouchableOpacity>
+                        </View>
+                        <View style={styles.filtros}>
+                            <Text style={styles.txtFiltros}>FILTROS</Text>
+                            <View style={styles.inep_nome}>
+                                <View style={{ flexGrow: 1, maxWidth: '100%', zIndex: 999 }}>
+                                    <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Inep</Text>
+                                    <TouchableOpacity style={styles.dropdownSelector} onPress={() => { setInepClicked(!inepClicked); initData() }}>
+                                        <Text>{selectedInep}</Text>
+                                        {inepClicked ? <Ionicons name='chevron-up-outline' color={'green'} size={30} /> :
+                                            <Ionicons name='chevron-down-outline' color={'green'} size={30} />}
+                                    </TouchableOpacity>
+                                    {inepClicked ?
+                                        <View style={styles.dropdownArea}>
+                                            <TextInput placeholder={'Pesquisar Inep'} placeholderTextColor={'green'} onChangeText={(text) => searchDataByInep(text)} style={styles.searchInput} />
+                                            {data?.map((item, index) => {
+                                                return (
+                                                    <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedInep(item.inep); getNomeAcrossInep(data, item.inep); searchDataByInep(''); setInepClicked(false); }}>
+                                                        <Text>{item.inep}</Text>
+                                                    </TouchableOpacity>
+                                                )
+                                            })}
+                                        </View> : null}
+                                </View>
+                                <View style={{ flexGrow: 10, maxWidth: '100%' }}>
+                                    <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Nome da Escola</Text>
+                                    <TouchableOpacity style={styles.dropdownSelector} onPress={() => setNomeClicked(!nomeClicked)}>
+                                        <Text>{selectedNome}</Text>
+                                        {nomeClicked ? <Ionicons name='chevron-up-outline' color={'green'} size={30} /> :
+                                            <Ionicons name='chevron-down-outline' color={'green'} size={30} />}
+                                    </TouchableOpacity>
+                                    {nomeClicked ?
+                                        <View style={styles.dropdownArea}>
+                                            <TextInput placeholder="Pesquisar escolas" placeholderTextColor={'green'} style={styles.searchInput} onChangeText={txt => { return searchDataByNome(txt) }} />
+                                            {data.map((item, index) => {
+                                                return (
+                                                    <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedNome(item.nome); getInepAcrossNome(data, item.nome, item.id); searchDataByNome(''); setNomeClicked(false); }}>
+                                                        <Text>{item.nome}</Text>
+                                                    </TouchableOpacity>
+                                                )
+                                            })}
+                                        </View> : null}
+                                </View>
                             </View>
                         </View>
+                        <View style={{ flexDirection: 'row', marginTop: 10, justifyContent: 'flex-end', gap: 10, zIndex: -1 }}>
+                            <TouchableOpacity style={styles.btnCancelar}><Text style={{ color: 'green', fontWeight: 'bold' }}>Cancelar</Text></TouchableOpacity>
+                            <TouchableOpacity style={styles.btnPesquisar}><Text style={{ color: 'white', fontWeight: 'bold' }}>Pesquisar</Text></TouchableOpacity>
+                        </View>
                     </View>
-                    <View style={{ flexDirection: 'row', marginTop: 10, justifyContent: 'flex-end', gap: 10, zIndex: -1 }}>
-                        <TouchableOpacity style={styles.btnCancelar}><Text style={{ color: 'green', fontWeight: 'bold' }}>Cancelar</Text></TouchableOpacity>
-                        <TouchableOpacity style={styles.btnPesquisar}><Text style={{ color: 'white', fontWeight: 'bold' }}>Pesquisar</Text></TouchableOpacity>
-                    </View>
+                    <ScrollView horizontal={true} style={{ alignSelf: 'center' }}>
+                        <View style={styles.tableCard} >
+                            <View style={styles.tableHeader}>
+                                <View style={{ width: 70 }}></View>
+                                <Text style={{ width: 55, fontSize: 15, fontWeight: 'bold' }}>ID</Text>
+                                <Text style={{ width: 100, fontSize: 15, fontWeight: 'bold' }}>Inep</Text>
+                                <Text style={{ width: 350, fontSize: 15, fontWeight: 'bold' }}>Nome da Escola</Text>
+                                <Text style={{ width: 120, textAlign: 'left', fontSize: 15, fontWeight: 'bold' }}>Tipo</Text>
+                                <Text style={{ width: 100, textAlign: 'left', fontSize: 15, fontWeight: 'bold' }}>Ações</Text>
+                            </View>
+                            <View style={styles.tableContainerContent}>
+                                {data.map((item, index) => {
+                                    return (
+                                        <View key={index} style={styles.tableContent}>
+                                            <BouncyCheckbox
+                                                size={25}
+                                                fillColor="green"
+                                                unfillColor="#FFFFFF"
+                                                style={{ width: 25, }}
+                                                isChecked={isChecked}
+                                                iconStyle={{ borderColor: "green", borderRadius: 5 }}
+                                                innerIconStyle={{ borderWidth: 1, borderRadius: 5 }}
+                                                onPress={(isChecked: boolean) => { setIsChecked(isChecked) }} />
+                                            <Text style={{ width: 100, fontSize: 15, textAlign: 'center' }}>{item.id}</Text>
+                                            <Text style={{ width: 100, fontSize: 15, textAlign: 'left' }}>{item.inep}</Text>
+                                            <Text style={{ width: 350, fontSize: 15, textAlign: 'left' }}>{item.nome}</Text>
+                                            <Text style={{ width: 120, fontSize: 15, textAlign: 'left' }}>{item.tipo}</Text>
+                                            <View style={{ flexDirection: 'row', width: 50, gap: 10 }}>
+                                                <TouchableOpacity style={styles.addBtn}><Ionicons color={'white'} name='eye-outline' size={30} /></TouchableOpacity>
+                                                <TouchableOpacity style={styles.addBtn}><Ionicons color={'white'} name='pencil-outline' size={30} /></TouchableOpacity>
+                                                <TouchableOpacity style={styles.addBtn}><Ionicons color={'white'} name='trash-outline' size={30} /></TouchableOpacity>
+                                            </View>
+                                        </View>
+                                    )
+                                })}
+                            </View>
+                        </View>
+                    </ScrollView>
                 </View>
+            </ScrollView>
+            <View style={styles.paginationContainer}>
+                <TouchableOpacity disabled={currentPage === 1 ? true : false} onPress={() => paginate('skipBack')}><Ionicons name='play-skip-back-outline' color={'white'} size={20} style={styles.paginationIcon} /></TouchableOpacity>
+                <TouchableOpacity disabled={currentPage === 1 ? true : false} onPress={() => paginate('back')}><Ionicons name='chevron-back-outline' color={'white'} size={20} style={styles.paginationIcon} /></TouchableOpacity>
+                <Text>{currentPage} de {numberOfPages}</Text>
+                <TouchableOpacity disabled={currentPage === 69 ? true : false} onPress={() => paginate('forward')}><Ionicons name='chevron-forward-outline' color={'white'} size={20} style={styles.paginationIcon} /></TouchableOpacity>
+                <TouchableOpacity disabled={currentPage === 69 ? true : false} onPress={() => paginate('skipForward')}><Ionicons name='play-skip-forward-outline' color={'white'} size={20} style={styles.paginationIcon} /></TouchableOpacity>
             </View>
-            {/* <ScrollView style={styles.container}>
-                <Text style={styles.title}></Text>
-                <TouchableOpacity style={styles.dropdownSelector} onPress={() => setIsClicked(!isClicked)}>
-                    <Text>{selectedSchool}</Text>
-                    {isClicked ? <Image source={require('../assets/icons/dropup.png')} style={styles.icon} /> :
-                        <Image source={require('../assets/icons/dropdown.png')} style={styles.icon} />}
-                </TouchableOpacity>
-                {isClicked ?
-                    <View style={styles.dropdownArea}>
-                        <TextInput placeholder="Pesquisar escolas" style={styles.searchInput} onChangeText={txt => { return onSearch(txt) }} />
-                        {data.map((item, index) => {
-                            return (
-                                <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedSchool(item.nome); onSearch(''); setIsClicked(false); }}>
-                                    <Text>{item.nome}</Text>
-                                </TouchableOpacity>
-                            )
-                        })}
-                    </View> : null}
-                <TouchableOpacity style={styles.button} onPress={() => router.push(`/form/${selectedSchool}`)}>
-                    <Text style={{ color: '#fff', fontSize: 15, fontWeight: 'bold' }}>Abrir</Text>
-                </TouchableOpacity>
-            </ScrollView> */}
         </>
     )
 }
