@@ -13,20 +13,21 @@ const dropTBEscola = () => {
 }
 
 const createTBEscola = () => {
+    return new Promise((resolve, reject) => {
 
-    db.transaction(tx => {
-        tx.executeSql("CREATE TABLE escola ( inep INTEGER PRIMARY KEY, id INTEGER NOT NULL, nome VARCHAR(400), tipo VARCHAR(20))",
-            [],
-            (_, { rows }) => {
-                console.log("CRIADO COM SUCESSO!");
-            },
-            (_, error) => { console.log(error); return false })
+        db.transaction(tx => {
+            tx.executeSql("CREATE TABLE escola (inep VARCHAR(8) PRIMARY KEY, id INTEGER NOT NULL, nome VARCHAR(400), tipo VARCHAR(20))",
+                [],
+                (_, { rows }) => {
+                    console.log("CRIADO COM SUCESSO!");
+                },
+                (_, error) => { console.log(error); return false })
+        });
     });
-
 }
 
 interface IInsert {
-    inep: number | string,
+    inep: string,
     id: number,
     nome: string,
     tipo: string
@@ -47,8 +48,8 @@ const insertEscola = (obj: IInsert) => {
     });
 }
 
-const findEscola = () => {
-    return new Promise((resolve, reject) => {
+const existsEscola = () => {
+    return new Promise((resolve) => {
         db.transaction((tx) => {
             //comando SQL modificável
             tx.executeSql(
@@ -57,13 +58,76 @@ const findEscola = () => {
                 //-----------------------
                 (_, { rows }) => {
                     if (rows.length > 0) resolve(true)
-                    else reject(false) // nenhum registro encontrado
+                    else resolve(false); // nenhum registro encontrado
                 },
-                (_, error) => { return false }
+                (_, error) => { resolve(false); return false; }
             );
         });
     });
 };
 
+const getAllEscolas = () => {
+    return new Promise((resolve) => {
+        db.transaction((tx) => {
+            tx.executeSql("SELECT * FROM escola LIMIT 10;",
+                [],
+                (_, { rows }) => {
+                    if (rows.length > 0) {
+                        const data = [];
+                        for (let index = 0; index < rows.length; index++) {
+                            data.push(rows.item(index));
+                        }
+                        resolve(data);
+                    }
+                    else resolve(false)
+                },
+                (_, error) => { resolve(false); return false; }
+            )
+        });
+    });
+}
 
-export default { createTBEscola, findEscola, dropTBEscola, insertEscola };
+const getEscolaByInep = (inep: string) => {
+    return new Promise((resolve) => {
+        db.transaction((tx) => {
+            tx.executeSql("SELECT * FROM escola WHERE inep LIKE ? || '%' LIMIT 10;",
+                [inep],
+                (_, { rows }) => {
+                    if (rows.length > 0) {
+                        const data = [];
+                        for (let index = 0; index < rows.length; index++) {
+                            data.push(rows.item(index));
+                        }
+                        resolve(data);
+                    }
+                    resolve(false)
+                },
+                (_, error) => { resolve(error); return false; }
+            )
+        });
+    });
+}
+
+const getEscolaByNome = (nome: string) => {
+    return new Promise((resolve) => {
+        db.transaction((tx) => {
+            tx.executeSql("SELECT * FROM escola WHERE REPLACE(nome, '  ', ' ') LIKE ? || '%' LIMIT 10;",
+                [nome],
+                (_, { rows }) => {
+                    if (rows.length > 0) {
+                        const data = [];
+                        for (let index = 0; index < rows.length; index++) {
+                            data.push(rows.item(index));
+                        }
+                        resolve(data);
+                    }
+                    resolve(false)
+                },
+                (_, error) => { resolve(error); return false; }
+            )
+        });
+    });
+}
+
+
+export default { createTBEscola, existsEscola, dropTBEscola, getAllEscolas, insertEscola, getEscolaByInep, getEscolaByNome };

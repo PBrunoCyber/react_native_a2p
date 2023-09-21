@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-    
+
     cardContainer: {
         maxWidth: 900,
         backgroundColor: 'white',
@@ -9,9 +9,10 @@ const styles = StyleSheet.create({
         marginTop: 40,
         borderRadius: 15,
         width: '100%',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        zIndex: -1,
     },
-    add:{
+    add: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         borderBottomColor: '#ccc'
     },
-    filtros:{
+    filtros: {
         marginTop: 30,
         paddingBottom: 50,
         borderBottomColor: '#ccc',
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
         paddingRight: 10
     },
     btnCancelar: {
-        height: 40, 
+        height: 40,
         minWidth: 120,
         borderWidth: 0.5,
         alignItems: 'center',
@@ -64,10 +65,11 @@ const styles = StyleSheet.create({
         borderColor: 'green'
     },
     btnPesquisar: {
-        height: 40, 
+        height: 40,
         minWidth: 120,
+        zIndex: -1,
         alignItems: 'center',
-        justifyContent:'center',
+        justifyContent: 'center',
         borderRadius: 5,
         backgroundColor: 'green'
     },
@@ -76,30 +78,32 @@ const styles = StyleSheet.create({
         height: 20
     },
     dropdownArea: {
-        width: '90%',
         borderRadius: 10,
         paddingBottom: 20,
-        marginTop: 20,
+        marginBottom: 20,
+        marginTop: 90,
+        width: '100%',
         elevation: 5,
-        backgroundColor: '#fff',
+        position: 'absolute',
+        backgroundColor: '#dbffdc',
         alignSelf: 'center'
     },
     searchInput: {
         width: '90%',
         height: 40,
-        borderRadius: 10,
+        borderRadius: 5,
         borderWidth: 0.5,
         paddingLeft: 20,
         paddingRight: 20,
-        borderColor: "black",
+        borderColor: "green",
         alignSelf: 'center',
         marginTop: 10,
         marginBottom: 20,
     },
     schoolsItem: {
-        width: '85%',
+        width: '90%',
         height: 50,
-        borderBottomColor: '#8e8e8e',
+        borderBottomColor: 'green',
         borderBottomWidth: .2,
         justifyContent: 'center',
         alignSelf: 'center'
