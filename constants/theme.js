@@ -5,7 +5,8 @@ const COLORS = {
     darkGray: "#5A5A5A",
     lightBlack: '#555',
     black: 'black',
-    lightGreen: '#dbffdc'
+    lightGreen: '#dbffdc',
+    blue: "#287bff"
 }
 
 export { COLORS };

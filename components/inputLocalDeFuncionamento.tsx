@@ -7,29 +7,22 @@ import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { COLORS } from '../constants/theme';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { RadioButton } from 'react-native-paper';
+import TwoOptions from './twoOptions';
 
 
-interface CheckBoxState {
-    sim: boolean;
-    nao: boolean;
-}
 
-interface CheckBoxGroupState {
-    [key: string]: CheckBoxState
-}
 
 
 const LocalDeFuncionamento = () => {
     const [isClicked, setIsClicked] = useState(false);
+    const [answer,  setAnswers] = useState({});
 
-    const [selectedValue, setSelectedValue] = useState('sim');
-
-    const handleRadioChange = (value: string) => {
-        setSelectedValue(value);
-    };
-
-
-
+    const handleOptionChange = (question: string, answer: boolean)=>{
+        setAnswers((prevAnswer)=> ({
+            ...prevAnswer,
+            [question]: answer
+        }));
+    }
 
     return (
         <View>
@@ -42,19 +35,7 @@ const LocalDeFuncionamento = () => {
             </TouchableOpacity>
             {isClicked &&
                 <View style={styles.formContainer}>
-                    <View style={styles.formFlex}>
-                        <Text style={{ fontWeight: 'bold', flexGrow: 1 }}>1 - Prédio Escolar*</Text>
-                        <RadioButton.Group onValueChange={handleRadioChange} value={selectedValue}>
-                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <RadioButton.Android color='green' value="sim" />
-                                <Text>Sim</Text>
-                            </View>
-                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <RadioButton.Android value="nao" />
-                                <Text>Não</Text>
-                            </View>
-                        </RadioButton.Group>
-                    </View>
+                    <TwoOptions weight='bold' question='1 - Prédio Escolar*' onOptionChange={(option) => handleOptionChange('Pergunta1', option)}/>
                     <View style={[styles.formFlex]}>
                         <Text style={{ flexGrow: 1 }}>a) Tipo de Imóvel*</Text>
                         <View style={styles.formFlexOptions}>
@@ -72,19 +53,7 @@ const LocalDeFuncionamento = () => {
                             </View>
                         </View>
                     </View>
-                    <View style={[styles.formFlex]}>
-                        <Text style={{ flexGrow: 1 }}>b) Prédio Escolar Compartilhado com Outra Escola*</Text>
-                        <View style={styles.formFlexOptions}>
-                            <View style={styles.formFlexOption}>
-                                <BouncyCheckbox fillColor={COLORS.green} />
-                                <Text>SIM</Text>
-                            </View>
-                            <View style={styles.formFlexOption}>
-                                <BouncyCheckbox fillColor={COLORS.green} />
-                                <Text>NÃO</Text>
-                            </View>
-                        </View>
-                    </View>
+                    <TwoOptions weight='normal' question='b) Prédio Escolar Compartilhado com Outra Escola*' onOptionChange={(option) => handleOptionChange('Pergunta2', option)}/>
                     <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 10 }]}>
                         <Text style={{ flexGrow: 1 }}>i) Código da escola com a qual compartilha*</Text>
                         <TextInput style={styles.input} />
