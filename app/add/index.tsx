@@ -4,9 +4,10 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../../styles/add.style';
 import { COLORS } from '../../constants/theme'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Escola from '../../services/Escola';
+import LocalDeFuncionamento from '../../components/inputLocalDeFuncionamento';
 
 interface IData {
     id: number,
@@ -25,10 +26,12 @@ interface IProps {
 
 const AddEstruturaFisica = (props: IProps) => {
 
+    const [data, setData] = useState<Array<IData>>([{ id: 0, nome: '', inep: 0, tipo: '' }]);
     const [inepClicked, setInepClicked] = useState(false);
     const [nomeClicked, setNomeClicked] = useState(false);
     const [selectedInep, setSeletedInep] = useState<string>('');
     const [selectedNome, setSeletedNome] = useState<string>();
+    const limit: number = 10;
 
     const getNomeAcrossInep = (data: Array<IData>, inepSelected: number | string) => {
         const selectedItem = data.find(item => item.inep === inepSelected);
@@ -46,12 +49,10 @@ const AddEstruturaFisica = (props: IProps) => {
 
     const searchDataByInep = async (inep: string) => {
         const res: any = await Escola.getEscolaByInep(inep);
-        const count: any = await Escola.getNumberOfPagesWithInep(inep, props.limit);
-        props.setNumberOfPages(count);
         if (res != false) {
-            props.setData(res);
+            setData(res);
         } else {
-            props.setData([]);
+            setData([]);
         }
     }
 
@@ -59,15 +60,23 @@ const AddEstruturaFisica = (props: IProps) => {
     const searchDataByNome = async (nome: string) => {
         nome = nome.replace('  ', ' ');
         const res: any = await Escola.getEscolaByNome(nome);
-        const count: any = await Escola.getNumberOfPagesWithNome(nome, props.limit);
-        props.setNumberOfPages(count);
         if (res != false) {
-            props.setData(res);
+            setData(res);
         } else {
-            props.setData([]);
+            setData([]);
         }
     }
 
+    const initData = async () => {
+        const res: any = await Escola.getAll(limit);
+        if (res != false) {
+            setData(res);
+        }
+    }
+
+    useEffect(() => {
+        initData();
+    }, [])
 
     return (
         <>
@@ -90,10 +99,11 @@ const AddEstruturaFisica = (props: IProps) => {
                         </View>
                         <Text style={styles.textInfo}>Identifique a escola e forneça os dados a seguir</Text>
                         <View style={styles.filtros}>
+                            <Text style={styles.txtFiltros}>DADOS DA ESCOLA</Text>
                             <View style={styles.inep_nome}>
                                 <View style={{ flexGrow: 1, maxWidth: '100%', zIndex: 999 }}>
                                     <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Inep</Text>
-                                    <TouchableOpacity style={styles.dropdownSelector} onPress={() => { setInepClicked(!nomeClicked); props.initData() }}>
+                                    <TouchableOpacity style={styles.dropdownSelector} onPress={() => { setInepClicked(!inepClicked); initData() }}>
                                         <Text>{selectedInep}</Text>
                                         {inepClicked ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} /> :
                                             <Ionicons name='chevron-down-outline' color={COLORS.green} size={30} />}
@@ -101,10 +111,10 @@ const AddEstruturaFisica = (props: IProps) => {
                                     {inepClicked ?
                                         <View style={styles.dropdownArea}>
                                             <TextInput placeholder="Pesquisar por inep" placeholderTextColor={COLORS.green} style={styles.searchInput} onChangeText={txt => { return searchDataByInep(txt) }} />
-                                            {props.data.map((item, index) => {
+                                            {data.map((item, index) => {
                                                 return (
-                                                    <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedInep(item.nome); getNomeAcrossInep(props.data, item.inep); searchDataByInep(item.nome); setInepClicked(false); }}>
-                                                        <Text>{item.nome}</Text>
+                                                    <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedInep(item.inep.toString()); getNomeAcrossInep(data, item.inep); searchDataByInep(item.inep.toString()); setInepClicked(false); }}>
+                                                        <Text>{item.inep}</Text>
                                                     </TouchableOpacity>
                                                 )
                                             })}
@@ -112,17 +122,17 @@ const AddEstruturaFisica = (props: IProps) => {
                                 </View>
                                 <View style={{ flexGrow: 10, maxWidth: '100%' }}>
                                     <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Nome da Escola</Text>
-                                    <TouchableOpacity style={styles.dropdownSelector} onPress={() => { setNomeClicked(!nomeClicked); props.initData() }}>
+                                    <TouchableOpacity style={styles.dropdownSelector} onPress={() => { setNomeClicked(!nomeClicked); initData() }}>
                                         <Text>{selectedNome}</Text>
                                         {nomeClicked ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} /> :
                                             <Ionicons name='chevron-down-outline' color={COLORS.green} size={30} />}
                                     </TouchableOpacity>
                                     {nomeClicked ?
                                         <View style={styles.dropdownArea}>
-                                            <TextInput placeholder="Pesquisar escolas" placeholderTextColor={COLORS.green} style={styles.searchInput} onChangeText={txt => { return searchDataByNome(txt) }} />
-                                            {props.data.map((item, index) => {
+                                            <TextInput placeholder="Pesquisar por nome da escola" placeholderTextColor={COLORS.green} style={styles.searchInput} onChangeText={txt => { return searchDataByNome(txt) }} />
+                                            {data.map((item, index) => {
                                                 return (
-                                                    <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedNome(item.nome); getInepAcrossNome(props.data, item.nome, item.id); searchDataByNome(item.nome); setNomeClicked(false); }}>
+                                                    <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedNome(item.nome); getInepAcrossNome(data, item.nome, item.id); searchDataByNome(item.nome); setNomeClicked(false); }}>
                                                         <Text>{item.nome}</Text>
                                                     </TouchableOpacity>
                                                 )
@@ -130,6 +140,13 @@ const AddEstruturaFisica = (props: IProps) => {
                                         </View> : null}
                                 </View>
                             </View>
+                            <View style={{ marginTop: 20 }}>
+                                <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Nome do Anexo da Escola</Text>
+                                <TextInput style={styles.inputAnexo} />
+                            </View>
+                        </View>
+                        <View style={{ marginTop: 40 }}>
+                            <LocalDeFuncionamento />
                         </View>
                     </View>
                 </ScrollView>

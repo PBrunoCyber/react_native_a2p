@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
         marginTop: 40,
         borderTopLeftRadius: 15,
         borderTopRightRadius: 15,
-        height: 1000
     },
     container: {
         maxWidth: 900,
@@ -19,6 +18,8 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: 20,
         alignItems: 'center'
     },
     btnSalvarRascunho: {
@@ -43,13 +44,11 @@ const styles = StyleSheet.create({
     filtros: {
         marginTop: 30,
         paddingBottom: 50,
-        borderBottomColor: COLORS.gray,
-        borderBottomWidth: 0.5,
     },
     txtFiltros: {
         fontWeight: 'bold',
         fontSize: 15,
-        color: '#555'
+        color: COLORS.green
     },
     inep_nome: {
         marginTop: 20,
@@ -99,6 +98,13 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 20,
     },
+    inputAnexo: {
+        height: 50,
+        width: '100%',
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#ccc'
+    }
 });
 
 export default styles;

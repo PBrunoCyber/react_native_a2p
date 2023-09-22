@@ -129,6 +129,26 @@ const getWithPagination = (limit: number, offset: number) => {
     });
 }
 
+const getAll = (limit: number) => {
+    return new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql("SELECT * FROM escola LIMIT ?;",
+                [limit],
+                (_, { rows }) => {
+                    if (rows.length > 0) {
+                        const data = [];
+                        for (let index = 0; index < rows.length; index++) {
+                            data.push(rows.item(index));
+                        }
+                        resolve(data);
+                    }
+                    resolve(false)
+                },
+                (_, error) => { resolve(false); return false; });
+        });
+    });
+}
+
 const getNumberOfPages = (limit: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
@@ -141,7 +161,7 @@ const getNumberOfPages = (limit: number) => {
     });
 }
 
-const getNumberOfPagesWithNome = ( nome: string, limit: number) => {
+const getNumberOfPagesWithNome = (nome: string, limit: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql("SELECT COUNT(*) AS total_registros FROM escola WHERE REPLACE(nome, '  ', ' ') LIKE ? || '%';", [nome], (tx, results) => {
@@ -153,7 +173,7 @@ const getNumberOfPagesWithNome = ( nome: string, limit: number) => {
     });
 }
 
-const getNumberOfPagesWithInep = ( inep: string, limit: number) => {
+const getNumberOfPagesWithInep = (inep: string, limit: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql("SELECT COUNT(*) AS total_registros FROM escola WHERE inep LIKE ? || '%';", [inep], (tx, results) => {
@@ -166,4 +186,4 @@ const getNumberOfPagesWithInep = ( inep: string, limit: number) => {
 }
 
 
-export default { createTBEscola, existsEscola, dropTBEscola, insertEscola, getEscolaByInep, getEscolaByNome, getNumberOfPages, getWithPagination, getNumberOfPagesWithNome, getNumberOfPagesWithInep };
+export default { createTBEscola, existsEscola, dropTBEscola, insertEscola, getEscolaByInep, getEscolaByNome, getNumberOfPages, getWithPagination, getNumberOfPagesWithNome, getNumberOfPagesWithInep, getAll };
