@@ -104,6 +104,24 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         borderColor: '#ccc'
+    },
+    btnSalvar:{
+        width: 150,
+        backgroundColor: COLORS.green,
+        height: 40,
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    btnCancelar: {
+        width: 150,
+        height: 40,
+        borderWidth: 2,
+        borderRadius: 5,
+        borderColor: COLORS.green,
+        backgroundColor: COLORS.white,
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 });
 

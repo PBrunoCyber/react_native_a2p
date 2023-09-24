@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     },
     formFlexOptions: {
         flexDirection: 'row',
+        alignItems: 'center',
         gap: 30,
     },
     formFlexOption: {
@@ -35,6 +36,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 100
     },
+    messageError: {
+        marginTop: 10,
+        color: COLORS.red,
+    }
 });
 
 export default styles;

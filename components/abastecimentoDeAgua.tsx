@@ -8,21 +8,13 @@ import { COLORS } from '../constants/theme';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import RadioGroup from './RadioGroup';
 import CheckBox from './CheckBox';
+import {IAbastecimentoDeAgua} from '../types/EstruturaFisicaEscolar';
 
-
-interface IQuestions {
-    campo_17: number | null,
-    campo_18: number | null,
-    campo_19: number | null,
-    campo_20: number | null,
-    campo_21: number | null,
-    campo_22: 0 | 1,
-}
 
 
 const AbastecimentoDeAgua = () => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IQuestions>(
+    const [answer, setAnswers] = useState<IAbastecimentoDeAgua>(
         {
             campo_17: null,
             campo_18: null,
