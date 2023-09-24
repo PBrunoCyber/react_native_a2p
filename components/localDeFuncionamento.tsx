@@ -113,7 +113,6 @@ const AbastecimentoDeAgua = () => {
                     <RadioGroup options={[1, 0]} value={answer.campo_6} textOption={textOption} fontWeight='bold' question='4 - Unidade de atendimento Socioeducativa*' onSelect={(option) => handleOptionChange('campo_6', option)} />
                     <RadioGroup options={[1, 0]} value={answer.campo_7} textOption={textOption} fontWeight='bold' question='5 - Unidade Prisional*' onSelect={(option) => handleOptionChange('campo_7', option)} />
                     <RadioGroup options={[1, 0]} value={answer.campo_8} textOption={textOption} fontWeight='bold' question='6 - Outros*' onSelect={(option) => handleOptionChange('campo_8', option)} />
-                        <TouchableOpacity onPress={()=> console.log(answer)}><Text>Show Answers</Text></TouchableOpacity>
                 </View>
             }
         </View>
