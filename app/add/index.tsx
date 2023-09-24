@@ -7,7 +7,8 @@ import { COLORS } from '../../constants/theme'
 import { useEffect, useState } from 'react';
 
 import Escola from '../../services/Escola';
-import LocalDeFuncionamento from '../../components/inputLocalDeFuncionamento';
+import LocalDeFuncionamento from '../../components/localDeFuncionamento';
+import AbastecimentoDeAgua from '../../components/abastecimentoDeAgua';
 
 interface IData {
     id: number,
@@ -147,6 +148,7 @@ const AddEstruturaFisica = (props: IProps) => {
                         </View>
                         <View style={{ marginTop: 40 }}>
                             <LocalDeFuncionamento />
+                            <AbastecimentoDeAgua />
                         </View>
                     </View>
                 </ScrollView>
