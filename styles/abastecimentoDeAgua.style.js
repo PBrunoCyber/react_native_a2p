@@ -10,6 +10,10 @@ const styles = StyleSheet.create({
     formContainer: {
         marginBottom: 30
     },
+    messageError: {
+        marginTop: 10,
+        color: COLORS.red,
+    },
     formFlex: {
         flexDirection: 'row',
         alignItems: 'center',

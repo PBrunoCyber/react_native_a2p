@@ -24,6 +24,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    radioButtonDisabled: {
+        borderWidth: 2,
+        borderColor: COLORS.gray,
+        backgroundColor: COLORS.lightGray,
+        borderRadius: 50,
+        padding: 8,
+        width: 30,
+        height: 30,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     selected: {
         backgroundColor: COLORS.green,
     },

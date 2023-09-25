@@ -14,7 +14,7 @@ interface IProps {
     formErrors: any,
 }
 
-const AbastecimentoDeAgua = ({localDeFuncionamentoChange, formErrors}:IProps) => {
+const AbastecimentoDeAgua = ({ localDeFuncionamentoChange, formErrors }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
     const [answer, setAnswers] = useState<ILocalDeFuncionamento>(
         {
@@ -36,24 +36,24 @@ const AbastecimentoDeAgua = ({localDeFuncionamentoChange, formErrors}:IProps) =>
     );
     const textOption = ["SIM", "NÃO"]
 
-    useEffect(()=>{
+    useEffect(() => {
         localDeFuncionamentoChange(answer);
-        
-    },[answer])
 
-    useEffect(()=>{
-        if(formErrors && Object.keys(formErrors).length > 0){
+    }, [answer])
+
+    useEffect(() => {
+        if (formErrors && Object.keys(formErrors).length > 0) {
             setIsClicked(true);
         }
-    },[formErrors])
-    
+    }, [formErrors])
+
     const handleOptionChange = (question: string, resposta: number | string | null) => {
         setAnswers((prevAnswer) => ({
             ...prevAnswer,
             [question]: resposta
         }));
-        if (question === 'campo_3' && resposta === 0){
-            setAnswers((prevAnswer)=> ({
+        if (question === 'campo_3' && resposta === 0) {
+            setAnswers((prevAnswer) => ({
                 ...prevAnswer,
                 ['campo_9']: null,
                 ['campo_10']: null
@@ -63,71 +63,67 @@ const AbastecimentoDeAgua = ({localDeFuncionamentoChange, formErrors}:IProps) =>
 
     return (
         <View>
-            <TouchableOpacity onPress={() =>{ setIsClicked(!isClicked)}}>
+            <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
                     <Text style={isClicked || Object.keys(formErrors).length > 0 ? { color: COLORS.green, fontWeight: 'bold' } : { color: COLORS.black }}>I - LOCAL DE FUNCIONAMENTO DA ESCOLA</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>
             </TouchableOpacity>
-            {isClicked === true || Object.keys(formErrors).length > 0 ? 
+            {isClicked === true || Object.keys(formErrors).length > 0 ?
                 <View style={styles.formContainer}>
                     {formErrors.localDeFuncionamento && <Text style={styles.messageError}>{formErrors.localDeFuncionamento}</Text>}
                     <RadioGroup options={[1, 0]} value={answer.campo_3} textOption={textOption} fontWeight='bold' question='1 - Prédio Escolar*' onSelect={(option) => handleOptionChange('campo_3', option)} />
                     {formErrors.campo_3 && <Text style={styles.messageError}>{formErrors.campo_3}</Text>}
-                    {answer.campo_3 === 1 ?
-                        <>
-                            <RadioGroup options={[1, 2, 3]} value={answer.campo_9} textOption={["Próprio", "Cedido", "Alugado"]} fontWeight='normal' question='a) Tipo de Imóvel*' onSelect={(option) => handleOptionChange('campo_9', option)} />
-                            {formErrors.campo_9 && <Text style={styles.messageError}>{formErrors.campo_9}</Text>}
-                            <RadioGroup options={[1, 0]} value={answer.campo_10} textOption={textOption} fontWeight='normal' question='b) Prédio Escolar Compartilhado com Outra Escola*' onSelect={(option) => handleOptionChange('campo_10', option)} />
-                            {formErrors.campo_10 && <Text style={styles.messageError}>{formErrors.campo_10}</Text>}
-                            <View style={{ marginTop: 40 }}>
-                                <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 10 }]}>
-                                    <Text style={{ flexGrow: 1 }}>i) Código da escola com a qual compartilha*</Text>
-                                    <View>
-                                        <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_11 : answer.campo_11 = ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer.campo_10 == 0 || answer.campo_10 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_11', txt)} />
-                                        {formErrors.campo_11 && <Text style={styles.messageError}>{formErrors.campo_11}</Text>}
-                                    </View>
-                                </View>
-                                <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 10 }]}>
-                                    <Text style={{ flexGrow: 1 }}>ii) Código da escola com a qual compartilha*</Text>
-                                    <View>
-                                        <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_12 : answer.campo_12 = ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer.campo_10 == 0 || answer.campo_10 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_12', txt)} />
-                                        {formErrors.campo_12 && <Text style={styles.messageError}>{formErrors.campo_12}</Text>}
-                                    </View>
-                                </View>
-                                <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 10 }]}>
-                                    <Text style={{ flexGrow: 1 }}>iii) Código da escola com a qual compartilha*</Text>
-                                    <View>
-                                        <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_13 : answer.campo_13 = ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer.campo_10 == 0 || answer.campo_10 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_13', txt)} />
-                                        {formErrors.campo_13 && <Text style={styles.messageError}>{formErrors.campo_13}</Text>}
-                                    </View>
-                                </View>
-                                <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 10 }]}>
-                                    <Text style={{ flexGrow: 1 }}>iv) Código da escola com a qual compartilha*</Text>
-                                    <View>
-                                        <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_14 : answer.campo_14 = ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer.campo_10 == 0 || answer.campo_10 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_14', txt)} />
-                                        {formErrors.campo_14 && <Text style={styles.messageError}>{formErrors.campo_14}</Text>}
-                                    </View>
-                                </View>
-                                <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 10 }]}>
-                                    <Text style={{ flexGrow: 1 }}>v) Código da escola com a qual compartilha*</Text>
-                                    <View>
-                                        <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_15 : answer.campo_15 = ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer.campo_10 == 0 || answer.campo_10 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_15', txt)} />
-                                        {formErrors.campo_15 && <Text style={styles.messageError}>{formErrors.campo_15}</Text>}
-                                    </View>
-                                </View>
-                                <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 0 }]}>
-                                    <Text style={{ flexGrow: 1 }}>vi) Código da escola com a qual compartilha*</Text>
-                                    <View>
-                                        <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_16 : answer.campo_16 = ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer.campo_10 == 0 || answer.campo_10 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_16', txt)} />
-                                        {formErrors.campo_16 && <Text style={styles.messageError}>{formErrors.campo_16}</Text>}
-                                    </View>
-                                </View>
+
+                    <RadioGroup options={[1, 2, 3]} disable={answer.campo_3 === 1 ? false : true} value={answer.campo_9} textOption={["Próprio", "Cedido", "Alugado"]} fontWeight='normal' question='a) Tipo de Imóvel*' onSelect={(option) => handleOptionChange('campo_9', option)} />
+                    {formErrors.campo_9 && <Text style={styles.messageError}>{formErrors.campo_9}</Text>}
+                    <RadioGroup options={[1, 0]} disable={answer.campo_3 === 1 ? false : true} value={answer.campo_10} textOption={textOption} fontWeight='normal' question='b) Prédio Escolar Compartilhado com Outra Escola*' onSelect={(option) => handleOptionChange('campo_10', option)} />
+                    {formErrors.campo_10 && <Text style={styles.messageError}>{formErrors.campo_10}</Text>}
+                    <View style={{ marginTop: 40 }}>
+                        <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 10 }]}>
+                            <Text style={{ flexGrow: 1 }}>i) Código da escola com a qual compartilha*</Text>
+                            <View>
+                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_11 : answer.campo_11 = ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer.campo_10 == 0 || answer.campo_10 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_11', txt)} />
+                                {formErrors.campo_11 && <Text style={styles.messageError}>{formErrors.campo_11}</Text>}
                             </View>
-                        </>
-                        :
-                        null}
+                        </View>
+                        <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 10 }]}>
+                            <Text style={{ flexGrow: 1 }}>ii) Código da escola com a qual compartilha*</Text>
+                            <View>
+                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_12 : answer.campo_12 = ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer.campo_10 == 0 || answer.campo_10 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_12', txt)} />
+                                {formErrors.campo_12 && <Text style={styles.messageError}>{formErrors.campo_12}</Text>}
+                            </View>
+                        </View>
+                        <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 10 }]}>
+                            <Text style={{ flexGrow: 1 }}>iii) Código da escola com a qual compartilha*</Text>
+                            <View>
+                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_13 : answer.campo_13 = ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer.campo_10 == 0 || answer.campo_10 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_13', txt)} />
+                                {formErrors.campo_13 && <Text style={styles.messageError}>{formErrors.campo_13}</Text>}
+                            </View>
+                        </View>
+                        <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 10 }]}>
+                            <Text style={{ flexGrow: 1 }}>iv) Código da escola com a qual compartilha*</Text>
+                            <View>
+                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_14 : answer.campo_14 = ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer.campo_10 == 0 || answer.campo_10 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_14', txt)} />
+                                {formErrors.campo_14 && <Text style={styles.messageError}>{formErrors.campo_14}</Text>}
+                            </View>
+                        </View>
+                        <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 10 }]}>
+                            <Text style={{ flexGrow: 1 }}>v) Código da escola com a qual compartilha*</Text>
+                            <View>
+                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_15 : answer.campo_15 = ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer.campo_10 == 0 || answer.campo_10 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_15', txt)} />
+                                {formErrors.campo_15 && <Text style={styles.messageError}>{formErrors.campo_15}</Text>}
+                            </View>
+                        </View>
+                        <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 0 }]}>
+                            <Text style={{ flexGrow: 1 }}>vi) Código da escola com a qual compartilha*</Text>
+                            <View>
+                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_16 : answer.campo_16 = ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer.campo_10 == 0 || answer.campo_10 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_16', txt)} />
+                                {formErrors.campo_16 && <Text style={styles.messageError}>{formErrors.campo_16}</Text>}
+                            </View>
+                        </View>
+                    </View>
                     <RadioGroup options={[1, 0]} value={answer.campo_4} textOption={textOption} fontWeight='bold' question='2 - Sala(s) em outra escola*' onSelect={(option) => handleOptionChange('campo_4', option)} />
                     {formErrors.campo_4 && <Text style={styles.messageError}>{formErrors.campo_4}</Text>}
                     <RadioGroup options={[1, 0]} value={answer.campo_5} textOption={textOption} fontWeight='bold' question='3 - Galpão / rancho / paiol / barracão*' onSelect={(option) => handleOptionChange('campo_5', option)} />
@@ -138,7 +134,7 @@ const AbastecimentoDeAgua = ({localDeFuncionamentoChange, formErrors}:IProps) =>
                     {formErrors.campo_7 && <Text style={styles.messageError}>{formErrors.campo_7}</Text>}
                     <RadioGroup options={[1, 0]} value={answer.campo_8} textOption={textOption} fontWeight='bold' question='6 - Outros*' onSelect={(option) => handleOptionChange('campo_8', option)} />
                     {formErrors.campo_8 && <Text style={styles.messageError}>{formErrors.campo_8}</Text>}
-                </View>:null
+                </View> : null
             }
         </View>
     );
