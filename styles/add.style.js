@@ -4,10 +4,13 @@ import { COLORS } from '../constants/theme'
 const styles = StyleSheet.create({
     cardContainer: {
         width: '100%',
-        backgroundColor: COLORS.white,
         marginTop: 40,
-        borderTopLeftRadius: 15,
-        borderTopRightRadius: 15,
+        marginBottom: 200,
+        flex: 1,
+        elevation: 5,
+        backgroundColor: COLORS.white,
+        borderRadius: 15,
+        zIndex: -1
     },
     container: {
         maxWidth: 900,
@@ -66,6 +69,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingLeft: 10,
         minWidth: 200,
+        zIndex: 9999,
         paddingRight: 10
     },
     dropdownArea: {
@@ -75,10 +79,12 @@ const styles = StyleSheet.create({
         marginTop: 90,
         width: '100%',
         elevation: 5,
+        zIndex: 9999,
         position: 'absolute',
         backgroundColor: COLORS.lightGreen,
         alignSelf: 'center'
-    }, schoolsItem: {
+    }, 
+    schoolsItem: {
         width: '90%',
         height: 50,
         borderBottomColor: COLORS.green,

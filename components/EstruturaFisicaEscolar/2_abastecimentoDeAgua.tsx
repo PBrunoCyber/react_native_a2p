@@ -2,13 +2,13 @@ import { View, Text, Animated, LayoutAnimation } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRef, useState } from 'react';
 
-import styles from '../styles/abastecimentoDeAgua.style'
+import styles from '../../styles/abastecimentoDeAgua.style'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
-import { COLORS } from '../constants/theme';
+import { COLORS } from '../../constants/theme';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import RadioGroup from './RadioGroup';
-import CheckBox from './CheckBox';
-import {IAbastecimentoDeAgua} from '../types/EstruturaFisicaEscolar';
+import RadioGroup from '../RadioGroup';
+import CheckBox from '../CheckBox';
+import { IAbastecimentoDeAgua } from '../../types/EstruturaFisicaEscolar';
 
 
 
@@ -34,7 +34,6 @@ const AbastecimentoDeAgua = () => {
         if (question === 'campo_22' && answer === 1) {
             setAnswers((prevAnswer) => ({
                 ...prevAnswer,
-                ['campo_17']: null,
                 ['campo_18']: null,
                 ['campo_19']: null,
                 ['campo_20']: null,
@@ -65,9 +64,10 @@ const AbastecimentoDeAgua = () => {
             {isClicked &&
                 <View style={styles.formContainer}>
                     <CheckBox fontWeight='bold' value={answer.campo_22} label='Não há abastecimento de água*' onSelect={(value) => handleOptionChange('campo_22', value)} />
+
+                    <RadioGroup options={[1, 0]} value={answer.campo_17} textOption={textOption} fontWeight='bold' question='Fornece água potável para consumo humano*' onSelect={(option) => handleOptionChange('campo_17', option)} />
                     {answer.campo_22 === 0 &&
                         <>
-                            <RadioGroup options={[1, 0]} value={answer.campo_17} textOption={textOption} fontWeight='bold' question='Fornece água potável para consumo humano*' onSelect={(option) => handleOptionChange('campo_17', option)} />
                             {answer.campo_17 === 1 &&
                                 <>
                                     <RadioGroup options={[1, 0]} value={answer.campo_18} textOption={textOption} fontWeight='normal' question='a) Rede Pública' onSelect={(option) => handleOptionChange('campo_18', option)} />

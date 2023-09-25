@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     formFlexOptions: {
         flexDirection: 'row',
         gap: 40,
+        marginTop: 35,
         alignItems: 'center'
     },
     checkbox: {

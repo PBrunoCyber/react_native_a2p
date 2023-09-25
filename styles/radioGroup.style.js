@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         flexWrap: 'wrap',
+        justifyContent: 'space-between',
         marginTop: 40,
         gap: 20,
     },
@@ -29,11 +30,13 @@ const styles = StyleSheet.create({
     formFlexOptions: {
         flexDirection: 'row',
         gap: 30,
+        alignItems: 'flex-end',
+        justifyContent: 'space-between'
     },
     formFlexOption: {
         flexDirection: 'row',
         alignItems: 'center',
-        width: 100
+        width: 100,
     },
 
 });

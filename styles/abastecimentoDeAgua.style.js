@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     formContainer: {
-        marginTop: 30,
+        marginBottom: 30
     },
     formFlex: {
         flexDirection: 'row',
@@ -16,9 +16,11 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         marginBottom: 40,
         gap: 20,
+        justifyContent: 'space-between'
     },
     input: {
-        width: 300,
+        width: '100%',
+        flexGrow: 1,
         height: 40,
         borderWidth: 1,
         borderRadius: 5,

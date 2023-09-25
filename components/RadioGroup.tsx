@@ -21,7 +21,7 @@ const RadioGroup = ({ options, question,value , textOption ,fontWeight, onSelect
 
     return (
         <View style={[styles.formFlex]}>
-            <Text style={{ flexGrow: 1, fontWeight: fontWeight }}>{question}</Text>
+            <Text style={{ flexGrow: 1, fontWeight: fontWeight, maxWidth: 400 }}>{question}</Text>
             <View style={styles.formFlexOptions}>
                 {options.map((option, index) => (
                     <View key={index} style={{flexDirection: 'row', alignItems: 'center', gap: 10, width: 100}}>

@@ -2,12 +2,12 @@ import { View, Text, Animated, LayoutAnimation } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useRef, useState } from 'react';
 
-import styles from '../styles/localDeFuncionamento.style'
+import styles from '../../styles/localDeFuncionamento.style'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
-import { COLORS } from '../constants/theme';
+import { COLORS } from '../../constants/theme';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import RadioGroup from './RadioGroup';
-import { ILocalDeFuncionamento } from '../types/EstruturaFisicaEscolar';
+import RadioGroup from '../RadioGroup';
+import { ILocalDeFuncionamento } from '../../types/EstruturaFisicaEscolar';
 
 interface IProps {
     localDeFuncionamentoChange: (value: ILocalDeFuncionamento) => void,
