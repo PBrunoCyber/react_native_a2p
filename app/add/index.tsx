@@ -6,7 +6,7 @@ import styles from '../../styles/add.style';
 import { COLORS } from '../../constants/theme'
 import { useEffect, useState } from 'react';
 
-import { IAbastecimentoDeAgua, IDependenciasFisicas, IDestinacaoDoLixo, IEnergiaEletrica, IEsgotamentoSanitario, ILocalDeFuncionamento, ITratamentoDoLixo } from '../../types/EstruturaFisicaEscolar';
+import { IAbastecimentoDeAgua, IDependenciasFisicas, IDestinacaoDoLixo, IEnergiaEletrica, IEquipamentos, IEquipamentosAlunosInternet, IEsgotamentoSanitario, ILocalDeFuncionamento, IQuantidadeEquipamentos, IRecursosDeAcessibilidade, ITratamentoDoLixo } from '../../types/EstruturaFisicaEscolar';
 import ValidateLocalDeFuncionamento from '../../services/EstruturaFisicaEscolar/1_ValidateLocalDeFuncionamento';
 import Escola from '../../services/Escola';
 import LocalDeFuncionamento from '../../components/EstruturaFisicaEscolar/1_localDeFuncionamento';
@@ -33,6 +33,9 @@ import ValidateEsgotamentoSanitario from '../../services/EstruturaFisicaEscolar/
 import ValidateDestinacaoDoLixo from '../../services/EstruturaFisicaEscolar/5_ValidateDestinacaoDoLixo';
 import ValidateTratamentoDoLixo from '../../services/EstruturaFisicaEscolar/6_ValidateTratamentoDoLixo';
 import ValidateDependenciasFisicas from '../../services/EstruturaFisicaEscolar/7_ValidateDependenciasFisicas';
+import ValidateRecursosDeAcessibilidade from '../../services/EstruturaFisicaEscolar/8_ValidateRecursosDeAcessibilidade';
+import ValidateEquipamentos from '../../services/EstruturaFisicaEscolar/9_ValidateEquipamentos';
+import ValidateQuantidadeEquipamentos from '../../services/EstruturaFisicaEscolar/10_ValidateQuantidadeEquipamentos';
 
 interface IData {
     id: number,
@@ -77,13 +80,17 @@ const AddEstruturaFisica = (props: IProps) => {
     const [formErrorsLinguaMinistrada, setFormErrorsLinguaMinistrada] = useState({});
     const [formErrorsReservaDeVagas, setFormErrorsReservarDeVagas] = useState({});
     const [formErrorsOrgaosColegiados, setFormErrorsOrgaosColegiados] = useState({});
-    const [answerLocalDeFuncionamento, setAnswerLocalDeFuncionamento] = useState<ILocalDeFuncionamento>();
+    const [answerLocalDeFuncionamento, setAnswerLocalDeFuncionamento] = useState<ILocalDeFuncionamento | undefined>();
     const [answerAbastecimentoDeAgua, setAnswerAbastecimentoDeAgua] = useState<IAbastecimentoDeAgua>();
     const [answerFonteEnergiaEletrica, setAnswerFonteEnergiaEletrica] = useState<IEnergiaEletrica>();
     const [answerEsgotamentoSanitario, setAnswerEsgotamentoSanitario] = useState<IEsgotamentoSanitario>();
     const [answerDestinacaoDoLixo, setAnswerDestinacaoDoLixo] = useState<IDestinacaoDoLixo>();
     const [answerTratamentoDoLixo, setAnswerTratamentoDoLixo] = useState<ITratamentoDoLixo>();
     const [answerDependenciaFisica, setAnswerDependenciaFisica] = useState<IDependenciasFisicas>();
+    const [answerRecursosDeAcessibilidade, setAnswerRecursosDeAcessibilidade] = useState<IRecursosDeAcessibilidade>();
+    const [answerEquipamentos, setAnswerEquipamentos] = useState<IEquipamentos>();
+    const [answerQuantidadeEquipamentos, setAnswerQuantidadeEquipamentos] = useState<IQuantidadeEquipamentos>();
+    const [answerEquipamentosAlunosInternet, setAnswerEquipamentosAlunosInternet] = useState<IEquipamentosAlunosInternet>();
     const limit: number = 10;
 
     const getNomeAcrossInep = (data: Array<IData>, inepSelected: number | string) => {
@@ -161,6 +168,21 @@ const AddEstruturaFisica = (props: IProps) => {
         setFormErrorsDependenciasFisicas({});
     }
 
+    const onRecursosDeAcessibilidade = async (answer: IRecursosDeAcessibilidade) => {
+        setAnswerRecursosDeAcessibilidade(answer);
+        setFormErrorsRecursosDeAcessibilidade({});
+    }
+
+    const onEquipamentos = async (answer: IEquipamentos) => {
+        setAnswerEquipamentos(answer);
+        setFormErrorsEquipamentos({});
+    }
+
+    const onQuantidadeEquipamentos = async (answer: IQuantidadeEquipamentos) => {
+        setAnswerQuantidadeEquipamentos(answer);
+        setFormErrorsQuantidadeEquipamentos({});
+    }
+
     const onSubmit = () => {
         const res_1 = ValidateLocalDeFuncionamento.validate(answerLocalDeFuncionamento);
         const res_2 = ValidateAbastecimentoDeAgua.validate(answerAbastecimentoDeAgua);
@@ -169,7 +191,10 @@ const AddEstruturaFisica = (props: IProps) => {
         const res_5 = ValidateDestinacaoDoLixo.validate(answerDestinacaoDoLixo);
         const res_6 = ValidateTratamentoDoLixo.validate(answerTratamentoDoLixo);
         const res_7 = ValidateDependenciasFisicas.validate(answerDependenciaFisica);
-        if (res_1 || res_2 || res_3 || res_4 || res_5 || res_6 || res_7) {
+        const res_8 = ValidateRecursosDeAcessibilidade.validate(answerRecursosDeAcessibilidade, answerLocalDeFuncionamento);
+        const res_9 = ValidateEquipamentos.validate(answerEquipamentos);
+        const res_10 = ValidateQuantidadeEquipamentos.validate(answerQuantidadeEquipamentos);
+        if (res_1 || res_2 || res_3 || res_4 || res_5 || res_6 || res_7 || res_8 || res_9 || res_10) {
             setFormErrorsLocalDeFuncionamento(res_1);
             setFormErrorsAbastecimentoDeAgua(res_2);
             setFormErrorsFonteEnergiaEletrica(res_3);
@@ -177,6 +202,9 @@ const AddEstruturaFisica = (props: IProps) => {
             setFormErrorsDestinacaoDoLixo(res_5);
             setFormErrorsTratamentoDoLixo(res_6);
             setFormErrorsDependenciasFisicas(res_7);
+            setFormErrorsRecursosDeAcessibilidade(res_8);
+            setFormErrorsEquipamentos(res_9);
+            setFormErrorsQuantidadeEquipamentos(res_10);
             return;
         }
 
@@ -261,9 +289,9 @@ const AddEstruturaFisica = (props: IProps) => {
                             <DestinacaoDoLixo formErrors={formErrorsDestinacaoDoLixo} destinacaoDoLixo={(value) => onDestinacaoDoLixo(value)} />
                             <TratamentoDoLixo formErrors={formErrorsTratamentoDoLixo} tratamentoDoLixo={(value) => onTratamentoDoLixo(value)} />
                             <DependenciasFisicas formErrors={formErrorsDependenciasFisicas} dependenciasFisicas={(value) => onDependenciasFisicas(value)} />
-                            <RecursosDeAcessibilidade />
-                            <Equipamentos />
-                            <QuantidadeDeEquipamentos />
+                            <RecursosDeAcessibilidade formErrors={formErrorsRecursosDeAcessibilidade} recursosDeAcessibilidade={(value) => onRecursosDeAcessibilidade(value)} answerLocalDeFuncionamento={answerLocalDeFuncionamento} />
+                            <Equipamentos formErrors={formErrorsEquipamentos} equipamentos={(value) => onEquipamentos(value)} />
+                            <QuantidadeDeEquipamentos formErrors={formErrorsQuantidadeEquipamentos} quantidadeDeEquipamentos={(value) => onQuantidadeEquipamentos(value)} answerEquipamentosAlunosInternet={answerEquipamentosAlunosInternet} />
                             <AcessoInternet />
                             <EquipamentosAlunosInternet />
                             <RedeLocal />
