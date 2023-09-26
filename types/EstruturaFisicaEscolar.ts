@@ -196,7 +196,7 @@ export interface IReservaDeVagas {
     campo_157: number | null,
     campo_158: number | null,
     campo_159: number | null,
-    campo_160: number | null,
+    campo_160: 0 | 1,
     campo_161: number | null,
     campo_162: number | null,
     campo_163: number | null,
@@ -210,3 +210,7 @@ export interface IOrgaosColegiados {
     campo_168: number | null,
 }
 
+export interface IUltimasPerguntas {
+    campo_154: number | null,
+    campo_170: number | null
+}

@@ -63,6 +63,11 @@ const DependenciasFisicas = ({ formErrors, dependenciasFisicas }: IProps) => {
 
     useEffect(() => {
         dependenciasFisicas(answer);
+        for (const key in answer) {
+            if (answer[key as keyof IDependenciasFisicas]) {
+                setIsClicked(true);
+            }
+        }
     }, [answer])
 
     useEffect(() => {

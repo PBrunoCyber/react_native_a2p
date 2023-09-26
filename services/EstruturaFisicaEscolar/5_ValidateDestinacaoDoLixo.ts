@@ -22,7 +22,7 @@ const validate = (answer: IDestinacaoDoLixo | undefined) => {
         && answer?.campo_33 === 0
         && answer?.campo_34 === 0
         && answer?.campo_35 === 0) {
-        errors.destinacaoDoLixo = "Destinação do lixo não foi preenchido corretamente. Não podem ser informadas todas as opções com valor igual a 0 (Não)."
+        errors.destinacaoDoLixo = "\"Destinação do lixo\" não foi preenchido corretamente. Não podem ser informadas todas as opções com valor igual a 0 (Não)."
     }
 
     if (Object.keys(errors).length > 0) {

@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     formFlex: {
         flexDirection: 'row',
         alignItems: 'center',
+        maxWidth: '100%',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
         marginTop: 40,
@@ -40,9 +41,9 @@ const styles = StyleSheet.create({
     },
     formFlexOptions: {
         flexDirection: 'row',
-        gap: 30,
-        alignItems: 'flex-end',
-        justifyContent: 'space-between'
+        alignItems: 'center',
+        maxWidth: '100%',
+        flexWrap: 'wrap',
     },
     formFlexOption: {
         flexDirection: 'row',

@@ -13,7 +13,7 @@ const validate = (answer: IAbastecimentoDeAgua | undefined) => {
         && answer?.campo_20 === 0
         && answer?.campo_21 === 0
         && answer?.campo_22 === 0) {
-        errors.abastecimentoDeAgua = "Abastecimento de água não foi preenchido corretamente. Não podem ser informadas todas as opções com valor igual a 0 (Não)."
+        errors.abastecimentoDeAgua = "\"Abastecimento de água\" não foi preenchido corretamente. Não podem ser informadas todas as opções com valor igual a 0 (Não)."
     }
     if (answer?.campo_22 === 0 && answer?.campo_18 === null) {
         errors.campo_18 = "Campo obrigatório";

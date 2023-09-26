@@ -43,7 +43,7 @@ const validate = (answer: IDependenciasFisicas | undefined) => {
         && answer?.campo_75 === 0
         && answer?.campo_76 === 0
         && answer?.campo_77 === 0) {
-        errors.dependenciasFisicas = "Dependências físicas existentes na escola não foram preenchidas corretamente. Não podem ser informadas todas as opções com valor igual a 0 (Não)."
+        errors.dependenciasFisicas = "\"Dependências físicas existentes na escola\" não foram preenchidas corretamente. Não podem ser informadas todas as opções com valor igual a 0 (Não)."
     }
     if (answer?.campo_77 === 0 && answer?.campo_40 === null) {
         errors.campo_40 = "Campo obrigatório";

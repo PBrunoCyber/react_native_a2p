@@ -33,6 +33,11 @@ const Equipamentos = ({ formErrors, equipamentos }: IProps) => {
 
     useEffect(() => {
         equipamentos(answer);
+        for (const key in answer) {
+            if (answer[key as keyof IEquipamentos]) {
+                setIsClicked(true);
+            }
+        }
     }, [answer])
 
     useEffect(() => {

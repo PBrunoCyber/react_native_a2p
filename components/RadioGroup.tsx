@@ -11,10 +11,11 @@ interface IRadioGroup {
     value: number | null,
     disable?: boolean
     fontWeight: 'bold' | 'normal',
+    color?: string,
     onSelect: (option: number | null) => void
 }
 
-const RadioGroup = ({ options, question, value, textOption, disable, fontWeight, onSelect }: IRadioGroup) => {
+const RadioGroup = ({ options, question, value, textOption, disable, fontWeight, color, onSelect }: IRadioGroup) => {
 
     const handleOptionSelect = (option: number | null) => {
         onSelect(option);
@@ -22,10 +23,10 @@ const RadioGroup = ({ options, question, value, textOption, disable, fontWeight,
 
     return (
         <View style={[styles.formFlex]}>
-            <Text style={{ flexGrow: 1, fontWeight: fontWeight, maxWidth: 400 }}>{question}</Text>
+            <Text style={{ flexGrow: 1, fontWeight: fontWeight, color: color, maxWidth: 400 }}>{question}</Text>
             <View style={styles.formFlexOptions}>
                 {options.map((option, index) => (
-                    <View key={index} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10, width: 100 }}>
+                    <View key={index} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 10, width: 130 }}>
                         {disable === false || disable === undefined ?
                             <TouchableOpacity
                                 style={[

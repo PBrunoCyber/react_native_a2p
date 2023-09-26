@@ -6,7 +6,7 @@ import styles from '../../styles/add.style';
 import { COLORS } from '../../constants/theme'
 import { useEffect, useState } from 'react';
 
-import { IAbastecimentoDeAgua, IAcessoInternet, IDependenciasFisicas, IDestinacaoDoLixo, IEnergiaEletrica, IEquipamentos, IEquipamentosAlunosInternet, IEsgotamentoSanitario, IInstrumentosEMateriais, ILinguaMinistrada, ILocalDeFuncionamento, IQuantidadeEquipamentos, IRecursosDeAcessibilidade, IRedeLocal, ITotalProfissionais, ITratamentoDoLixo } from '../../types/EstruturaFisicaEscolar';
+import { IAbastecimentoDeAgua, IAcessoInternet, IDependenciasFisicas, IDestinacaoDoLixo, IEnergiaEletrica, IEquipamentos, IEquipamentosAlunosInternet, IEsgotamentoSanitario, IInstrumentosEMateriais, ILinguaMinistrada, ILocalDeFuncionamento, IOrgaosColegiados, IQuantidadeEquipamentos, IRecursosDeAcessibilidade, IRedeLocal, IReservaDeVagas, ITotalProfissionais, ITratamentoDoLixo, IUltimasPerguntas } from '../../types/EstruturaFisicaEscolar';
 import ValidateLocalDeFuncionamento from '../../services/EstruturaFisicaEscolar/1_ValidateLocalDeFuncionamento';
 import Escola from '../../services/Escola';
 import LocalDeFuncionamento from '../../components/EstruturaFisicaEscolar/1_localDeFuncionamento';
@@ -39,9 +39,12 @@ import ValidateRedeLocal from '../../services/EstruturaFisicaEscolar/13_Validate
 import ValidateTotalProfissionais from '../../services/EstruturaFisicaEscolar/14_ValidateTotalDeProfissionais';
 import ValidateInstrumentosEMateriais from '../../services/EstruturaFisicaEscolar/15_ValidateInstrumentosEMateriais';
 import ValidateLinguaMinistrada from '../../services/EstruturaFisicaEscolar/16_LinguaMinistrada';
+import ValidateReservaDeVagas from '../../services/EstruturaFisicaEscolar/17_ReservaDeVagas';
+import ValidateOrgaosColegiados from '../../services/EstruturaFisicaEscolar/18_OrgaosColegiados';
 import AcessoInternet from '../../components/EstruturaFisicaEscolar/10_acessoInternet';
 import EquipamentosAlunosInternet from '../../components/EstruturaFisicaEscolar/11_equipamentoAlunosInternet';
 import QuantidadeDeEquipamentos from '../../components/EstruturaFisicaEscolar/12_quantidadeDeEquipamentos';
+import UltimasPerguntas from '../../components/EstruturaFisicaEscolar/19_ultimasPerguntas';
 
 interface IData {
     id: number,
@@ -102,6 +105,9 @@ const AddEstruturaFisica = (props: IProps) => {
     const [answerTotalProfissionais, setAnswerTotalProfissionais] = useState<ITotalProfissionais>();
     const [answerInstrumentosEMateriais, setAnswerInstrumentosEMaterias] = useState<IInstrumentosEMateriais>();
     const [answerLinguaMinistrada, setAnswerLinguaMinistrada] = useState<ILinguaMinistrada>();
+    const [answerUltimasPerguntas, setAnswerUltimasPerguntas] = useState<IUltimasPerguntas>();
+    const [answerReservaDeVagas, setAnswerReservaDeVagas] = useState<IReservaDeVagas>();
+    const [answerOrgaosColegiados, setAnswerOrgaosColegiados] = useState<IOrgaosColegiados>();
     const limit: number = 10;
 
     const getNomeAcrossInep = (data: Array<IData>, inepSelected: number | string) => {
@@ -224,9 +230,23 @@ const AddEstruturaFisica = (props: IProps) => {
         setFormErrorsLinguaMinistrada({});
     }
 
+    const onUltimasPerguntas = (answer: IUltimasPerguntas) => {
+        setAnswerUltimasPerguntas(answer);
+    }
+
+    const onReservaDeVagas = (answer: IReservaDeVagas) => {
+        setAnswerReservaDeVagas(answer);
+        setFormErrorsReservarDeVagas({});
+    }
+
+    const onOrgaosColegiados = (answer: IOrgaosColegiados) => {
+        setAnswerOrgaosColegiados(answer);
+        setFormErrorsOrgaosColegiados({});
+    }
+
 
     const onSubmit = () => {
-        const res_1 = ValidateLocalDeFuncionamento.validate(answerLocalDeFuncionamento);
+        const res_1 = ValidateLocalDeFuncionamento.validate(answerLocalDeFuncionamento, selectedInep);
         const res_2 = ValidateAbastecimentoDeAgua.validate(answerAbastecimentoDeAgua);
         const res_3 = ValidateFonteEnergiaEletrica.validate(answerFonteEnergiaEletrica);
         const res_4 = ValidateEsgotamentoSanitario.validate(answerEsgotamentoSanitario);
@@ -242,10 +262,13 @@ const AddEstruturaFisica = (props: IProps) => {
         const res_14 = ValidateTotalProfissionais.validate(answerTotalProfissionais);
         const res_15 = ValidateInstrumentosEMateriais.validate(answerInstrumentosEMateriais);
         const res_16 = ValidateLinguaMinistrada.validate(answerLinguaMinistrada, answerInstrumentosEMateriais);
+        const res_17 = ValidateReservaDeVagas.validate(answerReservaDeVagas, answerUltimasPerguntas);
+        const res_18 = ValidateOrgaosColegiados.validate(answerOrgaosColegiados);
         if (res_1 || res_2 || res_3 || res_4 ||
             res_5 || res_6 || res_7 || res_8 ||
             res_9 || res_10 || res_11 || res_12 ||
-            res_13 || res_14 || res_15 || res_16) {
+            res_13 || res_14 || res_15 || res_16 ||
+            res_17 || res_18) {
             setFormErrorsLocalDeFuncionamento(res_1);
             setFormErrorsAbastecimentoDeAgua(res_2);
             setFormErrorsFonteEnergiaEletrica(res_3);
@@ -262,6 +285,8 @@ const AddEstruturaFisica = (props: IProps) => {
             setFormErrorsTotalDeProfissionais(res_14);
             setFormErrorsInstrumentosEMateriais(res_15);
             setFormErrorsLinguaMinistrada(res_16);
+            setFormErrorsReservarDeVagas(res_17);
+            setFormErrorsOrgaosColegiados(res_18);
             return;
         }
 
@@ -355,8 +380,9 @@ const AddEstruturaFisica = (props: IProps) => {
                             <TotalDeProfissionais formErrors={formErrorsTotalDeProfissionais} totalDeProfissionais={(value) => onTotalDeProfissionais(value)} />
                             <InstrumentosEMateriais formErrors={formErrorsInstrumentosEMateriais} instrumentosEMateriais={(value) => onInstrumentosEMateriais(value)} />
                             <LinguaMinistrada formErrors={formErrorsLinguaMinistrada} linguaMinistrada={(value) => onLinguaMinistrada(value)} answerInstrumentosEMateriais={answerInstrumentosEMateriais} />
-                            <ReservaDeVagas />
-                            <OrgaosColegiados />
+                            <ReservaDeVagas formErrors={formErrorsReservaDeVagas} reservaDeVagas={(value) => onReservaDeVagas(value)} answerUltimasPerguntas={answerUltimasPerguntas} />
+                            <OrgaosColegiados formErrors={formErrorsOrgaosColegiados} orgaosColegiados={(value) => onOrgaosColegiados(value)} />
+                            <UltimasPerguntas ultimasPerguntas={(value) => onUltimasPerguntas(value)} />
                             <View style={{ flexDirection: 'row', justifyContent: 'flex-end', borderTopWidth: 1, borderColor: COLORS.gray, paddingTop: 50, marginTop: 50, marginBottom: 50, gap: 20 }}>
                                 <TouchableOpacity style={styles.btnCancelar} ><Text style={{ color: COLORS.green }}>Cancelar</Text></TouchableOpacity>
                                 <TouchableOpacity style={styles.btnSalvar} onPress={onSubmit}><Text style={{ color: COLORS.white }}>Salvar</Text></TouchableOpacity>

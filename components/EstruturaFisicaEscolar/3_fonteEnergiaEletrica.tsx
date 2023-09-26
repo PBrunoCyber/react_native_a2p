@@ -29,6 +29,11 @@ const FonteEnergiaEletrica = ({ formErrors, fonteEnergiaEletricaChange }: IProps
 
     useEffect(() => {
         fonteEnergiaEletricaChange(answer);
+        for (const key in answer) {
+            if (answer[key as keyof IEnergiaEletrica]) {
+                setIsClicked(true);
+            }
+        }
     }, [answer])
 
     useEffect(() => {

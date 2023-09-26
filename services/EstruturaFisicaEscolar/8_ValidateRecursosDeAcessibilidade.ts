@@ -23,7 +23,7 @@ const validate = (answer: IRecursosDeAcessibilidade | undefined, localDeFunciona
         && answer?.campo_84 === 0
         && answer?.campo_85 === 0
         && answer?.campo_86 === 0) {
-        errors.recursosDeAcessibilidade = "Recursos de acessibilidade para pessoas com deficiência ou mobilidade reduzida nas vias de circulação internas na escola não foram preenchidos corretamente. Não podem ser informadas todas as opções com valor igual a 0 (Não)."
+        errors.recursosDeAcessibilidade = "\"Recursos de acessibilidade para pessoas com deficiência ou mobilidade reduzida nas vias de circulação internas na escola\" não foram preenchidos corretamente. Não podem ser informadas todas as opções com valor igual a 0 (Não)."
     }
     if (answer?.campo_86 === 0 && answer?.campo_78 === null) {
         errors.campo_78 = "Campo obrigatório";

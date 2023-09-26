@@ -1,6 +1,6 @@
 import { ILocalDeFuncionamento } from "../../types/EstruturaFisicaEscolar";
 
-const validate = (answerLocalDeFuncionamento: ILocalDeFuncionamento | undefined) => {
+const validate = (answerLocalDeFuncionamento: ILocalDeFuncionamento | undefined, selectedInep: string) => {
     const errors: any = {};
     if (answerLocalDeFuncionamento?.campo_3 === null) {
         errors.campo_3 = "Campo Obrigatório"
@@ -38,21 +38,6 @@ const validate = (answerLocalDeFuncionamento: ILocalDeFuncionamento | undefined)
     if (answerLocalDeFuncionamento?.campo_10 === 1 && answerLocalDeFuncionamento?.campo_11 === "") {
         errors.campo_11 = "Campo obrigatório";
     }
-    if (answerLocalDeFuncionamento?.campo_10 === 1 && answerLocalDeFuncionamento?.campo_12 === "") {
-        errors.campo_12 = "Campo obrigatório";
-    }
-    if (answerLocalDeFuncionamento?.campo_10 === 1 && answerLocalDeFuncionamento?.campo_13 === "") {
-        errors.campo_13 = "Campo obrigatório";
-    }
-    if (answerLocalDeFuncionamento?.campo_10 === 1 && answerLocalDeFuncionamento?.campo_14 === "") {
-        errors.campo_14 = "Campo obrigatório";
-    }
-    if (answerLocalDeFuncionamento?.campo_10 === 1 && answerLocalDeFuncionamento?.campo_15 === "") {
-        errors.campo_15 = "Campo obrigatório";
-    }
-    if (answerLocalDeFuncionamento?.campo_10 === 1 && answerLocalDeFuncionamento?.campo_16 === "") {
-        errors.campo_16 = "Campo obrigatório";
-    }
     if (answerLocalDeFuncionamento?.campo_11 && answerLocalDeFuncionamento?.campo_11.length < 8) {
         errors.campo_11 = "Código incompleto ou incorreto";
     }
@@ -89,6 +74,25 @@ const validate = (answerLocalDeFuncionamento: ILocalDeFuncionamento | undefined)
     if (answerLocalDeFuncionamento?.campo_16 && !/^\d+$/.test(answerLocalDeFuncionamento?.campo_16)) {
         errors.campo_16 = "Informe apenas números";
     }
+    if (answerLocalDeFuncionamento?.campo_11 === selectedInep) {
+        errors.campo_11 = "O campo foi preenchido com o código da escola informante";
+    }
+    if (answerLocalDeFuncionamento?.campo_12 === selectedInep) {
+        errors.campo_12 = "O campo foi preenchido com o código da escola informante";
+    }
+    if (answerLocalDeFuncionamento?.campo_13 === selectedInep) {
+        errors.campo_13 = "O campo foi preenchido com o código da escola informante";
+    }
+    if (answerLocalDeFuncionamento?.campo_14 === selectedInep) {
+        errors.campo_14 = "O campo foi preenchido com o código da escola informante";
+    }
+    if (answerLocalDeFuncionamento?.campo_15 === selectedInep) {
+        errors.campo_15 = "O campo foi preenchido com o código da escola informante";
+    }
+    if (answerLocalDeFuncionamento?.campo_16 === selectedInep) {
+        errors.campo_16 = "O campo foi preenchido com o código da escola informante";
+    }
+
     if (Object.keys(errors).length > 0) {
         return errors;
     } else {

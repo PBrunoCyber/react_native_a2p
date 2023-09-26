@@ -31,6 +31,11 @@ const AbastecimentoDeAgua = ({ formErrors, abastecimentoDeAguaChange }: IProps) 
 
     useEffect(() => {
         abastecimentoDeAguaChange(answer);
+        for (const key in answer) {
+            if (answer[key as keyof IAbastecimentoDeAgua]) {
+                setIsClicked(true);
+            }
+        }
     }, [answer])
 
     useEffect(() => {

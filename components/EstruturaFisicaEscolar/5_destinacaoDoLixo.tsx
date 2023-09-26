@@ -30,6 +30,11 @@ const DestinacaoDoLixo = ({ destinacaoDoLixo, formErrors }: IProps) => {
 
     useEffect(() => {
         destinacaoDoLixo(answer);
+        for (const key in answer) {
+            if (answer[key as keyof IDestinacaoDoLixo]) {
+                setIsClicked(true);
+            }
+        }
     }, [answer])
 
     useEffect(() => {

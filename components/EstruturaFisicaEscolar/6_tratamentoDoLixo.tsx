@@ -40,10 +40,22 @@ const TratamentoDoLixo = ({ formErrors, tratamentoDoLixo }: IProps) => {
                 ['campo_38']: null,
             }));
         }
+        if (question === "campo_36" && answer !== 1) {
+            setAnswers((prevAnswer) => ({
+                ...prevAnswer,
+                ['campo_37']: null,
+                ['campo_38']: null,
+            }));
+        }
     }
 
     useEffect(() => {
         tratamentoDoLixo(answer);
+        for (const key in answer) {
+            if (answer[key as keyof ITratamentoDoLixo]) {
+                setIsClicked(true);
+            }
+        }
     }, [answer])
 
     useEffect(() => {
@@ -71,9 +83,9 @@ const TratamentoDoLixo = ({ formErrors, tratamentoDoLixo }: IProps) => {
                     <Text style={{ fontWeight: "bold", marginTop: 40, marginBottom: 0 }}>Tratamento do lixo/resíduos</Text>
                     <RadioGroup options={[1, 0]} disable={answer.campo_39 === 1 ? true : false} value={answer.campo_36} textOption={textOption} fontWeight='normal' question='a) Separação do lixo/resíduos*' onSelect={(option) => handleOptionChange('campo_36', option)} />
                     {formErrors.campo_36 && <Text style={styles.messageError}>{formErrors.campo_36}</Text>}
-                    <RadioGroup options={[1, 0]} disable={answer.campo_39 === 1 ? true : false} value={answer.campo_37} textOption={textOption} fontWeight='normal' question='b) Reaproveitamento/reutilização*' onSelect={(option) => handleOptionChange('campo_37', option)} />
+                    <RadioGroup options={[1, 0]} disable={answer.campo_39 === 1 || answer.campo_36 !== 1 ? true : false} value={answer.campo_37} textOption={textOption} fontWeight='normal' question='b) Reaproveitamento/reutilização*' onSelect={(option) => handleOptionChange('campo_37', option)} />
                     {formErrors.campo_37 && <Text style={styles.messageError}>{formErrors.campo_37}</Text>}
-                    <RadioGroup options={[1, 0]} disable={answer.campo_39 === 1 ? true : false} value={answer.campo_38} textOption={textOption} fontWeight='normal' question='c) Reciclagem*' onSelect={(option) => handleOptionChange('campo_38', option)} />
+                    <RadioGroup options={[1, 0]} disable={answer.campo_39 === 1 || answer.campo_36 !== 1 ? true : false} value={answer.campo_38} textOption={textOption} fontWeight='normal' question='c) Reciclagem*' onSelect={(option) => handleOptionChange('campo_38', option)} />
                     {formErrors.campo_38 && <Text style={styles.messageError}>{formErrors.campo_38}</Text>}
                 </View>
                 : null

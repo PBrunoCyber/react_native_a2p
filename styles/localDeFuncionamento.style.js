@@ -13,17 +13,20 @@ const styles = StyleSheet.create({
     formFlex: {
         flexDirection: 'row',
         alignItems: 'center',
+        width: '100%',
         flexWrap: 'wrap',
         marginBottom: 40,
         gap: 20,
     },
     input: {
-        width: 300,
+        width: '100%',
         height: 40,
         borderWidth: 1,
         borderRadius: 5,
         paddingLeft: 10,
         paddingRight: 10,
+        alignSelf: 'center',
+        flexGrow: 1,
         borderColor: COLORS.gray
     },
     formFlexOptions: {

@@ -29,6 +29,11 @@ const EsgotamentoSanitario = ({ formErrors, esgotamentoSanitarioChange }: IProps
 
     useEffect(() => {
         esgotamentoSanitarioChange(answer);
+        for (const key in answer) {
+            if (answer[key as keyof IEsgotamentoSanitario]) {
+                setIsClicked(true);
+            }
+        }
     }, [answer])
 
     useEffect(() => {

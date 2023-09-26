@@ -1,13 +1,5 @@
 import { IInstrumentosEMateriais, ILinguaMinistrada } from "../../types/EstruturaFisicaEscolar";
 
-const verificaApenasZeros = (inputString: string) => {
-    for (let i = 0; i < inputString.length; i++) {
-        if (inputString[i] !== '0') {
-            return false;
-        }
-    }
-    return true;
-};
 
 const validate = (answer: ILinguaMinistrada | undefined, instrumentosEMateriais: IInstrumentosEMateriais | undefined) => {
     const errors: any = {};

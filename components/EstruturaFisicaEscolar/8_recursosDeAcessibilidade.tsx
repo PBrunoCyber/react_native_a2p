@@ -39,6 +39,11 @@ const RecursosDeAcessibilidade = ({ recursosDeAcessibilidade, answerLocalDeFunci
 
     useEffect(() => {
         recursosDeAcessibilidade(answer);
+        for (const key in answer) {
+            if (answer[key as keyof IRecursosDeAcessibilidade]) {
+                setIsClicked(true);
+            }
+        }
     }, [answer])
 
     useEffect(() => {

@@ -9,7 +9,7 @@ const validate = (answer: IEsgotamentoSanitario | undefined) => {
         && answer?.campo_28 === 0
         && answer?.campo_29 === 0
         && answer?.campo_30 === 0) {
-        errors.esgotamentoSanitario = "Esgotamento Sanitário não foi preenchido corretamente. Não podem ser informadas todas as opções com valor igual a 0 (Não)."
+        errors.esgotamentoSanitario = "\"Esgotamento Sanitário\" não foi preenchido corretamente. Não podem ser informadas todas as opções com valor igual a 0 (Não)."
     }
     if (answer?.campo_30 === 0 && answer?.campo_27 === null) {
         errors.campo_27 = "Campo obrigatório";
