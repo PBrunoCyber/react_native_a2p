@@ -6,7 +6,7 @@ import styles from '../../styles/add.style';
 import { COLORS } from '../../constants/theme'
 import { useEffect, useState } from 'react';
 
-import { IAbastecimentoDeAgua, IAcessoInternet, IDependenciasFisicas, IDestinacaoDoLixo, IEnergiaEletrica, IEquipamentos, IEquipamentosAlunosInternet, IEsgotamentoSanitario, ILocalDeFuncionamento, IQuantidadeEquipamentos, IRecursosDeAcessibilidade, IRedeLocal, ITratamentoDoLixo } from '../../types/EstruturaFisicaEscolar';
+import { IAbastecimentoDeAgua, IAcessoInternet, IDependenciasFisicas, IDestinacaoDoLixo, IEnergiaEletrica, IEquipamentos, IEquipamentosAlunosInternet, IEsgotamentoSanitario, IInstrumentosEMateriais, ILinguaMinistrada, ILocalDeFuncionamento, IQuantidadeEquipamentos, IRecursosDeAcessibilidade, IRedeLocal, ITotalProfissionais, ITratamentoDoLixo } from '../../types/EstruturaFisicaEscolar';
 import ValidateLocalDeFuncionamento from '../../services/EstruturaFisicaEscolar/1_ValidateLocalDeFuncionamento';
 import Escola from '../../services/Escola';
 import LocalDeFuncionamento from '../../components/EstruturaFisicaEscolar/1_localDeFuncionamento';
@@ -35,7 +35,10 @@ import ValidateEquipamentos from '../../services/EstruturaFisicaEscolar/9_Valida
 import ValidateQuantidadeEquipamentos from '../../services/EstruturaFisicaEscolar/12_ValidateQuantidadeEquipamentos';
 import ValidateAcessoInternet from '../../services/EstruturaFisicaEscolar/10_ValidateAcessoInternet';
 import ValidateEquipamentosAlunosInternet from '../../services/EstruturaFisicaEscolar/11_ValidateEquipamentosAlunosInternet';
-import ValidateRedeLocal from '../../services/EstruturaFisicaEscolar/13_RedeLocal';
+import ValidateRedeLocal from '../../services/EstruturaFisicaEscolar/13_ValidateRedeLocal';
+import ValidateTotalProfissionais from '../../services/EstruturaFisicaEscolar/14_ValidateTotalDeProfissionais';
+import ValidateInstrumentosEMateriais from '../../services/EstruturaFisicaEscolar/15_ValidateInstrumentosEMateriais';
+import ValidateLinguaMinistrada from '../../services/EstruturaFisicaEscolar/16_LinguaMinistrada';
 import AcessoInternet from '../../components/EstruturaFisicaEscolar/10_acessoInternet';
 import EquipamentosAlunosInternet from '../../components/EstruturaFisicaEscolar/11_equipamentoAlunosInternet';
 import QuantidadeDeEquipamentos from '../../components/EstruturaFisicaEscolar/12_quantidadeDeEquipamentos';
@@ -96,6 +99,9 @@ const AddEstruturaFisica = (props: IProps) => {
     const [answerAcessoInternet, setAnswerAcessoInternet] = useState<IAcessoInternet>();
     const [answerEquipamentosAlunosInternet, setAnswerEquipamentosAlunosInternet] = useState<IEquipamentosAlunosInternet>();
     const [answerRedeLocal, setAnswerRedeLocal] = useState<IRedeLocal>();
+    const [answerTotalProfissionais, setAnswerTotalProfissionais] = useState<ITotalProfissionais>();
+    const [answerInstrumentosEMateriais, setAnswerInstrumentosEMaterias] = useState<IInstrumentosEMateriais>();
+    const [answerLinguaMinistrada, setAnswerLinguaMinistrada] = useState<ILinguaMinistrada>();
     const limit: number = 10;
 
     const getNomeAcrossInep = (data: Array<IData>, inepSelected: number | string) => {
@@ -203,6 +209,21 @@ const AddEstruturaFisica = (props: IProps) => {
         setFormErrorsRedeLocal({});
     }
 
+    const onTotalDeProfissionais = (answer: ITotalProfissionais) => {
+        setAnswerTotalProfissionais(answer);
+        setFormErrorsTotalDeProfissionais({});
+    }
+
+    const onInstrumentosEMateriais = (answer: IInstrumentosEMateriais) => {
+        setAnswerInstrumentosEMaterias(answer);
+        setFormErrorsInstrumentosEMateriais({});
+    }
+
+    const onLinguaMinistrada = (answer: ILinguaMinistrada) => {
+        setAnswerLinguaMinistrada(answer);
+        setFormErrorsLinguaMinistrada({});
+    }
+
 
     const onSubmit = () => {
         const res_1 = ValidateLocalDeFuncionamento.validate(answerLocalDeFuncionamento);
@@ -214,14 +235,17 @@ const AddEstruturaFisica = (props: IProps) => {
         const res_7 = ValidateDependenciasFisicas.validate(answerDependenciaFisica);
         const res_8 = ValidateRecursosDeAcessibilidade.validate(answerRecursosDeAcessibilidade, answerLocalDeFuncionamento);
         const res_9 = ValidateEquipamentos.validate(answerEquipamentos);
-        const res_10 = ValidateQuantidadeEquipamentos.validate(answerQuantidadeEquipamentos, answerEquipamentosAlunosInternet);
-        const res_11 = ValidateAcessoInternet.validate(answerAcessoInternet);
-        const res_12 = ValidateEquipamentosAlunosInternet.validate(answerEquipamentosAlunosInternet, answerAcessoInternet);
+        const res_10 = ValidateAcessoInternet.validate(answerAcessoInternet);
+        const res_11 = ValidateEquipamentosAlunosInternet.validate(answerEquipamentosAlunosInternet, answerAcessoInternet);
+        const res_12 = ValidateQuantidadeEquipamentos.validate(answerQuantidadeEquipamentos, answerEquipamentosAlunosInternet);
         const res_13 = ValidateRedeLocal.validate(answerRedeLocal);
-        if (res_1 || res_2 || res_3 || res_4 || 
-            res_5 || res_6 || res_7 || res_8 || 
+        const res_14 = ValidateTotalProfissionais.validate(answerTotalProfissionais);
+        const res_15 = ValidateInstrumentosEMateriais.validate(answerInstrumentosEMateriais);
+        const res_16 = ValidateLinguaMinistrada.validate(answerLinguaMinistrada, answerInstrumentosEMateriais);
+        if (res_1 || res_2 || res_3 || res_4 ||
+            res_5 || res_6 || res_7 || res_8 ||
             res_9 || res_10 || res_11 || res_12 ||
-            res_13) {
+            res_13 || res_14 || res_15 || res_16) {
             setFormErrorsLocalDeFuncionamento(res_1);
             setFormErrorsAbastecimentoDeAgua(res_2);
             setFormErrorsFonteEnergiaEletrica(res_3);
@@ -231,10 +255,13 @@ const AddEstruturaFisica = (props: IProps) => {
             setFormErrorsDependenciasFisicas(res_7);
             setFormErrorsRecursosDeAcessibilidade(res_8);
             setFormErrorsEquipamentos(res_9);
-            setFormErrorsQuantidadeEquipamentos(res_10);
-            setFormErrorsAcessoInternet(res_11);
-            setFormErrorsEquipamentoAlunoInternet(res_12);
+            setFormErrorsAcessoInternet(res_10);
+            setFormErrorsEquipamentoAlunoInternet(res_11);
+            setFormErrorsQuantidadeEquipamentos(res_12);
             setFormErrorsRedeLocal(res_13);
+            setFormErrorsTotalDeProfissionais(res_14);
+            setFormErrorsInstrumentosEMateriais(res_15);
+            setFormErrorsLinguaMinistrada(res_16);
             return;
         }
 
@@ -321,13 +348,13 @@ const AddEstruturaFisica = (props: IProps) => {
                             <DependenciasFisicas formErrors={formErrorsDependenciasFisicas} dependenciasFisicas={(value) => onDependenciasFisicas(value)} />
                             <RecursosDeAcessibilidade formErrors={formErrorsRecursosDeAcessibilidade} recursosDeAcessibilidade={(value) => onRecursosDeAcessibilidade(value)} answerLocalDeFuncionamento={answerLocalDeFuncionamento} />
                             <Equipamentos formErrors={formErrorsEquipamentos} equipamentos={(value) => onEquipamentos(value)} />
-                            <AcessoInternet formErrors={formErrorsAcessoInternet} acessoInternet={(value)=> onAcessoInternet(value)}/>
-                            <EquipamentosAlunosInternet formErrors={formErrorsEquipamentoAlunoInternet} answerAcessoInternet={answerAcessoInternet} answerRedeLocal={answerRedeLocal} equipamentosAlunosInternet={(value)=> onEquipamentosAlunosInternet(value)}/>
+                            <AcessoInternet formErrors={formErrorsAcessoInternet} acessoInternet={(value) => onAcessoInternet(value)} />
+                            <EquipamentosAlunosInternet formErrors={formErrorsEquipamentoAlunoInternet} answerAcessoInternet={answerAcessoInternet} answerRedeLocal={answerRedeLocal} equipamentosAlunosInternet={(value) => onEquipamentosAlunosInternet(value)} />
                             <QuantidadeDeEquipamentos formErrors={formErrorsQuantidadeEquipamentos} quantidadeDeEquipamentos={(value) => onQuantidadeEquipamentos(value)} answerEquipamentosAlunosInternet={answerEquipamentosAlunosInternet} />
-                            <RedeLocal formErrors={formErrorsRedeLocal} answerEquipamentos={answerEquipamentos} answerQuantidadeEquipamentos={answerQuantidadeEquipamentos} redeLocal={(value)=> onRedeLocal(value)}/>
-                            <TotalDeProfissionais />
-                            <InstrumentosEMateriais />
-                            <LinguaMinistrada />
+                            <RedeLocal formErrors={formErrorsRedeLocal} answerEquipamentos={answerEquipamentos} answerQuantidadeEquipamentos={answerQuantidadeEquipamentos} redeLocal={(value) => onRedeLocal(value)} />
+                            <TotalDeProfissionais formErrors={formErrorsTotalDeProfissionais} totalDeProfissionais={(value) => onTotalDeProfissionais(value)} />
+                            <InstrumentosEMateriais formErrors={formErrorsInstrumentosEMateriais} instrumentosEMateriais={(value) => onInstrumentosEMateriais(value)} />
+                            <LinguaMinistrada formErrors={formErrorsLinguaMinistrada} linguaMinistrada={(value) => onLinguaMinistrada(value)} answerInstrumentosEMateriais={answerInstrumentosEMateriais} />
                             <ReservaDeVagas />
                             <OrgaosColegiados />
                             <View style={{ flexDirection: 'row', justifyContent: 'flex-end', borderTopWidth: 1, borderColor: COLORS.gray, paddingTop: 50, marginTop: 50, marginBottom: 50, gap: 20 }}>

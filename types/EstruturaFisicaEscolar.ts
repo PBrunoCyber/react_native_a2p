@@ -165,7 +165,7 @@ export interface ITotalProfissionais {
     campo_130: string,
     campo_131: string,
     campo_132: string,
-    campo_134: string,
+    campo_134: number | null,
 }
 export interface IInstrumentosEMateriais {
     campo_147: 0 | 1,

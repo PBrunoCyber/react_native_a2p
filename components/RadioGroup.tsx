@@ -25,7 +25,7 @@ const RadioGroup = ({ options, question, value, textOption, disable, fontWeight,
             <Text style={{ flexGrow: 1, fontWeight: fontWeight, maxWidth: 400 }}>{question}</Text>
             <View style={styles.formFlexOptions}>
                 {options.map((option, index) => (
-                    <View key={index} style={{ flexDirection: 'row', alignItems: 'center', gap: 10, width: 100 }}>
+                    <View key={index} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10, width: 100 }}>
                         {disable === false || disable === undefined ?
                             <TouchableOpacity
                                 style={[
