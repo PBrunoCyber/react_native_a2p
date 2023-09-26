@@ -82,7 +82,7 @@ const validate = (answer: IRecursosDeAcessibilidade | undefined, localDeFunciona
     if (answer?.campo_89 && answer?.campo_89.length > 4) {
         errors.campo_89 = "O campo não pode ter mais que 4 caracteres.";
     }
-    if (answer?.campo_89 && (Number)(answer?.campo_89) > (Number)(answer?.campo_87 + answer?.campo_88)) {
+    if (answer?.campo_89 && parseInt(answer?.campo_89) > parseInt(answer?.campo_87) + parseInt(answer?.campo_88)) {
         errors.campo_89 = "O valor preenchido não pode ser maior que a soma do campo \"Número de salas de aula utilizadas na escola dentro do prédio escolar\" com o campo \"Número de salas de aula utilizadas na escola fora do prédio escolar\"";
     }
     if (answer?.campo_90 && !/^\d+$/g.test(answer?.campo_90)) {
@@ -94,10 +94,10 @@ const validate = (answer: IRecursosDeAcessibilidade | undefined, localDeFunciona
     if (answer?.campo_90 && answer?.campo_90.length > 4) {
         errors.campo_90 = "O campo não pode ter mais que 4 caracteres.";
     }
-    if (answer?.campo_90 && (Number)(answer?.campo_90) > (Number)(answer?.campo_87 + answer?.campo_88)) {
+    if (answer?.campo_90 && parseInt(answer?.campo_90) > parseInt(answer?.campo_87) + parseInt(answer?.campo_88)) {
         errors.campo_90 = "O valor preenchido não pode ser maior que a soma do campo \"Número de salas de aula utilizadas na escola dentro do prédio escolar\" com o campo \"Número de salas de aula utilizadas na escola fora do prédio escolar\"";
     }
-    if (answer?.campo_90 && ((Number)(answer?.campo_90 + answer?.campo_89) > (2 * (Number)(answer?.campo_87 + answer?.campo_88)))) {
+    if (answer?.campo_90 && (parseInt(answer?.campo_90) + parseInt(answer?.campo_89) > (2 * parseInt(answer?.campo_87) + parseInt(answer?.campo_88)))) {
         errors.campo_90 = "A soma do número preenchido neste campo com o número preenchido no campo \"Número de salas de aula climatizadas\" não pode ser maior que o dobro da soma do campo \"Número de salas de aula utilizadas na escola dentro do prédio escolar\" com o campo \"Número de salas de aula utilizadas na escola fora do prédio escolar\"";
     }
     if (Object.keys(errors).length > 0) {

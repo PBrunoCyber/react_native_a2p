@@ -71,7 +71,6 @@ const InstrumentosEMateriais = ({ instrumentosEMateriais, formErrors }: IProps) 
                 ['campo_144']: null,
                 ['campo_145']: null,
                 ['campo_146']: null,
-                ['campo_148']: null,
             }));
         }
     }
@@ -115,7 +114,7 @@ const InstrumentosEMateriais = ({ instrumentosEMateriais, formErrors }: IProps) 
                     {formErrors.campo_145 && <Text style={styles.messageError}>{formErrors.campo_145}</Text>}
                     <RadioGroup options={[1, 0]} disable={answer.campo_147 === 1 ? true : false} value={answer.campo_146} textOption={textOption} fontWeight='normal' question='12 - Materiais pedagógicos para a educação do campo*' onSelect={(option) => handleOptionChange('campo_146', option)} />
                     {formErrors.campo_146 && <Text style={styles.messageError}>{formErrors.campo_146}</Text>}
-                    <RadioGroup options={[1, 0]} disable={answer.campo_147 === 1 ? true : false} value={answer.campo_148} textOption={textOption} fontWeight='normal' question='13 - Educação escolar indígena*' onSelect={(option) => handleOptionChange('campo_148', option)} />
+                    <RadioGroup options={[1, 0]} value={answer.campo_148} textOption={textOption} fontWeight='normal' question='13 - Educação escolar indígena*' onSelect={(option) => handleOptionChange('campo_148', option)} />
                     {formErrors.campo_148 && <Text style={styles.messageError}>{formErrors.campo_148}</Text>}
                 </View>
                 : null

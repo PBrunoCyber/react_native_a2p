@@ -111,9 +111,10 @@ const QuantidadeDeEquipamentos = ({ quantidadeDeEquipamentos, answerEquipamentos
                                 {formErrors.campo_102 && <Text style={styles.messageError}>{formErrors.campo_102}</Text>}
                             </View>
                         </View>
-                        <Text style={{ fontWeight: 'bold', marginBottom: 30 }}>6 - Quantidade de computadores em uso pelos alunos</Text>
-                        <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 30 }]}>
-                            <Text style={{ flexGrow: 1, maxWidth: 400, }}>a) Computadores de mesa (desktop)*</Text>
+                        <Text style={{ fontWeight: 'bold' }}>6 - Quantidade de computadores em uso pelos alunos</Text>
+                        {formErrors.campos && <Text style={[styles.messageError, {marginTop: 20}]}>{formErrors.campos}</Text>}
+                        <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 30, marginTop: 30 }]}>
+                            <Text style={{ flexGrow: 1, maxWidth: 400 }}>a) Computadores de mesa (desktop)*</Text>
                             <View style={{ maxWidth: 300 }}>
                                 <TextInput maxLength={4} value={answer?.campo_103} style={[styles.input, answerEquipamentosAlunosInternet?.campo_111 == 0 || answerEquipamentosAlunosInternet?.campo_111 === null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answerEquipamentosAlunosInternet?.campo_111 == 0 ? true : false} onChangeText={(txt) => handleOptionChange('campo_103', txt)} />
                                 {formErrors.campo_103 && <Text style={styles.messageError}>{formErrors.campo_103}</Text>}

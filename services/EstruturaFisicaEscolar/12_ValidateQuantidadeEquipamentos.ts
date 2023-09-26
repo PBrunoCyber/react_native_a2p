@@ -63,9 +63,6 @@ const validate = (answer: IQuantidadeEquipamentos | undefined, alunosEquipamento
     if (answer?.campo_103 && verificaApenasZeros(answer?.campo_103)) {
         errors.campo_103 = "O campo não pode ser preenchido apenas com zeros.";
     }
-    if (alunosEquipamentosInternet?.campo_111 === 1 && !answer?.campo_103) {
-        errors.campo_103 = "Campo obrigatório pois o 1º item da seção XI foi marcado como SIM"
-    }
     if (answer?.campo_103 && answer?.campo_103.length > 4) {
         errors.campo_103 = "O campo não pode ter mais que 4 caracteres.";
     }
@@ -78,9 +75,7 @@ const validate = (answer: IQuantidadeEquipamentos | undefined, alunosEquipamento
     if (answer?.campo_104 && answer?.campo_104.length > 4) {
         errors.campo_104 = "O campo não pode ter mais que 4 caracteres.";
     }
-    if (alunosEquipamentosInternet?.campo_111 === 1 && !answer?.campo_104) {
-        errors.campo_104 = "Campo obrigatório pois o 1º item da seção XI foi marcado como SIM"
-    }
+    
     if (answer?.campo_105 && !/^\d+$/g.test(answer?.campo_105)) {
         errors.campo_105 = "Informe apenas números";
     }
@@ -90,9 +85,10 @@ const validate = (answer: IQuantidadeEquipamentos | undefined, alunosEquipamento
     if (answer?.campo_105 && answer?.campo_105.length > 4) {
         errors.campo_105 = "O campo não pode ter mais que 4 caracteres.";
     }
-    if (alunosEquipamentosInternet?.campo_111 === 1 && !answer?.campo_105) {
-        errors.campo_105 = "Campo obrigatório pois o 1º item da seção XI foi marcado como SIM"
+    if(alunosEquipamentosInternet?.campo_111 === 1 && (!answer?.campo_103 && !answer?.campo_104 && !answer?.campo_105)){
+        errors.campos = "Pelo menos um dos campos abaixo deve ser preenchido, pois o 1º campo da seção XI foi marcado como SIM"
     }
+    
 
     if (Object.keys(errors).length > 0) {
         return errors;

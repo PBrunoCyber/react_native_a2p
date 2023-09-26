@@ -155,6 +155,7 @@ const AddEstruturaFisica = (props: IProps) => {
     const onLocalDeFuncionamentoChange = (answer: ILocalDeFuncionamento) => {
         setAnswerLocalDeFuncionamento(answer);
         setFormErrorsLocalDeFuncionamento({});
+        setFormErrorsRecursosDeAcessibilidade({});
     }
 
     const onAbastecimentoDeAguaChange = (answer: IAbastecimentoDeAgua) => {
@@ -203,6 +204,7 @@ const AddEstruturaFisica = (props: IProps) => {
     const onAcessoInternet = (answer: IAcessoInternet) => {
         setAnswerAcessoInternet(answer);
         setFormErrorsAcessoInternet({});
+        setFormErrorsEquipamentos({});
     }
 
     const onEquipamentosAlunosInternet = (answer: IEquipamentosAlunosInternet) => {
