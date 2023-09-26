@@ -6,7 +6,7 @@ import styles from '../../styles/add.style';
 import { COLORS } from '../../constants/theme'
 import { useEffect, useState } from 'react';
 
-import { IAbastecimentoDeAgua, IDependenciasFisicas, IDestinacaoDoLixo, IEnergiaEletrica, IEquipamentos, IEquipamentosAlunosInternet, IEsgotamentoSanitario, ILocalDeFuncionamento, IQuantidadeEquipamentos, IRecursosDeAcessibilidade, ITratamentoDoLixo } from '../../types/EstruturaFisicaEscolar';
+import { IAbastecimentoDeAgua, IAcessoInternet, IDependenciasFisicas, IDestinacaoDoLixo, IEnergiaEletrica, IEquipamentos, IEquipamentosAlunosInternet, IEsgotamentoSanitario, ILocalDeFuncionamento, IQuantidadeEquipamentos, IRecursosDeAcessibilidade, IRedeLocal, ITratamentoDoLixo } from '../../types/EstruturaFisicaEscolar';
 import ValidateLocalDeFuncionamento from '../../services/EstruturaFisicaEscolar/1_ValidateLocalDeFuncionamento';
 import Escola from '../../services/Escola';
 import LocalDeFuncionamento from '../../components/EstruturaFisicaEscolar/1_localDeFuncionamento';
@@ -18,9 +18,6 @@ import TratamentoDoLixo from '../../components/EstruturaFisicaEscolar/6_tratamen
 import DependenciasFisicas from '../../components/EstruturaFisicaEscolar/7_dependenciasFisicas';
 import RecursosDeAcessibilidade from '../../components/EstruturaFisicaEscolar/8_recursosDeAcessibilidade';
 import Equipamentos from '../../components/EstruturaFisicaEscolar/9_equipamentos';
-import QuantidadeDeEquipamentos from '../../components/EstruturaFisicaEscolar/10_quantidadeDeEquipamentos';
-import AcessoInternet from '../../components/EstruturaFisicaEscolar/11_acessoInternet';
-import EquipamentosAlunosInternet from '../../components/EstruturaFisicaEscolar/12_equipamentoAlunosInternet';
 import RedeLocal from '../../components/EstruturaFisicaEscolar/13_redeLocal';
 import TotalDeProfissionais from '../../components/EstruturaFisicaEscolar/14_totalDeProfissionais';
 import InstrumentosEMateriais from '../../components/EstruturaFisicaEscolar/15_InstrumentosEMateriais';
@@ -35,7 +32,13 @@ import ValidateTratamentoDoLixo from '../../services/EstruturaFisicaEscolar/6_Va
 import ValidateDependenciasFisicas from '../../services/EstruturaFisicaEscolar/7_ValidateDependenciasFisicas';
 import ValidateRecursosDeAcessibilidade from '../../services/EstruturaFisicaEscolar/8_ValidateRecursosDeAcessibilidade';
 import ValidateEquipamentos from '../../services/EstruturaFisicaEscolar/9_ValidateEquipamentos';
-import ValidateQuantidadeEquipamentos from '../../services/EstruturaFisicaEscolar/10_ValidateQuantidadeEquipamentos';
+import ValidateQuantidadeEquipamentos from '../../services/EstruturaFisicaEscolar/12_ValidateQuantidadeEquipamentos';
+import ValidateAcessoInternet from '../../services/EstruturaFisicaEscolar/10_ValidateAcessoInternet';
+import ValidateEquipamentosAlunosInternet from '../../services/EstruturaFisicaEscolar/11_ValidateEquipamentosAlunosInternet';
+import ValidateRedeLocal from '../../services/EstruturaFisicaEscolar/13_RedeLocal';
+import AcessoInternet from '../../components/EstruturaFisicaEscolar/10_acessoInternet';
+import EquipamentosAlunosInternet from '../../components/EstruturaFisicaEscolar/11_equipamentoAlunosInternet';
+import QuantidadeDeEquipamentos from '../../components/EstruturaFisicaEscolar/12_quantidadeDeEquipamentos';
 
 interface IData {
     id: number,
@@ -90,7 +93,9 @@ const AddEstruturaFisica = (props: IProps) => {
     const [answerRecursosDeAcessibilidade, setAnswerRecursosDeAcessibilidade] = useState<IRecursosDeAcessibilidade>();
     const [answerEquipamentos, setAnswerEquipamentos] = useState<IEquipamentos>();
     const [answerQuantidadeEquipamentos, setAnswerQuantidadeEquipamentos] = useState<IQuantidadeEquipamentos>();
+    const [answerAcessoInternet, setAnswerAcessoInternet] = useState<IAcessoInternet>();
     const [answerEquipamentosAlunosInternet, setAnswerEquipamentosAlunosInternet] = useState<IEquipamentosAlunosInternet>();
+    const [answerRedeLocal, setAnswerRedeLocal] = useState<IRedeLocal>();
     const limit: number = 10;
 
     const getNomeAcrossInep = (data: Array<IData>, inepSelected: number | string) => {
@@ -135,53 +140,69 @@ const AddEstruturaFisica = (props: IProps) => {
     }
 
 
-    const onLocalDeFuncionamentoChange = async (answer: ILocalDeFuncionamento) => {
+    const onLocalDeFuncionamentoChange = (answer: ILocalDeFuncionamento) => {
         setAnswerLocalDeFuncionamento(answer);
         setFormErrorsLocalDeFuncionamento({});
     }
 
-    const onAbastecimentoDeAguaChange = async (answer: IAbastecimentoDeAgua) => {
+    const onAbastecimentoDeAguaChange = (answer: IAbastecimentoDeAgua) => {
         setAnswerAbastecimentoDeAgua(answer);
         setFormErrorsAbastecimentoDeAgua({});
     }
 
-    const onFonteEnergiaEletricaChange = async (answer: IEnergiaEletrica) => {
+    const onFonteEnergiaEletricaChange = (answer: IEnergiaEletrica) => {
         setAnswerFonteEnergiaEletrica(answer);
         setFormErrorsFonteEnergiaEletrica({});
     }
 
-    const onEsgotamentoSanitarioChange = async (answer: IEsgotamentoSanitario) => {
+    const onEsgotamentoSanitarioChange = (answer: IEsgotamentoSanitario) => {
         setAnswerEsgotamentoSanitario(answer);
         setFormErrorsEsgotamentoSanitario({});
     }
 
-    const onDestinacaoDoLixo = async (answer: IDestinacaoDoLixo) => {
+    const onDestinacaoDoLixo = (answer: IDestinacaoDoLixo) => {
         setAnswerDestinacaoDoLixo(answer);
         setFormErrorsDestinacaoDoLixo({});
     }
-    const onTratamentoDoLixo = async (answer: ITratamentoDoLixo) => {
+    const onTratamentoDoLixo = (answer: ITratamentoDoLixo) => {
         setAnswerTratamentoDoLixo(answer);
         setFormErrorsTratamentoDoLixo({});
     }
-    const onDependenciasFisicas = async (answer: IDependenciasFisicas) => {
+    const onDependenciasFisicas = (answer: IDependenciasFisicas) => {
         setAnswerDependenciaFisica(answer);
         setFormErrorsDependenciasFisicas({});
     }
 
-    const onRecursosDeAcessibilidade = async (answer: IRecursosDeAcessibilidade) => {
+    const onRecursosDeAcessibilidade = (answer: IRecursosDeAcessibilidade) => {
         setAnswerRecursosDeAcessibilidade(answer);
         setFormErrorsRecursosDeAcessibilidade({});
     }
 
-    const onEquipamentos = async (answer: IEquipamentos) => {
+    const onEquipamentos = (answer: IEquipamentos) => {
         setAnswerEquipamentos(answer);
         setFormErrorsEquipamentos({});
     }
 
-    const onQuantidadeEquipamentos = async (answer: IQuantidadeEquipamentos) => {
+    const onQuantidadeEquipamentos = (answer: IQuantidadeEquipamentos) => {
         setAnswerQuantidadeEquipamentos(answer);
         setFormErrorsQuantidadeEquipamentos({});
     }
+
+    const onAcessoInternet = (answer: IAcessoInternet) => {
+        setAnswerAcessoInternet(answer);
+        setFormErrorsAcessoInternet({});
+    }
+
+    const onEquipamentosAlunosInternet = (answer: IEquipamentosAlunosInternet) => {
+        setAnswerEquipamentosAlunosInternet(answer);
+        setFormErrorsEquipamentoAlunoInternet({});
+    }
+
+    const onRedeLocal = (answer: IRedeLocal) => {
+        setAnswerRedeLocal(answer);
+        setFormErrorsRedeLocal({});
+    }
+
 
     const onSubmit = () => {
         const res_1 = ValidateLocalDeFuncionamento.validate(answerLocalDeFuncionamento);
@@ -193,8 +214,14 @@ const AddEstruturaFisica = (props: IProps) => {
         const res_7 = ValidateDependenciasFisicas.validate(answerDependenciaFisica);
         const res_8 = ValidateRecursosDeAcessibilidade.validate(answerRecursosDeAcessibilidade, answerLocalDeFuncionamento);
         const res_9 = ValidateEquipamentos.validate(answerEquipamentos);
-        const res_10 = ValidateQuantidadeEquipamentos.validate(answerQuantidadeEquipamentos);
-        if (res_1 || res_2 || res_3 || res_4 || res_5 || res_6 || res_7 || res_8 || res_9 || res_10) {
+        const res_10 = ValidateQuantidadeEquipamentos.validate(answerQuantidadeEquipamentos, answerEquipamentosAlunosInternet);
+        const res_11 = ValidateAcessoInternet.validate(answerAcessoInternet);
+        const res_12 = ValidateEquipamentosAlunosInternet.validate(answerEquipamentosAlunosInternet, answerAcessoInternet);
+        const res_13 = ValidateRedeLocal.validate(answerRedeLocal);
+        if (res_1 || res_2 || res_3 || res_4 || 
+            res_5 || res_6 || res_7 || res_8 || 
+            res_9 || res_10 || res_11 || res_12 ||
+            res_13) {
             setFormErrorsLocalDeFuncionamento(res_1);
             setFormErrorsAbastecimentoDeAgua(res_2);
             setFormErrorsFonteEnergiaEletrica(res_3);
@@ -205,6 +232,9 @@ const AddEstruturaFisica = (props: IProps) => {
             setFormErrorsRecursosDeAcessibilidade(res_8);
             setFormErrorsEquipamentos(res_9);
             setFormErrorsQuantidadeEquipamentos(res_10);
+            setFormErrorsAcessoInternet(res_11);
+            setFormErrorsEquipamentoAlunoInternet(res_12);
+            setFormErrorsRedeLocal(res_13);
             return;
         }
 
@@ -291,10 +321,10 @@ const AddEstruturaFisica = (props: IProps) => {
                             <DependenciasFisicas formErrors={formErrorsDependenciasFisicas} dependenciasFisicas={(value) => onDependenciasFisicas(value)} />
                             <RecursosDeAcessibilidade formErrors={formErrorsRecursosDeAcessibilidade} recursosDeAcessibilidade={(value) => onRecursosDeAcessibilidade(value)} answerLocalDeFuncionamento={answerLocalDeFuncionamento} />
                             <Equipamentos formErrors={formErrorsEquipamentos} equipamentos={(value) => onEquipamentos(value)} />
+                            <AcessoInternet formErrors={formErrorsAcessoInternet} acessoInternet={(value)=> onAcessoInternet(value)}/>
+                            <EquipamentosAlunosInternet formErrors={formErrorsEquipamentoAlunoInternet} answerAcessoInternet={answerAcessoInternet} answerRedeLocal={answerRedeLocal} equipamentosAlunosInternet={(value)=> onEquipamentosAlunosInternet(value)}/>
                             <QuantidadeDeEquipamentos formErrors={formErrorsQuantidadeEquipamentos} quantidadeDeEquipamentos={(value) => onQuantidadeEquipamentos(value)} answerEquipamentosAlunosInternet={answerEquipamentosAlunosInternet} />
-                            <AcessoInternet />
-                            <EquipamentosAlunosInternet />
-                            <RedeLocal />
+                            <RedeLocal formErrors={formErrorsRedeLocal} answerEquipamentos={answerEquipamentos} answerQuantidadeEquipamentos={answerQuantidadeEquipamentos} redeLocal={(value)=> onRedeLocal(value)}/>
                             <TotalDeProfissionais />
                             <InstrumentosEMateriais />
                             <LinguaMinistrada />

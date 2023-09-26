@@ -118,16 +118,7 @@ export interface IEquipamentos {
     campo_96: number | null,
 }
 
-export interface IQuantidadeEquipamentos {
-    campo_98: string,
-    campo_99: string,
-    campo_100: string,
-    campo_101: string,
-    campo_102: string,
-    campo_103: string,
-    campo_104: string,
-    campo_105: string,
-}
+
 export interface IAcessoInternet {
     campo_110: 0 | 1,
     campo_106: number | null,
@@ -144,6 +135,17 @@ export interface IRedeLocal {
     campo_116: 0 | 1,
     campo_114: number | null,
     campo_115: number | null,
+}
+
+export interface IQuantidadeEquipamentos {
+    campo_98: string,
+    campo_99: string,
+    campo_100: string,
+    campo_101: string,
+    campo_102: string,
+    campo_103: string,
+    campo_104: string,
+    campo_105: string,
 }
 export interface ITotalProfissionais {
     campo_133: 0 | 1,
