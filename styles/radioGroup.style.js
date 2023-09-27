@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         maxWidth: '100%',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
-        marginTop: 40,
+        marginTop: 30,
         gap: 20,
     },
     container: {

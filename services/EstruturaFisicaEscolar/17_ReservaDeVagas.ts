@@ -1,10 +1,10 @@
-import { IReservaDeVagas, IUltimasPerguntas } from "../../types/EstruturaFisicaEscolar";
+import { IReservaDeVagas } from "../../types/EstruturaFisicaEscolar";
 
 
-const validate = (answer: IReservaDeVagas | undefined, ultimasPerguntas: IUltimasPerguntas | undefined) => {
+const validate = (answer: IReservaDeVagas | undefined, exameClassificatorio: number | null) => {
     const errors: any = {};
 
-    if (ultimasPerguntas?.campo_154 === 1 && (
+    if (exameClassificatorio === 1 && (
         answer?.campo_155 === 0 &&
         answer?.campo_156 === 0 &&
         answer?.campo_157 === 0 &&
@@ -14,23 +14,21 @@ const validate = (answer: IReservaDeVagas | undefined, ultimasPerguntas: IUltima
     )) {
         errors.reservaDeVagas = "\"Reserva de vagas por sistema de cotas para grupos específicos de aluno(a)s\" não foi preenchida corretamente. Não podem ser informadas todas as opções com valor igual a 0 (Não).";
     }
-    if (ultimasPerguntas?.campo_154 === 1 && answer?.campo_160 === 0 && answer?.campo_155 === null) {
+    if (exameClassificatorio === 1 && answer?.campo_160 === 0 && answer?.campo_155 === null) {
         errors.campo_155 = "Campo obrigatório";
     }
-    if (ultimasPerguntas?.campo_154 === 1 && answer?.campo_160 === 0 && answer?.campo_156 === null) {
+    if (exameClassificatorio === 1 && answer?.campo_160 === 0 && answer?.campo_156 === null) {
         errors.campo_156 = "Campo obrigatório";
     }
-    if (ultimasPerguntas?.campo_154 === 1 && answer?.campo_160 === 0 && answer?.campo_157 === null) {
+    if (exameClassificatorio === 1 && answer?.campo_160 === 0 && answer?.campo_157 === null) {
         errors.campo_157 = "Campo obrigatório";
     }
-    if (ultimasPerguntas?.campo_154 === 1 && answer?.campo_160 === 0 && answer?.campo_158 === null) {
+    if (exameClassificatorio === 1 && answer?.campo_160 === 0 && answer?.campo_158 === null) {
         errors.campo_158 = "Campo obrigatório";
     }
-    if (ultimasPerguntas?.campo_154 === 1 && answer?.campo_160 === 0 && answer?.campo_159 === null) {
+    if (exameClassificatorio === 1 && answer?.campo_160 === 0 && answer?.campo_159 === null) {
         errors.campo_159 = "Campo obrigatório";
     }
-
-
 
     if (Object.keys(errors).length > 0) {
         return errors;

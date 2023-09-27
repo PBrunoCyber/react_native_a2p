@@ -12,10 +12,10 @@ import RadioGroup from '../RadioGroup';
 interface IProps {
     reservaDeVagas: (value: IReservaDeVagas) => void,
     formErrors: any,
-    answerUltimasPerguntas: IUltimasPerguntas | undefined
+    exameClassificatorio: number | null
 }
 
-const ReservaDeVagas = ({ reservaDeVagas, answerUltimasPerguntas, formErrors }: IProps) => {
+const ReservaDeVagas = ({ reservaDeVagas, exameClassificatorio, formErrors }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
     const [answer, setAnswers] = useState<IReservaDeVagas>(
         {
@@ -67,7 +67,7 @@ const ReservaDeVagas = ({ reservaDeVagas, answerUltimasPerguntas, formErrors }: 
     }, [formErrors])
 
     useEffect(() => {
-        if (answerUltimasPerguntas?.campo_154 !== 1) {
+        if (exameClassificatorio !== 1) {
             setAnswers((prevAnswer) => ({
                 ...prevAnswer,
                 ['campo_155']: null,
@@ -78,7 +78,7 @@ const ReservaDeVagas = ({ reservaDeVagas, answerUltimasPerguntas, formErrors }: 
             }));
         }
         console.log("Reserva De vagas");
-    }, [answerUltimasPerguntas?.campo_154])
+    }, [exameClassificatorio])
 
     return (
         <View style={{ marginTop: 20 }}>
@@ -95,15 +95,15 @@ const ReservaDeVagas = ({ reservaDeVagas, answerUltimasPerguntas, formErrors }: 
                     {formErrors.reservaDeVagas && <Text style={styles.messageError}>{formErrors.reservaDeVagas}</Text>}
                     <CheckBox fontWeight='bold' value={answer.campo_160} label='Sem reservas de vagas para sistema de cotas (ampla concorrência)*' onSelect={(value) => handleOptionChange('campo_160', value)} />
                     {formErrors.campo_160 && <Text style={styles.messageError}>{formErrors.campo_160}</Text>}
-                    <RadioGroup options={[1, 0]} disable={answer.campo_160 === 1 || answerUltimasPerguntas?.campo_154 !== 1 ? true : false} value={answer.campo_155} textOption={textOption} fontWeight='normal' question='1 - Autodeclarado preto, pardo ou indígena (PPI)*' onSelect={(option) => handleOptionChange('campo_155', option)} />
+                    <RadioGroup options={[1, 0]} disable={answer.campo_160 === 1 || exameClassificatorio !== 1 ? true : false} value={answer.campo_155} textOption={textOption} fontWeight='normal' question='1 - Autodeclarado preto, pardo ou indígena (PPI)*' onSelect={(option) => handleOptionChange('campo_155', option)} />
                     {formErrors.campo_155 && <Text style={styles.messageError}>{formErrors.campo_155}</Text>}
-                    <RadioGroup options={[1, 0]} disable={answer.campo_160 === 1 || answerUltimasPerguntas?.campo_154 !== 1 ? true : false} value={answer.campo_156} textOption={textOption} fontWeight='normal' question='2 - Condição de renda*' onSelect={(option) => handleOptionChange('campo_156', option)} />
+                    <RadioGroup options={[1, 0]} disable={answer.campo_160 === 1 || exameClassificatorio !== 1 ? true : false} value={answer.campo_156} textOption={textOption} fontWeight='normal' question='2 - Condição de renda*' onSelect={(option) => handleOptionChange('campo_156', option)} />
                     {formErrors.campo_156 && <Text style={styles.messageError}>{formErrors.campo_156}</Text>}
-                    <RadioGroup options={[1, 0]} disable={answer.campo_160 === 1 || answerUltimasPerguntas?.campo_154 !== 1 ? true : false} value={answer.campo_157} textOption={textOption} fontWeight='normal' question='3 - Oriundo de escola pública*' onSelect={(option) => handleOptionChange('campo_157', option)} />
+                    <RadioGroup options={[1, 0]} disable={answer.campo_160 === 1 || exameClassificatorio !== 1 ? true : false} value={answer.campo_157} textOption={textOption} fontWeight='normal' question='3 - Oriundo de escola pública*' onSelect={(option) => handleOptionChange('campo_157', option)} />
                     {formErrors.campo_157 && <Text style={styles.messageError}>{formErrors.campo_157}</Text>}
-                    <RadioGroup options={[1, 0]} disable={answer.campo_160 === 1 || answerUltimasPerguntas?.campo_154 !== 1 ? true : false} value={answer.campo_158} textOption={textOption} fontWeight='normal' question='4 - Pessoa com deficiência (PCD)*' onSelect={(option) => handleOptionChange('campo_158', option)} />
+                    <RadioGroup options={[1, 0]} disable={answer.campo_160 === 1 || exameClassificatorio !== 1 ? true : false} value={answer.campo_158} textOption={textOption} fontWeight='normal' question='4 - Pessoa com deficiência (PCD)*' onSelect={(option) => handleOptionChange('campo_158', option)} />
                     {formErrors.campo_158 && <Text style={styles.messageError}>{formErrors.campo_158}</Text>}
-                    <RadioGroup options={[1, 0]} disable={answer.campo_160 === 1 || answerUltimasPerguntas?.campo_154 !== 1 ? true : false} value={answer.campo_159} textOption={textOption} fontWeight='normal' question='5 - Outros grupos que não os listados*' onSelect={(option) => handleOptionChange('campo_159', option)} />
+                    <RadioGroup options={[1, 0]} disable={answer.campo_160 === 1 || exameClassificatorio !== 1 ? true : false} value={answer.campo_159} textOption={textOption} fontWeight='normal' question='5 - Outros grupos que não os listados*' onSelect={(option) => handleOptionChange('campo_159', option)} />
                     {formErrors.campo_159 && <Text style={styles.messageError}>{formErrors.campo_159}</Text>}
                     <RadioGroup options={[1, 0]} value={answer.campo_161} textOption={textOption} fontWeight='normal' question='7 - A escola possui site ou blog ou página em redes sociais para comunicação institucional*' onSelect={(option) => handleOptionChange('campo_161', option)} />
                     <RadioGroup options={[1, 0]} value={answer.campo_162} textOption={textOption} fontWeight='normal' question='8 - A escola compartilha espaços para atividades de integração escola-comunidade*' onSelect={(option) => handleOptionChange('campo_162', option)} />

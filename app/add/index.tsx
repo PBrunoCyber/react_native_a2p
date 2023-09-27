@@ -44,7 +44,7 @@ import ValidateOrgaosColegiados from '../../services/EstruturaFisicaEscolar/18_O
 import AcessoInternet from '../../components/EstruturaFisicaEscolar/10_acessoInternet';
 import EquipamentosAlunosInternet from '../../components/EstruturaFisicaEscolar/11_equipamentoAlunosInternet';
 import QuantidadeDeEquipamentos from '../../components/EstruturaFisicaEscolar/12_quantidadeDeEquipamentos';
-import UltimasPerguntas from '../../components/EstruturaFisicaEscolar/19_ultimasPerguntas';
+import RadioGroup from '../../components/RadioGroup';
 
 interface IData {
     id: number,
@@ -60,8 +60,6 @@ interface IProps {
     initData: () => void
     limit: number
 }
-
-
 
 
 const AddEstruturaFisica = (props: IProps) => {
@@ -105,9 +103,10 @@ const AddEstruturaFisica = (props: IProps) => {
     const [answerTotalProfissionais, setAnswerTotalProfissionais] = useState<ITotalProfissionais>();
     const [answerInstrumentosEMateriais, setAnswerInstrumentosEMaterias] = useState<IInstrumentosEMateriais>();
     const [answerLinguaMinistrada, setAnswerLinguaMinistrada] = useState<ILinguaMinistrada>();
-    const [answerUltimasPerguntas, setAnswerUltimasPerguntas] = useState<IUltimasPerguntas>();
     const [answerReservaDeVagas, setAnswerReservaDeVagas] = useState<IReservaDeVagas>();
     const [answerOrgaosColegiados, setAnswerOrgaosColegiados] = useState<IOrgaosColegiados>();
+    const [answerExameClassificatorio, setAnswerExameClassificatorio] = useState<number | null>(null);
+    const [answerProjetoPedagogico, setAnswerProjetoPedagogico] = useState<number | null>(null);
     const limit: number = 10;
 
     const getNomeAcrossInep = (data: Array<IData>, inepSelected: number | string) => {
@@ -232,9 +231,6 @@ const AddEstruturaFisica = (props: IProps) => {
         setFormErrorsLinguaMinistrada({});
     }
 
-    const onUltimasPerguntas = (answer: IUltimasPerguntas) => {
-        setAnswerUltimasPerguntas(answer);
-    }
 
     const onReservaDeVagas = (answer: IReservaDeVagas) => {
         setAnswerReservaDeVagas(answer);
@@ -264,7 +260,7 @@ const AddEstruturaFisica = (props: IProps) => {
         const res_14 = ValidateTotalProfissionais.validate(answerTotalProfissionais);
         const res_15 = ValidateInstrumentosEMateriais.validate(answerInstrumentosEMateriais);
         const res_16 = ValidateLinguaMinistrada.validate(answerLinguaMinistrada, answerInstrumentosEMateriais);
-        const res_17 = ValidateReservaDeVagas.validate(answerReservaDeVagas, answerUltimasPerguntas);
+        const res_17 = ValidateReservaDeVagas.validate(answerReservaDeVagas, answerExameClassificatorio);
         const res_18 = ValidateOrgaosColegiados.validate(answerOrgaosColegiados);
         if (res_1 || res_2 || res_3 || res_4 ||
             res_5 || res_6 || res_7 || res_8 ||
@@ -382,9 +378,14 @@ const AddEstruturaFisica = (props: IProps) => {
                             <TotalDeProfissionais formErrors={formErrorsTotalDeProfissionais} totalDeProfissionais={(value) => onTotalDeProfissionais(value)} />
                             <InstrumentosEMateriais formErrors={formErrorsInstrumentosEMateriais} instrumentosEMateriais={(value) => onInstrumentosEMateriais(value)} />
                             <LinguaMinistrada formErrors={formErrorsLinguaMinistrada} linguaMinistrada={(value) => onLinguaMinistrada(value)} answerInstrumentosEMateriais={answerInstrumentosEMateriais} />
-                            <ReservaDeVagas formErrors={formErrorsReservaDeVagas} reservaDeVagas={(value) => onReservaDeVagas(value)} answerUltimasPerguntas={answerUltimasPerguntas} />
+                            <View style={{ marginBottom: 25 }}>
+                                <RadioGroup options={[1, 0]} value={answerExameClassificatorio} textOption={["SIM", "NÃO"]} color={COLORS.green} fontWeight='bold' question='A escola faz exame de seleção para ingresso de seus aluno(a)s (avaliação por prova e /ou analise curricular)*' onSelect={(option) => setAnswerExameClassificatorio(option)} />
+                            </View>
+                            <ReservaDeVagas formErrors={formErrorsReservaDeVagas} reservaDeVagas={(value) => onReservaDeVagas(value)} exameClassificatorio={answerExameClassificatorio} />
                             <OrgaosColegiados formErrors={formErrorsOrgaosColegiados} orgaosColegiados={(value) => onOrgaosColegiados(value)} />
-                            <UltimasPerguntas ultimasPerguntas={(value) => onUltimasPerguntas(value)} />
+                            <View style={{ marginBottom: 25 }}>
+                                <RadioGroup options={[1, 0]} value={answerProjetoPedagogico} textOption={["SIM", "NÃO"]} color={COLORS.green} fontWeight='bold' question='O projeto político pedagógico ou a proposta pedagógica da escola (conforme art. 12 da LDB) foi atualizada nos últimos 12 meses até a data de referência*' onSelect={(option) => setAnswerProjetoPedagogico(option)} />
+                            </View>
                             <View style={{ flexDirection: 'row', justifyContent: 'flex-end', borderTopWidth: 1, borderColor: COLORS.gray, paddingTop: 50, marginTop: 50, marginBottom: 50, gap: 20 }}>
                                 <TouchableOpacity style={styles.btnCancelar} ><Text style={{ color: COLORS.green }}>Cancelar</Text></TouchableOpacity>
                                 <TouchableOpacity style={styles.btnSalvar} onPress={onSubmit}><Text style={{ color: COLORS.white }}>Salvar</Text></TouchableOpacity>
