@@ -1,5 +1,5 @@
 import db from "./SQLiteDatabase";
-
+import { IEscola } from "../types/Escola";
 
 const dropTBEscola = () => {
     db.transaction(tx => {
@@ -57,8 +57,7 @@ const existsEscola = () => {
                 [],
                 //-----------------------
                 (_, { rows }) => {
-                    if (rows.length > 0) resolve(true)
-                    else resolve(false); // nenhum registro encontrado
+                    resolve(true);
                 },
                 (_, error) => { resolve(false); return false; }
             );

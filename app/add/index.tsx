@@ -45,17 +45,11 @@ import AcessoInternet from '../../components/EstruturaFisicaEscolar/10_acessoInt
 import EquipamentosAlunosInternet from '../../components/EstruturaFisicaEscolar/11_equipamentoAlunosInternet';
 import QuantidadeDeEquipamentos from '../../components/EstruturaFisicaEscolar/12_quantidadeDeEquipamentos';
 import RadioGroup from '../../components/RadioGroup';
-
-interface IData {
-    id: number,
-    nome: string,
-    inep: number,
-    tipo: string,
-}
+import { IEscola } from '../../types/Escola';
 
 interface IProps {
-    data: Array<IData>,
-    setData: React.Dispatch<React.SetStateAction<Array<IData>>>
+    data: Array<IEscola>,
+    setData: React.Dispatch<React.SetStateAction<Array<IEscola>>>
     setNumberOfPages: React.Dispatch<React.SetStateAction<number>>
     initData: () => void
     limit: number
@@ -64,7 +58,7 @@ interface IProps {
 
 const AddEstruturaFisica = (props: IProps) => {
 
-    const [data, setData] = useState<Array<IData>>([{ id: 0, nome: '', inep: 0, tipo: '' }]);
+    const [data, setData] = useState<Array<IEscola>>([{ id: 0, nome: '', inep: '', tipo: '' }]);
     const [inepClicked, setInepClicked] = useState(false);
     const [nomeClicked, setNomeClicked] = useState(false);
     const [selectedInep, setSeletedInep] = useState<string>('');
@@ -109,14 +103,14 @@ const AddEstruturaFisica = (props: IProps) => {
     const [answerProjetoPedagogico, setAnswerProjetoPedagogico] = useState<number | null>(null);
     const limit: number = 10;
 
-    const getNomeAcrossInep = (data: Array<IData>, inepSelected: number | string) => {
+    const getNomeAcrossInep = (data: Array<IEscola>, inepSelected: number | string) => {
         const selectedItem = data.find(item => item.inep === inepSelected);
         if (selectedItem) {
             setSeletedNome(selectedItem.nome);
         }
     }
 
-    const getInepAcrossNome = (data: Array<IData>, nomeSelected: string, id: number) => {
+    const getInepAcrossNome = (data: Array<IEscola>, nomeSelected: string, id: number) => {
         const filteredItems = data.find(item => item.nome === nomeSelected && item.id === id);
         if (filteredItems) {
             setSeletedInep(filteredItems.inep.toString());

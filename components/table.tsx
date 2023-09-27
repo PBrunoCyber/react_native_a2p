@@ -6,16 +6,10 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS } from '../constants/theme'
-
-interface IData {
-    id: number,
-    nome: string,
-    inep: number,
-    tipo: string,
-}
+import { IEscola } from '../types/Escola';
 
 interface IProps {
-    data: Array<IData>,
+    data: Array<IEscola>,
 }
 
 const Table = (props: IProps) => {

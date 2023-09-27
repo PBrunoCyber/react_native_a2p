@@ -6,17 +6,12 @@ import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
 import Escola from '../services/Escola';
 import { COLORS } from '../constants/theme'
+import { IEscola } from '../types/Escola';
 
-interface IData {
-    id: number,
-    nome: string,
-    inep: number,
-    tipo: string,
-}
 
 interface IProps {
-    data: Array<IData>,
-    setData: React.Dispatch<React.SetStateAction<Array<IData>>>
+    data: Array<IEscola>,
+    setData: React.Dispatch<React.SetStateAction<Array<IEscola>>>
     setNumberOfPages: React.Dispatch<React.SetStateAction<number>>
     initData: () => void
     limit: number
@@ -30,14 +25,14 @@ const Filtros = (props: IProps) => {
     const [selectedInep, setSeletedInep] = useState<string>('');
     const [selectedNome, setSeletedNome] = useState<string>();
 
-    const getNomeAcrossInep = (data: Array<IData>, inepSelected: number | string) => {
+    const getNomeAcrossInep = (data: Array<IEscola>, inepSelected: number | string) => {
         const selectedItem = data.find(item => item.inep === inepSelected);
         if (selectedItem) {
             setSeletedNome(selectedItem.nome);
         }
     }
 
-    const getInepAcrossNome = (data: Array<IData>, nomeSelected: string, id: number) => {
+    const getInepAcrossNome = (data: Array<IEscola>, nomeSelected: string, id: number) => {
         const filteredItems = data.find(item => item.nome === nomeSelected && item.id === id);
         if (filteredItems) {
             setSeletedInep(filteredItems.inep.toString());
@@ -78,7 +73,7 @@ const Filtros = (props: IProps) => {
                 <View style={styles.inep_nome}>
                     <View style={{ flexGrow: 1, maxWidth: '100%', zIndex: 999 }}>
                         <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Inep</Text>
-                        <TouchableOpacity style={styles.dropdownSelector} onPress={() => { setInepClicked(!nomeClicked); props.initData() }}>
+                        <TouchableOpacity style={styles.dropdownSelector} onPress={() => { setInepClicked(!inepClicked); props.initData() }}>
                             <Text>{selectedInep}</Text>
                             {inepClicked ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} /> :
                                 <Ionicons name='chevron-down-outline' color={COLORS.green} size={30} />}
@@ -88,8 +83,8 @@ const Filtros = (props: IProps) => {
                                 <TextInput placeholder="Pesquisar por inep" placeholderTextColor={COLORS.green} style={styles.searchInput} onChangeText={txt => { return searchDataByInep(txt) }} />
                                 {props.data.map((item, index) => {
                                     return (
-                                        <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedInep(item.nome); getNomeAcrossInep(props.data, item.inep); searchDataByInep(item.nome); setInepClicked(false); }}>
-                                            <Text>{item.nome}</Text>
+                                        <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedInep(item.inep); getNomeAcrossInep(props.data, item.inep); searchDataByInep(item.inep); setInepClicked(false); }}>
+                                            <Text>{item.inep}</Text>
                                         </TouchableOpacity>
                                     )
                                 })}
