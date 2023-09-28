@@ -45,9 +45,13 @@ const Home = () => {
         const res = await Escola.existsEscola();
 
         if (res != true) {
-            json.map((item, index) => {
-                Escola.insertEscola({ inep: item.codINEPEntidade.toString(), id: item.idEntidade, nome: item.nome, tipo: "Não Iniciado" });
+            setIsLoading(true);
+            const promise = json.map(async (item, index) => {
+                await Escola.insertEscola({ inep: item.codINEPEntidade.toString(), id: item.idEntidade, nome: item.nome, tipo: "Não Iniciado" });
             })
+            await Promise.all(promise);
+            initData();
+            setIsLoading(false);
         }
 
     }
@@ -87,7 +91,8 @@ const Home = () => {
     }
 
     useEffect(() => {
-
+        //Escola.dropTBEscola();
+        //EstruturaFisicaEscolar.dropTBEstruturaFisicaEscolar();
         createOrNotEscola();
         createOrNotEstruturaFisicaEscolar();
         insertOrNotEscola();
@@ -110,7 +115,6 @@ const Home = () => {
             {isLoading ?
                 <View style={{ alignItems: 'center', marginTop: 100, justifyContent: 'center', }}>
                     <Loading width={'80'} height={'80'} />
-                    <Text>Carregando dados...</Text>
                 </View>
                 :
                 <>

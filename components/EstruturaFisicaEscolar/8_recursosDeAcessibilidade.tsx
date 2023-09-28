@@ -70,6 +70,13 @@ const RecursosDeAcessibilidade = ({ recursosDeAcessibilidade, answerLocalDeFunci
                 ['campo_85']: null,
             }));
         }
+        if(question === 'campo_87' && !answer || question === 'campo_88' && !answer){
+            setAnswers((prevAnswer) => ({
+                ...prevAnswer,
+                ['campo_89']: '',
+                ['campo_90']: ''
+            }));
+        }
     }
 
     return (
@@ -107,14 +114,14 @@ const RecursosDeAcessibilidade = ({ recursosDeAcessibilidade, answerLocalDeFunci
                         <View style={[styles.formFlex, { marginBottom: 50 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400 }}>9 - Número de salas de aula utilizadas na escola dentro do prédio escolar*</Text>
                             <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={4} value={answerLocalDeFuncionamento?.campo_3 == 1 ? answer.campo_87 : answer.campo_87 = ''} style={[styles.input, answerLocalDeFuncionamento?.campo_3 == 0 || answerLocalDeFuncionamento?.campo_3 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answerLocalDeFuncionamento?.campo_3 == 0 || answerLocalDeFuncionamento?.campo_3 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_87', txt)} />
+                                <TextInput maxLength={4} value={answerLocalDeFuncionamento?.campo_3 == 1 ? answer.campo_87 : ''} style={[styles.input, answerLocalDeFuncionamento?.campo_3 == 0 || answerLocalDeFuncionamento?.campo_3 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answerLocalDeFuncionamento?.campo_3 == 0 || answerLocalDeFuncionamento?.campo_3 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_87', txt)} />
                                 {formErrors.campo_87 && <Text style={styles.messageError}>{formErrors.campo_87}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 50 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400 }}>10 - Número de salas de aula utilizadas na escola fora do prédio escolar*</Text>
                             <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={4} value={answerLocalDeFuncionamento?.campo_3 == 1 ? answer.campo_88 : answer.campo_88 = ''} style={[styles.input, answerLocalDeFuncionamento?.campo_3 == 0 || answerLocalDeFuncionamento?.campo_3 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answerLocalDeFuncionamento?.campo_3 == 0 || answerLocalDeFuncionamento?.campo_3 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_88', txt)} />
+                                <TextInput maxLength={4} value={answerLocalDeFuncionamento?.campo_3 == 1 ? answer.campo_88 : ''} style={[styles.input, answerLocalDeFuncionamento?.campo_3 == 0 || answerLocalDeFuncionamento?.campo_3 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answerLocalDeFuncionamento?.campo_3 == 0 || answerLocalDeFuncionamento?.campo_3 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_88', txt)} />
                                 {formErrors.campo_88 && <Text style={styles.messageError}>{formErrors.campo_88}</Text>}
                             </View>
                         </View>

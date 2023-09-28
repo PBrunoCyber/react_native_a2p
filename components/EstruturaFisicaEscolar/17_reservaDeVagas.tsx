@@ -77,7 +77,6 @@ const ReservaDeVagas = ({ reservaDeVagas, exameClassificatorio, formErrors }: IP
                 ['campo_159']: null,
             }));
         }
-        console.log("Reserva De vagas");
     }, [exameClassificatorio])
 
     return (

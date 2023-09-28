@@ -34,18 +34,39 @@ interface IInsert {
 }
 
 const insertEscola = (obj: IInsert) => {
-    db.transaction((tx) => {
-        tx.executeSql(
-            "INSERT INTO escola (inep, id, nome, tipo) values (?, ?, ?, ?);",
-            [obj.inep, obj.id, obj.nome, obj.tipo],
-            //-----------------------
-            (_, { rowsAffected, insertId }) => {
-                if (rowsAffected > 0) console.log("Cadastrado com sucesso!");
-                else console.log("Erro ao inserir"); // insert falhou
-            },
-            (_, error) => { console.log(error); return false } // erro interno em tx.executeSql
-        );
-    });
+    return new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                "INSERT INTO escola (inep, id, nome, tipo) values (?, ?, ?, ?);",
+                [obj.inep, obj.id, obj.nome, obj.tipo],
+                //-----------------------
+                (_, { rowsAffected, insertId }) => {
+                    if (rowsAffected > 0) { resolve(true);}
+                    else resolve(false); // insert falhou
+                },
+                (_, error) => { resolve(false); return false } // erro interno em tx.executeSql
+            );
+        });
+    })
+
+}
+
+const updateTipoEscola = (tipo: string,inep: string) => {
+    return new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                "UPDATE escola SET tipo = ? WHERE inep = ?",
+                [tipo,inep],
+                //-----------------------
+                (_, { rowsAffected, insertId }) => {
+                    if (rowsAffected > 0) { resolve(true);}
+                    else resolve(false); // insert falhou
+                },
+                (_, error) => { resolve(false); return false } // erro interno em tx.executeSql
+            );
+        });
+    })
+
 }
 
 const existsEscola = () => {
@@ -185,4 +206,4 @@ const getNumberOfPagesWithInep = (inep: string, limit: number) => {
 }
 
 
-export default { createTBEscola, existsEscola, dropTBEscola, insertEscola, getEscolaByInep, getEscolaByNome, getNumberOfPages, getWithPagination, getNumberOfPagesWithNome, getNumberOfPagesWithInep, getAll };
+export default { createTBEscola, existsEscola, dropTBEscola, insertEscola, getEscolaByInep, getEscolaByNome, getNumberOfPages, getWithPagination, getNumberOfPagesWithNome, getNumberOfPagesWithInep, getAll, updateTipoEscola };

@@ -82,7 +82,6 @@ const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMat
                 ['campo_150']: null
             }));
         }
-        console.log("Lingua Ministrada");
     }, [answerInstrumentosEMateriais])
 
     return (

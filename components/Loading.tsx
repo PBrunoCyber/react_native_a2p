@@ -9,7 +9,7 @@ function Loading({ width, height }: IProps) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            style={{ margin: "auto", background: "none" }}
+            style={{ position: 'fixed', background: "none", alignSelf: 'center', marginTop: 50 }}
             width={width}
             height={height}
             display="block"

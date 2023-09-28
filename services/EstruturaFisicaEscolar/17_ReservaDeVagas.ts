@@ -1,7 +1,7 @@
 import { IReservaDeVagas } from "../../types/EstruturaFisicaEscolar";
 
 
-const validate = (answer: IReservaDeVagas | undefined, exameClassificatorio: number | null) => {
+const validate = (answer: IReservaDeVagas | undefined, exameClassificatorio: number | null | undefined) => {
     const errors: any = {};
 
     if (exameClassificatorio === 1 && (

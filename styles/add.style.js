@@ -128,6 +128,40 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    messageOk: {
+        position: 'fixed',
+        flexDirection: 'row',
+        alignSelf: 'center',
+        marginTop: 40,
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 10,
+        paddingBottom: 10,
+        gap: 10,
+        backgroundColor: COLORS.lightGreen,
+        borderWidth: 1, 
+        borderColor: COLORS.green, 
+        borderRadius: 5
+    },
+    messageError: {
+        position: 'fixed',
+        flexDirection: 'row',
+        alignSelf: 'center',
+        marginTop: 40,
+        gap: 10,
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 10,
+        paddingBottom: 10,
+        backgroundColor: COLORS.lightRed,
+        borderWidth: 1, 
+        borderColor: COLORS.red, 
+        borderRadius: 5
     }
 });
 

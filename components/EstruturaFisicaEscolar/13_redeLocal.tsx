@@ -50,7 +50,6 @@ const RedeLocal = ({ redeLocal, answerEquipamentos, answerQuantidadeEquipamentos
                 ['campo_114']: null,
             })); 
         }
-        console.log("Error");
     },[answerEquipamentos, answerQuantidadeEquipamentos?.campo_103, answerQuantidadeEquipamentos?.campo_104, answerQuantidadeEquipamentos?.campo_105])
 
     const handleOptionChange = (question: string, answer: number | string | null) => {

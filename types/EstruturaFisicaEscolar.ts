@@ -385,4 +385,5 @@ export interface IAllValues {
     campo_168: number | null,
     campo_169: 0 | 1,
     campo_170: number | null,
+    inep_fk: string,
 }

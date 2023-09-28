@@ -60,7 +60,6 @@ const QuantidadeDeEquipamentos = ({ quantidadeDeEquipamentos, answerEquipamentos
                 ['campo_105']: '',
             }));
         }
-        console.log("Teste");
     }, [answerEquipamentosAlunosInternet])
 
     return (
