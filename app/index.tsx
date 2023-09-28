@@ -21,8 +21,9 @@ const Home = () => {
 
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [isLoading, setIsLoading] = useState(false);
-    const [data, setData] = useState<Array<IEscola>>([{ id: 0, nome: '', inep: '', tipo: '' }]);
+    const [data, setData] = useState<Array<IEscola>>();
     const [numberOfPages, setNumberOfPages] = useState<number>(1);
+    const [selectedInep, setSelectedInep] = useState<string>();
 
     const paginate = (type: string) => {
         if (type === "skipBack") setCurrentPage(1);
@@ -85,10 +86,23 @@ const Home = () => {
 
     const createOrNotEstruturaFisicaEscolar = async () => {
         const res = await EstruturaFisicaEscolar.existsEstruturaFisicaEscolar();
+        console.log(res);
         if (res != true) {
             await EstruturaFisicaEscolar.createTBEstruturaFisicaEscolar();
         }
     }
+
+    const getDataByInep = async () => {
+        const res: any = await Escola.getByInep(selectedInep);
+        if (res != false) {
+            setData(res);
+            setNumberOfPages(1);
+        }
+    }
+
+    useEffect(() => {
+        getDataByInep();
+    }, [selectedInep])
 
     useEffect(() => {
         //Escola.dropTBEscola();
@@ -120,7 +134,7 @@ const Home = () => {
                 <>
                     <ScrollView>
                         <View style={{ margin: 20 }}>
-                            <Filtros data={data} setData={setData} initData={initData} limit={limit} setNumberOfPages={setNumberOfPages} />
+                            <Filtros setSelectedInep={setSelectedInep} limit={limit} />
                             <View style={{ maxWidth: 900, marginTop: 20, alignItems: 'flex-end', alignSelf: 'center', width: '100%' }}>
                                 <TouchableOpacity style={styles.syncBtn}><Ionicons name='reload' size={25} color={COLORS.white} /><Text style={{ color: COLORS.white }}>Sincronizar</Text></TouchableOpacity>
                             </View>

@@ -13,28 +13,13 @@ interface IProps {
     localDeFuncionamentoChange: (value: ILocalDeFuncionamento) => void,
     values?: IAllValues
     formErrors: any,
+    context: ILocalDeFuncionamento,
 }
 
-const AbastecimentoDeAgua = ({ localDeFuncionamentoChange, formErrors, values }: IProps) => {
+const AbastecimentoDeAgua = ({ localDeFuncionamentoChange, context, formErrors, values }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<ILocalDeFuncionamento>(
-        {
-            campo_3: values?.campo_3 || null,
-            campo_4: values?.campo_4 || null,
-            campo_5: values?.campo_5 || null,
-            campo_6: values?.campo_6 || null,
-            campo_7: values?.campo_7 || null,
-            campo_8: values?.campo_8 || null,
-            campo_9: values?.campo_9 || null,
-            campo_10: values?.campo_10 || null,
-            campo_11: values?.campo_11 || '',
-            campo_12: values?.campo_12 || '',
-            campo_13: values?.campo_13 || '',
-            campo_14: values?.campo_14 || '',
-            campo_15: values?.campo_15 || '',
-            campo_16: values?.campo_16 || '',
-        }
-    );
+    const [answer, setAnswers] = useState<ILocalDeFuncionamento>(context);
+
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
@@ -44,7 +29,13 @@ const AbastecimentoDeAgua = ({ localDeFuncionamentoChange, formErrors, values }:
                 setIsClicked(true);
             }
         }
+
     }, [answer])
+
+    useEffect(() => {
+        setAnswers(context);
+        if (context !== answer) setIsClicked(false);
+    }, [context])
 
     useEffect(() => {
         if (formErrors && Object.keys(formErrors).length > 0) {
@@ -75,7 +66,7 @@ const AbastecimentoDeAgua = ({ localDeFuncionamentoChange, formErrors, values }:
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>
             </TouchableOpacity>
-            {isClicked === true || Object.keys(formErrors).length > 0 ?
+            {(isClicked === true || Object.keys(formErrors).length > 0) ?
                 <View style={styles.formContainer}>
                     {formErrors.localDeFuncionamento && <Text style={styles.messageError}>{formErrors.localDeFuncionamento}</Text>}
                     <RadioGroup options={[1, 0]} value={answer.campo_3} textOption={textOption} fontWeight='bold' question='1 - Prédio Escolar*' onSelect={(option) => handleOptionChange('campo_3', option)} />

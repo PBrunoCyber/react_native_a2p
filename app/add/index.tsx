@@ -4,7 +4,7 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../../styles/add.style';
 import { COLORS } from '../../constants/theme'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { IAbastecimentoDeAgua, IAcessoInternet, IAllValues, IDependenciasFisicas, IDestinacaoDoLixo, IEnergiaEletrica, IEquipamentos, IEquipamentosAlunosInternet, IEsgotamentoSanitario, IInstrumentosEMateriais, ILinguaMinistrada, ILocalDeFuncionamento, IOrgaosColegiados, IQuantidadeEquipamentos, IRecursosDeAcessibilidade, IRedeLocal, IReservaDeVagas, ITotalProfissionais, ITratamentoDoLixo, IUltimasPerguntas } from '../../types/EstruturaFisicaEscolar';
 import ValidateLocalDeFuncionamento from '../../services/EstruturaFisicaEscolar/1_ValidateLocalDeFuncionamento';
@@ -48,6 +48,7 @@ import RadioGroup from '../../components/RadioGroup';
 import { IEscola } from '../../types/Escola';
 import EstruturaFisicaEscolar from '../../services/EstruturaFisicaEscolar';
 import Loading from '../../components/Loading';
+import EstruturaFisicaEscolarContext from '../../context/EstruturaFisicaEscolar';
 
 interface IProps {
     data: Array<IEscola>,
@@ -59,52 +60,17 @@ interface IProps {
 
 
 const AddEstruturaFisica = (props: IProps) => {
-
+    const context = useContext(EstruturaFisicaEscolarContext);
     const router = useRouter();
     const [data, setData] = useState<Array<IEscola>>([{ id: 0, nome: '', inep: '', tipo: '' }]);
     const [isLoading, setIsLoading] = useState(false);
     const [messageOk, setMessageOk] = useState('');
     const [messageError, setMessageError] = useState('');
+    const [existsError, setExistsError] = useState('');
     const [inepClicked, setInepClicked] = useState(false);
     const [nomeClicked, setNomeClicked] = useState(false);
-    const [selectedInep, setSeletedInep] = useState<string>('');
+    const [selectedInep, setSeletedInep] = useState<string>();
     const [selectedNome, setSeletedNome] = useState<string>();
-    const [formErrorsLocalDeFuncionamento, setFormErrorsLocalDeFuncionamento] = useState({});
-    const [formErrorsAbastecimentoDeAgua, setFormErrorsAbastecimentoDeAgua] = useState({});
-    const [formErrorsFonteEnergiaEletrica, setFormErrorsFonteEnergiaEletrica] = useState({});
-    const [formErrorsEsgotamentoSanitario, setFormErrorsEsgotamentoSanitario] = useState({});
-    const [formErrorsDestinacaoDoLixo, setFormErrorsDestinacaoDoLixo] = useState({});
-    const [formErrorsTratamentoDoLixo, setFormErrorsTratamentoDoLixo] = useState({});
-    const [formErrorsDependenciasFisicas, setFormErrorsDependenciasFisicas] = useState({});
-    const [formErrorsRecursosDeAcessibilidade, setFormErrorsRecursosDeAcessibilidade] = useState({});
-    const [formErrorsEquipamentos, setFormErrorsEquipamentos] = useState({});
-    const [formErrorsQuantidadeEquipamentos, setFormErrorsQuantidadeEquipamentos] = useState({});
-    const [formErrorsAcessoInternet, setFormErrorsAcessoInternet] = useState({});
-    const [formErrorsEquipamentoAlunoInternet, setFormErrorsEquipamentoAlunoInternet] = useState({});
-    const [formErrorsRedeLocal, setFormErrorsRedeLocal] = useState({});
-    const [formErrorsTotalDeProfissionais, setFormErrorsTotalDeProfissionais] = useState({});
-    const [formErrorsInstrumentosEMateriais, setFormErrorsInstrumentosEMateriais] = useState({});
-    const [formErrorsLinguaMinistrada, setFormErrorsLinguaMinistrada] = useState({});
-    const [formErrorsReservaDeVagas, setFormErrorsReservarDeVagas] = useState({});
-    const [formErrorsOrgaosColegiados, setFormErrorsOrgaosColegiados] = useState({});
-    const [answerLocalDeFuncionamento, setAnswerLocalDeFuncionamento] = useState<ILocalDeFuncionamento>({ campo_3: null, campo_4: null, campo_5: null, campo_6: null, campo_7: null, campo_8: null, campo_9: null, campo_10: null, campo_11: '', campo_12: '', campo_13: '', campo_14: '', campo_15: '', campo_16: '' });
-    const [answerAbastecimentoDeAgua, setAnswerAbastecimentoDeAgua] = useState<IAbastecimentoDeAgua>({ campo_17: null, campo_18: null, campo_19: null, campo_20: null, campo_21: null, campo_22: 0 });
-    const [answerFonteEnergiaEletrica, setAnswerFonteEnergiaEletrica] = useState<IEnergiaEletrica>({ campo_23: null, campo_24: null, campo_25: null, campo_26: 0 });
-    const [answerEsgotamentoSanitario, setAnswerEsgotamentoSanitario] = useState<IEsgotamentoSanitario>({ campo_27: null, campo_28: null, campo_29: null, campo_30: 0 });
-    const [answerDestinacaoDoLixo, setAnswerDestinacaoDoLixo] = useState<IDestinacaoDoLixo>({ campo_31: null, campo_32: null, campo_33: null, campo_34: null, campo_35: null });
-    const [answerTratamentoDoLixo, setAnswerTratamentoDoLixo] = useState<ITratamentoDoLixo>({ campo_36: null, campo_37: null, campo_38: null, campo_39: 0 });
-    const [answerDependenciaFisica, setAnswerDependenciaFisica] = useState<IDependenciasFisicas>({ campo_40: null, campo_41: null, campo_42: null, campo_43: null, campo_44: null, campo_45: null, campo_46: null, campo_47: null, campo_48: null, campo_49: null, campo_50: null, campo_51: null, campo_52: null, campo_53: null, campo_54: null, campo_55: null, campo_56: null, campo_57: null, campo_58: null, campo_59: null, campo_60: null, campo_61: null, campo_62: null, campo_63: null, campo_64: null, campo_65: null, campo_66: null, campo_67: null, campo_68: null, campo_69: null, campo_70: null, campo_71: null, campo_72: null, campo_73: null, campo_74: null, campo_75: null, campo_76: null, campo_77: 0 });
-    const [answerRecursosDeAcessibilidade, setAnswerRecursosDeAcessibilidade] = useState<IRecursosDeAcessibilidade>({ campo_78: null, campo_79: null, campo_80: null, campo_81: null, campo_82: null, campo_83: null, campo_84: null, campo_85: null, campo_86: 0, campo_87: '', campo_88: '', campo_89: '', campo_90: '' });
-    const [answerEquipamentos, setAnswerEquipamentos] = useState<IEquipamentos>({ campo_91: null, campo_92: null, campo_93: null, campo_94: null, campo_95: null, campo_96: null, campo_97: 0 });
-    const [answerQuantidadeEquipamentos, setAnswerQuantidadeEquipamentos] = useState<IQuantidadeEquipamentos>({ campo_98: '', campo_99: '', campo_100: '', campo_101: '', campo_102: '', campo_103: '', campo_104: '', campo_105: '' });
-    const [answerAcessoInternet, setAnswerAcessoInternet] = useState<IAcessoInternet>({ campo_106: null, campo_107: null, campo_108: null, campo_109: null, campo_110: 0 });
-    const [answerEquipamentosAlunosInternet, setAnswerEquipamentosAlunosInternet] = useState<IEquipamentosAlunosInternet>({ campo_111: null, campo_112: null, campo_113: null });
-    const [answerRedeLocal, setAnswerRedeLocal] = useState<IRedeLocal>({ campo_114: null, campo_115: null, campo_116: 0 });
-    const [answerTotalProfissionais, setAnswerTotalProfissionais] = useState<ITotalProfissionais>({ campo_117: '', campo_118: '', campo_119: '', campo_120: '', campo_121: '', campo_122: '', campo_123: '', campo_124: '', campo_125: '', campo_126: '', campo_127: '', campo_128: '', campo_129: '', campo_130: '', campo_131: '', campo_132: '', campo_133: 0, campo_134: null });
-    const [answerInstrumentosEMateriais, setAnswerInstrumentosEMaterias] = useState<IInstrumentosEMateriais>({ campo_135: null, campo_136: null, campo_137: null, campo_138: null, campo_139: null, campo_140: null, campo_141: null, campo_142: null, campo_143: null, campo_144: null, campo_145: null, campo_146: null, campo_147: 0, campo_148: null });
-    const [answerLinguaMinistrada, setAnswerLinguaMinistrada] = useState<ILinguaMinistrada>({ campo_149: null, campo_150: null, campo_151: '', campo_152: '', campo_153: '' });
-    const [answerReservaDeVagas, setAnswerReservaDeVagas] = useState<IReservaDeVagas>({ campo_155: null, campo_156: null, campo_157: null, campo_158: null, campo_159: null, campo_160: 0, campo_161: null, campo_162: null, campo_163: null });
-    const [answerOrgaosColegiados, setAnswerOrgaosColegiados] = useState<IOrgaosColegiados>({ campo_164: null, campo_165: null, campo_166: null, campo_167: null, campo_168: null, campo_169: 0 });
     const [answerExameClassificatorio, setAnswerExameClassificatorio] = useState<number | null>(null);
     const [answerProjetoPedagogico, setAnswerProjetoPedagogico] = useState<number | null>(null);
     const limit: number = 10;
@@ -132,6 +98,19 @@ const AddEstruturaFisica = (props: IProps) => {
         }
     }
 
+    const verifyExistsFormByInep = async () => {
+        const res: any = await EstruturaFisicaEscolar.getEstruturaFisicaEscolarByInep(selectedInep || '');
+        if (res !== false) {
+            setExistsError(`Já existe formulário para essa escola, id: ${res.id}`);
+        }
+    }
+
+    useEffect(() => {
+        if (selectedInep != undefined) {
+            verifyExistsFormByInep();
+            setExistsError('');
+        }
+    }, [selectedInep])
 
     const searchDataByNome = async (nome: string) => {
         nome = nome.replace('  ', ' ');
@@ -150,107 +129,25 @@ const AddEstruturaFisica = (props: IProps) => {
         }
     }
 
-
-    const onLocalDeFuncionamentoChange = (answer: ILocalDeFuncionamento) => {
-        setAnswerLocalDeFuncionamento(answer);
-        setFormErrorsLocalDeFuncionamento({});
-        setFormErrorsRecursosDeAcessibilidade({});
-    }
-
-    const onAbastecimentoDeAguaChange = (answer: IAbastecimentoDeAgua) => {
-        setAnswerAbastecimentoDeAgua(answer);
-        setFormErrorsAbastecimentoDeAgua({});
-    }
-
-    const onFonteEnergiaEletricaChange = (answer: IEnergiaEletrica) => {
-        setAnswerFonteEnergiaEletrica(answer);
-        setFormErrorsFonteEnergiaEletrica({});
-    }
-
-    const onEsgotamentoSanitarioChange = (answer: IEsgotamentoSanitario) => {
-        setAnswerEsgotamentoSanitario(answer);
-        setFormErrorsEsgotamentoSanitario({});
-    }
-
-    const onDestinacaoDoLixo = (answer: IDestinacaoDoLixo) => {
-        setAnswerDestinacaoDoLixo(answer);
-        setFormErrorsDestinacaoDoLixo({});
-    }
-    const onTratamentoDoLixo = (answer: ITratamentoDoLixo) => {
-        setAnswerTratamentoDoLixo(answer);
-        setFormErrorsTratamentoDoLixo({});
-    }
-    const onDependenciasFisicas = (answer: IDependenciasFisicas) => {
-        setAnswerDependenciaFisica(answer);
-        setFormErrorsDependenciasFisicas({});
-    }
-
-    const onRecursosDeAcessibilidade = (answer: IRecursosDeAcessibilidade) => {
-        setAnswerRecursosDeAcessibilidade(answer);
-        setFormErrorsRecursosDeAcessibilidade({});
-    }
-
-    const onEquipamentos = (answer: IEquipamentos) => {
-        setAnswerEquipamentos(answer);
-        setFormErrorsEquipamentos({});
-    }
-
-    const onQuantidadeEquipamentos = (answer: IQuantidadeEquipamentos) => {
-        setAnswerQuantidadeEquipamentos(answer);
-        setFormErrorsQuantidadeEquipamentos({});
-    }
-
-    const onAcessoInternet = (answer: IAcessoInternet) => {
-        setAnswerAcessoInternet(answer);
-        setFormErrorsAcessoInternet({});
-        setFormErrorsEquipamentos({});
-    }
-
-    const onEquipamentosAlunosInternet = (answer: IEquipamentosAlunosInternet) => {
-        setAnswerEquipamentosAlunosInternet(answer);
-        setFormErrorsEquipamentoAlunoInternet({});
-    }
-
-    const onRedeLocal = (answer: IRedeLocal) => {
-        setAnswerRedeLocal(answer);
-        setFormErrorsRedeLocal({});
-    }
-
-    const onTotalDeProfissionais = (answer: ITotalProfissionais) => {
-        setAnswerTotalProfissionais(answer);
-        setFormErrorsTotalDeProfissionais({});
-    }
-
-    const onInstrumentosEMateriais = (answer: IInstrumentosEMateriais) => {
-        setAnswerInstrumentosEMaterias(answer);
-        setFormErrorsInstrumentosEMateriais({});
-    }
-
-    const onLinguaMinistrada = (answer: ILinguaMinistrada) => {
-        setAnswerLinguaMinistrada(answer);
-        setFormErrorsLinguaMinistrada({});
-    }
-
-
-    const onReservaDeVagas = (answer: IReservaDeVagas) => {
-        setAnswerReservaDeVagas(answer);
-        setFormErrorsReservarDeVagas({});
-    }
-
-    const onOrgaosColegiados = (answer: IOrgaosColegiados) => {
-        setAnswerOrgaosColegiados(answer);
-        setFormErrorsOrgaosColegiados({});
-    }
-
     const onSaveRascunho = async () => {
         const forms: IAllValues = {
-            ...answerLocalDeFuncionamento, ...answerAbastecimentoDeAgua, ...answerFonteEnergiaEletrica,
-            ...answerEsgotamentoSanitario, ...answerDestinacaoDoLixo, ...answerTratamentoDoLixo, ...answerDependenciaFisica,
-            ...answerRecursosDeAcessibilidade, ...answerEquipamentos, ...answerAcessoInternet, ...answerEquipamentosAlunosInternet,
-            ...answerQuantidadeEquipamentos, ...answerRedeLocal, ...answerTotalProfissionais, ...answerInstrumentosEMateriais,
-            ...answerLinguaMinistrada, ...answerReservaDeVagas, ...answerOrgaosColegiados, campo_154: answerExameClassificatorio,
+            ...context.answerLocalDeFuncionamento, ...context.answerAbstecimentoDeAgua, ...context.answerEnergiaEletrica,
+            ...context.answerEsgotamentoSanitario, ...context.answerDestinacaoDoLixo, ...context.answerTratamentoDoLixo, ...context.answerDependenciasFisicas,
+            ...context.answerRecursosDeAcessibilidade, ...context.answerEquipamentos, ...context.answerAcessoInternet, ...context.answerEquipamentosAlunosInternet,
+            ...context.answerQuantidadeDeEquipamentos, ...context.answerRedeLocal, ...context.answerTotalDeProfissionais, ...context.answerInstrumentosEMateriais,
+            ...context.answerLinguasMinistradas, ...context.answerReservaDeVagas, ...context.answerOrgaosColegiados, campo_154: answerExameClassificatorio,
             campo_170: answerProjetoPedagogico, inep_fk: selectedInep
         }
+        const res: any = await EstruturaFisicaEscolar.getEstruturaFisicaEscolarByInep(selectedInep || '');
+
+        if (res !== false) {
+            setMessageError('Já existe um formulário para essa escola!');
+            setTimeout(() => {
+                setMessageError('');
+            }, 3000);
+            return;
+        }
+
 
         if (!selectedInep) {
             setMessageError('Selecione uma escola antes de enviar o questionário!');
@@ -264,42 +161,52 @@ const AddEstruturaFisica = (props: IProps) => {
         const response = await EstruturaFisicaEscolar.insertEstruturaFisicaEscolar(forms);
         setIsLoading(false);
         if (response) {
-            setMessageOk('Cadastro realizado com sucesso!');
-            const time = setTimeout(() => {
-                setMessageOk('');
-                router.back();
-            }, 3000);
-            return clearTimeout(time);
+            const response = await Escola.updateTipoEscola('Rascunho', selectedInep);
+            if (response) {
+                setMessageOk('Rascunho salvo com sucesso!');
+                setTimeout(() => {
+                    setMessageOk('');
+                    context.limparContexto();
+                    router.push('/');
+                }, 3000);
+                return;
+            } else {
+                setMessageError('Ocorreu algum ao atualizar o status da escola, tente novamente!');
+                setTimeout(() => {
+                    setMessageError('');
+                }, 3000);
+                return;
+            }
         } else {
             setMessageError('Ocorreu algum erro ao inserir os dados, tente novamente!');
-            const time = setTimeout(() => {
+            setTimeout(() => {
                 setMessageError('');
             }, 3000);
-            return clearTimeout(time);
+            return;
         }
     }
 
 
     const onSave = async () => {
-        const res_1 = ValidateLocalDeFuncionamento.validate(answerLocalDeFuncionamento, selectedInep);
-        const res_2 = ValidateAbastecimentoDeAgua.validate(answerAbastecimentoDeAgua);
-        const res_3 = ValidateFonteEnergiaEletrica.validate(answerFonteEnergiaEletrica);
-        const res_4 = ValidateEsgotamentoSanitario.validate(answerEsgotamentoSanitario);
-        const res_5 = ValidateDestinacaoDoLixo.validate(answerDestinacaoDoLixo);
-        const res_6 = ValidateTratamentoDoLixo.validate(answerTratamentoDoLixo);
-        const res_7 = ValidateDependenciasFisicas.validate(answerDependenciaFisica);
-        const res_8 = ValidateRecursosDeAcessibilidade.validate(answerRecursosDeAcessibilidade, answerLocalDeFuncionamento);
-        const res_9 = ValidateEquipamentos.validate(answerEquipamentos);
-        const res_10 = ValidateAcessoInternet.validate(answerAcessoInternet);
-        const res_11 = ValidateEquipamentosAlunosInternet.validate(answerEquipamentosAlunosInternet, answerAcessoInternet);
-        const res_12 = ValidateQuantidadeEquipamentos.validate(answerQuantidadeEquipamentos, answerEquipamentosAlunosInternet);
-        const res_13 = ValidateRedeLocal.validate(answerRedeLocal);
-        const res_14 = ValidateTotalProfissionais.validate(answerTotalProfissionais);
-        const res_15 = ValidateInstrumentosEMateriais.validate(answerInstrumentosEMateriais);
-        const res_16 = ValidateLinguaMinistrada.validate(answerLinguaMinistrada, answerInstrumentosEMateriais);
-        const res_17 = ValidateReservaDeVagas.validate(answerReservaDeVagas, answerExameClassificatorio);
-        const res_18 = ValidateOrgaosColegiados.validate(answerOrgaosColegiados);
-        
+        const res_1 = ValidateLocalDeFuncionamento.validate(context.answerLocalDeFuncionamento, selectedInep || '');
+        const res_2 = ValidateAbastecimentoDeAgua.validate(context.answerAbstecimentoDeAgua);
+        const res_3 = ValidateFonteEnergiaEletrica.validate(context.answerEnergiaEletrica);
+        const res_4 = ValidateEsgotamentoSanitario.validate(context.answerEsgotamentoSanitario);
+        const res_5 = ValidateDestinacaoDoLixo.validate(context.answerDestinacaoDoLixo);
+        const res_6 = ValidateTratamentoDoLixo.validate(context.answerTratamentoDoLixo);
+        const res_7 = ValidateDependenciasFisicas.validate(context.answerDependenciasFisicas);
+        const res_8 = ValidateRecursosDeAcessibilidade.validate(context.answerRecursosDeAcessibilidade, context.answerLocalDeFuncionamento);
+        const res_9 = ValidateEquipamentos.validate(context.answerEquipamentos);
+        const res_10 = ValidateAcessoInternet.validate(context.answerAcessoInternet);
+        const res_11 = ValidateEquipamentosAlunosInternet.validate(context.answerEquipamentosAlunosInternet, context.answerAcessoInternet);
+        const res_12 = ValidateQuantidadeEquipamentos.validate(context.answerQuantidadeDeEquipamentos, context.answerEquipamentosAlunosInternet);
+        const res_13 = ValidateRedeLocal.validate(context.answerRedeLocal);
+        const res_14 = ValidateTotalProfissionais.validate(context.answerTotalDeProfissionais);
+        const res_15 = ValidateInstrumentosEMateriais.validate(context.answerInstrumentosEMateriais);
+        const res_16 = ValidateLinguaMinistrada.validate(context.answerLinguasMinistradas, context.answerInstrumentosEMateriais);
+        const res_17 = ValidateReservaDeVagas.validate(context.answerReservaDeVagas, answerExameClassificatorio);
+        const res_18 = ValidateOrgaosColegiados.validate(context.answerOrgaosColegiados);
+
         if (!selectedInep) {
             setMessageError('Selecione uma escola antes de enviar o questionário!');
             setTimeout(() => {
@@ -312,46 +219,47 @@ const AddEstruturaFisica = (props: IProps) => {
             res_9 || res_10 || res_11 || res_12 ||
             res_13 || res_14 || res_15 || res_16 ||
             res_17 || res_18) {
-            setFormErrorsLocalDeFuncionamento(res_1);
-            setFormErrorsAbastecimentoDeAgua(res_2);
-            setFormErrorsFonteEnergiaEletrica(res_3);
-            setFormErrorsEsgotamentoSanitario(res_4);
-            setFormErrorsDestinacaoDoLixo(res_5);
-            setFormErrorsTratamentoDoLixo(res_6);
-            setFormErrorsDependenciasFisicas(res_7);
-            setFormErrorsRecursosDeAcessibilidade(res_8);
-            setFormErrorsEquipamentos(res_9);
-            setFormErrorsAcessoInternet(res_10);
-            setFormErrorsEquipamentoAlunoInternet(res_11);
-            setFormErrorsQuantidadeEquipamentos(res_12);
-            setFormErrorsRedeLocal(res_13);
-            setFormErrorsTotalDeProfissionais(res_14);
-            setFormErrorsInstrumentosEMateriais(res_15);
-            setFormErrorsLinguaMinistrada(res_16);
-            setFormErrorsReservarDeVagas(res_17);
-            setFormErrorsOrgaosColegiados(res_18);
+            context.setFormErrorsLocalDeFuncionamento(res_1);
+            context.setFormErrorsAbastecimentoDeAgua(res_2);
+            context.setFormErrorsEnergiaEletrica(res_3);
+            context.setFormErrorsEsgotamentoSanitario(res_4);
+            context.setFormErrorsDestinacaoDoLixo(res_5);
+            context.setFormErrorsTratamentoDoLixo(res_6);
+            context.setFormErrorsDependenciasFisicas(res_7);
+            context.setFormErrorsRecursosDeAcessibilidade(res_8);
+            context.setFormErrorsEquipamentos(res_9);
+            context.setFormErrorsAcessoInternet(res_10);
+            context.setFormErrorsEquipamentosAlunosInternet(res_11);
+            context.setFormErrorsQuantidadeDeEquipamentos(res_12);
+            context.setFormErrorsRedeLocal(res_13);
+            context.setFormErrorsTotalDeProfissionais(res_14);
+            context.setFormErrorsInstrumentosEMateriais(res_15);
+            context.setFormErrorsLinguasMinistradas(res_16);
+            context.setFormErrorsReservaDeVagas(res_17);
+            context.setFormErrorsOrgaosColegiados(res_18);
             return;
         }
         const forms: IAllValues = {
-            ...answerLocalDeFuncionamento, ...answerAbastecimentoDeAgua, ...answerFonteEnergiaEletrica,
-            ...answerEsgotamentoSanitario, ...answerDestinacaoDoLixo, ...answerTratamentoDoLixo, ...answerDependenciaFisica,
-            ...answerRecursosDeAcessibilidade, ...answerEquipamentos, ...answerAcessoInternet, ...answerEquipamentosAlunosInternet,
-            ...answerQuantidadeEquipamentos, ...answerRedeLocal, ...answerTotalProfissionais, ...answerInstrumentosEMateriais,
-            ...answerLinguaMinistrada, ...answerReservaDeVagas, ...answerOrgaosColegiados, campo_154: answerExameClassificatorio,
+            ...context.answerLocalDeFuncionamento, ...context.answerAbstecimentoDeAgua, ...context.answerEnergiaEletrica,
+            ...context.answerEsgotamentoSanitario, ...context.answerDestinacaoDoLixo, ...context.answerTratamentoDoLixo, ...context.answerDependenciasFisicas,
+            ...context.answerRecursosDeAcessibilidade, ...context.answerEquipamentos, ...context.answerAcessoInternet, ...context.answerEquipamentosAlunosInternet,
+            ...context.answerQuantidadeDeEquipamentos, ...context.answerRedeLocal, ...context.answerTotalDeProfissionais, ...context.answerInstrumentosEMateriais,
+            ...context.answerLinguasMinistradas, ...context.answerReservaDeVagas, ...context.answerOrgaosColegiados, campo_154: answerExameClassificatorio,
             campo_170: answerProjetoPedagogico, inep_fk: selectedInep
         }
-        
+
         setIsLoading(true);
         const response = await EstruturaFisicaEscolar.insertEstruturaFisicaEscolar(forms);
         setIsLoading(false);
         if (response) {
-            const response = await Escola.updateTipoEscola('Rascunho', selectedInep);
+            const response = await Escola.updateTipoEscola('Final', selectedInep);
             if (response) {
                 setMessageOk('Cadastro realizado com sucesso!');
-                const time = setTimeout(() => {
+                setTimeout(() => {
                     setMessageOk('');
+                    router.push('/');
                 }, 3000);
-                return clearTimeout(time);
+                return;
             } else {
                 setMessageError('Ocorreu algum ao atualizar o status da escola, tente novamente!');
                 const time = setTimeout(() => {
@@ -371,6 +279,9 @@ const AddEstruturaFisica = (props: IProps) => {
     }
 
     useEffect(() => {
+        setSeletedInep('');
+        setSeletedNome('');
+        setExistsError('');
         initData();
     }, [])
 
@@ -395,7 +306,7 @@ const AddEstruturaFisica = (props: IProps) => {
                     <View style={styles.container}>
                         <View style={styles.header}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 20 }}>
-                                <TouchableOpacity onPress={() => router.back()}><Ionicons name='arrow-back-outline' size={40} color={COLORS.green} /></TouchableOpacity>
+                                <TouchableOpacity onPress={() => context.limparContexto()}><Ionicons name='arrow-back-outline' size={40} color={COLORS.green} /></TouchableOpacity>
                                 <Text style={{ fontSize: 20, fontWeight: 'bold', color: COLORS.green }}>Cadastrar Estrutura Física Escolar</Text>
                             </View>
                             <TouchableOpacity style={styles.btnSalvarRascunho} onPress={onSaveRascunho}><Text style={{ color: COLORS.green, fontWeight: 'bold' }}>Salvar Rascunho</Text></TouchableOpacity>
@@ -423,6 +334,7 @@ const AddEstruturaFisica = (props: IProps) => {
                                             })}
                                         </View> : null}
                                 </View>
+
                                 <View style={{ flexGrow: 10, maxWidth: '100%' }}>
                                     <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Nome da Escola</Text>
                                     <TouchableOpacity style={styles.dropdownSelector} onPress={() => { setNomeClicked(!nomeClicked); initData() }}>
@@ -443,33 +355,35 @@ const AddEstruturaFisica = (props: IProps) => {
                                         </View> : null}
                                 </View>
                             </View>
+                            {existsError ? <Text style={{ color: COLORS.red, marginTop: 10, zIndex: -1 }}>{existsError}</Text> : null}
+
                             <View style={{ marginTop: 20, zIndex: -1 }}>
                                 <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Nome do Anexo da Escola</Text>
                                 <TextInput style={styles.inputAnexo} />
                             </View>
                         </View>
                         <View style={{ marginTop: 40, zIndex: -1 }}>
-                            <LocalDeFuncionamento formErrors={formErrorsLocalDeFuncionamento} localDeFuncionamentoChange={(value) => onLocalDeFuncionamentoChange(value)} />
-                            <AbastecimentoDeAgua formErrors={formErrorsAbastecimentoDeAgua} abastecimentoDeAguaChange={(value) => onAbastecimentoDeAguaChange(value)} />
-                            <FonteEnergiaEletrica formErrors={formErrorsFonteEnergiaEletrica} fonteEnergiaEletricaChange={(value) => onFonteEnergiaEletricaChange(value)} />
-                            <EsgotamentoSanitario formErrors={formErrorsEsgotamentoSanitario} esgotamentoSanitarioChange={(value) => onEsgotamentoSanitarioChange(value)} />
-                            <DestinacaoDoLixo formErrors={formErrorsDestinacaoDoLixo} destinacaoDoLixo={(value) => onDestinacaoDoLixo(value)} />
-                            <TratamentoDoLixo formErrors={formErrorsTratamentoDoLixo} tratamentoDoLixo={(value) => onTratamentoDoLixo(value)} />
-                            <DependenciasFisicas formErrors={formErrorsDependenciasFisicas} dependenciasFisicas={(value) => onDependenciasFisicas(value)} />
-                            <RecursosDeAcessibilidade formErrors={formErrorsRecursosDeAcessibilidade} recursosDeAcessibilidade={(value) => onRecursosDeAcessibilidade(value)} answerLocalDeFuncionamento={answerLocalDeFuncionamento} />
-                            <Equipamentos formErrors={formErrorsEquipamentos} equipamentos={(value) => onEquipamentos(value)} />
-                            <AcessoInternet formErrors={formErrorsAcessoInternet} acessoInternet={(value) => onAcessoInternet(value)} />
-                            <EquipamentosAlunosInternet formErrors={formErrorsEquipamentoAlunoInternet} answerAcessoInternet={answerAcessoInternet} answerRedeLocal={answerRedeLocal} equipamentosAlunosInternet={(value) => onEquipamentosAlunosInternet(value)} />
-                            <QuantidadeDeEquipamentos formErrors={formErrorsQuantidadeEquipamentos} quantidadeDeEquipamentos={(value) => onQuantidadeEquipamentos(value)} answerEquipamentosAlunosInternet={answerEquipamentosAlunosInternet} />
-                            <RedeLocal formErrors={formErrorsRedeLocal} answerEquipamentos={answerEquipamentos} answerQuantidadeEquipamentos={answerQuantidadeEquipamentos} redeLocal={(value) => onRedeLocal(value)} />
-                            <TotalDeProfissionais formErrors={formErrorsTotalDeProfissionais} totalDeProfissionais={(value) => onTotalDeProfissionais(value)} />
-                            <InstrumentosEMateriais formErrors={formErrorsInstrumentosEMateriais} instrumentosEMateriais={(value) => onInstrumentosEMateriais(value)} />
-                            <LinguaMinistrada formErrors={formErrorsLinguaMinistrada} linguaMinistrada={(value) => onLinguaMinistrada(value)} answerInstrumentosEMateriais={answerInstrumentosEMateriais} />
+                            <LocalDeFuncionamento context={context.answerLocalDeFuncionamento} formErrors={context?.formErrorsLocalDeFuncionamento} localDeFuncionamentoChange={(value) => context?.onLocalDeFuncionamentoChange(value)} />
+                            <AbastecimentoDeAgua formErrors={context.formErrorsAbastecimentoDeAgua} abastecimentoDeAguaChange={(value) => context.onAbastecimentoDeAguaChange(value)} />
+                            <FonteEnergiaEletrica formErrors={context.formErrorsEnergiaEletrica} fonteEnergiaEletricaChange={(value) => context.onEnergiaEletricaChange(value)} />
+                            <EsgotamentoSanitario formErrors={context.formErrorsEsgotamentoSanitario} esgotamentoSanitarioChange={(value) => context.onEsgotamentoSanitarioChange(value)} />
+                            <DestinacaoDoLixo formErrors={context.formErrorsDestinacaoDoLixo} destinacaoDoLixo={(value) => context.onDestinacaoDoLixoChange(value)} />
+                            <TratamentoDoLixo formErrors={context.formErrorsTratamentoDoLixo} tratamentoDoLixo={(value) => context.onTratamentoDoLixoChange(value)} />
+                            <DependenciasFisicas formErrors={context.formErrorsDependenciasFisicas} dependenciasFisicas={(value) => context.onDependenciasFisicasChange(value)} />
+                            <RecursosDeAcessibilidade formErrors={context.formErrorsRecursosDeAcessibilidade} recursosDeAcessibilidade={(value) => context.onRecursosDeAcessibilidadeChange(value)} answerLocalDeFuncionamento={context.answerLocalDeFuncionamento} />
+                            <Equipamentos formErrors={context.formErrorsEquipamentos} equipamentos={(value) => context.onEquipamentosChange(value)} />
+                            <AcessoInternet formErrors={context.formErrorsAcessoInternet} acessoInternet={(value) => context.onAcessoInternetChange(value)} />
+                            <EquipamentosAlunosInternet formErrors={context.formErrorsEquipamentosAlunosInternet} answerAcessoInternet={context.answerAcessoInternet} answerRedeLocal={context.answerRedeLocal} equipamentosAlunosInternet={(value) => context.onEquipamentosAlunosInternetChange(value)} />
+                            <QuantidadeDeEquipamentos formErrors={context.formErrorsQuantidadeDeEquipamentos} quantidadeDeEquipamentos={(value) => context.onQuantidadeDeEquipamentosChange(value)} answerEquipamentosAlunosInternet={context.answerEquipamentosAlunosInternet} />
+                            <RedeLocal formErrors={context.formErrorsRedeLocal} answerEquipamentos={context.answerEquipamentos} answerQuantidadeEquipamentos={context.answerQuantidadeDeEquipamentos} redeLocal={(value) => context.onRedeLocalChange(value)} />
+                            <TotalDeProfissionais formErrors={context.formErrorsTotalDeProfissionais} totalDeProfissionais={(value) => context.onTotalDeProfissionaisChange(value)} />
+                            <InstrumentosEMateriais formErrors={context.formErrorsInstrumentosEMateriais} instrumentosEMateriais={(value) => context.onInstrumentosEMateriaisChange(value)} />
+                            <LinguaMinistrada formErrors={context.formErrorsLinguasMinistradas} linguaMinistrada={(value) => context.onLinguasMinistradasChange(value)} answerInstrumentosEMateriais={context.answerInstrumentosEMateriais} />
                             <View style={{ marginBottom: 25 }}>
                                 <RadioGroup options={[1, 0]} value={answerExameClassificatorio} textOption={["SIM", "NÃO"]} color={COLORS.green} fontWeight='bold' question='A escola faz exame de seleção para ingresso de seus aluno(a)s (avaliação por prova e /ou analise curricular)*' onSelect={(option) => setAnswerExameClassificatorio(option)} />
                             </View>
-                            <ReservaDeVagas formErrors={formErrorsReservaDeVagas} reservaDeVagas={(value) => onReservaDeVagas(value)} exameClassificatorio={answerExameClassificatorio} />
-                            <OrgaosColegiados formErrors={formErrorsOrgaosColegiados} orgaosColegiados={(value) => onOrgaosColegiados(value)} />
+                            <ReservaDeVagas formErrors={context.formErrorsReservaDeVagas} reservaDeVagas={(value) => context.onReservaDeVagasChange(value)} exameClassificatorio={answerExameClassificatorio} />
+                            <OrgaosColegiados formErrors={context.formErrorsOrgaosColegiados} orgaosColegiados={(value) => context.onOrgaosColegiadosChange(value)} />
                             <View style={{ marginBottom: 25 }}>
                                 <RadioGroup options={[1, 0]} value={answerProjetoPedagogico} textOption={["SIM", "NÃO"]} color={COLORS.green} fontWeight='bold' question='O projeto político pedagógico ou a proposta pedagógica da escola (conforme art. 12 da LDB) foi atualizada nos últimos 12 meses até a data de referência*' onSelect={(option) => setAnswerProjetoPedagogico(option)} />
                             </View>

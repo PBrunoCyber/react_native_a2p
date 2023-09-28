@@ -9,7 +9,7 @@ import { COLORS } from '../constants/theme'
 import { IEscola } from '../types/Escola';
 
 interface IProps {
-    data: Array<IEscola>,
+    data: Array<IEscola> | undefined,
 }
 
 const Table = (props: IProps) => {
@@ -28,30 +28,32 @@ const Table = (props: IProps) => {
                     <Text style={{ width: 100, textAlign: 'left', fontSize: 15, fontWeight: 'bold' }}>Ações</Text>
                 </View>
                 <View style={styles.tableContainerContent}>
-                    {props.data.map((item, index) => {
-                        return (
-                            <View key={index} style={styles.tableContent}>
-                                <BouncyCheckbox
-                                    size={25}
-                                    fillColor={COLORS.green}
-                                    unfillColor="#FFFFFF"
-                                    style={{ width: 25, }}
-                                    isChecked={isChecked}
-                                    iconStyle={{ borderColor: COLORS.green, borderRadius: 5 }}
-                                    innerIconStyle={{ borderWidth: 1, borderRadius: 5 }}
-                                    onPress={(isChecked: boolean) => { setIsChecked(isChecked) }} />
-                                <Text style={{ width: 100, fontSize: 15, textAlign: 'center' }}>{item.id}</Text>
-                                <Text style={{ width: 100, fontSize: 15, textAlign: 'left' }}>{item.inep}</Text>
-                                <Text style={{ width: 350, fontSize: 15, textAlign: 'left' }}>{item.nome}</Text>
-                                <Text style={{ width: 120, fontSize: 15, textAlign: 'left' }}>{item.tipo}</Text>
-                                <View style={{ flexDirection: 'row', width: 50, gap: 10 }}>
-                                    <TouchableOpacity style={styles.addBtn}><Ionicons color={COLORS.white} name='eye-outline' size={30} /></TouchableOpacity>
-                                    <TouchableOpacity style={styles.addBtn}><Ionicons color={COLORS.white} name='pencil-outline' size={30} /></TouchableOpacity>
-                                    <TouchableOpacity style={styles.addBtn}><Ionicons color={COLORS.white} name='trash-outline' size={30} /></TouchableOpacity>
+                    {
+                        (props.data && props.data?.length > 0) &&
+                        props.data.map((item, index) => {
+                            return (
+                                <View key={index} style={styles.tableContent}>
+                                    <BouncyCheckbox
+                                        size={25}
+                                        fillColor={COLORS.green}
+                                        unfillColor="#FFFFFF"
+                                        style={{ width: 25, }}
+                                        isChecked={isChecked}
+                                        iconStyle={{ borderColor: COLORS.green, borderRadius: 5 }}
+                                        innerIconStyle={{ borderWidth: 1, borderRadius: 5 }}
+                                        onPress={(isChecked: boolean) => { setIsChecked(isChecked) }} />
+                                    <Text style={{ width: 100, fontSize: 15, textAlign: 'center' }}>{item.id}</Text>
+                                    <Text style={{ width: 100, fontSize: 15, textAlign: 'left' }}>{item.inep}</Text>
+                                    <Text style={{ width: 350, fontSize: 15, textAlign: 'left' }}>{item.nome}</Text>
+                                    <Text style={{ width: 120, fontSize: 15, textAlign: 'left' }}>{item.tipo}</Text>
+                                    <View style={{ flexDirection: 'row', width: 50, gap: 10 }}>
+                                        <TouchableOpacity style={styles.addBtn}><Ionicons color={COLORS.white} name='eye-outline' size={30} /></TouchableOpacity>
+                                        <TouchableOpacity style={styles.addBtn}><Ionicons color={COLORS.white} name='pencil-outline' size={30} /></TouchableOpacity>
+                                        <TouchableOpacity style={styles.addBtn}><Ionicons color={COLORS.white} name='trash-outline' size={30} /></TouchableOpacity>
+                                    </View>
                                 </View>
-                            </View>
-                        )
-                    })}
+                            )
+                        })}
                 </View>
             </View>
         </ScrollView>
