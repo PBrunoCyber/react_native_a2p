@@ -170,6 +170,23 @@ const getByInep = (inep: string) => {
     });
 }
 
+const getNomeByInep = (inep: string) => {
+    return new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql("SELECT * FROM escola WHERE inep = ?;",
+                [inep],
+                (_, { rows }) => {
+                    if (rows.length > 0) {
+                        resolve(rows.item(0).nome);
+                    } else {
+                        resolve(false)
+                    }
+                },
+                (_, error) => { console.log(error); resolve(false); return false; });
+        });
+    });
+}
+
 const getAll = (limit: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
@@ -227,4 +244,4 @@ const getNumberOfPagesWithInep = (inep: string, limit: number) => {
 }
 
 
-export default { createTBEscola, existsEscola, dropTBEscola, insertEscola, getEscolaByInep, getEscolaByNome, getNumberOfPages, getWithPagination, getNumberOfPagesWithNome, getNumberOfPagesWithInep, getAll, updateTipoEscola, getByInep };
+export default { createTBEscola, existsEscola, dropTBEscola, insertEscola, getEscolaByInep, getEscolaByNome, getNumberOfPages, getWithPagination, getNumberOfPagesWithNome, getNumberOfPagesWithInep, getAll, updateTipoEscola, getByInep, getNomeByInep };

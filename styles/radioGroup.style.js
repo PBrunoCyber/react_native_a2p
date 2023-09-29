@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         borderColor: COLORS.green,
         borderRadius: 50,
         padding: 0,
-        width: 30, 
+        width: 30,
         height: 30,
         alignItems: 'center',
         justifyContent: 'center'
@@ -51,7 +51,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 100,
     },
-
+    selectedDisabled: {
+        backgroundColor: COLORS.gray,
+    }
 });
 
 export default styles;

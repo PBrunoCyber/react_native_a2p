@@ -166,7 +166,7 @@ const AddEstruturaFisica = (props: IProps) => {
                 setTimeout(() => {
                     setMessageOk('');
                     router.push('/');
-                }, 1000);
+                }, 3000);
                 return;
             } else {
                 setMessageError('Ocorreu algum ao atualizar o status da escola, tente novamente!');
@@ -371,26 +371,26 @@ const AddEstruturaFisica = (props: IProps) => {
                         </View>
                         <View style={{ marginTop: 40, zIndex: -1 }}>
                             <LocalDeFuncionamento formErrors={context?.formErrorsLocalDeFuncionamento} localDeFuncionamentoChange={(value) => context?.onLocalDeFuncionamentoChange(value)} />
-                            <AbastecimentoDeAgua context={context.answerAbstecimentoDeAgua} formErrors={context.formErrorsAbastecimentoDeAgua} abastecimentoDeAguaChange={(value) => context.onAbastecimentoDeAguaChange(value)} />
-                            <FonteEnergiaEletrica context={context.answerEnergiaEletrica} formErrors={context.formErrorsEnergiaEletrica} fonteEnergiaEletricaChange={(value) => context.onEnergiaEletricaChange(value)} />
-                            <EsgotamentoSanitario context={context.answerEsgotamentoSanitario} formErrors={context.formErrorsEsgotamentoSanitario} esgotamentoSanitarioChange={(value) => context.onEsgotamentoSanitarioChange(value)} />
-                            <DestinacaoDoLixo context={context.answerDestinacaoDoLixo} formErrors={context.formErrorsDestinacaoDoLixo} destinacaoDoLixo={(value) => context.onDestinacaoDoLixoChange(value)} />
-                            <TratamentoDoLixo context={context.answerTratamentoDoLixo} formErrors={context.formErrorsTratamentoDoLixo} tratamentoDoLixo={(value) => context.onTratamentoDoLixoChange(value)} />
-                            <DependenciasFisicas context={context.answerDependenciasFisicas} formErrors={context.formErrorsDependenciasFisicas} dependenciasFisicas={(value) => context.onDependenciasFisicasChange(value)} />
-                            <RecursosDeAcessibilidade context={context.answerRecursosDeAcessibilidade} formErrors={context.formErrorsRecursosDeAcessibilidade} recursosDeAcessibilidade={(value) => context.onRecursosDeAcessibilidadeChange(value)} answerLocalDeFuncionamento={context.answerLocalDeFuncionamento} />
-                            <Equipamentos context={context.answerEquipamentos} formErrors={context.formErrorsEquipamentos} equipamentos={(value) => context.onEquipamentosChange(value)} />
-                            <AcessoInternet context={context.answerAcessoInternet} formErrors={context.formErrorsAcessoInternet} acessoInternet={(value) => context.onAcessoInternetChange(value)} />
-                            <EquipamentosAlunosInternet context={context.answerEquipamentosAlunosInternet} formErrors={context.formErrorsEquipamentosAlunosInternet} answerAcessoInternet={context.answerAcessoInternet} answerRedeLocal={context.answerRedeLocal} equipamentosAlunosInternet={(value) => context.onEquipamentosAlunosInternetChange(value)} />
-                            <QuantidadeDeEquipamentos context={context.answerQuantidadeDeEquipamentos} formErrors={context.formErrorsQuantidadeDeEquipamentos} quantidadeDeEquipamentos={(value) => context.onQuantidadeDeEquipamentosChange(value)} answerEquipamentosAlunosInternet={context.answerEquipamentosAlunosInternet} />
-                            <RedeLocal context={context.answerRedeLocal} formErrors={context.formErrorsRedeLocal} answerEquipamentos={context.answerEquipamentos} answerQuantidadeEquipamentos={context.answerQuantidadeDeEquipamentos} redeLocal={(value) => context.onRedeLocalChange(value)} />
-                            <TotalDeProfissionais context={context.answerTotalDeProfissionais} formErrors={context.formErrorsTotalDeProfissionais} totalDeProfissionais={(value) => context.onTotalDeProfissionaisChange(value)} />
-                            <InstrumentosEMateriais context={context.answerInstrumentosEMateriais} formErrors={context.formErrorsInstrumentosEMateriais} instrumentosEMateriais={(value) => context.onInstrumentosEMateriaisChange(value)} />
-                            <LinguaMinistrada context={context.answerLinguasMinistradas} formErrors={context.formErrorsLinguasMinistradas} linguaMinistrada={(value) => context.onLinguasMinistradasChange(value)} answerInstrumentosEMateriais={context.answerInstrumentosEMateriais} />
+                            <AbastecimentoDeAgua formErrors={context.formErrorsAbastecimentoDeAgua} abastecimentoDeAguaChange={(value) => context.onAbastecimentoDeAguaChange(value)} />
+                            <FonteEnergiaEletrica formErrors={context.formErrorsEnergiaEletrica} fonteEnergiaEletricaChange={(value) => context.onEnergiaEletricaChange(value)} />
+                            <EsgotamentoSanitario formErrors={context.formErrorsEsgotamentoSanitario} esgotamentoSanitarioChange={(value) => context.onEsgotamentoSanitarioChange(value)} />
+                            <DestinacaoDoLixo formErrors={context.formErrorsDestinacaoDoLixo} destinacaoDoLixo={(value) => context.onDestinacaoDoLixoChange(value)} />
+                            <TratamentoDoLixo formErrors={context.formErrorsTratamentoDoLixo} tratamentoDoLixo={(value) => context.onTratamentoDoLixoChange(value)} />
+                            <DependenciasFisicas formErrors={context.formErrorsDependenciasFisicas} dependenciasFisicas={(value) => context.onDependenciasFisicasChange(value)} />
+                            <RecursosDeAcessibilidade formErrors={context.formErrorsRecursosDeAcessibilidade} recursosDeAcessibilidade={(value) => context.onRecursosDeAcessibilidadeChange(value)} answerLocalDeFuncionamento={context.answerLocalDeFuncionamento} />
+                            <Equipamentos formErrors={context.formErrorsEquipamentos} equipamentos={(value) => context.onEquipamentosChange(value)} />
+                            <AcessoInternet formErrors={context.formErrorsAcessoInternet} acessoInternet={(value) => context.onAcessoInternetChange(value)} />
+                            <EquipamentosAlunosInternet formErrors={context.formErrorsEquipamentosAlunosInternet} answerAcessoInternet={context.answerAcessoInternet} answerRedeLocal={context.answerRedeLocal} equipamentosAlunosInternet={(value) => context.onEquipamentosAlunosInternetChange(value)} />
+                            <QuantidadeDeEquipamentos formErrors={context.formErrorsQuantidadeDeEquipamentos} quantidadeDeEquipamentos={(value) => context.onQuantidadeDeEquipamentosChange(value)} answerEquipamentosAlunosInternet={context.answerEquipamentosAlunosInternet} />
+                            <RedeLocal formErrors={context.formErrorsRedeLocal} answerEquipamentos={context.answerEquipamentos} answerQuantidadeEquipamentos={context.answerQuantidadeDeEquipamentos} redeLocal={(value) => context.onRedeLocalChange(value)} />
+                            <TotalDeProfissionais formErrors={context.formErrorsTotalDeProfissionais} totalDeProfissionais={(value) => context.onTotalDeProfissionaisChange(value)} />
+                            <InstrumentosEMateriais formErrors={context.formErrorsInstrumentosEMateriais} instrumentosEMateriais={(value) => context.onInstrumentosEMateriaisChange(value)} />
+                            <LinguaMinistrada formErrors={context.formErrorsLinguasMinistradas} linguaMinistrada={(value) => context.onLinguasMinistradasChange(value)} answerInstrumentosEMateriais={context.answerInstrumentosEMateriais} />
                             <View style={{ marginBottom: 25 }}>
                                 <RadioGroup options={[1, 0]} value={answerExameClassificatorio} textOption={["SIM", "NÃO"]} color={COLORS.green} fontWeight='bold' question='A escola faz exame de seleção para ingresso de seus aluno(a)s (avaliação por prova e /ou analise curricular)*' onSelect={(option) => setAnswerExameClassificatorio(option)} />
                             </View>
-                            <ReservaDeVagas context={context.answerReservaDeVagas} formErrors={context.formErrorsReservaDeVagas} reservaDeVagas={(value) => context.onReservaDeVagasChange(value)} exameClassificatorio={answerExameClassificatorio} />
-                            <OrgaosColegiados context={context.answerOrgaosColegiados} formErrors={context.formErrorsOrgaosColegiados} orgaosColegiados={(value) => context.onOrgaosColegiadosChange(value)} />
+                            <ReservaDeVagas formErrors={context.formErrorsReservaDeVagas} reservaDeVagas={(value) => context.onReservaDeVagasChange(value)} exameClassificatorio={answerExameClassificatorio} />
+                            <OrgaosColegiados formErrors={context.formErrorsOrgaosColegiados} orgaosColegiados={(value) => context.onOrgaosColegiadosChange(value)} />
                             <View style={{ marginBottom: 25 }}>
                                 <RadioGroup options={[1, 0]} value={answerProjetoPedagogico} textOption={["SIM", "NÃO"]} color={COLORS.green} fontWeight='bold' question='O projeto político pedagógico ou a proposta pedagógica da escola (conforme art. 12 da LDB) foi atualizada nos últimos 12 meses até a data de referência*' onSelect={(option) => setAnswerProjetoPedagogico(option)} />
                             </View>

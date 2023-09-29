@@ -12,18 +12,19 @@ import { IDestinacaoDoLixo } from '../../types/EstruturaFisicaEscolar';
 import { useFocusEffect } from 'expo-router';
 
 interface IProps {
-    destinacaoDoLixo: (value: IDestinacaoDoLixo) => void,
-    formErrors: any,
-    context: IDestinacaoDoLixo
+    destinacaoDoLixo?: (value: IDestinacaoDoLixo) => void,
+    formErrors?: any,
+    data?: IDestinacaoDoLixo
 }
 
-const DestinacaoDoLixo = ({ destinacaoDoLixo, formErrors, context }: IProps) => {
+const DestinacaoDoLixo = ({ destinacaoDoLixo, formErrors, data }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IDestinacaoDoLixo>(context);
+    const [answer, setAnswers] = useState<IDestinacaoDoLixo>(data || { campo_31: null, campo_32: null, campo_33: null, campo_34: null, campo_35: null });
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
-        destinacaoDoLixo(answer);
+        destinacaoDoLixo &&
+            destinacaoDoLixo(answer);
         for (const key in answer) {
             if (answer[key as keyof IDestinacaoDoLixo]) {
                 setIsClicked(true);
@@ -33,7 +34,7 @@ const DestinacaoDoLixo = ({ destinacaoDoLixo, formErrors, context }: IProps) => 
 
     useFocusEffect(
         useCallback(() => {
-            setAnswers({ campo_31: null, campo_32: null, campo_33: null, campo_34: null, campo_35: null });
+            setAnswers(data || { campo_31: null, campo_32: null, campo_33: null, campo_34: null, campo_35: null });
             setIsClicked(false);
         }, [])
     )
@@ -55,25 +56,25 @@ const DestinacaoDoLixo = ({ destinacaoDoLixo, formErrors, context }: IProps) => 
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%', color: COLORS.green, fontWeight: 'bold' } : { width: '80%', color: COLORS.black }}>V - DESTINAÇÃO DO LIXO</Text>
-                    {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
+                    <Text style={isClicked || formErrors && Object.keys(formErrors).length > 0 ? { width: '80%', color: COLORS.green, fontWeight: 'bold' } : { width: '80%', color: COLORS.black }}>V - DESTINAÇÃO DO LIXO</Text>
+                    {isClicked || formErrors && Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>
-                {isClicked === true || Object.keys(formErrors).length > 0 ? <View style={{ borderBottomWidth: 2, borderColor: COLORS.green, marginTop: 10 }} /> : null}
+                {isClicked === true || formErrors && Object.keys(formErrors).length > 0 ? <View style={{ borderBottomWidth: 2, borderColor: COLORS.green, marginTop: 10 }} /> : null}
             </TouchableOpacity>
-            {isClicked === true || Object.keys(formErrors).length > 0 ?
+            {isClicked === true || formErrors && Object.keys(formErrors).length > 0 ?
                 <View style={styles.formContainer}>
-                    {formErrors.destinacaoDoLixo && <Text style={styles.messageError}>{formErrors.destinacaoDoLixo}</Text>}
-                    <RadioGroup options={[1, 0]} value={answer.campo_31} textOption={textOption} fontWeight='bold' question='1 - Serviço de Coleta*' onSelect={(option) => handleOptionChange('campo_31', option)} />
-                    {formErrors.campo_31 && <Text style={styles.messageError}>{formErrors.campo_31}</Text>}
-                    <RadioGroup options={[1, 0]} value={answer.campo_32} textOption={textOption} fontWeight='bold' question='2 - Queima*' onSelect={(option) => handleOptionChange('campo_32', option)} />
-                    {formErrors.campo_32 && <Text style={styles.messageError}>{formErrors.campo_32}</Text>}
-                    <RadioGroup options={[1, 0]} value={answer.campo_33} textOption={textOption} fontWeight='bold' question='3 - Enterra*' onSelect={(option) => handleOptionChange('campo_33', option)} />
-                    {formErrors.campo_33 && <Text style={styles.messageError}>{formErrors.campo_33}</Text>}
-                    <RadioGroup options={[1, 0]} value={answer.campo_34} textOption={textOption} fontWeight='bold' question='4 - Leva a uma destinação final licenciada pelo poder público*' onSelect={(option) => handleOptionChange('campo_34', option)} />
-                    {formErrors.campo_34 && <Text style={styles.messageError}>{formErrors.campo_34}</Text>}
-                    <RadioGroup options={[1, 0]} value={answer.campo_35} textOption={textOption} fontWeight='bold' question='5 - Descarta em outra área*' onSelect={(option) => handleOptionChange('campo_35', option)} />
-                    {formErrors.campo_35 && <Text style={styles.messageError}>{formErrors.campo_35}</Text>}
+                    {formErrors?.destinacaoDoLixo && <Text style={styles.messageError}>{formErrors?.destinacaoDoLixo}</Text>}
+                    <RadioGroup options={[1, 0]} disable={data ? true : false} marked={data ? true : false} selected={data?.campo_31} value={answer.campo_31} textOption={textOption} fontWeight='bold' question='1 - Serviço de Coleta*' onSelect={(option) => handleOptionChange('campo_31', option)} />
+                    {formErrors?.campo_31 && <Text style={styles.messageError}>{formErrors?.campo_31}</Text>}
+                    <RadioGroup options={[1, 0]} disable={data ? true : false} marked={data ? true : false} selected={data?.campo_32} value={answer.campo_32} textOption={textOption} fontWeight='bold' question='2 - Queima*' onSelect={(option) => handleOptionChange('campo_32', option)} />
+                    {formErrors?.campo_32 && <Text style={styles.messageError}>{formErrors?.campo_32}</Text>}
+                    <RadioGroup options={[1, 0]} disable={data ? true : false} marked={data ? true : false} selected={data?.campo_33} value={answer.campo_33} textOption={textOption} fontWeight='bold' question='3 - Enterra*' onSelect={(option) => handleOptionChange('campo_33', option)} />
+                    {formErrors?.campo_33 && <Text style={styles.messageError}>{formErrors?.campo_33}</Text>}
+                    <RadioGroup options={[1, 0]} disable={data ? true : false} marked={data ? true : false} selected={data?.campo_34} value={answer.campo_34} textOption={textOption} fontWeight='bold' question='4 - Leva a uma destinação final licenciada pelo poder público*' onSelect={(option) => handleOptionChange('campo_34', option)} />
+                    {formErrors?.campo_34 && <Text style={styles.messageError}>{formErrors?.campo_34}</Text>}
+                    <RadioGroup options={[1, 0]} disable={data ? true : false} marked={data ? true : false} selected={data?.campo_35} value={answer.campo_35} textOption={textOption} fontWeight='bold' question='5 - Descarta em outra área*' onSelect={(option) => handleOptionChange('campo_35', option)} />
+                    {formErrors?.campo_35 && <Text style={styles.messageError}>{formErrors?.campo_35}</Text>}
                 </View>
                 : null
             }

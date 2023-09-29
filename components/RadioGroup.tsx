@@ -13,9 +13,11 @@ interface IRadioGroup {
     fontWeight: 'bold' | 'normal',
     color?: string,
     onSelect: (option: number | null) => void
+    marked?: boolean
+    selected?: number | null,
 }
 
-const RadioGroup = ({ options, question, value, textOption, disable, fontWeight, color, onSelect }: IRadioGroup) => {
+const RadioGroup = ({ options, question, value, textOption, disable, fontWeight, marked, selected, color, onSelect }: IRadioGroup) => {
 
     const handleOptionSelect = (option: number | null) => {
         onSelect(option);
@@ -34,16 +36,19 @@ const RadioGroup = ({ options, question, value, textOption, disable, fontWeight,
                                     value === option && styles.selected,
                                 ]}
                                 onPress={() => handleOptionSelect(option)}
-                            >   
-                                {value === option && <Ionicons color={COLORS.white} name='checkmark-outline' size={20} style={{alignSelf: 'center'}} />}
+                            >
+                                {value === option && <Ionicons color={COLORS.white} name='checkmark-outline' size={20} style={{ alignSelf: 'center' }} />}
                             </TouchableOpacity>
                             :
                             <TouchableOpacity
                                 style={[
                                     styles.radioButtonDisabled,
+                                    (marked && selected === option) && styles.selectedDisabled
                                 ]}
                                 disabled={true}
-                            />
+                            >
+                                {(marked && selected === option) && <Ionicons color={COLORS.white} name='checkmark-outline' size={20} style={{ alignSelf: 'center' }} />}
+                            </TouchableOpacity>
                         }
 
                         <Text style={{ fontWeight: fontWeight }}>{textOption[index]}</Text>

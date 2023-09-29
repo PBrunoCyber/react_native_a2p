@@ -12,33 +12,33 @@ import { IAcessoInternet, IEquipamentosAlunosInternet, IRedeLocal } from '../../
 import { useFocusEffect } from 'expo-router';
 
 interface IProps {
-    equipamentosAlunosInternet: (value: IEquipamentosAlunosInternet) => void,
-    answerAcessoInternet: IAcessoInternet | undefined,
-    answerRedeLocal: IRedeLocal | undefined,
-    formErrors: any,
-    context: IEquipamentosAlunosInternet
+    equipamentosAlunosInternet?: (value: IEquipamentosAlunosInternet) => void,
+    answerAcessoInternet?: IAcessoInternet | undefined,
+    answerRedeLocal?: IRedeLocal | undefined,
+    formErrors?: any,
+    data: IEquipamentosAlunosInternet
 }
 
 
-const EquipamentosAlunosInternet = ({ equipamentosAlunosInternet, answerAcessoInternet, answerRedeLocal, formErrors, context }: IProps) => {
+const EquipamentosAlunosInternet = ({ equipamentosAlunosInternet, answerAcessoInternet, data, answerRedeLocal, formErrors }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IEquipamentosAlunosInternet>(context);
+    const [answer, setAnswers] = useState<IEquipamentosAlunosInternet>(data || { campo_111: null, campo_112: null, campo_113: null });
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
-        equipamentosAlunosInternet(answer);
+        equipamentosAlunosInternet &&
+            equipamentosAlunosInternet(answer);
         for (const key in answer) {
             if (answer[key as keyof IEquipamentosAlunosInternet]) {
                 setIsClicked(true);
             }
         }
-        if (answer === context) setIsClicked(false);
     }, [answer])
 
 
     useFocusEffect(
         useCallback(() => {
-            setAnswers({ campo_111: null, campo_112: null, campo_113: null });
+            setAnswers(data || { campo_111: null, campo_112: null, campo_113: null });
             setIsClicked(false);
         }, [])
     )
@@ -76,20 +76,20 @@ const EquipamentosAlunosInternet = ({ equipamentosAlunosInternet, answerAcessoIn
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%', color: COLORS.green, fontWeight: 'bold' } : { width: '80%', color: COLORS.black }}>XI - EQUIPAMENTOS QUE OS ALUNOS USAM PARA ACESSAR A INTERNET DA ESCOLA</Text>
-                    {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
+                    <Text style={isClicked || formErrors && Object.keys(formErrors).length > 0 ? { width: '80%', color: COLORS.green, fontWeight: 'bold' } : { width: '80%', color: COLORS.black }}>XI - EQUIPAMENTOS QUE OS ALUNOS USAM PARA ACESSAR A INTERNET DA ESCOLA</Text>
+                    {isClicked || formErrors && Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>
-                {isClicked === true || Object.keys(formErrors).length > 0 ? <View style={{ borderBottomWidth: 2, borderColor: COLORS.green, marginTop: 10 }} /> : null}
+                {isClicked === true || formErrors && Object.keys(formErrors).length > 0 ? <View style={{ borderBottomWidth: 2, borderColor: COLORS.green, marginTop: 10 }} /> : null}
             </TouchableOpacity>
-            {isClicked === true || Object.keys(formErrors).length > 0 ?
+            {isClicked === true || formErrors && Object.keys(formErrors).length > 0 ?
                 <View style={styles.formContainer}>
-                    <RadioGroup options={[1, 0]} disable={(answerAcessoInternet?.campo_108 === 0 || answerAcessoInternet?.campo_108 === null) ? true : false} value={answer.campo_111} textOption={textOption} fontWeight='normal' question='1 - Computadores de mesa, portáteis e tablets da escola (no laboratório de informática, biblioteca, sala de aula etc.)*' onSelect={(option) => handleOptionChange('campo_111', option)} />
-                    {formErrors.campo_111 && <Text style={styles.messageError}>{formErrors.campo_111}</Text>}
-                    <RadioGroup options={[1, 0]} disable={(answerAcessoInternet?.campo_108 === 0 || answerAcessoInternet?.campo_108 === null || answerRedeLocal?.campo_115 === 0) ? true : false} value={answer.campo_112} textOption={textOption} fontWeight='normal' question='2 - Dispositivos pessoais (computadores portáteis, celulares, tablets etc.)*' onSelect={(option) => handleOptionChange('campo_112', option)} />
-                    {formErrors.campo_112 && <Text style={styles.messageError}>{formErrors.campo_112}</Text>}
-                    <RadioGroup options={[1, 0]} disable={(answerAcessoInternet?.campo_110 === 1) ? true : false} value={answer.campo_113} textOption={textOption} fontWeight='normal' question='3 - Internet banda larga*' onSelect={(option) => handleOptionChange('campo_113', option)} />
-                    {formErrors.campo_113 && <Text style={styles.messageError}>{formErrors.campo_113}</Text>}
+                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_111} disable={(answerAcessoInternet?.campo_108 === 0 || answerAcessoInternet?.campo_108 === null) || data ? true : false} value={answer.campo_111} textOption={textOption} fontWeight='normal' question='1 - Computadores de mesa, portáteis e tablets da escola (no laboratório de informática, biblioteca, sala de aula etc.)*' onSelect={(option) => handleOptionChange('campo_111', option)} />
+                    {formErrors?.campo_111 && <Text style={styles.messageError}>{formErrors?.campo_111}</Text>}
+                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_112} disable={(answerAcessoInternet?.campo_108 === 0 || answerAcessoInternet?.campo_108 === null || answerRedeLocal?.campo_115 === 0) || data ? true : false} value={answer.campo_112} textOption={textOption} fontWeight='normal' question='2 - Dispositivos pessoais (computadores portáteis, celulares, tablets etc.)*' onSelect={(option) => handleOptionChange('campo_112', option)} />
+                    {formErrors?.campo_112 && <Text style={styles.messageError}>{formErrors?.campo_112}</Text>}
+                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_113} disable={(answerAcessoInternet?.campo_110 === 1) || data ? true : false} value={answer.campo_113} textOption={textOption} fontWeight='normal' question='3 - Internet banda larga*' onSelect={(option) => handleOptionChange('campo_113', option)} />
+                    {formErrors?.campo_113 && <Text style={styles.messageError}>{formErrors?.campo_113}</Text>}
                 </View>
                 : null
             }
