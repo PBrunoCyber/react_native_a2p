@@ -1,13 +1,14 @@
 import { View, Text, Animated, LayoutAnimation } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import styles from '../../styles/abastecimentoDeAgua.style'
-import {  TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { COLORS } from '../../constants/theme';
 import RadioGroup from '../RadioGroup';
 import CheckBox from '../CheckBox';
 import { IAbastecimentoDeAgua } from '../../types/EstruturaFisicaEscolar';
+import { useFocusEffect } from 'expo-router';
 
 interface IProps {
     abastecimentoDeAguaChange: (value: IAbastecimentoDeAgua) => void,
@@ -27,7 +28,6 @@ const AbastecimentoDeAgua = ({ formErrors, abastecimentoDeAguaChange, context }:
                 setIsClicked(true);
             }
         }
-        if (answer === context) setIsClicked(false);
 
     }, [answer])
 
@@ -37,10 +37,12 @@ const AbastecimentoDeAgua = ({ formErrors, abastecimentoDeAguaChange, context }:
         }
     }, [formErrors])
 
-    useEffect(() => {
-        setAnswers(context);
-    }, [context.campo_17, context.campo_18, context.campo_19,
-        context.campo_20, context.campo_21, context.campo_22])
+    useFocusEffect(
+        useCallback(() => {
+            setAnswers({ campo_17: null, campo_18: null, campo_19: null, campo_20: null, campo_21: null, campo_22: 0 });
+            setIsClicked(false);
+        }, [])
+    )
 
     const handleOptionChange = (question: string, answer: number | string | null) => {
         setAnswers((prevAnswer) => ({
@@ -62,7 +64,7 @@ const AbastecimentoDeAgua = ({ formErrors, abastecimentoDeAguaChange, context }:
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%',color: COLORS.green, fontWeight: 'bold' } : { width: '80%',color: COLORS.black }}>II - ABASTECIMENTO DE ÁGUA</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%', color: COLORS.green, fontWeight: 'bold' } : { width: '80%', color: COLORS.black }}>II - ABASTECIMENTO DE ÁGUA</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>

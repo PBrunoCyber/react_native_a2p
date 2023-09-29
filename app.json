@@ -8,10 +8,27 @@
       "expo-router"
     ],
     "name": "react_native_app",
-    "slug": "react_native_app"
+    "slug": "react_native_app",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "9128991b-d46e-4b90-aaf7-5f92b4f2efab"
+      }
+    },
+    "android": {
+      "package": "com.pbrunocyber.seduc_censo"
+    }
   },
   "packagerOpts": {
     "config": "metro.config.js",
-    "sourceExts": ["js", "jsx", "ts", "tsx", "svg"]
+    "sourceExts": [
+      "js",
+      "jsx",
+      "ts",
+      "tsx",
+      "svg"
+    ]
   }
 }

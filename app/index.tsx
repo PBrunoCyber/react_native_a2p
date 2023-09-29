@@ -1,9 +1,9 @@
-import { Link, Stack, useRouter } from 'expo-router';
+import { Link, Stack, useFocusEffect, useRouter } from 'expo-router';
 import { View, Text, Image, TextInput, FlatList } from 'react-native';
 import styles from '../styles/home.style';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import Escola from '../services/Escola';
 import EstruturaFisicaEscolar from '../services/EstruturaFisicaEscolar';
@@ -22,9 +22,10 @@ const Home = () => {
 
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [isLoading, setIsLoading] = useState(false);
-    const [data, setData] = useState<Array<IEscola>>();
+    const [data, setData] = useState<Array<IEscola>>([]);
     const [numberOfPages, setNumberOfPages] = useState<number>(1);
-    const [selectedInep, setSelectedInep] = useState<string>();
+    const [selectedInep, setSelectedInep] = useState<string>('');
+    const router = useRouter();
 
     const paginate = (type: string) => {
         if (type === "skipBack") setCurrentPage(1);
@@ -112,8 +113,14 @@ const Home = () => {
         createOrNotEstruturaFisicaEscolar();
         insertOrNotEscola();
         initData();
-        
     }, [])
+
+    useFocusEffect(
+        useCallback(() => {
+            initData();
+        }, [])
+    )
+
 
     useEffect(() => {
         getWithPagination();

@@ -1,6 +1,6 @@
 import { View, Text, Animated, LayoutAnimation } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '../../styles/abastecimentoDeAgua.style'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
@@ -8,6 +8,7 @@ import { COLORS } from '../../constants/theme';
 import CheckBox from '../CheckBox';
 import { IInstrumentosEMateriais } from '../../types/EstruturaFisicaEscolar';
 import RadioGroup from '../RadioGroup';
+import { useFocusEffect } from 'expo-router';
 
 interface IProps {
     instrumentosEMateriais: (value: IInstrumentosEMateriais) => void,
@@ -35,14 +36,12 @@ const InstrumentosEMateriais = ({ instrumentosEMateriais, formErrors, context }:
         }
     }, [formErrors])
 
-    useEffect(() => {
-        setAnswers(context);
-
-    }, [context.campo_135, context.campo_136, context.campo_137,
-        context.campo_138, context.campo_139, context.campo_140, 
-        context.campo_141, context.campo_142, context.campo_143, 
-        context.campo_144, context.campo_145, context.campo_146,
-        context.campo_147, context.campo_148])
+    useFocusEffect(
+        useCallback(() => {
+            setAnswers({ campo_135: null, campo_136: null, campo_137: null, campo_138: null, campo_139: null, campo_140: null, campo_141: null, campo_142: null, campo_143: null, campo_144: null, campo_145: null, campo_146: null, campo_147: 0, campo_148: null });
+            setIsClicked(false);
+        }, [])
+    )
 
     const handleOptionChange = (question: string, answer: number | string | null) => {
         setAnswers((prevAnswer) => ({
@@ -72,7 +71,7 @@ const InstrumentosEMateriais = ({ instrumentosEMateriais, formErrors, context }:
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? {width: '80%', color: COLORS.green, fontWeight: 'bold' } : {width: '80%', color: COLORS.black }}>XV - INSTRUMENTOS, MATERIAIS SOCIOCULTURAIS E/OU PEDAGÓGICOS EM USO NA ESCOLA PARA O DESENVOLVIMENTO DE ATIVIDADES DE ENSINO APRENDIZAGEM</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%', color: COLORS.green, fontWeight: 'bold' } : { width: '80%', color: COLORS.black }}>XV - INSTRUMENTOS, MATERIAIS SOCIOCULTURAIS E/OU PEDAGÓGICOS EM USO NA ESCOLA PARA O DESENVOLVIMENTO DE ATIVIDADES DE ENSINO APRENDIZAGEM</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>

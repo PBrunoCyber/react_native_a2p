@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         backgroundColor: COLORS.lightGreen,
         alignSelf: 'center'
-    }, 
+    },
     schoolsItem: {
         width: '90%',
         height: 50,
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
         borderColor: '#ccc',
         zIndex: -99999
     },
-    btnSalvar:{
+    btnSalvar: {
         width: 150,
         backgroundColor: COLORS.green,
         height: 40,
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
         position: 'fixed',
         flexDirection: 'row',
         alignSelf: 'center',
-        marginTop: 40,
+        marginTop: 20,
         maxWidth: '90%',
         alignItems: 'center',
         justifyContent: 'flex-start',
@@ -149,8 +149,8 @@ const styles = StyleSheet.create({
         gap: 10,
         zIndex: 999,
         backgroundColor: COLORS.lightGreen,
-        borderWidth: 1, 
-        borderColor: COLORS.green, 
+        borderWidth: 1,
+        borderColor: COLORS.green,
         borderRadius: 5
     },
     messageError: {
@@ -169,8 +169,8 @@ const styles = StyleSheet.create({
         zIndex: 999,
         paddingBottom: 10,
         backgroundColor: COLORS.lightRed,
-        borderWidth: 1, 
-        borderColor: COLORS.red, 
+        borderWidth: 1,
+        borderColor: COLORS.red,
         borderRadius: 5
     }
 });

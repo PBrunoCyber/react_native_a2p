@@ -1,6 +1,6 @@
 import { View, Text, Animated, LayoutAnimation } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '../../styles/abastecimentoDeAgua.style'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
@@ -9,6 +9,7 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import RadioGroup from '../RadioGroup';
 import CheckBox from '../CheckBox';
 import { IAcessoInternet } from '../../types/EstruturaFisicaEscolar';
+import { useFocusEffect } from 'expo-router';
 
 interface IProps {
     acessoInternet: (value: IAcessoInternet) => void,
@@ -16,7 +17,7 @@ interface IProps {
     context: IAcessoInternet
 }
 
-const AcessoInternet = ({acessoInternet, formErrors, context}:IProps) => {
+const AcessoInternet = ({ acessoInternet, formErrors, context }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
     const [answer, setAnswers] = useState<IAcessoInternet>(context);
     const textOption = ["SIM", "NÃO"]
@@ -24,17 +25,18 @@ const AcessoInternet = ({acessoInternet, formErrors, context}:IProps) => {
     useEffect(() => {
         acessoInternet(answer);
         for (const key in answer) {
-            if(answer[key as keyof IAcessoInternet]){
+            if (answer[key as keyof IAcessoInternet]) {
                 setIsClicked(true);
             }
         }
-        if (context === answer) setIsClicked(false);
     }, [answer])
 
-    useEffect(() => {
-        setAnswers(context);
-    }, [context.campo_106, context.campo_107, context.campo_108,
-        context.campo_109, context.campo_110])
+    useFocusEffect(
+        useCallback(() => {
+            setAnswers({ campo_106: null, campo_107: null, campo_108: null, campo_109: null, campo_110: 0 });
+            setIsClicked(false);
+        }, [])
+    )
 
     useEffect(() => {
         if (formErrors && Object.keys(formErrors).length > 0) {
@@ -62,7 +64,7 @@ const AcessoInternet = ({acessoInternet, formErrors, context}:IProps) => {
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? {width: '80%', color: COLORS.green, fontWeight: 'bold' } : { width: '80%',color: COLORS.black }}>X - ACESSO À INTERNET</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%', color: COLORS.green, fontWeight: 'bold' } : { width: '80%', color: COLORS.black }}>X - ACESSO À INTERNET</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>

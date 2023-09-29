@@ -2,8 +2,6 @@ import React, { createContext, useEffect, useState } from "react";
 import { IAbastecimentoDeAgua, IAcessoInternet, IDependenciasFisicas, IDestinacaoDoLixo, IEnergiaEletrica, IEquipamentos, IEquipamentosAlunosInternet, IEsgotamentoSanitario, IInstrumentosEMateriais, ILinguaMinistrada, ILocalDeFuncionamento, IOrgaosColegiados, IQuantidadeEquipamentos, IRecursosDeAcessibilidade, IRedeLocal, IReservaDeVagas, ITotalProfissionais, ITratamentoDoLixo } from "../types/EstruturaFisicaEscolar";
 
 interface IContextProps {
-    //Limpar Contexto 
-    limparContexto: () => void,
     // Local de Funcionamento
     answerLocalDeFuncionamento: ILocalDeFuncionamento,
     onLocalDeFuncionamentoChange: (answer: ILocalDeFuncionamento) => void,
@@ -97,8 +95,6 @@ interface IContextProps {
 }
 
 const EstruturaFisicaEscolarContext = createContext<IContextProps>({
-    //Limpar Contexto
-    limparContexto: () => null,
     // Local De Funcionamento
     answerLocalDeFuncionamento: { campo_3: null, campo_4: null, campo_5: null, campo_6: null, campo_7: null, campo_8: null, campo_9: null, campo_10: null, campo_11: '', campo_12: '', campo_13: '', campo_14: '', campo_15: '', campo_16: '' },
     onLocalDeFuncionamentoChange: () => null,
@@ -235,27 +231,6 @@ export function Provider({ children }: IProps) {
     const [answerOrgaosColegiados, setAnswerOrgaosColegiados] = useState<IOrgaosColegiados>({ campo_164: null, campo_165: null, campo_166: null, campo_167: null, campo_168: null, campo_169: 0 });
     const [formErrorsOrgaosColegiados, setFormErrorsOrgaosColegiados] = useState({});
 
-    const limparContexto = () => {
-        setAnswerLocalDeFuncionamento({ campo_3: null, campo_4: null, campo_5: null, campo_6: null, campo_7: null, campo_8: null, campo_9: null, campo_10: null, campo_11: '', campo_12: '', campo_13: '', campo_14: '', campo_15: '', campo_16: '' });
-        setAnswerAbastecimentoDeAgua({ campo_17: null, campo_18: null, campo_19: null, campo_20: null, campo_21: null, campo_22: 0 });
-        setAnswerEnergiaEletrica({campo_23: null, campo_24: null, campo_25: null, campo_26: 0 });
-        setAnswerEsgotamentoSanitario({campo_27: null, campo_28: null, campo_29: null, campo_30: 0 });
-        setAnswerDestinacaoDoLixo({campo_31: null, campo_32: null, campo_33: null, campo_34: null, campo_35: null });
-        setAnswerTratamentoDoLixo({campo_36: null, campo_37: null, campo_38: null, campo_39: 0});
-        setAnswerDependenciaFisica({ campo_40: null, campo_41: null, campo_42: null, campo_43: null, campo_44: null, campo_45: null, campo_46: null, campo_47: null, campo_48: null, campo_49: null, campo_50: null, campo_51: null, campo_52: null, campo_53: null, campo_54: null, campo_55: null, campo_56: null, campo_57: null, campo_58: null, campo_59: null, campo_60: null, campo_61: null, campo_62: null, campo_63: null, campo_64: null, campo_65: null, campo_66: null, campo_67: null, campo_68: null, campo_69: null, campo_70: null, campo_71: null, campo_72: null, campo_73: null, campo_74: null, campo_75: null, campo_76: null, campo_77: 0 });
-        setAnswerRecursosDeAcessibilidade({campo_78: null, campo_79: null, campo_80: null, campo_81: null, campo_82: null, campo_83: null, campo_84: null, campo_85: null, campo_86: 0, campo_87: '', campo_88: '', campo_89: '', campo_90: '' });
-        setAnswerEquipamentos({campo_91: null, campo_92: null, campo_93: null, campo_94: null, campo_95: null, campo_96: null, campo_97: 0 });
-        setAnswerAcessoInternet({campo_106: null, campo_107: null, campo_108: null, campo_109: null, campo_110: 0});
-        setAnswerEquipamentosAlunosInternet({campo_111: null, campo_112: null, campo_113: null});
-        setAnswerQuantidadeEquipamentos({ campo_98: '', campo_99: '', campo_100: '', campo_101: '', campo_102: '', campo_103: '', campo_104: '', campo_105: '' });
-        setAnswerRedeLocal({campo_114: null, campo_115: null, campo_116: 0});
-        setAnswerTotalProfissionais({campo_117: '', campo_118: '', campo_119: '', campo_120: '', campo_121: '', campo_122: '', campo_123: '', campo_124: '', campo_125: '', campo_126: '', campo_127: '', campo_128: '', campo_129: '', campo_130: '', campo_131: '', campo_132: '', campo_133: 0, campo_134: null});
-        setAnswerInstrumentosEMaterias({campo_135: null, campo_136: null, campo_137: null, campo_138: null, campo_139: null, campo_140: null, campo_141: null, campo_142: null, campo_143: null, campo_144: null, campo_145: null, campo_146: null, campo_147: 0, campo_148: null });
-        setAnswerLinguaMinistrada({ campo_149: null, campo_150: null, campo_151: '', campo_152: '', campo_153: ''});
-        setAnswerReservaDeVagas({ campo_155: null, campo_156: null, campo_157: null, campo_158: null, campo_159: null, campo_160: 0, campo_161: null, campo_162: null, campo_163: null });
-        setAnswerOrgaosColegiados({campo_164: null, campo_165: null, campo_166: null, campo_167: null, campo_168: null, campo_169: 0 });
-    }
-
     const onLocalDeFuncionamentoChange = (answer: ILocalDeFuncionamento) => {
         setAnswerLocalDeFuncionamento(answer);
         setFormErrorsLocalDeFuncionamento({});
@@ -348,8 +323,6 @@ export function Provider({ children }: IProps) {
     }
 
     const contextData: IContextProps = {
-        // Limpar Contexto 
-        limparContexto: limparContexto,
         // Local De Funcionamento
         answerLocalDeFuncionamento: answerLocalDeFuncionamento,
         onLocalDeFuncionamentoChange: onLocalDeFuncionamentoChange,

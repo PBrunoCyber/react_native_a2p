@@ -1,6 +1,6 @@
 import { View, Text, Animated, LayoutAnimation } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '../../styles/abastecimentoDeAgua.style'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
@@ -8,6 +8,7 @@ import { COLORS } from '../../constants/theme';
 import CheckBox from '../CheckBox';
 import { IInstrumentosEMateriais, ILinguaMinistrada } from '../../types/EstruturaFisicaEscolar';
 import RadioGroup from '../RadioGroup';
+import { useFocusEffect } from 'expo-router';
 
 interface IProps {
     linguaMinistrada: (value: ILinguaMinistrada) => void,
@@ -28,14 +29,14 @@ const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMat
                 setIsClicked(true);
             }
         }
-        if (context === answer) setIsClicked(false);
     }, [answer])
 
-    useEffect(() => {
-        setAnswers(context);
-
-    }, [context.campo_149, context.campo_150, context.campo_151, 
-        context.campo_152, context.campo_153])
+    useFocusEffect(
+        useCallback(() => {
+            setAnswers({ campo_149: null, campo_150: null, campo_151: '', campo_152: '', campo_153: '' });
+            setIsClicked(false);
+        }, [])
+    )
 
     useEffect(() => {
         if (formErrors && Object.keys(formErrors).length > 0) {
@@ -87,7 +88,7 @@ const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMat
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? {width: '80%', color: COLORS.green, fontWeight: 'bold' } : {width: '80%', color: COLORS.black }}>XVI - LÍNGUA EM QUE O ENSINO É MINISTRADO</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%', color: COLORS.green, fontWeight: 'bold' } : { width: '80%', color: COLORS.black }}>XVI - LÍNGUA EM QUE O ENSINO É MINISTRADO</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>

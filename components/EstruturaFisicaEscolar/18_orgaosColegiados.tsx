@@ -1,6 +1,6 @@
 import { View, Text, Animated, LayoutAnimation } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '../../styles/abastecimentoDeAgua.style'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
@@ -9,6 +9,7 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import RadioGroup from '../RadioGroup';
 import CheckBox from '../CheckBox';
 import { IOrgaosColegiados } from '../../types/EstruturaFisicaEscolar';
+import { useFocusEffect } from 'expo-router';
 
 interface IProps {
     orgaosColegiados: (value: IOrgaosColegiados) => void,
@@ -38,10 +39,12 @@ const OrgaosColegiados = ({ orgaosColegiados, formErrors, context }: IProps) => 
         }
     }
 
-    useEffect(() => {
-        setAnswers(context);
-    }, [context.campo_164, context.campo_165, context.campo_166, 
-        context.campo_167, context.campo_168, context.campo_169])
+    useFocusEffect(
+        useCallback(() => {
+            setAnswers({ campo_164: null, campo_165: null, campo_166: null, campo_167: null, campo_168: null, campo_169: 0 });
+            setIsClicked(false);
+        }, [])
+    )
 
     useEffect(() => {
         orgaosColegiados(answer);
@@ -63,7 +66,7 @@ const OrgaosColegiados = ({ orgaosColegiados, formErrors, context }: IProps) => 
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? {width: '80%', color: COLORS.green, fontWeight: 'bold' } : {width: '80%', color: COLORS.black }}>XVIII - ÓRGÃOS COLEGIADOS EM FUNCIONAMENTO NA ESCOLA</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%', color: COLORS.green, fontWeight: 'bold' } : { width: '80%', color: COLORS.black }}>XVIII - ÓRGÃOS COLEGIADOS EM FUNCIONAMENTO NA ESCOLA</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>

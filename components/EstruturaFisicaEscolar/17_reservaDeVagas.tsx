@@ -1,6 +1,6 @@
 import { View, Text, Animated, LayoutAnimation } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '../../styles/abastecimentoDeAgua.style'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
@@ -8,6 +8,7 @@ import { COLORS } from '../../constants/theme';
 import CheckBox from '../CheckBox';
 import { IReservaDeVagas, IUltimasPerguntas } from '../../types/EstruturaFisicaEscolar';
 import RadioGroup from '../RadioGroup';
+import { useFocusEffect } from 'expo-router';
 
 interface IProps {
     reservaDeVagas: (value: IReservaDeVagas) => void,
@@ -38,12 +39,12 @@ const ReservaDeVagas = ({ reservaDeVagas, exameClassificatorio, formErrors, cont
         }
     }
 
-    useEffect(() => {
-        setAnswers(context);
-
-    }, [context.campo_155, context.campo_156, context.campo_157,
-        context.campo_158, context.campo_159, context.campo_160,
-        context.campo_161, context.campo_162, context.campo_163])
+    useFocusEffect(
+        useCallback(() => {
+            setAnswers({ campo_155: null, campo_156: null, campo_157: null, campo_158: null, campo_159: null, campo_160: 0, campo_161: null, campo_162: null, campo_163: null });
+            setIsClicked(false);
+        }, [])
+    )
 
     useEffect(() => {
         reservaDeVagas(answer);
@@ -78,7 +79,7 @@ const ReservaDeVagas = ({ reservaDeVagas, exameClassificatorio, formErrors, cont
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? {width: '80%', color: COLORS.green, fontWeight: 'bold' } : {width: '80%', color: COLORS.black }}>XVII - RESERVA DE VAGAS POR SISTEMA DE COTAS PARA GRUPOS ESPECÍFICOS DE ALUNO(A)S</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%', color: COLORS.green, fontWeight: 'bold' } : { width: '80%', color: COLORS.black }}>XVII - RESERVA DE VAGAS POR SISTEMA DE COTAS PARA GRUPOS ESPECÍFICOS DE ALUNO(A)S</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>

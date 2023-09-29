@@ -144,23 +144,28 @@ const getWithPagination = (limit: number, offset: number) => {
                     }
                     resolve(false)
                 },
-                (_, error) => {resolve(false); return false; });
+                (_, error) => { resolve(false); return false; });
         });
     });
 }
 
-const getByInep = (inep: string | undefined) => {
+const getByInep = (inep: string) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql("SELECT * FROM escola WHERE inep = ? AND tipo <> 'Não Iniciado';",
-                [inep || ''],
+                [inep],
                 (_, { rows }) => {
                     if (rows.length > 0) {
-                        resolve(rows._array);
+                        const array = [];
+                        for (let index = 0; index < rows.length; index++) {
+                            array.push(rows.item(index));
+                        }
+                        resolve(array);
+                    } else {
+                        resolve(false)
                     }
-                    resolve(false)
                 },
-                (_, error) => {console.log(error); resolve(false); return false; });
+                (_, error) => { console.log(error); resolve(false); return false; });
         });
     });
 }

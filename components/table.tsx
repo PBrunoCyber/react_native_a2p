@@ -9,7 +9,7 @@ import { COLORS } from '../constants/theme'
 import { IEscola } from '../types/Escola';
 
 interface IProps {
-    data: Array<IEscola> | undefined,
+    data: Array<IEscola>,
 }
 
 const Table = (props: IProps) => {

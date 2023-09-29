@@ -1,6 +1,6 @@
 import { View, Text, Animated, LayoutAnimation } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '../../styles/abastecimentoDeAgua.style'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
@@ -9,6 +9,7 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import RadioGroup from '../RadioGroup';
 import CheckBox from '../CheckBox';
 import { IDependenciasFisicas } from '../../types/EstruturaFisicaEscolar';
+import { useFocusEffect } from 'expo-router';
 
 interface IProps {
     dependenciasFisicas: (value: IDependenciasFisicas) => void,
@@ -28,24 +29,14 @@ const DependenciasFisicas = ({ formErrors, dependenciasFisicas, context }: IProp
                 setIsClicked(true);
             }
         }
-        if (context === answer) setIsClicked(false);
     }, [answer])
 
-    useEffect(() => {
-        setAnswers(context);
-    }, [context.campo_40, context.campo_41, context.campo_42,
-        context.campo_43, context.campo_44, context.campo_45,
-        context.campo_46, context.campo_47, context.campo_48,
-        context.campo_49, context.campo_50, context.campo_51, 
-        context.campo_52, context.campo_53, context.campo_54,
-        context.campo_55, context.campo_56, context.campo_57,
-        context.campo_60, context.campo_61, context.campo_62,
-        context.campo_63, context.campo_64, context.campo_65,
-        context.campo_66, context.campo_67, context.campo_68, 
-        context.campo_69, context.campo_70, context.campo_71, 
-        context.campo_72, context.campo_73, context.campo_74, 
-        context.campo_74, context.campo_75, context.campo_76,
-        context.campo_77])
+    useFocusEffect(
+        useCallback(() => {
+            setAnswers({ campo_40: null, campo_41: null, campo_42: null, campo_43: null, campo_44: null, campo_45: null, campo_46: null, campo_47: null, campo_48: null, campo_49: null, campo_50: null, campo_51: null, campo_52: null, campo_53: null, campo_54: null, campo_55: null, campo_56: null, campo_57: null, campo_58: null, campo_59: null, campo_60: null, campo_61: null, campo_62: null, campo_63: null, campo_64: null, campo_65: null, campo_66: null, campo_67: null, campo_68: null, campo_69: null, campo_70: null, campo_71: null, campo_72: null, campo_73: null, campo_74: null, campo_75: null, campo_76: null, campo_77: 0 });
+            setIsClicked(false);
+        }, [])
+    )
 
     useEffect(() => {
         if (formErrors && Object.keys(formErrors).length > 0) {
@@ -115,7 +106,7 @@ const DependenciasFisicas = ({ formErrors, dependenciasFisicas, context }: IProp
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? {width: '80%', color: COLORS.green, fontWeight: 'bold' } : { width: '80%',color: COLORS.black }}>VII - DEPENDÊNCIAS FÍSICAS EXISTENTES E UTILIZADAS NA ESCOLA</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%', color: COLORS.green, fontWeight: 'bold' } : { width: '80%', color: COLORS.black }}>VII - DEPENDÊNCIAS FÍSICAS EXISTENTES E UTILIZADAS NA ESCOLA</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>

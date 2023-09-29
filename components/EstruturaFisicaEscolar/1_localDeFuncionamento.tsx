@@ -1,6 +1,6 @@
 import { View, Text, Animated, LayoutAnimation } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '../../styles/localDeFuncionamento.style'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
@@ -8,39 +8,38 @@ import { COLORS } from '../../constants/theme';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import RadioGroup from '../RadioGroup';
 import { IAllValues, ILocalDeFuncionamento } from '../../types/EstruturaFisicaEscolar';
+import { useFocusEffect } from 'expo-router';
 
 interface IProps {
-    localDeFuncionamentoChange: (value: ILocalDeFuncionamento) => void,
+    localDeFuncionamentoChange?: (value: ILocalDeFuncionamento) => void,
     values?: IAllValues
-    formErrors: any,
-    context: ILocalDeFuncionamento,
+    formErrors?: any,
 }
 
-const AbastecimentoDeAgua = ({ localDeFuncionamentoChange, context, formErrors, values }: IProps) => {
+const AbastecimentoDeAgua = ({ localDeFuncionamentoChange, formErrors, values }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<ILocalDeFuncionamento>(context);
+    const [answer, setAnswers] = useState<ILocalDeFuncionamento>({ campo_3: null, campo_4: null, campo_5: null, campo_6: null, campo_7: null, campo_8: null, campo_9: null, campo_10: null, campo_11: '', campo_12: '', campo_13: '', campo_14: '', campo_15: '', campo_16: '' });
 
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
-        localDeFuncionamentoChange(answer);
+        localDeFuncionamentoChange &&
+            localDeFuncionamentoChange(answer);
         for (const key in answer) {
             if (answer[key as keyof ILocalDeFuncionamento]) {
                 setIsClicked(true);
             }
         }
-        if(answer === context) setIsClicked(false);
 
     }, [answer])
 
-    useEffect(() => {
-        setAnswers(context);
-    }, [context.campo_3, context.campo_4, context.campo_5, 
-        context.campo_6, context.campo_7, context.campo_8, 
-        context.campo_9, context.campo_10, context.campo_11,
-        context.campo_12, context.campo_13, context.campo_14,
-        context.campo_15, context.campo_16])
-    
+    useFocusEffect(
+        useCallback(() => {
+            setAnswers({ campo_3: null, campo_4: null, campo_5: null, campo_6: null, campo_7: null, campo_8: null, campo_9: null, campo_10: null, campo_11: '', campo_12: '', campo_13: '', campo_14: '', campo_15: '', campo_16: '' });
+            setIsClicked(false);
+        }, [])
+    )
+
 
     useEffect(() => {
         if (formErrors && Object.keys(formErrors).length > 0) {
@@ -66,9 +65,9 @@ const AbastecimentoDeAgua = ({ localDeFuncionamentoChange, context, formErrors, 
         <View>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%',color: COLORS.green, fontWeight: 'bold' } : {  width: '80%',color: COLORS.black }}>I - LOCAL DE FUNCIONAMENTO DA ESCOLA</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%', color: COLORS.green, fontWeight: 'bold' } : { width: '80%', color: COLORS.black }}>I - LOCAL DE FUNCIONAMENTO DA ESCOLA</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
-                        : <Ionicons name='chevron-down-outline'  color={COLORS.lightBlack} size={30} />}
+                        : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>
             </TouchableOpacity>
             {(isClicked === true || Object.keys(formErrors).length > 0) ?
@@ -98,7 +97,7 @@ const AbastecimentoDeAgua = ({ localDeFuncionamentoChange, context, formErrors, 
                         <View style={[styles.formFlex, { paddingLeft: '10%', marginBottom: 10 }]}>
                             <Text style={{ flexGrow: 1 }}>iii) Código da escola com a qual compartilha*</Text>
                             <View style={{ maxWidth: 300, flexGrow: 1 }}>
-                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_13 : ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer.campo_10 === 1  ? true : false} onChangeText={(txt) => handleOptionChange('campo_13', txt)} />
+                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_13 : ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer.campo_10 === 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_13', txt)} />
                                 {formErrors.campo_13 && <Text style={styles.messageError}>{formErrors.campo_13}</Text>}
                             </View>
                         </View>

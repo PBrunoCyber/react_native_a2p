@@ -1,6 +1,6 @@
 import { View, Text, Animated, LayoutAnimation } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '../../styles/abastecimentoDeAgua.style'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
@@ -9,6 +9,7 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import RadioGroup from '../RadioGroup';
 import CheckBox from '../CheckBox';
 import { ILocalDeFuncionamento, IRecursosDeAcessibilidade } from '../../types/EstruturaFisicaEscolar';
+import { useFocusEffect } from 'expo-router';
 
 interface IProps {
     recursosDeAcessibilidade: (value: IRecursosDeAcessibilidade) => void,
@@ -29,16 +30,14 @@ const RecursosDeAcessibilidade = ({ recursosDeAcessibilidade, answerLocalDeFunci
                 setIsClicked(true);
             }
         }
-        if (context === answer) setIsClicked(false);
     }, [answer])
 
-    useEffect(() => {
-        setAnswers(context);
-    }, [context.campo_78, context.campo_79, context.campo_80,
-        context.campo_81, context.campo_82, context.campo_83, 
-        context.campo_84, context.campo_85, context.campo_86,
-        context.campo_87, context.campo_88, context.campo_89,
-        context.campo_90])
+    useFocusEffect(
+        useCallback(() => {
+            setAnswers({ campo_78: null, campo_79: null, campo_80: null, campo_81: null, campo_82: null, campo_83: null, campo_84: null, campo_85: null, campo_86: 0, campo_87: '', campo_88: '', campo_89: '', campo_90: '' });
+            setIsClicked(false);
+        }, [])
+    )
 
     useEffect(() => {
         if (formErrors && Object.keys(formErrors).length > 0) {
@@ -64,7 +63,7 @@ const RecursosDeAcessibilidade = ({ recursosDeAcessibilidade, answerLocalDeFunci
                 ['campo_85']: null,
             }));
         }
-        if(question === 'campo_87' && !answer || question === 'campo_88' && !answer){
+        if (question === 'campo_87' && !answer || question === 'campo_88' && !answer) {
             setAnswers((prevAnswer) => ({
                 ...prevAnswer,
                 ['campo_89']: '',
@@ -77,7 +76,7 @@ const RecursosDeAcessibilidade = ({ recursosDeAcessibilidade, answerLocalDeFunci
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%',color: COLORS.green, fontWeight: 'bold' } : {width: '80%', color: COLORS.black }}>VIII - RECURSOS DE ACESSIBILIDADE</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%', color: COLORS.green, fontWeight: 'bold' } : { width: '80%', color: COLORS.black }}>VIII - RECURSOS DE ACESSIBILIDADE</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>

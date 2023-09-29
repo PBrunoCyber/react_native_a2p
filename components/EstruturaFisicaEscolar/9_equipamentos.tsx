@@ -1,6 +1,6 @@
 import { View, Text, Animated, LayoutAnimation } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '../../styles/abastecimentoDeAgua.style'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
@@ -9,6 +9,7 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import RadioGroup from '../RadioGroup';
 import CheckBox from '../CheckBox';
 import { IEquipamentos } from '../../types/EstruturaFisicaEscolar';
+import { useFocusEffect } from 'expo-router';
 
 interface IProps {
     equipamentos: (value: IEquipamentos) => void,
@@ -31,11 +32,12 @@ const Equipamentos = ({ formErrors, equipamentos, context }: IProps) => {
         }
     }, [answer])
 
-    useEffect(() => {
-        setAnswers(context);
-    }, [context.campo_91, context.campo_92, context.campo_93,
-        context.campo_94, context.campo_95, context.campo_95,
-        context.campo_96, context.campo_97])
+    useFocusEffect(
+        useCallback(() => {
+            setAnswers({ campo_91: null, campo_92: null, campo_93: null, campo_94: null, campo_95: null, campo_96: null, campo_97: 0 });
+            setIsClicked(false);
+        }, [])
+    )
 
     useEffect(() => {
         if (formErrors && Object.keys(formErrors).length > 0) {
@@ -66,7 +68,7 @@ const Equipamentos = ({ formErrors, equipamentos, context }: IProps) => {
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? {width: '80%', color: COLORS.green, fontWeight: 'bold' } : {width: '80%', color: COLORS.black }}>IX - EQUIPAMENTOS EXISTENTES NA ESCOLA PARA USO TÉCNICO E ADMINISTRATIVO</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%', color: COLORS.green, fontWeight: 'bold' } : { width: '80%', color: COLORS.black }}>IX - EQUIPAMENTOS EXISTENTES NA ESCOLA PARA USO TÉCNICO E ADMINISTRATIVO</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>

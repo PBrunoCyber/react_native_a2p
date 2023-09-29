@@ -1,18 +1,18 @@
 import { View, Text, TextInput } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import styles from '../styles/filtros.style';
-import { useRouter } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Escola from '../services/Escola';
 import { COLORS } from '../constants/theme'
 import { IEscola } from '../types/Escola';
 
 
 interface IProps {
-    setSelectedInep: React.Dispatch<React.SetStateAction<string | undefined>>
+    setSelectedInep: React.Dispatch<React.SetStateAction<string>>
     limit: number,
-    initData: ()=> void
+    initData: () => void
 }
 
 
@@ -33,7 +33,20 @@ const Filtros = (props: IProps) => {
 
     useEffect(() => {
         getData();
-    }, [])
+    }, []);
+
+    useFocusEffect(
+        useCallback(() => {
+            setSeletedInep('');
+            setSeletedNome('');
+        }, [])
+    )
+
+    useEffect(() => {
+        props.initData();
+        props.setSelectedInep('');
+        console.log("Teste");
+    }, [router.back])
 
     const getNomeAcrossInep = (data: Array<IEscola>, inepSelected: number | string) => {
         const selectedItem = data.find(item => item.inep === inepSelected);
@@ -77,14 +90,14 @@ const Filtros = (props: IProps) => {
         <View style={styles.cardContainer}>
             <View style={styles.add}>
                 <Text style={{ fontSize: 20, color: COLORS.green, fontWeight: 'bold' }}>Estrutura Física Escolar</Text>
-                <TouchableOpacity style={styles.addBtn} onPress={() => router.push('/add/')}><Ionicons name='add-outline' size={40} color={'#fff'} /></TouchableOpacity>
+                <TouchableOpacity style={styles.addBtn} onPress={() => router.push('/addEstruturaFisicaEscolar/')}><Ionicons name='add-outline' size={40} color={'#fff'} /></TouchableOpacity>
             </View>
             <View style={styles.filtros}>
                 <Text style={styles.txtFiltros}>FILTROS</Text>
                 <View style={styles.inep_nome}>
                     <View style={{ flexGrow: 1, maxWidth: '100%', zIndex: 999 }}>
                         <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Inep</Text>
-                        <TouchableOpacity style={styles.dropdownSelector} onPress={() => { setInepClicked(!inepClicked); getData();props.initData() }}>
+                        <TouchableOpacity style={styles.dropdownSelector} onPress={() => { setInepClicked(!inepClicked); getData(); props.initData() }}>
                             <Text>{selectedInep}</Text>
                             {inepClicked ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} /> :
                                 <Ionicons name='chevron-down-outline' color={COLORS.green} size={30} />}
@@ -105,7 +118,7 @@ const Filtros = (props: IProps) => {
                     </View>
                     <View style={{ flexGrow: 10, maxWidth: '100%' }}>
                         <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Nome da Escola</Text>
-                        <TouchableOpacity style={styles.dropdownSelector} onPress={() => { setNomeClicked(!nomeClicked); getData();props.initData() }}>
+                        <TouchableOpacity style={styles.dropdownSelector} onPress={() => { setNomeClicked(!nomeClicked); getData(); props.initData() }}>
                             <Text>{selectedNome}</Text>
                             {nomeClicked ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} /> :
                                 <Ionicons name='chevron-down-outline' color={COLORS.green} size={30} />}
