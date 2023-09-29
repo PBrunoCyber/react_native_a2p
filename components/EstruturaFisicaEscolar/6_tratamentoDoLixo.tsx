@@ -13,18 +13,12 @@ import { ITratamentoDoLixo } from '../../types/EstruturaFisicaEscolar';
 interface IProps {
     tratamentoDoLixo: (value: ITratamentoDoLixo) => void,
     formErrors: any,
+    context: ITratamentoDoLixo
 }
 
-const TratamentoDoLixo = ({ formErrors, tratamentoDoLixo }: IProps) => {
+const TratamentoDoLixo = ({ formErrors, tratamentoDoLixo, context }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<ITratamentoDoLixo>(
-        {
-            campo_39: 0,
-            campo_36: null,
-            campo_37: null,
-            campo_38: null,
-        }
-    );
+    const [answer, setAnswers] = useState<ITratamentoDoLixo>(context);
     const textOption = ["SIM", "NÃO"]
 
     const handleOptionChange = (question: string, answer: number | string | null) => {
@@ -50,12 +44,17 @@ const TratamentoDoLixo = ({ formErrors, tratamentoDoLixo }: IProps) => {
     }
 
     useEffect(() => {
+        setAnswers(context);
+    }, [context.campo_36, context.campo_37, context.campo_38, context.campo_39])
+
+    useEffect(() => {
         tratamentoDoLixo(answer);
         for (const key in answer) {
             if (answer[key as keyof ITratamentoDoLixo]) {
                 setIsClicked(true);
             }
         }
+        if (context === answer) setIsClicked(false);
     }, [answer])
 
     useEffect(() => {
@@ -69,9 +68,9 @@ const TratamentoDoLixo = ({ formErrors, tratamentoDoLixo }: IProps) => {
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { color: COLORS.green, fontWeight: 'bold' } : { color: COLORS.black }}>VI - TRATAMENTO DO LIXO/RESÍDUOS QUE A ESCOLA REALIZA</Text>
-                    {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
-                        : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%',color: COLORS.green, fontWeight: 'bold' } : {width: '80%', color: COLORS.black }}>VI - TRATAMENTO DO LIXO/RESÍDUOS QUE A ESCOLA REALIZA</Text>
+                    {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' style={{width: 30}} color={COLORS.green} size={30} />
+                        : <Ionicons name='chevron-down-outline' style={{width: 30}} color={COLORS.lightBlack} size={30} />}
                 </View>
                 {isClicked === true || Object.keys(formErrors).length > 0 ? <View style={{ borderBottomWidth: 2, borderColor: COLORS.green, marginTop: 10 }} /> : null}
             </TouchableOpacity>

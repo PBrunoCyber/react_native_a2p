@@ -13,19 +13,12 @@ import { IDestinacaoDoLixo } from '../../types/EstruturaFisicaEscolar';
 interface IProps {
     destinacaoDoLixo: (value: IDestinacaoDoLixo) => void,
     formErrors: any,
+    context: IDestinacaoDoLixo
 }
 
-const DestinacaoDoLixo = ({ destinacaoDoLixo, formErrors }: IProps) => {
+const DestinacaoDoLixo = ({ destinacaoDoLixo, formErrors, context }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IDestinacaoDoLixo>(
-        {
-            campo_31: null,
-            campo_32: null,
-            campo_33: null,
-            campo_34: null,
-            campo_35: null,
-        }
-    );
+    const [answer, setAnswers] = useState<IDestinacaoDoLixo>(context);
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
@@ -35,7 +28,13 @@ const DestinacaoDoLixo = ({ destinacaoDoLixo, formErrors }: IProps) => {
                 setIsClicked(true);
             }
         }
+        if (context === answer) setIsClicked(false);
     }, [answer])
+
+    useEffect(() => {
+        setAnswers(context);
+    }, [context.campo_31, context.campo_32, context.campo_33,
+        context.campo_34, context.campo_35])
 
     useEffect(() => {
         if (formErrors && Object.keys(formErrors).length > 0) {
@@ -54,7 +53,7 @@ const DestinacaoDoLixo = ({ destinacaoDoLixo, formErrors }: IProps) => {
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { color: COLORS.green, fontWeight: 'bold' } : { color: COLORS.black }}>V - DESTINAÇÃO DO LIXO</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%',color: COLORS.green, fontWeight: 'bold' } : { width: '80%',color: COLORS.black }}>V - DESTINAÇÃO DO LIXO</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>

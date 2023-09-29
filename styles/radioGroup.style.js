@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: COLORS.green,
         borderRadius: 50,
-        padding: 8,
-        width: 30,
+        padding: 0,
+        width: 30, 
         height: 30,
         alignItems: 'center',
         justifyContent: 'center'
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         maxWidth: '100%',
         flexWrap: 'wrap',
+        gap: 10,
     },
     formFlexOption: {
         flexDirection: 'row',

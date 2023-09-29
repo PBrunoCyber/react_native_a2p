@@ -47,8 +47,8 @@ import QuantidadeDeEquipamentos from '../../components/EstruturaFisicaEscolar/12
 import RadioGroup from '../../components/RadioGroup';
 import { IEscola } from '../../types/Escola';
 import EstruturaFisicaEscolar from '../../services/EstruturaFisicaEscolar';
-import Loading from '../../components/Loading';
 import EstruturaFisicaEscolarContext from '../../context/EstruturaFisicaEscolar';
+import { ActivityIndicator } from 'react-native';
 
 interface IProps {
     data: Array<IEscola>,
@@ -156,7 +156,6 @@ const AddEstruturaFisica = (props: IProps) => {
             }, 3000);
             return;
         }
-
         setIsLoading(true);
         const response = await EstruturaFisicaEscolar.insertEstruturaFisicaEscolar(forms);
         setIsLoading(false);
@@ -166,9 +165,8 @@ const AddEstruturaFisica = (props: IProps) => {
                 setMessageOk('Rascunho salvo com sucesso!');
                 setTimeout(() => {
                     setMessageOk('');
-                    context.limparContexto();
                     router.push('/');
-                }, 3000);
+                }, 2000);
                 return;
             } else {
                 setMessageError('Ocorreu algum ao atualizar o status da escola, tente novamente!');
@@ -177,13 +175,16 @@ const AddEstruturaFisica = (props: IProps) => {
                 }, 3000);
                 return;
             }
+
         } else {
             setMessageError('Ocorreu algum erro ao inserir os dados, tente novamente!');
+
             setTimeout(() => {
                 setMessageError('');
             }, 3000);
             return;
         }
+
     }
 
 
@@ -257,23 +258,24 @@ const AddEstruturaFisica = (props: IProps) => {
                 setMessageOk('Cadastro realizado com sucesso!');
                 setTimeout(() => {
                     setMessageOk('');
+                    context.limparContexto();
                     router.push('/');
                 }, 3000);
                 return;
             } else {
                 setMessageError('Ocorreu algum ao atualizar o status da escola, tente novamente!');
-                const time = setTimeout(() => {
+                setTimeout(() => {
                     setMessageError('');
                 }, 3000);
-                return clearTimeout(time);
+                return;
             }
 
         } else {
             setMessageError('Ocorreu algum erro ao inserir os dados, tente novamente!');
-            const time = setTimeout(() => {
+            setTimeout(() => {
                 setMessageError('');
             }, 3000);
-            return clearTimeout(time);
+            return;
         }
 
     }
@@ -282,6 +284,8 @@ const AddEstruturaFisica = (props: IProps) => {
         setSeletedInep('');
         setSeletedNome('');
         setExistsError('');
+        setAnswerExameClassificatorio(null);
+        setAnswerProjetoPedagogico(null);
         initData();
     }, [])
 
@@ -294,20 +298,24 @@ const AddEstruturaFisica = (props: IProps) => {
                 headerRight: () => <Ionicons name='exit-outline' color={COLORS.white} size={30} />,
                 headerStyle: { backgroundColor: COLORS.green }
             }} />
-            <View style={{ backgroundColor: COLORS.lightGreen }}>
-                {isLoading ? <Loading width='80' height='80' />
+            <View style={{ backgroundColor: COLORS.white }}>
+                {isLoading ? 
+                    <View style={{alignItems: 'center', marginTop: 10, marginBottom: 10}}>
+                        <ActivityIndicator color={COLORS.green} size={40}/>
+                    </View>
                     :
                     <>
                         {messageOk && <View style={styles.messageOk}><Ionicons name='checkmark-circle-outline' size={40} color={COLORS.green} /><Text style={{ fontWeight: 'bold', color: COLORS.green }}>{messageOk}</Text></View>}
                         {messageError && <View style={styles.messageError}><Ionicons name='close-circle-outline' size={40} color={COLORS.red} /><Text style={{ fontWeight: 'bold', color: COLORS.red }}>{messageError}</Text></View>}
                     </>
                 }
-                <ScrollView style={styles.cardContainer}>
+                <ScrollView horizontal={false} style={styles.cardContainer}>
+
                     <View style={styles.container}>
                         <View style={styles.header}>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 20 }}>
-                                <TouchableOpacity onPress={() => context.limparContexto()}><Ionicons name='arrow-back-outline' size={40} color={COLORS.green} /></TouchableOpacity>
-                                <Text style={{ fontSize: 20, fontWeight: 'bold', color: COLORS.green }}>Cadastrar Estrutura Física Escolar</Text>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+                                <TouchableOpacity onPress={() => { context.limparContexto(); router.push('/'); }}><Ionicons name='arrow-back-outline' size={40} color={COLORS.green} /></TouchableOpacity>
+                                <Text style={{ fontSize: 20, fontWeight: 'bold', maxWidth: '90%',flexGrow: 1, color: COLORS.green }}>Cadastrar Estrutura Física Escolar</Text>
                             </View>
                             <TouchableOpacity style={styles.btnSalvarRascunho} onPress={onSaveRascunho}><Text style={{ color: COLORS.green, fontWeight: 'bold' }}>Salvar Rascunho</Text></TouchableOpacity>
                         </View>
@@ -357,33 +365,33 @@ const AddEstruturaFisica = (props: IProps) => {
                             </View>
                             {existsError ? <Text style={{ color: COLORS.red, marginTop: 10, zIndex: -1 }}>{existsError}</Text> : null}
 
-                            <View style={{ marginTop: 20, zIndex: -1 }}>
+                            <View style={{ marginTop: 20, zIndex: -999 }}>
                                 <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Nome do Anexo da Escola</Text>
-                                <TextInput style={styles.inputAnexo} />
+                                <TextInput style={styles.inputAnexo}/>
                             </View>
                         </View>
                         <View style={{ marginTop: 40, zIndex: -1 }}>
                             <LocalDeFuncionamento context={context.answerLocalDeFuncionamento} formErrors={context?.formErrorsLocalDeFuncionamento} localDeFuncionamentoChange={(value) => context?.onLocalDeFuncionamentoChange(value)} />
-                            <AbastecimentoDeAgua formErrors={context.formErrorsAbastecimentoDeAgua} abastecimentoDeAguaChange={(value) => context.onAbastecimentoDeAguaChange(value)} />
-                            <FonteEnergiaEletrica formErrors={context.formErrorsEnergiaEletrica} fonteEnergiaEletricaChange={(value) => context.onEnergiaEletricaChange(value)} />
-                            <EsgotamentoSanitario formErrors={context.formErrorsEsgotamentoSanitario} esgotamentoSanitarioChange={(value) => context.onEsgotamentoSanitarioChange(value)} />
-                            <DestinacaoDoLixo formErrors={context.formErrorsDestinacaoDoLixo} destinacaoDoLixo={(value) => context.onDestinacaoDoLixoChange(value)} />
-                            <TratamentoDoLixo formErrors={context.formErrorsTratamentoDoLixo} tratamentoDoLixo={(value) => context.onTratamentoDoLixoChange(value)} />
-                            <DependenciasFisicas formErrors={context.formErrorsDependenciasFisicas} dependenciasFisicas={(value) => context.onDependenciasFisicasChange(value)} />
-                            <RecursosDeAcessibilidade formErrors={context.formErrorsRecursosDeAcessibilidade} recursosDeAcessibilidade={(value) => context.onRecursosDeAcessibilidadeChange(value)} answerLocalDeFuncionamento={context.answerLocalDeFuncionamento} />
-                            <Equipamentos formErrors={context.formErrorsEquipamentos} equipamentos={(value) => context.onEquipamentosChange(value)} />
-                            <AcessoInternet formErrors={context.formErrorsAcessoInternet} acessoInternet={(value) => context.onAcessoInternetChange(value)} />
-                            <EquipamentosAlunosInternet formErrors={context.formErrorsEquipamentosAlunosInternet} answerAcessoInternet={context.answerAcessoInternet} answerRedeLocal={context.answerRedeLocal} equipamentosAlunosInternet={(value) => context.onEquipamentosAlunosInternetChange(value)} />
-                            <QuantidadeDeEquipamentos formErrors={context.formErrorsQuantidadeDeEquipamentos} quantidadeDeEquipamentos={(value) => context.onQuantidadeDeEquipamentosChange(value)} answerEquipamentosAlunosInternet={context.answerEquipamentosAlunosInternet} />
-                            <RedeLocal formErrors={context.formErrorsRedeLocal} answerEquipamentos={context.answerEquipamentos} answerQuantidadeEquipamentos={context.answerQuantidadeDeEquipamentos} redeLocal={(value) => context.onRedeLocalChange(value)} />
-                            <TotalDeProfissionais formErrors={context.formErrorsTotalDeProfissionais} totalDeProfissionais={(value) => context.onTotalDeProfissionaisChange(value)} />
-                            <InstrumentosEMateriais formErrors={context.formErrorsInstrumentosEMateriais} instrumentosEMateriais={(value) => context.onInstrumentosEMateriaisChange(value)} />
-                            <LinguaMinistrada formErrors={context.formErrorsLinguasMinistradas} linguaMinistrada={(value) => context.onLinguasMinistradasChange(value)} answerInstrumentosEMateriais={context.answerInstrumentosEMateriais} />
+                            <AbastecimentoDeAgua context={context.answerAbstecimentoDeAgua} formErrors={context.formErrorsAbastecimentoDeAgua} abastecimentoDeAguaChange={(value) => context.onAbastecimentoDeAguaChange(value)} />
+                            <FonteEnergiaEletrica context={context.answerEnergiaEletrica} formErrors={context.formErrorsEnergiaEletrica} fonteEnergiaEletricaChange={(value) => context.onEnergiaEletricaChange(value)} />
+                            <EsgotamentoSanitario context={context.answerEsgotamentoSanitario} formErrors={context.formErrorsEsgotamentoSanitario} esgotamentoSanitarioChange={(value) => context.onEsgotamentoSanitarioChange(value)} />
+                            <DestinacaoDoLixo context={context.answerDestinacaoDoLixo} formErrors={context.formErrorsDestinacaoDoLixo} destinacaoDoLixo={(value) => context.onDestinacaoDoLixoChange(value)} />
+                            <TratamentoDoLixo context={context.answerTratamentoDoLixo} formErrors={context.formErrorsTratamentoDoLixo} tratamentoDoLixo={(value) => context.onTratamentoDoLixoChange(value)} />
+                            <DependenciasFisicas context={context.answerDependenciasFisicas} formErrors={context.formErrorsDependenciasFisicas} dependenciasFisicas={(value) => context.onDependenciasFisicasChange(value)} />
+                            <RecursosDeAcessibilidade context={context.answerRecursosDeAcessibilidade} formErrors={context.formErrorsRecursosDeAcessibilidade} recursosDeAcessibilidade={(value) => context.onRecursosDeAcessibilidadeChange(value)} answerLocalDeFuncionamento={context.answerLocalDeFuncionamento} />
+                            <Equipamentos context={context.answerEquipamentos} formErrors={context.formErrorsEquipamentos} equipamentos={(value) => context.onEquipamentosChange(value)} />
+                            <AcessoInternet context={context.answerAcessoInternet} formErrors={context.formErrorsAcessoInternet} acessoInternet={(value) => context.onAcessoInternetChange(value)} />
+                            <EquipamentosAlunosInternet context={context.answerEquipamentosAlunosInternet} formErrors={context.formErrorsEquipamentosAlunosInternet} answerAcessoInternet={context.answerAcessoInternet} answerRedeLocal={context.answerRedeLocal} equipamentosAlunosInternet={(value) => context.onEquipamentosAlunosInternetChange(value)} />
+                            <QuantidadeDeEquipamentos context={context.answerQuantidadeDeEquipamentos} formErrors={context.formErrorsQuantidadeDeEquipamentos} quantidadeDeEquipamentos={(value) => context.onQuantidadeDeEquipamentosChange(value)} answerEquipamentosAlunosInternet={context.answerEquipamentosAlunosInternet} />
+                            <RedeLocal context={context.answerRedeLocal} formErrors={context.formErrorsRedeLocal} answerEquipamentos={context.answerEquipamentos} answerQuantidadeEquipamentos={context.answerQuantidadeDeEquipamentos} redeLocal={(value) => context.onRedeLocalChange(value)} />
+                            <TotalDeProfissionais context={context.answerTotalDeProfissionais} formErrors={context.formErrorsTotalDeProfissionais} totalDeProfissionais={(value) => context.onTotalDeProfissionaisChange(value)} />
+                            <InstrumentosEMateriais context={context.answerInstrumentosEMateriais} formErrors={context.formErrorsInstrumentosEMateriais} instrumentosEMateriais={(value) => context.onInstrumentosEMateriaisChange(value)} />
+                            <LinguaMinistrada context={context.answerLinguasMinistradas} formErrors={context.formErrorsLinguasMinistradas} linguaMinistrada={(value) => context.onLinguasMinistradasChange(value)} answerInstrumentosEMateriais={context.answerInstrumentosEMateriais} />
                             <View style={{ marginBottom: 25 }}>
                                 <RadioGroup options={[1, 0]} value={answerExameClassificatorio} textOption={["SIM", "NÃO"]} color={COLORS.green} fontWeight='bold' question='A escola faz exame de seleção para ingresso de seus aluno(a)s (avaliação por prova e /ou analise curricular)*' onSelect={(option) => setAnswerExameClassificatorio(option)} />
                             </View>
-                            <ReservaDeVagas formErrors={context.formErrorsReservaDeVagas} reservaDeVagas={(value) => context.onReservaDeVagasChange(value)} exameClassificatorio={answerExameClassificatorio} />
-                            <OrgaosColegiados formErrors={context.formErrorsOrgaosColegiados} orgaosColegiados={(value) => context.onOrgaosColegiadosChange(value)} />
+                            <ReservaDeVagas context={context.answerReservaDeVagas} formErrors={context.formErrorsReservaDeVagas} reservaDeVagas={(value) => context.onReservaDeVagasChange(value)} exameClassificatorio={answerExameClassificatorio} />
+                            <OrgaosColegiados context={context.answerOrgaosColegiados} formErrors={context.formErrorsOrgaosColegiados} orgaosColegiados={(value) => context.onOrgaosColegiadosChange(value)} />
                             <View style={{ marginBottom: 25 }}>
                                 <RadioGroup options={[1, 0]} value={answerProjetoPedagogico} textOption={["SIM", "NÃO"]} color={COLORS.green} fontWeight='bold' question='O projeto político pedagógico ou a proposta pedagógica da escola (conforme art. 12 da LDB) foi atualizada nos últimos 12 meses até a data de referência*' onSelect={(option) => setAnswerProjetoPedagogico(option)} />
                             </View>

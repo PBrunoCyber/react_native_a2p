@@ -15,18 +15,13 @@ interface IProps {
     answerAcessoInternet: IAcessoInternet | undefined,
     answerRedeLocal: IRedeLocal | undefined,
     formErrors: any,
+    context: IEquipamentosAlunosInternet
 }
 
 
-const EquipamentosAlunosInternet = ({ equipamentosAlunosInternet, answerAcessoInternet,answerRedeLocal, formErrors }: IProps) => {
+const EquipamentosAlunosInternet = ({ equipamentosAlunosInternet, answerAcessoInternet,answerRedeLocal, formErrors, context }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IEquipamentosAlunosInternet>(
-        {
-            campo_111: null,
-            campo_112: null,
-            campo_113: null
-        }
-    );
+    const [answer, setAnswers] = useState<IEquipamentosAlunosInternet>(context);
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
@@ -36,7 +31,12 @@ const EquipamentosAlunosInternet = ({ equipamentosAlunosInternet, answerAcessoIn
                 setIsClicked(true);
             }
         }
+        if (answer === context) setIsClicked(false);
     }, [answer])
+
+    useEffect(() => {
+        setAnswers(context);
+    }, [context.campo_111, context.campo_112, context.campo_113])
 
     useEffect(() => {
         if (formErrors && Object.keys(formErrors).length > 0) {
@@ -71,7 +71,7 @@ const EquipamentosAlunosInternet = ({ equipamentosAlunosInternet, answerAcessoIn
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { color: COLORS.green, fontWeight: 'bold' } : { color: COLORS.black }}>XI - EQUIPAMENTOS QUE OS ALUNOS USAM PARA ACESSAR A INTERNET DA ESCOLA</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? {width: '80%', color: COLORS.green, fontWeight: 'bold' } : { width: '80%',color: COLORS.black }}>XI - EQUIPAMENTOS QUE OS ALUNOS USAM PARA ACESSAR A INTERNET DA ESCOLA</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>

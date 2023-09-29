@@ -132,7 +132,7 @@ const getEscolaByNome = (nome: string) => {
 const getWithPagination = (limit: number, offset: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT * FROM escola LIMIT ? OFFSET ? WHERE tipo <> 'Não iniciado';",
+            tx.executeSql("SELECT * FROM escola WHERE tipo <> 'Não Iniciado' LIMIT ? OFFSET ? ;",
                 [limit, offset],
                 (_, { rows }) => {
                     if (rows.length > 0) {
@@ -144,7 +144,7 @@ const getWithPagination = (limit: number, offset: number) => {
                     }
                     resolve(false)
                 },
-                (_, error) => { resolve(false); return false; });
+                (_, error) => {resolve(false); return false; });
         });
     });
 }
@@ -152,15 +152,15 @@ const getWithPagination = (limit: number, offset: number) => {
 const getByInep = (inep: string | undefined) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT * FROM escola WHERE inep = ? AND tipo <> 'Não iniciado';",
+            tx.executeSql("SELECT * FROM escola WHERE inep = ? AND tipo <> 'Não Iniciado';",
                 [inep || ''],
                 (_, { rows }) => {
                     if (rows.length > 0) {
-                        resolve(rows.item(0));
+                        resolve(rows._array);
                     }
                     resolve(false)
                 },
-                (_, error) => { resolve(false); return false; });
+                (_, error) => {console.log(error); resolve(false); return false; });
         });
     });
 }
@@ -188,7 +188,7 @@ const getAll = (limit: number) => {
 const getNumberOfPages = (limit: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT COUNT(*) AS total_registros FROM escola WHERE tipo <> 'Não iniciado';", [], (tx, results) => {
+            tx.executeSql("SELECT COUNT(*) AS total_registros FROM escola WHERE tipo <> 'Não Iniciado';", [], (tx, results) => {
                 const totalRegistros = results.rows.item(0).total_registros;
                 const paginas = Math.ceil(totalRegistros / limit);
                 resolve(paginas);
@@ -200,7 +200,7 @@ const getNumberOfPages = (limit: number) => {
 const getNumberOfPagesWithNome = (nome: string, limit: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT COUNT(*) AS total_registros FROM escola WHERE REPLACE(nome, '  ', ' ') LIKE ? || '%' AND tipo <> 'Não iniciado';", [nome], (tx, results) => {
+            tx.executeSql("SELECT COUNT(*) AS total_registros FROM escola WHERE REPLACE(nome, '  ', ' ') LIKE ? || '%' AND tipo <> 'Não Iniciado';", [nome], (tx, results) => {
                 const totalRegistros = results.rows.item(0).total_registros;
                 const paginas = Math.ceil(totalRegistros / limit);
                 resolve(paginas);
@@ -212,7 +212,7 @@ const getNumberOfPagesWithNome = (nome: string, limit: number) => {
 const getNumberOfPagesWithInep = (inep: string, limit: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT COUNT(*) AS total_registros FROM escola WHERE inep LIKE ? || '%' AND tipo <> 'Não iniciado';", [inep], (tx, results) => {
+            tx.executeSql("SELECT COUNT(*) AS total_registros FROM escola WHERE inep LIKE ? || '%' AND tipo <> 'Não Iniciado';", [inep], (tx, results) => {
                 const totalRegistros = results.rows.item(0).total_registros;
                 const paginas = Math.ceil(totalRegistros / limit);
                 resolve(paginas);

@@ -5,7 +5,8 @@ const styles = StyleSheet.create({
     titleContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        width: '100%',
     },
     formContainer: {
         marginBottom: 30
@@ -18,14 +19,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         flexWrap: 'wrap',
+        width: '100%',
         marginBottom: 40,
         gap: 20,
         justifyContent: 'space-between'
     },
     input: {
-        width: '100%',
-        flexGrow: 1,
+        maxWidth: '100%',
         height: 40,
+        minWidth: 200,
         borderWidth: 1,
         borderRadius: 5,
         paddingLeft: 10,

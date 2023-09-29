@@ -4,10 +4,7 @@ import { COLORS } from '../constants/theme'
 const styles = StyleSheet.create({
     cardContainer: {
         width: '100%',
-        marginTop: 40,
-        marginBottom: 200,
-        flex: 1,
-        elevation: 5,
+        elevation: 20,
         backgroundColor: COLORS.white,
         borderRadius: 15,
         zIndex: -1
@@ -23,6 +20,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         flexWrap: 'wrap',
         gap: 20,
+        width: '100%',
         alignItems: 'center'
     },
     btnSalvarRascunho: {
@@ -90,7 +88,8 @@ const styles = StyleSheet.create({
         borderBottomColor: COLORS.green,
         borderBottomWidth: .2,
         justifyContent: 'center',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        zIndex: 99999,
     },
     searchInput: {
         width: '90%',
@@ -107,9 +106,13 @@ const styles = StyleSheet.create({
     inputAnexo: {
         height: 50,
         width: '100%',
+        position: 'absolute',
         borderRadius: 10,
+        paddingLeft: 20,
+        marginTop: 30,
         borderWidth: 1,
-        borderColor: '#ccc'
+        borderColor: '#ccc',
+        zIndex: -99999
     },
     btnSalvar:{
         width: 150,
@@ -134,13 +137,17 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignSelf: 'center',
         marginTop: 40,
+        maxWidth: '90%',
         alignItems: 'center',
         justifyContent: 'flex-start',
         paddingLeft: 20,
         paddingRight: 20,
         paddingTop: 10,
         paddingBottom: 10,
+        marginBottom: 10,
+
         gap: 10,
+        zIndex: 999,
         backgroundColor: COLORS.lightGreen,
         borderWidth: 1, 
         borderColor: COLORS.green, 
@@ -150,13 +157,16 @@ const styles = StyleSheet.create({
         position: 'fixed',
         flexDirection: 'row',
         alignSelf: 'center',
-        marginTop: 40,
+        marginTop: 20,
+        marginBottom: 10,
         gap: 10,
+        maxWidth: '90%',
         alignItems: 'center',
         justifyContent: 'flex-start',
         paddingLeft: 20,
         paddingRight: 20,
         paddingTop: 10,
+        zIndex: 999,
         paddingBottom: 10,
         backgroundColor: COLORS.lightRed,
         borderWidth: 1, 

@@ -34,8 +34,8 @@ const RadioGroup = ({ options, question, value, textOption, disable, fontWeight,
                                     value === option && styles.selected,
                                 ]}
                                 onPress={() => handleOptionSelect(option)}
-                            >
-                                {value === option && <Ionicons color={COLORS.white} name='checkmark-outline' size={20} />}
+                            >   
+                                {value === option && <Ionicons color={COLORS.white} name='checkmark-outline' size={20} style={{alignSelf: 'center'}} />}
                             </TouchableOpacity>
                             :
                             <TouchableOpacity

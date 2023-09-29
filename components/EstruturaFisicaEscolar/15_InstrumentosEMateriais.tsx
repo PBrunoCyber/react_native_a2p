@@ -12,28 +12,12 @@ import RadioGroup from '../RadioGroup';
 interface IProps {
     instrumentosEMateriais: (value: IInstrumentosEMateriais) => void,
     formErrors: any,
+    context: IInstrumentosEMateriais
 }
 
-const InstrumentosEMateriais = ({ instrumentosEMateriais, formErrors }: IProps) => {
+const InstrumentosEMateriais = ({ instrumentosEMateriais, formErrors, context }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IInstrumentosEMateriais>(
-        {
-            campo_147: 0,
-            campo_135: null,
-            campo_136: null,
-            campo_137: null,
-            campo_138: null,
-            campo_139: null,
-            campo_140: null,
-            campo_141: null,
-            campo_142: null,
-            campo_143: null,
-            campo_144: null,
-            campo_145: null,
-            campo_146: null,
-            campo_148: null,
-        }
-    );
+    const [answer, setAnswers] = useState<IInstrumentosEMateriais>(context);
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
@@ -50,6 +34,15 @@ const InstrumentosEMateriais = ({ instrumentosEMateriais, formErrors }: IProps) 
             setIsClicked(true);
         }
     }, [formErrors])
+
+    useEffect(() => {
+        setAnswers(context);
+
+    }, [context.campo_135, context.campo_136, context.campo_137,
+        context.campo_138, context.campo_139, context.campo_140, 
+        context.campo_141, context.campo_142, context.campo_143, 
+        context.campo_144, context.campo_145, context.campo_146,
+        context.campo_147, context.campo_148])
 
     const handleOptionChange = (question: string, answer: number | string | null) => {
         setAnswers((prevAnswer) => ({
@@ -79,7 +72,7 @@ const InstrumentosEMateriais = ({ instrumentosEMateriais, formErrors }: IProps) 
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { color: COLORS.green, fontWeight: 'bold' } : { color: COLORS.black }}>XV - INSTRUMENTOS, MATERIAIS SOCIOCULTURAIS E/OU PEDAGÓGICOS EM USO NA ESCOLA PARA O DESENVOLVIMENTO DE ATIVIDADES DE ENSINO APRENDIZAGEM</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? {width: '80%', color: COLORS.green, fontWeight: 'bold' } : {width: '80%', color: COLORS.black }}>XV - INSTRUMENTOS, MATERIAIS SOCIOCULTURAIS E/OU PEDAGÓGICOS EM USO NA ESCOLA PARA O DESENVOLVIMENTO DE ATIVIDADES DE ENSINO APRENDIZAGEM</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>

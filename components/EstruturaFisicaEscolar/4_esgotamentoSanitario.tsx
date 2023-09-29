@@ -13,18 +13,12 @@ import { IEsgotamentoSanitario } from '../../types/EstruturaFisicaEscolar';
 interface IProps {
     esgotamentoSanitarioChange: (value: IEsgotamentoSanitario) => void,
     formErrors: any,
+    context: IEsgotamentoSanitario
 }
 
-const EsgotamentoSanitario = ({ formErrors, esgotamentoSanitarioChange }: IProps) => {
+const EsgotamentoSanitario = ({ formErrors, esgotamentoSanitarioChange, context }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IEsgotamentoSanitario>(
-        {
-            campo_30: 0,
-            campo_27: null,
-            campo_28: null,
-            campo_29: null,
-        }
-    );
+    const [answer, setAnswers] = useState<IEsgotamentoSanitario>(context);
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
@@ -34,6 +28,7 @@ const EsgotamentoSanitario = ({ formErrors, esgotamentoSanitarioChange }: IProps
                 setIsClicked(true);
             }
         }
+        if (context === answer) setIsClicked(false);
     }, [answer])
 
     useEffect(() => {
@@ -41,6 +36,11 @@ const EsgotamentoSanitario = ({ formErrors, esgotamentoSanitarioChange }: IProps
             setIsClicked(true);
         }
     }, [formErrors])
+
+    useEffect(() => {
+        setAnswers(context);
+    }, [context.campo_27, context.campo_28, context.campo_29, 
+        context.campo_30])
 
     const handleOptionChange = (question: string, answer: number | string | null) => {
         setAnswers((prevAnswer) => ({
@@ -61,7 +61,7 @@ const EsgotamentoSanitario = ({ formErrors, esgotamentoSanitarioChange }: IProps
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { color: COLORS.green, fontWeight: 'bold' } : { color: COLORS.black }}>IV - ESGOTAMENTO SANITÁRIO</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%',color: COLORS.green, fontWeight: 'bold' } : { width: '80%',color: COLORS.black }}>IV - ESGOTAMENTO SANITÁRIO</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>

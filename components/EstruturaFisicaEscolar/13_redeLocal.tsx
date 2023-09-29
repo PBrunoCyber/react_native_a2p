@@ -15,17 +15,12 @@ interface IProps {
     answerEquipamentos: IEquipamentos | undefined,
     answerQuantidadeEquipamentos: IQuantidadeEquipamentos | undefined,
     formErrors: any,
+    context: IRedeLocal
 }
 
-const RedeLocal = ({ redeLocal, answerEquipamentos, answerQuantidadeEquipamentos, formErrors }: IProps) => {
+const RedeLocal = ({ redeLocal, answerEquipamentos, answerQuantidadeEquipamentos, formErrors, context }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IRedeLocal>(
-        {
-            campo_116: 0,
-            campo_114: null,
-            campo_115: null
-        }
-    );
+    const [answer, setAnswers] = useState<IRedeLocal>(context);
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
@@ -35,7 +30,12 @@ const RedeLocal = ({ redeLocal, answerEquipamentos, answerQuantidadeEquipamentos
                 setIsClicked(true);
             }
         }
+        if (context === answer) setIsClicked(false);
     }, [answer])
+
+    useEffect(() => {
+        setAnswers(context);
+    }, [context.campo_114, context.campo_115, context.campo_116])
 
     useEffect(() => {
         if (formErrors && Object.keys(formErrors).length > 0) {
@@ -72,7 +72,7 @@ const RedeLocal = ({ redeLocal, answerEquipamentos, answerQuantidadeEquipamentos
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { color: COLORS.green, fontWeight: 'bold' } : { color: COLORS.black }}>XIII - REDE LOCAL DE INTERLIGAÇÃO DE COMPUTADORES</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? {width: '80%', color: COLORS.green, fontWeight: 'bold' } : {width: '80%', color: COLORS.black }}>XIII - REDE LOCAL DE INTERLIGAÇÃO DE COMPUTADORES</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>

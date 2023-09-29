@@ -12,7 +12,8 @@ import Filtros from '../components/filtros';
 import Table from '../components/table';
 import { COLORS } from '../constants/theme'
 import { IEscola } from '../types/Escola';
-import Loading from '../components/Loading';
+import DoubleRing from '../assets/icons/Double_Ring.svg';
+import { ActivityIndicator } from 'react-native';
 
 
 const Home = () => {
@@ -86,7 +87,6 @@ const Home = () => {
 
     const createOrNotEstruturaFisicaEscolar = async () => {
         const res = await EstruturaFisicaEscolar.existsEstruturaFisicaEscolar();
-        console.log(res);
         if (res != true) {
             await EstruturaFisicaEscolar.createTBEstruturaFisicaEscolar();
         }
@@ -96,7 +96,8 @@ const Home = () => {
         const res: any = await Escola.getByInep(selectedInep);
         if (res != false) {
             setData(res);
-            setNumberOfPages(1);
+        } else {
+            setData([]);
         }
     }
 
@@ -111,7 +112,7 @@ const Home = () => {
         createOrNotEstruturaFisicaEscolar();
         insertOrNotEscola();
         initData();
-
+        
     }, [])
 
     useEffect(() => {
@@ -128,26 +129,27 @@ const Home = () => {
             }} />
             {isLoading ?
                 <View style={{ alignItems: 'center', marginTop: 100, justifyContent: 'center', }}>
-                    <Loading width={'80'} height={'80'} />
+                    <ActivityIndicator color={COLORS.green} size={40} />
                 </View>
                 :
                 <>
                     <ScrollView>
                         <View style={{ margin: 20 }}>
-                            <Filtros setSelectedInep={setSelectedInep} limit={limit} />
+                            <Filtros setSelectedInep={setSelectedInep} initData={initData} limit={limit} />
                             <View style={{ maxWidth: 900, marginTop: 20, alignItems: 'flex-end', alignSelf: 'center', width: '100%' }}>
                                 <TouchableOpacity style={styles.syncBtn}><Ionicons name='reload' size={25} color={COLORS.white} /><Text style={{ color: COLORS.white }}>Sincronizar</Text></TouchableOpacity>
                             </View>
                             <Table data={data} />
                         </View>
+                        <View style={styles.paginationContainer}>
+                            <TouchableOpacity disabled={currentPage === 1 ? true : false} onPress={() => paginate('skipBack')}><Ionicons name='play-skip-back-outline' color={COLORS.white} size={20} style={styles.paginationIcon} /></TouchableOpacity>
+                            <TouchableOpacity disabled={currentPage === 1 ? true : false} onPress={() => paginate('back')}><Ionicons name='chevron-back-outline' color={COLORS.white} size={20} style={styles.paginationIcon} /></TouchableOpacity>
+                            <Text>{currentPage} de {numberOfPages}</Text>
+                            <TouchableOpacity disabled={currentPage === numberOfPages ? true : false} onPress={() => paginate('forward')}><Ionicons name='chevron-forward-outline' color={COLORS.white} size={20} style={styles.paginationIcon} /></TouchableOpacity>
+                            <TouchableOpacity disabled={currentPage === numberOfPages ? true : false} onPress={() => paginate('skipForward')}><Ionicons name='play-skip-forward-outline' color={COLORS.white} size={20} style={styles.paginationIcon} /></TouchableOpacity>
+                        </View>
                     </ScrollView>
-                    <View style={styles.paginationContainer}>
-                        <TouchableOpacity disabled={currentPage === 1 ? true : false} onPress={() => paginate('skipBack')}><Ionicons name='play-skip-back-outline' color={COLORS.white} size={20} style={styles.paginationIcon} /></TouchableOpacity>
-                        <TouchableOpacity disabled={currentPage === 1 ? true : false} onPress={() => paginate('back')}><Ionicons name='chevron-back-outline' color={COLORS.white} size={20} style={styles.paginationIcon} /></TouchableOpacity>
-                        <Text>{currentPage} de {numberOfPages}</Text>
-                        <TouchableOpacity disabled={currentPage === numberOfPages ? true : false} onPress={() => paginate('forward')}><Ionicons name='chevron-forward-outline' color={COLORS.white} size={20} style={styles.paginationIcon} /></TouchableOpacity>
-                        <TouchableOpacity disabled={currentPage === numberOfPages ? true : false} onPress={() => paginate('skipForward')}><Ionicons name='play-skip-forward-outline' color={COLORS.white} size={20} style={styles.paginationIcon} /></TouchableOpacity>
-                    </View></>
+                </>
 
             }
 

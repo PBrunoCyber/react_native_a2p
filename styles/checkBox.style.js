@@ -5,9 +5,10 @@ const styles = StyleSheet.create({
     
     formFlexOptions: {
         flexDirection: 'row',
-        gap: 40,
+        gap: 20,
         marginTop: 35,
-        alignItems: 'center'
+        alignItems: 'center',
+        width: '100%'
     },
     checkbox: {
         alignItems: 'center',

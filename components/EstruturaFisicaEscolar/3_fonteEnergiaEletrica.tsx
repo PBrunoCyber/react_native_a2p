@@ -13,18 +13,12 @@ import { IEnergiaEletrica } from '../../types/EstruturaFisicaEscolar';
 interface IProps {
     fonteEnergiaEletricaChange: (value: IEnergiaEletrica) => void,
     formErrors: any,
+    context: IEnergiaEletrica
 }
 
-const FonteEnergiaEletrica = ({ formErrors, fonteEnergiaEletricaChange }: IProps) => {
+const FonteEnergiaEletrica = ({ formErrors, fonteEnergiaEletricaChange, context }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IEnergiaEletrica>(
-        {
-            campo_26: 0,
-            campo_23: null,
-            campo_24: null,
-            campo_25: null,
-        }
-    );
+    const [answer, setAnswers] = useState<IEnergiaEletrica>(context);
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
@@ -34,6 +28,8 @@ const FonteEnergiaEletrica = ({ formErrors, fonteEnergiaEletricaChange }: IProps
                 setIsClicked(true);
             }
         }
+        if (context === answer) setIsClicked(false);
+
     }, [answer])
 
     useEffect(() => {
@@ -41,6 +37,11 @@ const FonteEnergiaEletrica = ({ formErrors, fonteEnergiaEletricaChange }: IProps
             setIsClicked(true);
         }
     }, [formErrors])
+
+    useEffect(() => {
+        setAnswers(context);
+    }, [context.campo_23, context.campo_24, context.campo_25,
+        context.campo_26])
 
     const handleOptionChange = (question: string, answer: number | string | null) => {
         setAnswers((prevAnswer) => ({
@@ -61,7 +62,7 @@ const FonteEnergiaEletrica = ({ formErrors, fonteEnergiaEletricaChange }: IProps
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { color: COLORS.green, fontWeight: 'bold' } : { color: COLORS.black }}>III - FONTE DE ENERGIA ELÉTRICA</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%',color: COLORS.green, fontWeight: 'bold' } : { width: '80%',color: COLORS.black }}>III - FONTE DE ENERGIA ELÉTRICA</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>

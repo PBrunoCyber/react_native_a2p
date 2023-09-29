@@ -13,22 +13,13 @@ import { IEquipamentos } from '../../types/EstruturaFisicaEscolar';
 interface IProps {
     equipamentos: (value: IEquipamentos) => void,
     formErrors: any,
+    context: IEquipamentos,
 }
 
 
-const Equipamentos = ({ formErrors, equipamentos }: IProps) => {
+const Equipamentos = ({ formErrors, equipamentos, context }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IEquipamentos>(
-        {
-            campo_97: 0,
-            campo_91: null,
-            campo_92: null,
-            campo_93: null,
-            campo_94: null,
-            campo_95: null,
-            campo_96: null,
-        }
-    );
+    const [answer, setAnswers] = useState<IEquipamentos>(context);
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
@@ -41,10 +32,17 @@ const Equipamentos = ({ formErrors, equipamentos }: IProps) => {
     }, [answer])
 
     useEffect(() => {
+        setAnswers(context);
+    }, [context.campo_91, context.campo_92, context.campo_93,
+        context.campo_94, context.campo_95, context.campo_95,
+        context.campo_96, context.campo_97])
+
+    useEffect(() => {
         if (formErrors && Object.keys(formErrors).length > 0) {
             setIsClicked(true);
         }
     }, [formErrors])
+
 
     const handleOptionChange = (question: string, answer: number | string | null) => {
         setAnswers((prevAnswer) => ({
@@ -68,7 +66,7 @@ const Equipamentos = ({ formErrors, equipamentos }: IProps) => {
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { color: COLORS.green, fontWeight: 'bold' } : { color: COLORS.black }}>IX - EQUIPAMENTOS EXISTENTES NA ESCOLA PARA USO TÉCNICO E ADMINISTRATIVO</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? {width: '80%', color: COLORS.green, fontWeight: 'bold' } : {width: '80%', color: COLORS.black }}>IX - EQUIPAMENTOS EXISTENTES NA ESCOLA PARA USO TÉCNICO E ADMINISTRATIVO</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>

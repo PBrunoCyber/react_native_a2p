@@ -12,32 +12,12 @@ import RadioGroup from '../RadioGroup';
 interface IProps {
     totalDeProfissionais: (value: ITotalProfissionais) => void,
     formErrors: any,
+    context: ITotalProfissionais
 }
 
-const TotalDeProfissionais = ({ formErrors, totalDeProfissionais }: IProps) => {
+const TotalDeProfissionais = ({ formErrors, totalDeProfissionais, context }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<ITotalProfissionais>(
-        {
-            campo_133: 0,
-            campo_117: '',
-            campo_118: '',
-            campo_119: '',
-            campo_120: '',
-            campo_121: '',
-            campo_122: '',
-            campo_123: '',
-            campo_124: '',
-            campo_125: '',
-            campo_126: '',
-            campo_127: '',
-            campo_128: '',
-            campo_129: '',
-            campo_130: '',
-            campo_131: '',
-            campo_132: '',
-            campo_134: null,
-        }
-    );
+    const [answer, setAnswers] = useState<ITotalProfissionais>(context);
 
     useEffect(() => {
         totalDeProfissionais(answer);
@@ -46,7 +26,18 @@ const TotalDeProfissionais = ({ formErrors, totalDeProfissionais }: IProps) => {
                 setIsClicked(true);
             }
         }
+        if (context === answer) setIsClicked(false);
     }, [answer])
+
+    useEffect(() => {
+        setAnswers(context);
+
+    }, [context.campo_117, context.campo_118, context.campo_119,
+        context.campo_120, context.campo_121, context.campo_122,
+        context.campo_123, context.campo_124, context.campo_125,
+        context.campo_126, context.campo_127, context.campo_128, 
+        context.campo_129, context.campo_130, context.campo_131,
+        context.campo_132, context.campo_133, context.campo_134])
 
     useEffect(() => {
         if (formErrors && Object.keys(formErrors).length > 0) {
@@ -86,7 +77,7 @@ const TotalDeProfissionais = ({ formErrors, totalDeProfissionais }: IProps) => {
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { color: COLORS.green, fontWeight: 'bold' } : { color: COLORS.black }}>XIV - TOTAL DE PROFISSIONAIS QUE ATUAM NAS SEGUINTES FUNÇÕES NA ESCOLA</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? {width: '80%', color: COLORS.green, fontWeight: 'bold' } : {width: '80%', color: COLORS.black }}>XIV - TOTAL DE PROFISSIONAIS QUE ATUAM NAS SEGUINTES FUNÇÕES NA ESCOLA</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>
@@ -100,113 +91,113 @@ const TotalDeProfissionais = ({ formErrors, totalDeProfissionais }: IProps) => {
                     <View style={{ marginTop: 40 }}>
                         <View style={[styles.formFlex, { marginBottom: 30 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400, fontWeight: 'normal' }}>1 - Auxiliares de secretaria ou auxiliares administrativos, atendentes*</Text>
-                            <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={4} value={answer?.campo_117} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer?.campo_133 == 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_117', txt)} />
+                            <View style={{ maxWidth: 300, flexGrow: 1  }}>
+                                <TextInput maxLength={4} value={answer?.campo_117} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_117', txt)} />
                                 {formErrors.campo_117 && <Text style={styles.messageError}>{formErrors.campo_117}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 30 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400, fontWeight: 'normal' }}>2 - Auxiliar de serviços gerais, porteiro(a), zelador(a), faxineiro(a), horticultor(a), jardineiro(a)*</Text>
-                            <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={4} value={answer?.campo_118} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer?.campo_133 == 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_118', txt)} />
+                            <View style={{ maxWidth: 300, flexGrow: 1  }}>
+                                <TextInput maxLength={4} value={answer?.campo_118} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_118', txt)} />
                                 {formErrors.campo_118 && <Text style={styles.messageError}>{formErrors.campo_118}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 30 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400, fontWeight: 'normal' }}>3 - Bibliotecário(a), auxiliar de biblioteca ou monitor(a) da sala de leitura*</Text>
-                            <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={4} value={answer?.campo_119} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer?.campo_133 == 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_119', txt)} />
+                            <View style={{ maxWidth: 300, flexGrow: 1  }}>
+                                <TextInput maxLength={4} value={answer?.campo_119} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_119', txt)} />
                                 {formErrors.campo_119 && <Text style={styles.messageError}>{formErrors.campo_119}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 30 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400, fontWeight: 'normal' }}>4 - Bombeiro(a) brigadista, profissionais de assistência a saúde (urgência e emergência), enfermeiro(a), técnico(a) de enfermagem e socorrista*</Text>
-                            <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={4} value={answer?.campo_120} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer?.campo_133 == 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_120', txt)} />
+                            <View style={{ maxWidth: 300, flexGrow: 1  }}>
+                                <TextInput maxLength={4} value={answer?.campo_120} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_120', txt)} />
                                 {formErrors.campo_120 && <Text style={styles.messageError}>{formErrors.campo_120}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 40 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400, fontWeight: 'normal' }}>5 - Coordenador(a) de turno/disciplinar*</Text>
-                            <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={4} value={answer?.campo_121} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer?.campo_133 == 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_121', txt)} />
+                            <View style={{ maxWidth: 300, flexGrow: 1  }}>
+                                <TextInput maxLength={4} value={answer?.campo_121} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_121', txt)} />
                                 {formErrors.campo_121 && <Text style={styles.messageError}>{formErrors.campo_121}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 40 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400, fontWeight: 'normal' }}>6 - Fonoaudiólogo(a)*</Text>
-                            <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={4} value={answer?.campo_122} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer?.campo_133 == 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_122', txt)} />
+                            <View style={{ maxWidth: 300, flexGrow: 1  }}>
+                                <TextInput maxLength={4} value={answer?.campo_122} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_122', txt)} />
                                 {formErrors.campo_122 && <Text style={styles.messageError}>{formErrors.campo_122}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 40 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400, fontWeight: 'normal' }}>7 - Nutricionista*</Text>
-                            <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={4} value={answer?.campo_123} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer?.campo_133 == 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_123', txt)} />
+                            <View style={{ maxWidth: 300, flexGrow: 1  }}>
+                                <TextInput maxLength={4} value={answer?.campo_123} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_123', txt)} />
                                 {formErrors.campo_123 && <Text style={styles.messageError}>{formErrors.campo_123}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 40 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400, fontWeight: 'normal' }}>8 - Psicólogo(a) escolar*</Text>
-                            <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={4} value={answer?.campo_124} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer?.campo_133 == 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_124', txt)} />
+                            <View style={{ maxWidth: 300, flexGrow: 1  }}>
+                                <TextInput maxLength={4} value={answer?.campo_124} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_124', txt)} />
                                 {formErrors.campo_124 && <Text style={styles.messageError}>{formErrors.campo_124}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 40 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400, fontWeight: 'normal' }}>9 - Profissionais de preparação e segurança alimentar, cozinheiro(a), merendeira e auxiliar de cozinha*</Text>
-                            <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={4} value={answer?.campo_125} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer?.campo_133 == 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_125', txt)} />
+                            <View style={{ maxWidth: 300, flexGrow: 1  }}>
+                                <TextInput maxLength={4} value={answer?.campo_125} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_125', txt)} />
                                 {formErrors.campo_125 && <Text style={styles.messageError}>{formErrors.campo_125}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 40 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400, fontWeight: 'normal' }}>10 - Profissionais de apoio e supervisão pedagógica: (pedagogo(a), coordenador(a) pedagógico(a), orientador(a) educacional, supervisor(a) escolar e coordenador(a) de área de ensino*</Text>
-                            <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={4} value={answer?.campo_126} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer?.campo_133 == 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_126', txt)} />
+                            <View style={{ maxWidth: 300, flexGrow: 1  }}>
+                                <TextInput maxLength={4} value={answer?.campo_126} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_126', txt)} />
                                 {formErrors.campo_126 && <Text style={styles.messageError}>{formErrors.campo_126}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 40 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400, fontWeight: 'normal' }}>11 - Secretário(a) escolar*</Text>
-                            <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={4} value={answer?.campo_127} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer?.campo_133 == 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_127', txt)} />
+                            <View style={{ maxWidth: 300, flexGrow: 1  }}>
+                                <TextInput maxLength={4} value={answer?.campo_127} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_127', txt)} />
                                 {formErrors.campo_127 && <Text style={styles.messageError}>{formErrors.campo_127}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 40 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400, fontWeight: 'normal' }}>12 - Segurança, guarda ou segurança patrimonial*</Text>
-                            <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={4} value={answer?.campo_128} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer?.campo_133 == 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_128', txt)} />
+                            <View style={{ maxWidth: 300, flexGrow: 1  }}>
+                                <TextInput maxLength={4} value={answer?.campo_128} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_128', txt)} />
                                 {formErrors.campo_128 && <Text style={styles.messageError}>{formErrors.campo_128}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 40 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400, fontWeight: 'normal' }}>13 - Técnicos(as), monitores(as), supervisores(as) ou auxiliares de laboratório(s), de apoio a tecnologias educacionais ou em multimeios/multimídias eletrônico-digitais.*</Text>
-                            <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={4} value={answer?.campo_129} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer?.campo_133 == 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_129', txt)} />
+                            <View style={{ maxWidth: 300, flexGrow: 1  }}>
+                                <TextInput maxLength={4} value={answer?.campo_129} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_129', txt)} />
                                 {formErrors.campo_129 && <Text style={styles.messageError}>{formErrors.campo_129}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 40 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400, fontWeight: 'normal' }}>14 - Vice-diretor(a) ou diretor(a) adjunto(a), profissionais responsáveis pela gestão administrativa e/ou financeira*</Text>
-                            <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={4} value={answer?.campo_130} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer?.campo_133 == 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_130', txt)} />
+                            <View style={{ maxWidth: 300, flexGrow: 1  }}>
+                                <TextInput maxLength={4} value={answer?.campo_130} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_130', txt)} />
                                 {formErrors.campo_130 && <Text style={styles.messageError}>{formErrors.campo_130}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 40 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400, fontWeight: 'normal' }}>15 - Orientador(a) comunitário(a) ou assistente social*</Text>
-                            <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={4} value={answer?.campo_131} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer?.campo_133 == 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_131', txt)} />
+                            <View style={{ maxWidth: 300, flexGrow: 1  }}>
+                                <TextInput maxLength={4} value={answer?.campo_131} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_131', txt)} />
                                 {formErrors.campo_131 && <Text style={styles.messageError}>{formErrors.campo_131}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 40 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400, fontWeight: 'normal' }}>16 - Tradutor e Intérprete de Libras para atendimento em outros ambientes da escola que não seja sala de aula*</Text>
-                            <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={4} value={answer?.campo_132} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer?.campo_133 == 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_132', txt)} />
+                            <View style={{ maxWidth: 300, flexGrow: 1 }}>
+                                <TextInput maxLength={4} value={answer?.campo_132} style={[styles.input, answer?.campo_133 == 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_132', txt)} />
                                 {formErrors.campo_132 && <Text style={styles.messageError}>{formErrors.campo_132}</Text>}
                             </View>
                         </View>

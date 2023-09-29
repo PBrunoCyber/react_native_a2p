@@ -4,8 +4,10 @@ import { COLORS } from '../constants/theme';
 const styles = StyleSheet.create({
     titleContainer: {
         flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'center',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        width: '100%',
     },
     formContainer: {
         marginBottom: 40,
@@ -20,13 +22,12 @@ const styles = StyleSheet.create({
     },
     input: {
         width: '100%',
+        minWidth: 200,
         height: 40,
         borderWidth: 1,
         borderRadius: 5,
         paddingLeft: 10,
         paddingRight: 10,
-        alignSelf: 'center',
-        flexGrow: 1,
         borderColor: COLORS.gray
     },
     formFlexOptions: {

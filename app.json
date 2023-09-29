@@ -9,5 +9,9 @@
     ],
     "name": "react_native_app",
     "slug": "react_native_app"
+  },
+  "packagerOpts": {
+    "config": "metro.config.js",
+    "sourceExts": ["js", "jsx", "ts", "tsx", "svg"]
   }
 }

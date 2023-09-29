@@ -25,7 +25,7 @@ const RadioGroup = ({ label,fontWeight,value, onSelect }: IRadioGroup) => {
             <TouchableOpacity onPress={toggleCheckBox} style={[styles.checkbox, isChecked && styles.checked]}>
                 {isChecked && <Ionicons name='checkmark-outline' size={20} color={COLORS.white}/>}
             </TouchableOpacity>
-            <Text style={{fontWeight: fontWeight}}>{label}</Text>
+            <Text style={{fontWeight: fontWeight, maxWidth: '80%'}}>{label}</Text>
         </View>
     );
 };

@@ -29,13 +29,18 @@ const AbastecimentoDeAgua = ({ localDeFuncionamentoChange, context, formErrors, 
                 setIsClicked(true);
             }
         }
+        if(answer === context) setIsClicked(false);
 
     }, [answer])
 
     useEffect(() => {
         setAnswers(context);
-        if (context !== answer) setIsClicked(false);
-    }, [context])
+    }, [context.campo_3, context.campo_4, context.campo_5, 
+        context.campo_6, context.campo_7, context.campo_8, 
+        context.campo_9, context.campo_10, context.campo_11,
+        context.campo_12, context.campo_13, context.campo_14,
+        context.campo_15, context.campo_16])
+    
 
     useEffect(() => {
         if (formErrors && Object.keys(formErrors).length > 0) {
@@ -61,9 +66,9 @@ const AbastecimentoDeAgua = ({ localDeFuncionamentoChange, context, formErrors, 
         <View>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { color: COLORS.green, fontWeight: 'bold' } : { color: COLORS.black }}>I - LOCAL DE FUNCIONAMENTO DA ESCOLA</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { width: '80%',color: COLORS.green, fontWeight: 'bold' } : {  width: '80%',color: COLORS.black }}>I - LOCAL DE FUNCIONAMENTO DA ESCOLA</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
-                        : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
+                        : <Ionicons name='chevron-down-outline'  color={COLORS.lightBlack} size={30} />}
                 </View>
             </TouchableOpacity>
             {(isClicked === true || Object.keys(formErrors).length > 0) ?
@@ -79,42 +84,42 @@ const AbastecimentoDeAgua = ({ localDeFuncionamentoChange, context, formErrors, 
                         <View style={[styles.formFlex, { paddingLeft: '10%', marginBottom: 10 }]}>
                             <Text style={{ flexGrow: 1 }}>i) Código da escola com a qual compartilha*</Text>
                             <View style={{ maxWidth: 300, flexGrow: 1 }}>
-                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_11 : ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer.campo_10 == 0 || answer.campo_10 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_11', txt)} />
+                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_11 : ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer.campo_10 === 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_11', txt)} />
                                 {formErrors.campo_11 && <Text style={styles.messageError}>{formErrors.campo_11}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { paddingLeft: '10%', marginBottom: 10 }]}>
                             <Text style={{ flexGrow: 1 }}>ii) Código da escola com a qual compartilha*</Text>
                             <View style={{ maxWidth: 300, flexGrow: 1 }}>
-                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_12 : ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer.campo_10 == 0 || answer.campo_10 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_12', txt)} />
+                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_12 : ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer.campo_10 === 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_12', txt)} />
                                 {formErrors.campo_12 && <Text style={styles.messageError}>{formErrors.campo_12}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { paddingLeft: '10%', marginBottom: 10 }]}>
                             <Text style={{ flexGrow: 1 }}>iii) Código da escola com a qual compartilha*</Text>
                             <View style={{ maxWidth: 300, flexGrow: 1 }}>
-                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_13 : ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer.campo_10 == 0 || answer.campo_10 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_13', txt)} />
+                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_13 : ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer.campo_10 === 1  ? true : false} onChangeText={(txt) => handleOptionChange('campo_13', txt)} />
                                 {formErrors.campo_13 && <Text style={styles.messageError}>{formErrors.campo_13}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { paddingLeft: '10%', marginBottom: 10 }]}>
                             <Text style={{ flexGrow: 1 }}>iv) Código da escola com a qual compartilha*</Text>
                             <View style={{ maxWidth: 300, flexGrow: 1 }}>
-                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_14 : ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer.campo_10 == 0 || answer.campo_10 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_14', txt)} />
+                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_14 : ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer.campo_10 === 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_14', txt)} />
                                 {formErrors.campo_14 && <Text style={styles.messageError}>{formErrors.campo_14}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { paddingLeft: '10%', marginBottom: 10 }]}>
                             <Text style={{ flexGrow: 1 }}>v) Código da escola com a qual compartilha*</Text>
                             <View style={{ maxWidth: 300, flexGrow: 1 }}>
-                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_15 : ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer.campo_10 == 0 || answer.campo_10 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_15', txt)} />
+                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_15 : ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer.campo_10 === 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_15', txt)} />
                                 {formErrors.campo_15 && <Text style={styles.messageError}>{formErrors.campo_15}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { paddingLeft: '10%', marginBottom: 0 }]}>
                             <Text style={{ flexGrow: 1 }}>vi) Código da escola com a qual compartilha*</Text>
                             <View style={{ maxWidth: 300, flexGrow: 1 }}>
-                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_16 : ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: 'trasparent' }]} aria-disabled={answer.campo_10 == 0 || answer.campo_10 == null ? true : false} onChangeText={(txt) => handleOptionChange('campo_16', txt)} />
+                                <TextInput maxLength={8} value={answer.campo_10 == 1 ? answer.campo_16 : ''} style={[styles.input, answer.campo_10 == 0 || answer.campo_10 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer.campo_10 === 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_16', txt)} />
                                 {formErrors.campo_16 && <Text style={styles.messageError}>{formErrors.campo_16}</Text>}
                             </View>
                         </View>

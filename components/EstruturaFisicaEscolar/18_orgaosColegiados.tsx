@@ -12,21 +12,13 @@ import { IOrgaosColegiados } from '../../types/EstruturaFisicaEscolar';
 
 interface IProps {
     orgaosColegiados: (value: IOrgaosColegiados) => void,
-    formErrors: any;
+    formErrors: any,
+    context: IOrgaosColegiados
 }
 
-const OrgaosColegiados = ({ orgaosColegiados, formErrors }: IProps) => {
+const OrgaosColegiados = ({ orgaosColegiados, formErrors, context }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IOrgaosColegiados>(
-        {
-            campo_169: 0,
-            campo_164: null,
-            campo_165: null,
-            campo_166: null,
-            campo_167: null,
-            campo_168: null,
-        }
-    );
+    const [answer, setAnswers] = useState<IOrgaosColegiados>(context);
     const textOption = ["SIM", "NÃO"]
 
     const handleOptionChange = (question: string, answer: number | string | null) => {
@@ -46,6 +38,10 @@ const OrgaosColegiados = ({ orgaosColegiados, formErrors }: IProps) => {
         }
     }
 
+    useEffect(() => {
+        setAnswers(context);
+    }, [context.campo_164, context.campo_165, context.campo_166, 
+        context.campo_167, context.campo_168, context.campo_169])
 
     useEffect(() => {
         orgaosColegiados(answer);
@@ -54,6 +50,7 @@ const OrgaosColegiados = ({ orgaosColegiados, formErrors }: IProps) => {
                 setIsClicked(true);
             }
         }
+        if (context === answer) setIsClicked(false);
     }, [answer])
 
     useEffect(() => {
@@ -66,7 +63,7 @@ const OrgaosColegiados = ({ orgaosColegiados, formErrors }: IProps) => {
         <View style={{ marginTop: 20 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
-                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? { color: COLORS.green, fontWeight: 'bold' } : { color: COLORS.black }}>XVIII - ÓRGÃOS COLEGIADOS EM FUNCIONAMENTO NA ESCOLA</Text>
+                    <Text style={isClicked || Object.keys(formErrors).length > 0 ? {width: '80%', color: COLORS.green, fontWeight: 'bold' } : {width: '80%', color: COLORS.black }}>XVIII - ÓRGÃOS COLEGIADOS EM FUNCIONAMENTO NA ESCOLA</Text>
                     {isClicked || Object.keys(formErrors).length > 0 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} />
                         : <Ionicons name='chevron-down-outline' color={COLORS.lightBlack} size={30} />}
                 </View>
