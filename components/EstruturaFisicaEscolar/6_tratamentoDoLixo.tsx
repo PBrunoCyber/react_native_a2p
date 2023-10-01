@@ -14,12 +14,13 @@ import { useFocusEffect } from 'expo-router';
 interface IProps {
     tratamentoDoLixo?: (value: ITratamentoDoLixo) => void,
     formErrors?: any,
-    data?: ITratamentoDoLixo
+    data?: ITratamentoDoLixo,
+    editData?: ITratamentoDoLixo
 }
 
-const TratamentoDoLixo = ({ formErrors, tratamentoDoLixo, data }: IProps) => {
+const TratamentoDoLixo = ({ formErrors, tratamentoDoLixo, data, editData }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<ITratamentoDoLixo>(data || { campo_36: null, campo_37: null, campo_38: null, campo_39: 0 });
+    const [answer, setAnswers] = useState<ITratamentoDoLixo>(data || editData ||{ campo_36: null, campo_37: null, campo_38: null, campo_39: 0 });
     const textOption = ["SIM", "NÃO"]
 
     const handleOptionChange = (question: string, answer: number | string | null) => {
@@ -46,7 +47,7 @@ const TratamentoDoLixo = ({ formErrors, tratamentoDoLixo, data }: IProps) => {
 
     useFocusEffect(
         useCallback(() => {
-            setAnswers(data || { campo_36: null, campo_37: null, campo_38: null, campo_39: 0 });
+            setAnswers(data || editData || { campo_36: null, campo_37: null, campo_38: null, campo_39: 0 });
             setIsClicked(false);
         }, [])
     )
@@ -54,11 +55,6 @@ const TratamentoDoLixo = ({ formErrors, tratamentoDoLixo, data }: IProps) => {
     useEffect(() => {
         tratamentoDoLixo &&
             tratamentoDoLixo(answer);
-        for (const key in answer) {
-            if (answer[key as keyof ITratamentoDoLixo]) {
-                setIsClicked(true);
-            }
-        }
     }, [answer])
 
     useEffect(() => {

@@ -36,7 +36,7 @@ const validate = (answer: ILinguaMinistrada | undefined, instrumentosEMateriais:
     if (Object.keys(errors).length > 0) {
         return errors;
     } else {
-        return {};
+        return false;
     }
 }
 

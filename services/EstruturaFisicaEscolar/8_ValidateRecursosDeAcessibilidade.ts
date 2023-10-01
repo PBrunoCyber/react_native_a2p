@@ -103,7 +103,7 @@ const validate = (answer: IRecursosDeAcessibilidade | undefined, localDeFunciona
     if (Object.keys(errors).length > 0) {
         return errors;
     } else {
-        return {};
+        return false;
     }
 }
 

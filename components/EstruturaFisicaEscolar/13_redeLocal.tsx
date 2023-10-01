@@ -16,26 +16,23 @@ interface IProps {
     answerEquipamentos?: IEquipamentos | undefined,
     answerQuantidadeEquipamentos?: IQuantidadeEquipamentos | undefined,
     formErrors?: any,
+    data?: IRedeLocal,
+    editData?: IRedeLocal
 }
 
-const RedeLocal = ({ redeLocal, answerEquipamentos, answerQuantidadeEquipamentos, formErrors }: IProps) => {
+const RedeLocal = ({ redeLocal, answerEquipamentos, answerQuantidadeEquipamentos, data, formErrors, editData }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IRedeLocal>({ campo_114: null, campo_115: null, campo_116: 0 });
+    const [answer, setAnswers] = useState<IRedeLocal>(data || editData ||{ campo_114: null, campo_115: null, campo_116: 0 });
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
         redeLocal &&
             redeLocal(answer);
-        for (const key in answer) {
-            if (answer[key as keyof IRedeLocal]) {
-                setIsClicked(true);
-            }
-        }
     }, [answer])
 
     useFocusEffect(
         useCallback(() => {
-            setAnswers({ campo_114: null, campo_115: null, campo_116: 0 });
+            setAnswers(data || editData ||{ campo_114: null, campo_115: null, campo_116: 0 });
             setIsClicked(false);
         }, [])
     )
@@ -84,11 +81,11 @@ const RedeLocal = ({ redeLocal, answerEquipamentos, answerQuantidadeEquipamentos
             {isClicked === true || formErrors && Object.keys(formErrors).length > 0 ?
                 <View style={styles.formContainer}>
                     {formErrors?.redeLocal && <Text style={styles.messageError}>{formErrors?.redeLocal}</Text>}
-                    <CheckBox fontWeight='bold' value={answer.campo_116} label='Não há rede local interligando computadores*' onSelect={(value) => handleOptionChange('campo_116', value)} />
+                    <CheckBox fontWeight='bold' disable={data? true : false} value={answer.campo_116} label='Não há rede local interligando computadores*' onSelect={(value) => handleOptionChange('campo_116', value)} />
                     {formErrors?.campo_116 && <Text style={styles.messageError}>{formErrors?.campo_116}</Text>}
-                    <RadioGroup options={[1, 0]} disable={answer.campo_116 === 1 || (answerEquipamentos?.campo_92 !== 1 || (!answerQuantidadeEquipamentos?.campo_103 && !answerQuantidadeEquipamentos?.campo_104 && !answerQuantidadeEquipamentos?.campo_105)) ? true : false} value={answer.campo_114} textOption={textOption} fontWeight='normal' question='1 - A cabo*' onSelect={(option) => handleOptionChange('campo_114', option)} />
+                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_114} disable={answer.campo_116 === 1 || (answerEquipamentos?.campo_92 !== 1 || (!answerQuantidadeEquipamentos?.campo_103 && !answerQuantidadeEquipamentos?.campo_104 && !answerQuantidadeEquipamentos?.campo_105)) || data ? true : false} value={answer.campo_114} textOption={textOption} fontWeight='normal' question='1 - A cabo*' onSelect={(option) => handleOptionChange('campo_114', option)} />
                     {formErrors?.campo_114 && <Text style={styles.messageError}>{formErrors?.campo_114}</Text>}
-                    <RadioGroup options={[1, 0]} disable={answer.campo_116 === 1 || answer.campo_114 === null ? true : false} value={answer.campo_115} textOption={textOption} fontWeight='normal' question='2 - Wireless*' onSelect={(option) => handleOptionChange('campo_115', option)} />
+                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_115} disable={answer.campo_116 === 1 || answer.campo_114 === null || data ? true : false} value={answer.campo_115} textOption={textOption} fontWeight='normal' question='2 - Wireless*' onSelect={(option) => handleOptionChange('campo_115', option)} />
                     {formErrors?.campo_115 && <Text style={styles.messageError}>{formErrors?.campo_115}</Text>}
                 </View>
                 : null

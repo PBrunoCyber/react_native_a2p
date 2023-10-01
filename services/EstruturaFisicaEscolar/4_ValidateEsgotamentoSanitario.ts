@@ -24,7 +24,7 @@ const validate = (answer: IEsgotamentoSanitario | undefined) => {
     if (Object.keys(errors).length > 0) {
         return errors;
     } else {
-        return {};
+        return false;
     }
 }
 

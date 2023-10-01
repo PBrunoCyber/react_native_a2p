@@ -14,27 +14,23 @@ import { useFocusEffect } from 'expo-router';
 interface IProps {
     acessoInternet?: (value: IAcessoInternet) => void,
     formErrors?: any,
-    data: IAcessoInternet
+    data?: IAcessoInternet,
+    editData?: IAcessoInternet
 }
 
-const AcessoInternet = ({ acessoInternet, formErrors, data }: IProps) => {
+const AcessoInternet = ({ acessoInternet, formErrors, data, editData }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IAcessoInternet>(data || { campo_106: null, campo_107: null, campo_108: null, campo_109: null, campo_110: 0 });
+    const [answer, setAnswers] = useState<IAcessoInternet>(data || editData ||{ campo_106: null, campo_107: null, campo_108: null, campo_109: null, campo_110: 0 });
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
         acessoInternet &&
             acessoInternet(answer);
-        for (const key in answer) {
-            if (answer[key as keyof IAcessoInternet]) {
-                setIsClicked(true);
-            }
-        }
     }, [answer])
 
     useFocusEffect(
         useCallback(() => {
-            setAnswers(data || { campo_106: null, campo_107: null, campo_108: null, campo_109: null, campo_110: 0 });
+            setAnswers(data || editData ||{ campo_106: null, campo_107: null, campo_108: null, campo_109: null, campo_110: 0 });
             setIsClicked(false);
         }, [])
     )

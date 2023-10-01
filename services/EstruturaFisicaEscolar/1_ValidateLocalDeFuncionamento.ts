@@ -96,7 +96,7 @@ const validate = (answerLocalDeFuncionamento: ILocalDeFuncionamento | undefined,
     if (Object.keys(errors).length > 0) {
         return errors;
     } else {
-        return {};
+        return false;
     }
 }
 

@@ -14,29 +14,24 @@ interface IProps {
     localDeFuncionamentoChange?: (value: ILocalDeFuncionamento) => void,
     values?: IAllValues
     formErrors?: any,
-    data?: ILocalDeFuncionamento
+    data?: ILocalDeFuncionamento,
+    editData?: ILocalDeFuncionamento
 }
 
-const AbastecimentoDeAgua = ({ localDeFuncionamentoChange, formErrors, data }: IProps) => {
+const AbastecimentoDeAgua = ({ localDeFuncionamentoChange, formErrors, data, editData }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<ILocalDeFuncionamento>(data || { campo_3: null, campo_4: null, campo_5: null, campo_6: null, campo_7: null, campo_8: null, campo_9: null, campo_10: null, campo_11: '', campo_12: '', campo_13: '', campo_14: '', campo_15: '', campo_16: '' });
+    const [answer, setAnswers] = useState<ILocalDeFuncionamento>(data || editData || { campo_3: null, campo_4: null, campo_5: null, campo_6: null, campo_7: null, campo_8: null, campo_9: null, campo_10: null, campo_11: '', campo_12: '', campo_13: '', campo_14: '', campo_15: '', campo_16: '' });
 
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
         localDeFuncionamentoChange &&
             localDeFuncionamentoChange(answer);
-        for (const key in answer) {
-            if (answer[key as keyof ILocalDeFuncionamento]) {
-                setIsClicked(true);
-            }
-        }
-
     }, [answer])
 
     useFocusEffect(
         useCallback(() => {
-            setAnswers(data || { campo_3: null, campo_4: null, campo_5: null, campo_6: null, campo_7: null, campo_8: null, campo_9: null, campo_10: null, campo_11: '', campo_12: '', campo_13: '', campo_14: '', campo_15: '', campo_16: '' });
+            setAnswers(data || editData || { campo_3: null, campo_4: null, campo_5: null, campo_6: null, campo_7: null, campo_8: null, campo_9: null, campo_10: null, campo_11: '', campo_12: '', campo_13: '', campo_14: '', campo_15: '', campo_16: '' });
             setIsClicked(false);
         }, [])
     )
@@ -60,6 +55,17 @@ const AbastecimentoDeAgua = ({ localDeFuncionamentoChange, formErrors, data }: I
                 ['campo_10']: null
             }));
         }
+        if(question === 'campo_10' && resposta === 0){
+            setAnswers((prevAnswer) => ({
+                ...prevAnswer,
+                ['campo_11']: '',
+                ['campo_12']: '',
+                ['campo_13']: '',
+                ['campo_14']: '',
+                ['campo_15']: '',
+                ['campo_16']: ''
+            }));
+        }
     }
 
     return (
@@ -78,7 +84,7 @@ const AbastecimentoDeAgua = ({ localDeFuncionamentoChange, formErrors, data }: I
                     {formErrors?.campo_3 && <Text style={styles.messageError}>{formErrors?.campo_3}</Text>}
                     <RadioGroup options={[1, 2, 3]} marked={data ? true : false} selected={data?.campo_9} disable={answer.campo_3 === 1 && !data ? false : true} value={answer.campo_9} textOption={["Próprio", "Cedido", "Alugado"]} fontWeight='normal' question='a) Tipo de Imóvel*' onSelect={(option) => handleOptionChange('campo_9', option)} />
                     {formErrors?.campo_9 && <Text style={styles.messageError}>{formErrors?.campo_9}</Text>}
-                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_10} disable={answer.campo_3 === 1 && !data ? false : true} value={answer.campo_10} textOption={textOption} fontWeight='normal' question='b) Prédio Escolar Compartilhado com Outra Escola*' onSelect={(option) => handleOptionChange('campo_10', option)} />
+                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_10} disable={answer.campo_3 === 1 && !data ? false : true} value={ answer.campo_10} textOption={textOption} fontWeight='normal' question='b) Prédio Escolar Compartilhado com Outra Escola*' onSelect={(option) => handleOptionChange('campo_10', option)} />
                     {formErrors?.campo_10 && <Text style={styles.messageError}>{formErrors?.campo_10}</Text>}
                     <View style={{ marginTop: 40 }}>
                         <View style={[styles.formFlex, { paddingLeft: '10%', marginBottom: 10 }]}>

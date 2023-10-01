@@ -42,12 +42,6 @@ const Filtros = (props: IProps) => {
         }, [])
     )
 
-    useEffect(() => {
-        props.initData();
-        props.setSelectedInep('');
-        console.log("Teste");
-    }, [router.back])
-
     const getNomeAcrossInep = (data: Array<IEscola>, inepSelected: number | string) => {
         const selectedItem = data.find(item => item.inep === inepSelected);
         if (selectedItem) {

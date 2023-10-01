@@ -14,27 +14,23 @@ import { useFocusEffect } from 'expo-router';
 interface IProps {
     destinacaoDoLixo?: (value: IDestinacaoDoLixo) => void,
     formErrors?: any,
-    data?: IDestinacaoDoLixo
+    data?: IDestinacaoDoLixo,
+    editData?: IDestinacaoDoLixo
 }
 
-const DestinacaoDoLixo = ({ destinacaoDoLixo, formErrors, data }: IProps) => {
+const DestinacaoDoLixo = ({ destinacaoDoLixo, formErrors, data, editData }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IDestinacaoDoLixo>(data || { campo_31: null, campo_32: null, campo_33: null, campo_34: null, campo_35: null });
+    const [answer, setAnswers] = useState<IDestinacaoDoLixo>(data || editData ||{ campo_31: null, campo_32: null, campo_33: null, campo_34: null, campo_35: null });
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
         destinacaoDoLixo &&
             destinacaoDoLixo(answer);
-        for (const key in answer) {
-            if (answer[key as keyof IDestinacaoDoLixo]) {
-                setIsClicked(true);
-            }
-        }
     }, [answer])
 
     useFocusEffect(
         useCallback(() => {
-            setAnswers(data || { campo_31: null, campo_32: null, campo_33: null, campo_34: null, campo_35: null });
+            setAnswers(data || editData ||{ campo_31: null, campo_32: null, campo_33: null, campo_34: null, campo_35: null });
             setIsClicked(false);
         }, [])
     )

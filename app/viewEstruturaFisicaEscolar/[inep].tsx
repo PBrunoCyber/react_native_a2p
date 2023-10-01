@@ -33,19 +33,12 @@ import EstruturaFisicaEscolar from '../../services/EstruturaFisicaEscolar';
 import EstruturaFisicaEscolarContext from '../../context/EstruturaFisicaEscolar';
 import { ActivityIndicator } from 'react-native';
 
-interface IProps {
-    data: Array<IEscola>,
-    setData: React.Dispatch<React.SetStateAction<Array<IEscola>>>
-    setNumberOfPages: React.Dispatch<React.SetStateAction<number>>
-    initData: () => void
-    limit: number
-}
 
-
-const ViewEstruturaFisica = (props: IProps) => {
+const ViewEstruturaFisica = () => {
     const router = useRouter();
     const [selectedInep, setSeletedInep] = useState<string>('');
     const [selectedNome, setSeletedNome] = useState<string>('');
+    const [isLoading, setIsLoading] = useState(false);
     const [answerExameClassificatorio, setAnswerExameClassificatorio] = useState<number | null>(null);
     const [answerProjetoPedagogico, setAnswerProjetoPedagogico] = useState<number | null>(null);
     const [localDeFuncionamento, setLocalDeFuncionamento] = useState<ILocalDeFuncionamento>();
@@ -66,10 +59,14 @@ const ViewEstruturaFisica = (props: IProps) => {
     const [linguaMinistrada, setLinguaMinistrada] = useState<ILinguaMinistrada>();
     const [reservaDeVagas, setReservaDeVagas] = useState<IReservaDeVagas>();
     const [orgaosColegiados, setOrgaosColegiados] = useState<IOrgaosColegiados>();
-    const { inep } = useLocalSearchParams();
+    const { inep, tipo } = useLocalSearchParams();
+
+   
 
     const getData = async () => {
+        setIsLoading(true);
         const res: any = await EstruturaFisicaEscolar.getEstruturaFisicaEscolarByInep(inep?.toString() || '');
+        setIsLoading(false);
         if (res != false) {
             console.log(res);
             setAnswerProjetoPedagogico(res.campo_170);
@@ -153,30 +150,38 @@ const ViewEstruturaFisica = (props: IProps) => {
                             </View>
                         </View>
                         <View style={{ marginTop: 40, zIndex: -1 }}>
-                            <LocalDeFuncionamento data={localDeFuncionamento} />
-                            <AbastecimentoDeAgua data={abastecimentoDeAgua} />
-                            <FonteEnergiaEletrica data={energiaEletrica} />
-                            <EsgotamentoSanitario />
-                            <DestinacaoDoLixo />
-                            <TratamentoDoLixo />
-                            <DependenciasFisicas />
-                            <RecursosDeAcessibilidade />
-                            <Equipamentos />
-                            <AcessoInternet />
-                            <EquipamentosAlunosInternet />
-                            <QuantidadeDeEquipamentos />
-                            <RedeLocal />
-                            <TotalDeProfissionais />
-                            <InstrumentosEMateriais />
-                            <LinguaMinistrada />
-                            <View style={{ marginBottom: 25 }}>
-                                <RadioGroup options={[1, 0]} value={answerExameClassificatorio} textOption={["SIM", "NÃO"]} color={COLORS.green} fontWeight='bold' question='A escola faz exame de seleção para ingresso de seus aluno(a)s (avaliação por prova e /ou analise curricular)*' onSelect={(option) => setAnswerExameClassificatorio(option)} />
-                            </View>
-                            <ReservaDeVagas />
-                            <OrgaosColegiados />
-                            <View style={{ marginBottom: 25 }}>
-                                <RadioGroup options={[1, 0]} value={answerProjetoPedagogico} textOption={["SIM", "NÃO"]} color={COLORS.green} fontWeight='bold' question='O projeto político pedagógico ou a proposta pedagógica da escola (conforme art. 12 da LDB) foi atualizada nos últimos 12 meses até a data de referência*' onSelect={(option) => setAnswerProjetoPedagogico(option)} />
-                            </View>
+                            {isLoading ?
+                                <View style={{ alignItems: 'center', marginTop: 10, marginBottom: 10 }}>
+                                    <ActivityIndicator color={COLORS.green} size={40} />
+                                </View>
+                                :
+                                <>
+                                    <LocalDeFuncionamento data={localDeFuncionamento} />
+                                    <AbastecimentoDeAgua data={abastecimentoDeAgua} />
+                                    <FonteEnergiaEletrica data={energiaEletrica} />
+                                    <EsgotamentoSanitario data={esgotamentoSanitario} />
+                                    <DestinacaoDoLixo data={destinacaoDoLixo} />
+                                    <TratamentoDoLixo data={tratamentoDoLixo} />
+                                    <DependenciasFisicas data={dependenciasFisicas} />
+                                    <RecursosDeAcessibilidade data={recursosDeAcessibilidade} />
+                                    <Equipamentos data={equipamentos} />
+                                    <AcessoInternet data={acessoInternet} />
+                                    <EquipamentosAlunosInternet data={equipamentosAlunosInternet} />
+                                    <QuantidadeDeEquipamentos data={quantidadeEquipamentos} />
+                                    <RedeLocal data={redeLocal} />
+                                    <TotalDeProfissionais data={totalDeProfissionais} />
+                                    <InstrumentosEMateriais data={instrumentosEMateriais} />
+                                    <LinguaMinistrada data={linguaMinistrada} />
+                                    <View style={{ marginBottom: 25 }}>
+                                        <RadioGroup options={[1, 0]} marked={true} selected={answerExameClassificatorio} disable={true} value={answerExameClassificatorio} textOption={["SIM", "NÃO"]} color={COLORS.green} fontWeight='bold' question='A escola faz exame de seleção para ingresso de seus aluno(a)s (avaliação por prova e /ou analise curricular)*' onSelect={(option) => setAnswerExameClassificatorio(option)} />
+                                    </View>
+                                    <ReservaDeVagas data={reservaDeVagas} />
+                                    <OrgaosColegiados data={orgaosColegiados} />
+                                    <View style={{ marginBottom: 25 }}>
+                                        <RadioGroup options={[1, 0]} marked={true} selected={answerProjetoPedagogico} disable={true} value={answerProjetoPedagogico} textOption={["SIM", "NÃO"]} color={COLORS.green} fontWeight='bold' question='O projeto político pedagógico ou a proposta pedagógica da escola (conforme art. 12 da LDB) foi atualizada nos últimos 12 meses até a data de referência*' onSelect={(option) => setAnswerProjetoPedagogico(option)} />
+                                    </View>
+                                </>
+                            }
                         </View>
                     </View>
                 </ScrollView>

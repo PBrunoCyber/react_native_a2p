@@ -13,24 +13,18 @@ import { useFocusEffect } from 'expo-router';
 interface IProps {
     abastecimentoDeAguaChange?: (value: IAbastecimentoDeAgua) => void,
     formErrors?: any,
-    data?: IAbastecimentoDeAgua
-
+    data?: IAbastecimentoDeAgua,
+    editData?: IAbastecimentoDeAgua
 }
 
-const AbastecimentoDeAgua = ({ formErrors, abastecimentoDeAguaChange, data }: IProps) => {
+const AbastecimentoDeAgua = ({ formErrors, abastecimentoDeAguaChange, data, editData }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IAbastecimentoDeAgua>(data || { campo_17: null, campo_18: null, campo_19: null, campo_20: null, campo_21: null, campo_22: 0 });
+    const [answer, setAnswers] = useState<IAbastecimentoDeAgua>(data || editData || { campo_17: null, campo_18: null, campo_19: null, campo_20: null, campo_21: null, campo_22: 0 });
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
         abastecimentoDeAguaChange &&
             abastecimentoDeAguaChange(answer);
-        for (const key in answer) {
-            if (answer[key as keyof IAbastecimentoDeAgua]) {
-                setIsClicked(true);
-            }
-        }
-
     }, [answer])
 
     useEffect(() => {
@@ -41,7 +35,7 @@ const AbastecimentoDeAgua = ({ formErrors, abastecimentoDeAguaChange, data }: IP
 
     useFocusEffect(
         useCallback(() => {
-            setAnswers(data || { campo_17: null, campo_18: null, campo_19: null, campo_20: null, campo_21: null, campo_22: 0 });
+            setAnswers(data || editData || { campo_17: null, campo_18: null, campo_19: null, campo_20: null, campo_21: null, campo_22: 0 });
             setIsClicked(false);
         }, [])
     )

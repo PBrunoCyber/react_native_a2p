@@ -14,26 +14,23 @@ interface IProps {
     linguaMinistrada?: (value: ILinguaMinistrada) => void,
     answerInstrumentosEMateriais?: IInstrumentosEMateriais | undefined
     formErrors?: any,
+    data?: ILinguaMinistrada,
+    editData?: ILinguaMinistrada
 }
 
-const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMateriais }: IProps) => {
+const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMateriais, data, editData }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<ILinguaMinistrada>({ campo_149: null, campo_150: null, campo_151: '', campo_152: '', campo_153: '' });
+    const [answer, setAnswers] = useState<ILinguaMinistrada>(data || editData ||{ campo_149: null, campo_150: null, campo_151: '', campo_152: '', campo_153: '' });
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
         linguaMinistrada &&
             linguaMinistrada(answer);
-        for (const key in answer) {
-            if (answer[key as keyof ILinguaMinistrada]) {
-                setIsClicked(true);
-            }
-        }
     }, [answer])
 
     useFocusEffect(
         useCallback(() => {
-            setAnswers({ campo_149: null, campo_150: null, campo_151: '', campo_152: '', campo_153: '' });
+            setAnswers(data || editData ||{ campo_149: null, campo_150: null, campo_151: '', campo_152: '', campo_153: '' });
             setIsClicked(false);
         }, [])
     )
@@ -97,29 +94,29 @@ const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMat
             {isClicked === true || formErrors && Object.keys(formErrors).length > 0 ?
                 <View style={styles.formContainer}>
                     {formErrors?.linguaMinistrada && <Text style={styles.messageError}>{formErrors?.linguaMinistrada}</Text>}
-                    <RadioGroup options={[1, 0]} disable={answerInstrumentosEMateriais?.campo_148 !== 1 ? true : false} value={answer.campo_150} textOption={textOption} fontWeight='normal' question='1 - Língua Portuguesa*' onSelect={(option) => handleOptionChange('campo_150', option)} />
+                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_150} disable={answerInstrumentosEMateriais?.campo_148 !== 1 || data ? true : false} value={answer.campo_150} textOption={textOption} fontWeight='normal' question='1 - Língua Portuguesa*' onSelect={(option) => handleOptionChange('campo_150', option)} />
                     {formErrors?.campo_150 && <Text style={styles.messageError}>{formErrors?.campo_150}</Text>}
-                    <RadioGroup options={[1, 0]} disable={answerInstrumentosEMateriais?.campo_148 !== 1 ? true : false} value={answer.campo_149} textOption={textOption} fontWeight='normal' question='2 - Língua Indígena*' onSelect={(option) => handleOptionChange('campo_149', option)} />
+                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_149} disable={answerInstrumentosEMateriais?.campo_148 !== 1 || data ? true : false} value={answer.campo_149} textOption={textOption} fontWeight='normal' question='2 - Língua Indígena*' onSelect={(option) => handleOptionChange('campo_149', option)} />
                     {formErrors?.campo_149 && <Text style={styles.messageError}>{formErrors?.campo_149}</Text>}
                     <View style={{ marginTop: 40 }}>
                         <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 30 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400 }}>a) Código da língua indígena 1*</Text>
                             <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={5} value={answer?.campo_151} style={[styles.input, answer.campo_149 !== 1 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer.campo_149 === 1 ? true : false} onChangeText={(txt) => handleOptionChange('campo_151', txt)} />
+                                <TextInput maxLength={5} value={data?.campo_151 ? data.campo_151 : answer.campo_151} style={[styles.input, answer.campo_149 !== 1 || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer.campo_149 === 1 && !data ? true : false} onChangeText={(txt) => handleOptionChange('campo_151', txt)} />
                                 {formErrors?.campo_151 && <Text style={styles.messageError}>{formErrors?.campo_151}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 30 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400 }}>b) Código da língua indígena 2*</Text>
                             <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={5} value={answer?.campo_152} style={[styles.input, !answer?.campo_151 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer.campo_151 ? true : false} onChangeText={(txt) => handleOptionChange('campo_152', txt)} />
+                                <TextInput maxLength={5} value={data?.campo_151 ? data.campo_152 : answer.campo_152} style={[styles.input, !answer?.campo_151 || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer.campo_151 && !data ? true : false} onChangeText={(txt) => handleOptionChange('campo_152', txt)} />
                                 {formErrors?.campo_152 && <Text style={styles.messageError}>{formErrors?.campo_152}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 30 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400 }}>c) Código da língua indígena 3*</Text>
                             <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={5} value={answer?.campo_153} style={[styles.input, !answer?.campo_152 ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer.campo_152 ? true : false} onChangeText={(txt) => handleOptionChange('campo_153', txt)} />
+                                <TextInput maxLength={5} value={data?.campo_153 ? data.campo_153 : answer.campo_153}  style={[styles.input, !answer?.campo_152 || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer.campo_152 && !data ? true : false} onChangeText={(txt) => handleOptionChange('campo_153', txt)} />
                                 {formErrors?.campo_153 && <Text style={styles.messageError}>{formErrors?.campo_153}</Text>}
                             </View>
                         </View>

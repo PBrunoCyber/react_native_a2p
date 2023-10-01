@@ -8,8 +8,8 @@ import { Ionicons } from '@expo/vector-icons';
 import Escola from '../services/Escola';
 import EstruturaFisicaEscolar from '../services/EstruturaFisicaEscolar';
 import json from '../json/escolas.json';
-import Filtros from '../components/filtros';
-import Table from '../components/table';
+import Filtros from '../components/Filtros';
+import Table from '../components/Table';
 import { COLORS } from '../constants/theme'
 import { IEscola } from '../types/Escola';
 import DoubleRing from '../assets/icons/Double_Ring.svg';

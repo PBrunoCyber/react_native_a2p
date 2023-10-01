@@ -14,23 +14,18 @@ import { useFocusEffect } from 'expo-router';
 interface IProps {
     fonteEnergiaEletricaChange?: (value: IEnergiaEletrica) => void,
     formErrors?: any,
-    data?: IEnergiaEletrica
+    data?: IEnergiaEletrica,
+    editData?: IEnergiaEletrica 
 }
 
-const FonteEnergiaEletrica = ({ formErrors, fonteEnergiaEletricaChange, data }: IProps) => {
+const FonteEnergiaEletrica = ({ formErrors, fonteEnergiaEletricaChange, data, editData }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IEnergiaEletrica>({ campo_23: null, campo_24: null, campo_25: null, campo_26: 0 });
+    const [answer, setAnswers] = useState<IEnergiaEletrica>(data || editData || { campo_23: null, campo_24: null, campo_25: null, campo_26: 0 });
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
         fonteEnergiaEletricaChange &&
             fonteEnergiaEletricaChange(answer);
-        for (const key in answer) {
-            if (answer[key as keyof IEnergiaEletrica]) {
-                setIsClicked(true);
-            }
-        }
-
     }, [answer])
 
     useEffect(() => {
@@ -41,7 +36,7 @@ const FonteEnergiaEletrica = ({ formErrors, fonteEnergiaEletricaChange, data }: 
 
     useFocusEffect(
         useCallback(() => {
-            setAnswers({ campo_23: null, campo_24: null, campo_25: null, campo_26: 0 });
+            setAnswers(data || editData || { campo_23: null, campo_24: null, campo_25: null, campo_26: 0 });
             setIsClicked(false);
         }, [])
     )

@@ -15,27 +15,23 @@ interface IProps {
     recursosDeAcessibilidade?: (value: IRecursosDeAcessibilidade) => void,
     answerLocalDeFuncionamento?: ILocalDeFuncionamento | undefined
     formErrors?: any,
-    data?: IRecursosDeAcessibilidade
+    data?: IRecursosDeAcessibilidade,
+    editData?: IRecursosDeAcessibilidade
 }
 
-const RecursosDeAcessibilidade = ({ recursosDeAcessibilidade, answerLocalDeFuncionamento, data, formErrors }: IProps) => {
+const RecursosDeAcessibilidade = ({ recursosDeAcessibilidade, answerLocalDeFuncionamento, data,editData, formErrors }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IRecursosDeAcessibilidade>(data || { campo_78: null, campo_79: null, campo_80: null, campo_81: null, campo_82: null, campo_83: null, campo_84: null, campo_85: null, campo_86: 0, campo_87: '', campo_88: '', campo_89: '', campo_90: '' });
+    const [answer, setAnswers] = useState<IRecursosDeAcessibilidade>(data || editData ||{ campo_78: null, campo_79: null, campo_80: null, campo_81: null, campo_82: null, campo_83: null, campo_84: null, campo_85: null, campo_86: 0, campo_87: '', campo_88: '', campo_89: '', campo_90: '' });
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
         recursosDeAcessibilidade &&
             recursosDeAcessibilidade(answer);
-        for (const key in answer) {
-            if (answer[key as keyof IRecursosDeAcessibilidade]) {
-                setIsClicked(true);
-            }
-        }
     }, [answer])
 
     useFocusEffect(
         useCallback(() => {
-            setAnswers(data || { campo_78: null, campo_79: null, campo_80: null, campo_81: null, campo_82: null, campo_83: null, campo_84: null, campo_85: null, campo_86: 0, campo_87: '', campo_88: '', campo_89: '', campo_90: '' });
+            setAnswers(data || editData ||{ campo_78: null, campo_79: null, campo_80: null, campo_81: null, campo_82: null, campo_83: null, campo_84: null, campo_85: null, campo_86: 0, campo_87: '', campo_88: '', campo_89: '', campo_90: '' });
             setIsClicked(false);
         }, [])
     )

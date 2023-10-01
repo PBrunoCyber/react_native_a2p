@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import styles from '../styles/checkBox.style'
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS } from '../constants/theme';
+import { useFocusEffect } from 'expo-router';
 
 interface IRadioGroup {
     label: string,
@@ -32,7 +33,7 @@ const RadioGroup = ({ label, fontWeight, value, disable, onSelect }: IRadioGroup
                 </>
                 :
                 <>
-                    <TouchableOpacity disabled onPress={toggleCheckBox} style={[styles.checkboxDisable, isChecked && styles.checkboxDisable]}>
+                    <TouchableOpacity disabled onPress={toggleCheckBox} style={[styles.checkboxDisable, isChecked && styles.checkedDisable]}>
                         {isChecked && <Ionicons name='checkmark-outline' size={20} color={COLORS.white} />}
                     </TouchableOpacity>
                     <Text style={{ fontWeight: fontWeight, maxWidth: '80%' }}>{label}</Text>

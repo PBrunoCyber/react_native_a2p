@@ -14,22 +14,18 @@ import { useFocusEffect } from 'expo-router';
 interface IProps {
     esgotamentoSanitarioChange?: (value: IEsgotamentoSanitario) => void,
     formErrors?: any,
-    data?: IEsgotamentoSanitario
+    data?: IEsgotamentoSanitario,
+    editData?: IEsgotamentoSanitario
 }
 
-const EsgotamentoSanitario = ({ formErrors, esgotamentoSanitarioChange, data }: IProps) => {
+const EsgotamentoSanitario = ({ formErrors, esgotamentoSanitarioChange, data, editData }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IEsgotamentoSanitario>(data || { campo_27: null, campo_28: null, campo_29: null, campo_30: 0 });
+    const [answer, setAnswers] = useState<IEsgotamentoSanitario>(data || editData || { campo_27: null, campo_28: null, campo_29: null, campo_30: 0 });
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
         esgotamentoSanitarioChange &&
             esgotamentoSanitarioChange(answer);
-        for (const key in answer) {
-            if (answer[key as keyof IEsgotamentoSanitario]) {
-                setIsClicked(true);
-            }
-        }
     }, [answer])
 
     useEffect(() => {
@@ -40,7 +36,7 @@ const EsgotamentoSanitario = ({ formErrors, esgotamentoSanitarioChange, data }: 
 
     useFocusEffect(
         useCallback(() => {
-            setAnswers(data || { campo_27: null, campo_28: null, campo_29: null, campo_30: 0 });
+            setAnswers(data || editData || { campo_27: null, campo_28: null, campo_29: null, campo_30: 0 });
             setIsClicked(false);
         }, [])
     )

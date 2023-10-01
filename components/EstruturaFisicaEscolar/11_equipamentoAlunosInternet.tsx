@@ -16,29 +16,25 @@ interface IProps {
     answerAcessoInternet?: IAcessoInternet | undefined,
     answerRedeLocal?: IRedeLocal | undefined,
     formErrors?: any,
-    data: IEquipamentosAlunosInternet
+    data?: IEquipamentosAlunosInternet,
+    editData?: IEquipamentosAlunosInternet
 }
 
 
-const EquipamentosAlunosInternet = ({ equipamentosAlunosInternet, answerAcessoInternet, data, answerRedeLocal, formErrors }: IProps) => {
+const EquipamentosAlunosInternet = ({ equipamentosAlunosInternet, answerAcessoInternet, data, answerRedeLocal, formErrors, editData }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IEquipamentosAlunosInternet>(data || { campo_111: null, campo_112: null, campo_113: null });
+    const [answer, setAnswers] = useState<IEquipamentosAlunosInternet>(data || editData || { campo_111: null, campo_112: null, campo_113: null });
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
         equipamentosAlunosInternet &&
             equipamentosAlunosInternet(answer);
-        for (const key in answer) {
-            if (answer[key as keyof IEquipamentosAlunosInternet]) {
-                setIsClicked(true);
-            }
-        }
     }, [answer])
 
 
     useFocusEffect(
         useCallback(() => {
-            setAnswers(data || { campo_111: null, campo_112: null, campo_113: null });
+            setAnswers(data || editData || { campo_111: null, campo_112: null, campo_113: null });
             setIsClicked(false);
         }, [])
     )

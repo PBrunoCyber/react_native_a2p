@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
   },
-  checkedDisble: {
+  checkedDisable: {
     backgroundColor: COLORS.gray
   }
 });
