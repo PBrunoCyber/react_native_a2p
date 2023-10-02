@@ -136,7 +136,7 @@ const AddEstruturaFisica = (props: IProps) => {
             ...context.answerRecursosDeAcessibilidade, ...context.answerEquipamentos, ...context.answerAcessoInternet, ...context.answerEquipamentosAlunosInternet,
             ...context.answerQuantidadeDeEquipamentos, ...context.answerRedeLocal, ...context.answerTotalDeProfissionais, ...context.answerInstrumentosEMateriais,
             ...context.answerLinguasMinistradas, ...context.answerReservaDeVagas, ...context.answerOrgaosColegiados, campo_154: answerExameClassificatorio,
-            campo_170: answerProjetoPedagogico, inep_fk: selectedInep
+            campo_170: answerProjetoPedagogico, campo_2: selectedInep
         }
         const res: any = await EstruturaFisicaEscolar.getEstruturaFisicaEscolarByInep(selectedInep || '');
 
@@ -236,7 +236,7 @@ const AddEstruturaFisica = (props: IProps) => {
             ...context.answerRecursosDeAcessibilidade, ...context.answerEquipamentos, ...context.answerAcessoInternet, ...context.answerEquipamentosAlunosInternet,
             ...context.answerQuantidadeDeEquipamentos, ...context.answerRedeLocal, ...context.answerTotalDeProfissionais, ...context.answerInstrumentosEMateriais,
             ...context.answerLinguasMinistradas, ...context.answerReservaDeVagas, ...context.answerOrgaosColegiados, campo_154: answerExameClassificatorio,
-            campo_170: answerProjetoPedagogico, inep_fk: selectedInep
+            campo_170: answerProjetoPedagogico, campo_2: selectedInep
         }
 
         setIsLoading(true);

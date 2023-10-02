@@ -31,6 +31,7 @@ const Home = () => {
     const [display, setDisplay] = useState<"none" | "flex" | undefined>("none");
     const [messageOk, setMessageOk] = useState('');
     const [messageError, setMessageError] = useState('');
+    const [selectedItems, setSelectedItems] = useState<Array<string>>([]);
 
     const router = useRouter();
 
@@ -119,6 +120,13 @@ const Home = () => {
             getDataByInep();
     }, [selectedInep])
 
+    const onSelectedItems = (inep: string) => {
+        const data = [];
+        data.push(inep);
+        setSelectedItems(data);
+        console.log(data);
+    }
+
     useEffect(() => {
         //Escola.dropTBEscola();
         //EstruturaFisicaEscolar.dropTBEstruturaFisicaEscolar();
@@ -127,6 +135,7 @@ const Home = () => {
         insertOrNotEscola();
         initData();
     }, [])
+
 
     useFocusEffect(
         useCallback(() => {
@@ -214,7 +223,7 @@ const Home = () => {
                             <View style={{ maxWidth: 900, marginTop: 20, alignItems: 'flex-end', alignSelf: 'center', width: '100%' }}>
                                 <TouchableOpacity style={styles.syncBtn}><Ionicons name='reload' size={25} color={COLORS.white} /><Text style={{ color: COLORS.white }}>Sincronizar</Text></TouchableOpacity>
                             </View>
-                            <Table data={data} onDelete={(inep) => onShowDelete(inep)} />
+                            <Table data={data} selectedItems={onSelectedItems} onDelete={(inep) => onShowDelete(inep)} />
                         </View>
 
                         <View style={[styles.paginationContainer]}>

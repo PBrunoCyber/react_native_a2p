@@ -8,14 +8,16 @@ import { Ionicons } from '@expo/vector-icons';
 import { COLORS } from '../constants/theme'
 import { IEscola } from '../types/Escola';
 import { router } from 'expo-router';
+import CheckBox from './CheckBox';
 
 interface IProps {
     data: Array<IEscola>,
-    onDelete: (inep: string) => void
+    onDelete: (inep: string) => void,
+    selectedItems: (inep: string) => void
 }
 
 const Table = (props: IProps) => {
-    const [isChecked, setIsChecked] = useState<boolean>();
+    const [isChecked, setIsChecked] = useState<0 | 1>(0);
     return (
 
 
@@ -35,15 +37,7 @@ const Table = (props: IProps) => {
                         props.data.map((item, index) => {
                             return (
                                 <View key={index} style={styles.tableContent}>
-                                    <BouncyCheckbox
-                                        size={25}
-                                        fillColor={COLORS.green}
-                                        unfillColor="#FFFFFF"
-                                        style={{ width: 25, }}
-                                        isChecked={isChecked}
-                                        iconStyle={{ borderColor: COLORS.green, borderRadius: 5 }}
-                                        innerIconStyle={{ borderWidth: 1, borderRadius: 5 }}
-                                        onPress={(isChecked: boolean) => { setIsChecked(isChecked) }} />
+                                    <CheckBox fontWeight='normal' label='' value={isChecked} onSelect={(value) => { setIsChecked(value); props.selectedItems(item.inep) }} />
                                     <Text style={{ width: 100, fontSize: 15, textAlign: 'center' }}>{item.id}</Text>
                                     <Text style={{ width: 100, fontSize: 15, textAlign: 'left' }}>{item.inep}</Text>
                                     <Text style={{ width: 350, fontSize: 15, textAlign: 'left' }}>{item.nome}</Text>

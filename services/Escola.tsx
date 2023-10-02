@@ -113,7 +113,7 @@ const getEscolaByNome = (nome: string) => {
 const getWithPagination = (limit: number, offset: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT e.id, e.nome, e.inep, efs.status FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.inep_fk LIMIT ? OFFSET ?;",
+            tx.executeSql("SELECT e.id, e.nome, e.inep, efs.status FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.campo_2 LIMIT ? OFFSET ?;",
                 [limit, offset],
                 (_, { rows }) => {
                     if (rows.length > 0) {
@@ -133,7 +133,7 @@ const getWithPagination = (limit: number, offset: number) => {
 const getByInep = (inep: string) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT e.id, e.nome, e.inep, efs.status FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.inep_fk WHERE e.inep = ?;",
+            tx.executeSql("SELECT e.id, e.nome, e.inep, efs.status FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.campo_2 WHERE e.inep = ?;",
                 [inep],
                 (_, { rows }) => {
                     if (rows.length > 0) {
@@ -191,12 +191,12 @@ const getAll = (limit: number) => {
 const getNumberOfPages = (limit: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT COUNT(*) AS total_registros FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.inep_fk;", 
-            [], (tx, results) => {
-                const totalRegistros = results.rows.item(0).total_registros;
-                const paginas = Math.ceil(totalRegistros / limit);
-                resolve(paginas);
-            });
+            tx.executeSql("SELECT COUNT(*) AS total_registros FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.campo_2;",
+                [], (tx, results) => {
+                    const totalRegistros = results.rows.item(0).total_registros;
+                    const paginas = Math.ceil(totalRegistros / limit);
+                    resolve(paginas);
+                });
         });
     });
 }
@@ -204,13 +204,13 @@ const getNumberOfPages = (limit: number) => {
 const getNumberOfPagesWithNome = (nome: string, limit: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT COUNT(*) AS total_registros FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.inep_fk WHERE REPLACE(e.nome, '  ', ' ') LIKE ? || '%';", 
-            [nome], 
-            (tx, results) => {
-                const totalRegistros = results.rows.item(0).total_registros;
-                const paginas = Math.ceil(totalRegistros / limit);
-                resolve(paginas);
-            });
+            tx.executeSql("SELECT COUNT(*) AS total_registros FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.campo_2 WHERE REPLACE(e.nome, '  ', ' ') LIKE ? || '%';",
+                [nome],
+                (tx, results) => {
+                    const totalRegistros = results.rows.item(0).total_registros;
+                    const paginas = Math.ceil(totalRegistros / limit);
+                    resolve(paginas);
+                });
         });
     });
 }
@@ -218,13 +218,13 @@ const getNumberOfPagesWithNome = (nome: string, limit: number) => {
 const getNumberOfPagesWithInep = (inep: string, limit: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT COUNT(*) AS total_registros FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.inep_fk WHERE e.inep LIKE ? || '%';", 
-            [inep], 
-            (tx, results) => {
-                const totalRegistros = results.rows.item(0).total_registros;
-                const paginas = Math.ceil(totalRegistros / limit);
-                resolve(paginas);
-            });
+            tx.executeSql("SELECT COUNT(*) AS total_registros FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.campo_2 WHERE e.inep LIKE ? || '%';",
+                [inep],
+                (tx, results) => {
+                    const totalRegistros = results.rows.item(0).total_registros;
+                    const paginas = Math.ceil(totalRegistros / limit);
+                    resolve(paginas);
+                });
         });
     });
 }
