@@ -3,7 +3,7 @@ import { IEscola } from "../types/Escola";
 
 const dropTBEscola = () => {
     db.transaction(tx => {
-        tx.executeSql("DROP TABLE escola",
+        tx.executeSql("DROP TABLE tb_escola",
             [],
             (_, { rows }) => {
                 console.log("Excluído com sucesso!");
@@ -16,7 +16,7 @@ const createTBEscola = () => {
     return new Promise((resolve, reject) => {
 
         db.transaction(tx => {
-            tx.executeSql("CREATE TABLE escola (inep VARCHAR(8) PRIMARY KEY, id INTEGER NOT NULL, nome VARCHAR(400), tipo VARCHAR(20))",
+            tx.executeSql("CREATE TABLE tb_escola (inep VARCHAR(8) PRIMARY KEY, id INTEGER NOT NULL, nome VARCHAR(400))",
                 [],
                 (_, { rows }) => {
                     console.log("CRIADO COM SUCESSO!");
@@ -30,35 +30,16 @@ interface IInsert {
     inep: string,
     id: number,
     nome: string,
-    tipo: string
 }
 
 const insertEscola = (obj: IInsert) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql(
-                "INSERT INTO escola (inep, id, nome, tipo) values (?, ?, ?, ?);",
-                [obj.inep, obj.id, obj.nome, obj.tipo],
+                "INSERT INTO tb_escola (inep, id, nome) values (?, ?, ?);",
+                [obj.inep, obj.id, obj.nome],
                 //-----------------------
                 (_, { rowsAffected, insertId }) => {
-                    if (rowsAffected > 0) { resolve(true); }
-                    else resolve(false); // insert falhou
-                },
-                (_, error) => { resolve(false); return false } // erro interno em tx.executeSql
-            );
-        });
-    })
-
-}
-
-const updateTipoEscola = (tipo: string, inep: string) => {
-    return new Promise((resolve, reject) => {
-        db.transaction((tx) => {
-            tx.executeSql(
-                "UPDATE escola SET tipo = ? WHERE inep = ?",
-                [tipo, inep],
-                //-----------------------
-                (_, { rowsAffected }) => {
                     if (rowsAffected > 0) { resolve(true); }
                     else resolve(false); // insert falhou
                 },
@@ -74,7 +55,7 @@ const existsEscola = () => {
         db.transaction((tx) => {
             //comando SQL modificável
             tx.executeSql(
-                "SELECT 1 FROM escola;",
+                "SELECT 1 FROM tb_escola;",
                 [],
                 //-----------------------
                 (_, { rows }) => {
@@ -90,7 +71,7 @@ const existsEscola = () => {
 const getEscolaByInep = (inep: string) => {
     return new Promise((resolve) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT * FROM escola WHERE inep LIKE ? || '%' LIMIT 10;",
+            tx.executeSql("SELECT * FROM tb_escola WHERE inep LIKE ? || '%' LIMIT 10;",
                 [inep],
                 (_, { rows }) => {
                     if (rows.length > 0) {
@@ -111,7 +92,7 @@ const getEscolaByInep = (inep: string) => {
 const getEscolaByNome = (nome: string) => {
     return new Promise((resolve) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT * FROM escola WHERE REPLACE(nome, '  ', ' ') LIKE ? || '%' LIMIT 10;",
+            tx.executeSql("SELECT * FROM tb_escola WHERE REPLACE(nome, '  ', ' ') LIKE ? || '%' LIMIT 10;",
                 [nome],
                 (_, { rows }) => {
                     if (rows.length > 0) {
@@ -132,7 +113,7 @@ const getEscolaByNome = (nome: string) => {
 const getWithPagination = (limit: number, offset: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT * FROM escola WHERE tipo <> 'Não Iniciado' LIMIT ? OFFSET ? ;",
+            tx.executeSql("SELECT e.id, e.nome, e.inep, efs.status FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.inep_fk LIMIT ? OFFSET ?;",
                 [limit, offset],
                 (_, { rows }) => {
                     if (rows.length > 0) {
@@ -152,7 +133,7 @@ const getWithPagination = (limit: number, offset: number) => {
 const getByInep = (inep: string) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT * FROM escola WHERE inep = ? AND tipo <> 'Não Iniciado';",
+            tx.executeSql("SELECT e.id, e.nome, e.inep, efs.status FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.inep_fk WHERE e.inep = ?;",
                 [inep],
                 (_, { rows }) => {
                     if (rows.length > 0) {
@@ -173,7 +154,7 @@ const getByInep = (inep: string) => {
 const getNomeByInep = (inep: string) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT * FROM escola WHERE inep = ?;",
+            tx.executeSql("SELECT * FROM tb_escola WHERE inep = ?;",
                 [inep],
                 (_, { rows }) => {
                     if (rows.length > 0) {
@@ -190,7 +171,7 @@ const getNomeByInep = (inep: string) => {
 const getAll = (limit: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT * FROM escola LIMIT ?;",
+            tx.executeSql("SELECT * FROM tb_escola LIMIT ?;",
                 [limit],
                 (_, { rows }) => {
                     if (rows.length > 0) {
@@ -210,7 +191,8 @@ const getAll = (limit: number) => {
 const getNumberOfPages = (limit: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT COUNT(*) AS total_registros FROM escola WHERE tipo <> 'Não Iniciado';", [], (tx, results) => {
+            tx.executeSql("SELECT COUNT(*) AS total_registros FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.inep_fk;", 
+            [], (tx, results) => {
                 const totalRegistros = results.rows.item(0).total_registros;
                 const paginas = Math.ceil(totalRegistros / limit);
                 resolve(paginas);
@@ -222,7 +204,9 @@ const getNumberOfPages = (limit: number) => {
 const getNumberOfPagesWithNome = (nome: string, limit: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT COUNT(*) AS total_registros FROM escola WHERE REPLACE(nome, '  ', ' ') LIKE ? || '%' AND tipo <> 'Não Iniciado';", [nome], (tx, results) => {
+            tx.executeSql("SELECT COUNT(*) AS total_registros FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.inep_fk WHERE REPLACE(e.nome, '  ', ' ') LIKE ? || '%';", 
+            [nome], 
+            (tx, results) => {
                 const totalRegistros = results.rows.item(0).total_registros;
                 const paginas = Math.ceil(totalRegistros / limit);
                 resolve(paginas);
@@ -234,7 +218,9 @@ const getNumberOfPagesWithNome = (nome: string, limit: number) => {
 const getNumberOfPagesWithInep = (inep: string, limit: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT COUNT(*) AS total_registros FROM escola WHERE inep LIKE ? || '%' AND tipo <> 'Não Iniciado';", [inep], (tx, results) => {
+            tx.executeSql("SELECT COUNT(*) AS total_registros FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.inep_fk WHERE e.inep LIKE ? || '%';", 
+            [inep], 
+            (tx, results) => {
                 const totalRegistros = results.rows.item(0).total_registros;
                 const paginas = Math.ceil(totalRegistros / limit);
                 resolve(paginas);
@@ -244,4 +230,4 @@ const getNumberOfPagesWithInep = (inep: string, limit: number) => {
 }
 
 
-export default { createTBEscola, existsEscola, dropTBEscola, insertEscola, getEscolaByInep, getEscolaByNome, getNumberOfPages, getWithPagination, getNumberOfPagesWithNome, getNumberOfPagesWithInep, getAll, updateTipoEscola, getByInep, getNomeByInep };
+export default { createTBEscola, existsEscola, dropTBEscola, insertEscola, getEscolaByInep, getEscolaByNome, getNumberOfPages, getWithPagination, getNumberOfPagesWithNome, getNumberOfPagesWithInep, getAll, getByInep, getNomeByInep };

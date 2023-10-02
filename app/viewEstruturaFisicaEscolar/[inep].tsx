@@ -66,9 +66,7 @@ const ViewEstruturaFisica = () => {
     const getData = async () => {
         setIsLoading(true);
         const res: any = await EstruturaFisicaEscolar.getEstruturaFisicaEscolarByInep(inep?.toString() || '');
-        setIsLoading(false);
         if (res != false) {
-            console.log(res);
             setAnswerProjetoPedagogico(res.campo_170);
             setAnswerExameClassificatorio(res.campo_154);
             setLocalDeFuncionamento({ campo_3: res.campo_3, campo_4: res.campo_4, campo_5: res.campo_5, campo_6: res.campo_6, campo_7: res.campo_7, campo_8: res.campo_8, campo_9: res.campo_9, campo_10: res.campo_10, campo_11: res.campo_11, campo_12: res.campo_12, campo_13: res.campo_13, campo_14: res.campo_14, campo_15: res.campo_15, campo_16: res.campo_16 });
@@ -89,6 +87,7 @@ const ViewEstruturaFisica = () => {
             setLinguaMinistrada({ campo_149: res.campo_149, campo_150: res.campo_150, campo_151: res.campo_151, campo_152: res.campo_152, campo_153: res.campo_153 });
             setReservaDeVagas({ campo_155: res.campo_155, campo_156: res.campo_156, campo_157: res.campo_157, campo_158: res.campo_158, campo_159: res.campo_159, campo_160: res.campo_160, campo_161: res.campo_161, campo_162: res.campo_162, campo_163: res.campo_163 });
             setOrgaosColegiados({ campo_164: res.campo_164, campo_165: res.campo_165, campo_166: res.campo_166, campo_167: res.campo_167, campo_168: res.campo_168, campo_169: res.campo_169 });
+            setIsLoading(false);
         }
     }
 

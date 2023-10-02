@@ -67,8 +67,12 @@ const styles = StyleSheet.create({
         elevation: 5,
         position: 'absolute',
         backgroundColor: COLORS.lightGreen,
+        borderWidth: 1,
+        borderColor: COLORS.green,
+        elevation: 5,
         alignSelf: 'center'
-    }, schoolsItem: {
+    }, 
+    schoolsItem: {
         width: '90%',
         height: 50,
         borderBottomColor: COLORS.green,
@@ -77,16 +81,18 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     searchInput: {
-        width: '90%',
+        position: 'relative',
+        width: '100%',
         height: 40,
-        borderRadius: 5,
+        borderRadius: 100,
         borderWidth: 0.5,
-        paddingLeft: 20,
+        paddingLeft: 40,
         paddingRight: 20,
         borderColor: COLORS.green,
         alignSelf: 'center',
         marginTop: 10,
-        marginBottom: 20,
+        marginBottom: 10,
+        zIndex: 999
     },
 
 });

@@ -7,7 +7,7 @@
     "plugins": [
       "expo-router"
     ],
-    "name": "react_native_app",
+    "name": "Seduc Censo",
     "slug": "react_native_app",
     "extra": {
       "router": {

@@ -62,7 +62,7 @@ interface IProps {
 const AddEstruturaFisica = (props: IProps) => {
     const context = useContext(EstruturaFisicaEscolarContext);
     const router = useRouter();
-    const [data, setData] = useState<Array<IEscola>>([{ id: 0, nome: '', inep: '', tipo: '' }]);
+    const [data, setData] = useState<Array<IEscola>>([{ id: 0, nome: '', inep: '', status: '' }]);
     const [isLoading, setIsLoading] = useState(false);
     const [messageOk, setMessageOk] = useState('');
     const [messageError, setMessageError] = useState('');
@@ -157,25 +157,15 @@ const AddEstruturaFisica = (props: IProps) => {
             return;
         }
         setIsLoading(true);
-        const response = await EstruturaFisicaEscolar.insertEstruturaFisicaEscolar(forms);
+        const response = await EstruturaFisicaEscolar.insertEstruturaFisicaEscolar(forms, 'Rascunho');
         setIsLoading(false);
         if (response) {
-            const response = await Escola.updateTipoEscola('Rascunho', selectedInep);
-            if (response) {
-                setMessageOk('Rascunho salvo com sucesso!');
-                setTimeout(() => {
-                    setMessageOk('');
-                    router.push('/');
-                }, 3000);
-                return;
-            } else {
-                setMessageError('Ocorreu algum ao atualizar o status da escola, tente novamente!');
-                setTimeout(() => {
-                    setMessageError('');
-                }, 3000);
-                return;
-            }
-
+            setMessageOk('Rascunho salvo com sucesso!');
+            setTimeout(() => {
+                setMessageOk('');
+                router.push('/');
+            }, 3000);
+            return;
         } else {
             setMessageError('Ocorreu algum erro ao inserir os dados, tente novamente!');
 
@@ -250,25 +240,15 @@ const AddEstruturaFisica = (props: IProps) => {
         }
 
         setIsLoading(true);
-        const response = await EstruturaFisicaEscolar.insertEstruturaFisicaEscolar(forms);
+        const response = await EstruturaFisicaEscolar.insertEstruturaFisicaEscolar(forms, 'Final');
         setIsLoading(false);
         if (response) {
-            const response = await Escola.updateTipoEscola('Final', selectedInep);
-            if (response) {
-                setMessageOk('Cadastro realizado com sucesso!');
-                setTimeout(() => {
-                    setMessageOk('');
-                    router.push('/');
-                }, 3000);
-                return;
-            } else {
-                setMessageError('Ocorreu algum ao atualizar o status da escola, tente novamente!');
-                setTimeout(() => {
-                    setMessageError('');
-                }, 3000);
-                return;
-            }
-
+            setMessageOk('Cadastro realizado com sucesso!');
+            setTimeout(() => {
+                setMessageOk('');
+                router.push('/');
+            }, 2000);
+            return;
         } else {
             setMessageError('Ocorreu algum erro ao inserir os dados, tente novamente!');
             setTimeout(() => {
@@ -276,7 +256,6 @@ const AddEstruturaFisica = (props: IProps) => {
             }, 3000);
             return;
         }
-
     }
 
     useEffect(() => {
@@ -304,8 +283,8 @@ const AddEstruturaFisica = (props: IProps) => {
                     </View>
                     :
                     <>
-                        {messageOk && <View style={styles.messageOk}><Ionicons name='checkmark-circle-outline' size={40} color={COLORS.green} /><Text style={{ fontWeight: 'bold', color: COLORS.green }}>{messageOk}</Text></View>}
-                        {messageError && <View style={styles.messageError}><Ionicons name='close-circle-outline' size={40} color={COLORS.red} /><Text style={{ fontWeight: 'bold', color: COLORS.red }}>{messageError}</Text></View>}
+                        {messageOk && <View style={styles.messageOk}><Ionicons name='checkmark-circle-outline' size={40} color={COLORS.green} /><Text style={{ fontWeight: 'bold', color: COLORS.green, maxWidth: 260 }}>{messageOk}</Text></View>}
+                        {messageError && <View style={styles.messageError}><Ionicons name='close-circle-outline' size={40} color={COLORS.red} /><Text style={{ fontWeight: 'bold', color: COLORS.red, maxWidth: 260 }}>{messageError}</Text></View>}
                     </>
                 }
                 <ScrollView horizontal={false} style={styles.cardContainer}>
@@ -386,22 +365,21 @@ const AddEstruturaFisica = (props: IProps) => {
                             <TotalDeProfissionais formErrors={context.formErrorsTotalDeProfissionais} totalDeProfissionais={(value) => context.onTotalDeProfissionaisChange(value)} />
                             <InstrumentosEMateriais formErrors={context.formErrorsInstrumentosEMateriais} instrumentosEMateriais={(value) => context.onInstrumentosEMateriaisChange(value)} />
                             <LinguaMinistrada formErrors={context.formErrorsLinguasMinistradas} linguaMinistrada={(value) => context.onLinguasMinistradasChange(value)} answerInstrumentosEMateriais={context.answerInstrumentosEMateriais} />
-                            <View style={{ marginBottom: 25 }}>
+                            <View style={{ marginBottom: 25, zIndex: -1}}>
                                 <RadioGroup options={[1, 0]} value={answerExameClassificatorio} textOption={["SIM", "NÃO"]} color={COLORS.green} fontWeight='bold' question='A escola faz exame de seleção para ingresso de seus aluno(a)s (avaliação por prova e /ou analise curricular)*' onSelect={(option) => setAnswerExameClassificatorio(option)} />
                             </View>
                             <ReservaDeVagas formErrors={context.formErrorsReservaDeVagas} reservaDeVagas={(value) => context.onReservaDeVagasChange(value)} exameClassificatorio={answerExameClassificatorio} />
                             <OrgaosColegiados formErrors={context.formErrorsOrgaosColegiados} orgaosColegiados={(value) => context.onOrgaosColegiadosChange(value)} />
-                            <View style={{ marginBottom: 25 }}>
+                            <View style={{ marginBottom: 25, zIndex: -1 }}>
                                 <RadioGroup options={[1, 0]} value={answerProjetoPedagogico} textOption={["SIM", "NÃO"]} color={COLORS.green} fontWeight='bold' question='O projeto político pedagógico ou a proposta pedagógica da escola (conforme art. 12 da LDB) foi atualizada nos últimos 12 meses até a data de referência*' onSelect={(option) => setAnswerProjetoPedagogico(option)} />
                             </View>
-                            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', borderTopWidth: 1, borderColor: COLORS.gray, paddingTop: 50, marginTop: 50, marginBottom: 50, gap: 20 }}>
-                                <TouchableOpacity style={styles.btnCancelar} ><Text style={{ color: COLORS.green }}>Cancelar</Text></TouchableOpacity>
+                            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', borderTopWidth: 1, borderColor: COLORS.gray, paddingTop: 50, marginTop: 50, zIndex: -1, marginBottom: 50, gap: 20 }}>
+                                <TouchableOpacity style={styles.btnCancelar} ><Text style={{ color: COLORS.green }} onPress={()=> router.push('/')}>Cancelar</Text></TouchableOpacity>
                                 <TouchableOpacity style={styles.btnSalvar} onPress={onSave}><Text style={{ color: COLORS.white }}>Salvar</Text></TouchableOpacity>
                             </View>
                         </View>
                     </View>
                 </ScrollView>
-
             </View>
         </>
     );

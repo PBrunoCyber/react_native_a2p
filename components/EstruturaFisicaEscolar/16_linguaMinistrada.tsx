@@ -9,6 +9,7 @@ import CheckBox from '../CheckBox';
 import { IInstrumentosEMateriais, ILinguaMinistrada } from '../../types/EstruturaFisicaEscolar';
 import RadioGroup from '../RadioGroup';
 import { useFocusEffect } from 'expo-router';
+import json from '../../json/linguas_indigenas.json';
 
 interface IProps {
     linguaMinistrada?: (value: ILinguaMinistrada) => void,
@@ -20,7 +21,11 @@ interface IProps {
 
 const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMateriais, data, editData }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<ILinguaMinistrada>(data || editData ||{ campo_149: null, campo_150: null, campo_151: '', campo_152: '', campo_153: '' });
+    const [answer, setAnswers] = useState<ILinguaMinistrada>(data || editData || { campo_149: null, campo_150: null, campo_151: '', campo_152: '', campo_153: '' });
+    const [cod1, setCod1] = useState(false);
+    const [cod2, setCod2] = useState(false);
+    const [cod3, setCod3] = useState(false);
+    const [linguas, setLinguas] = useState(json);
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
@@ -30,7 +35,7 @@ const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMat
 
     useFocusEffect(
         useCallback(() => {
-            setAnswers(data || editData ||{ campo_149: null, campo_150: null, campo_151: '', campo_152: '', campo_153: '' });
+            setAnswers(data || editData || { campo_149: null, campo_150: null, campo_151: '', campo_152: '', campo_153: '' });
             setIsClicked(false);
         }, [])
     )
@@ -53,6 +58,7 @@ const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMat
                 ['campo_152']: '',
                 ['campo_153']: ''
             }));
+            setCod1(false);
         }
 
         if (question === 'campo_151' && !answer) {
@@ -61,14 +67,25 @@ const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMat
                 ['campo_152']: '',
                 ['campo_153']: ''
             }));
+            setCod2(false);
+            setCod3(false);
         }
         if (question === 'campo_152' && !answer) {
             setAnswers((prevAnswer) => ({
                 ...prevAnswer,
                 ['campo_153']: ''
             }));
+            setCod3(false);
         }
 
+    }
+
+    const searchByNome = (txt: string) => {
+        if (txt === '') {
+            setLinguas(json);
+        } else {
+            setLinguas(json.filter((linguas) => linguas.nome.toLowerCase().includes(txt.toLowerCase())));
+        }
     }
 
     useEffect(() => {
@@ -99,24 +116,81 @@ const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMat
                     <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_149} disable={answerInstrumentosEMateriais?.campo_148 !== 1 || data ? true : false} value={answer.campo_149} textOption={textOption} fontWeight='normal' question='2 - Língua Indígena*' onSelect={(option) => handleOptionChange('campo_149', option)} />
                     {formErrors?.campo_149 && <Text style={styles.messageError}>{formErrors?.campo_149}</Text>}
                     <View style={{ marginTop: 40 }}>
-                        <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 30 }]}>
+                        <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 30, zIndex: 999 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400 }}>a) Código da língua indígena 1*</Text>
-                            <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={5} value={data?.campo_151 ? data.campo_151 : answer.campo_151} style={[styles.input, answer.campo_149 !== 1 || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer.campo_149 === 1 && !data ? true : false} onChangeText={(txt) => handleOptionChange('campo_151', txt)} />
+                            <View style={{ maxWidth: 260 }}>
+                                <TouchableOpacity style={[styles.dropdownSelector, answer.campo_149 !== 1 || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} disabled={answer.campo_149 != 1 || data ? true : false} onPress={() => { setCod1(!cod1); setLinguas(json); }}>
+                                    <Text>{answer.campo_151}</Text>
+                                    {cod1 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} /> :
+                                        <Ionicons name='chevron-down-outline' color={answer.campo_149 !== 1 || data ? COLORS.lightBlack : COLORS.green} size={30} />}
+                                </TouchableOpacity>
+                                {cod1 ?
+                                    <View style={styles.dropdownArea}>
+                                        <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center', width: '90%' }}>
+                                            <Ionicons name='search-outline' size={30} style={{ position: 'absolute', marginLeft: 5 }} color={COLORS.green} />
+                                            <TextInput placeholder={"Pesquisar por inep"} placeholderTextColor={COLORS.green} style={styles.searchInput} onChangeText={txt => { return searchByNome(txt) }}></TextInput>
+                                        </View>
+                                        {
+                                            linguas.map((item, index) => {
+                                                return (
+                                                    <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { handleOptionChange('campo_151', item.codigo.toString()); setCod1(false); }}>
+                                                        <Text>{item.codigo} - {item.nome}</Text>
+                                                    </TouchableOpacity>
+                                                )
+                                            }).slice(0, 10)}
+                                    </View> : null}
                                 {formErrors?.campo_151 && <Text style={styles.messageError}>{formErrors?.campo_151}</Text>}
                             </View>
                         </View>
-                        <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 30 }]}>
+                        <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 30, zIndex: 99 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400 }}>b) Código da língua indígena 2*</Text>
-                            <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={5} value={data?.campo_151 ? data.campo_152 : answer.campo_152} style={[styles.input, !answer?.campo_151 || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer.campo_151 && !data ? true : false} onChangeText={(txt) => handleOptionChange('campo_152', txt)} />
+                            <View style={{ maxWidth: 260 }}>
+                                <TouchableOpacity style={[styles.dropdownSelector, !answer.campo_151 || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} disabled={!answer.campo_151 || data ? true : false} onPress={() => { setCod2(!cod2); setLinguas(json); }}>
+                                    <Text>{answer.campo_152}</Text>
+                                    {cod2 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} /> :
+                                        <Ionicons name='chevron-down-outline' color={!answer.campo_151 || data ? COLORS.lightBlack : COLORS.green} size={30} />}
+                                </TouchableOpacity>
+                                {cod2 ?
+                                    <View style={styles.dropdownArea}>
+                                        <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center', width: '90%' }}>
+                                            <Ionicons name='search-outline' size={30} style={{ position: 'absolute', marginLeft: 5 }} color={COLORS.green} />
+                                            <TextInput placeholder={"Pesquisar por inep"} placeholderTextColor={COLORS.green} style={styles.searchInput} onChangeText={txt => { return searchByNome(txt) }}></TextInput>
+                                        </View>
+                                        {
+                                            linguas.map((item, index) => {
+                                                return (
+                                                    <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { handleOptionChange('campo_152', item.codigo.toString()); setCod2(false); }}>
+                                                        <Text>{item.codigo} - {item.nome}</Text>
+                                                    </TouchableOpacity>
+                                                )
+                                            }).slice(0, 10)}
+                                    </View> : null}
                                 {formErrors?.campo_152 && <Text style={styles.messageError}>{formErrors?.campo_152}</Text>}
                             </View>
                         </View>
-                        <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 30 }]}>
+                        <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 30, zIndex: 9 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400 }}>c) Código da língua indígena 3*</Text>
-                            <View style={{ maxWidth: 300 }}>
-                                <TextInput maxLength={5} value={data?.campo_153 ? data.campo_153 : answer.campo_153}  style={[styles.input, !answer?.campo_152 || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer.campo_152 && !data ? true : false} onChangeText={(txt) => handleOptionChange('campo_153', txt)} />
+                            <View style={{ maxWidth: 260, flexGrow: 1 }}>
+                                <TouchableOpacity style={[styles.dropdownSelector, !answer.campo_152 || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} disabled={!answer.campo_152 || data ? true : false} onPress={() => { setCod3(!cod3); setLinguas(json); }}>
+                                    <Text>{answer.campo_153}</Text>
+                                    {cod3 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} /> :
+                                        <Ionicons name='chevron-down-outline' color={!answer.campo_152 || data ? COLORS.lightBlack : COLORS.green} size={30} />}
+                                </TouchableOpacity>
+                                {cod3 ?
+                                    <View style={styles.dropdownArea}>
+                                        <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center', width: '90%' }}>
+                                            <Ionicons name='search-outline' size={30} style={{ position: 'absolute', marginLeft: 5 }} color={COLORS.green} />
+                                            <TextInput placeholder={"Pesquisar por inep"} placeholderTextColor={COLORS.green} style={styles.searchInput} onChangeText={txt => { return searchByNome(txt) }}></TextInput>
+                                        </View>
+                                        {
+                                            linguas.map((item, index) => {
+                                                return (
+                                                    <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { handleOptionChange('campo_153', item.codigo.toString()); setCod3(false); }}>
+                                                        <Text>{item.codigo} - {item.nome}</Text>
+                                                    </TouchableOpacity>
+                                                )
+                                            }).slice(0, 10)}
+                                    </View> : null}
                                 {formErrors?.campo_153 && <Text style={styles.messageError}>{formErrors?.campo_153}</Text>}
                             </View>
                         </View>

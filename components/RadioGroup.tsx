@@ -47,10 +47,9 @@ const RadioGroup = ({ options, question, value, textOption, disable, fontWeight,
                                 ]}
                                 disabled={true}
                             >
-                                {(marked && selected === option) && <Ionicons color={COLORS.white} name='checkmark-outline' size={20} style={{ alignSelf: 'center' }} />}
+                                {(marked && selected === option) && <Ionicons color={COLORS.white} name='checkmark-outline' size={20} style={{alignSelf: 'center'}} />}
                             </TouchableOpacity>
                         }
-
                         <Text style={{ fontWeight: fontWeight }}>{textOption[index]}</Text>
                     </View>
                 ))}

@@ -1,0 +1,1294 @@
+[
+    {
+        "codigo": "",
+        "nome": ""
+    },
+    {
+        "codigo": 30,
+        "nome": "Borsro"
+    },
+    {
+        "codigo": 244,
+        "nome": "Umutmna"
+    },
+    {
+        "codigo": 42,
+        "nome": "Guats"
+    },
+    {
+        "codigo": 12,
+        "nome": "Apinayi"
+    },
+    {
+        "codigo": 235,
+        "nome": "Kaingang"
+    },
+    {
+        "codigo": 150,
+        "nome": "Suya, Kisjdjj/ Kisedjj"
+    },
+    {
+        "codigo": 81,
+        "nome": "Gorotire (Kayaps)"
+    },
+    {
+        "codigo": 82,
+        "nome": "Kararat (Kayaps)"
+    },
+    {
+        "codigo": 83,
+        "nome": "Kokraimoro (Kayaps)"
+    },
+    {
+        "codigo": 84,
+        "nome": "Kubenkrngkegn (Kayaps)"
+    },
+    {
+        "codigo": 85,
+        "nome": "Menkrangnoti (Kayaps)"
+    },
+    {
+        "codigo": 86,
+        "nome": "Mentuktmre, Txukahamae (Kayaps)"
+    },
+    {
+        "codigo": 87,
+        "nome": "Xikrin (Kayaps)"
+    },
+    {
+        "codigo": 220,
+        "nome": "Kayaps"
+    },
+    {
+        "codigo": 221,
+        "nome": "Mebengokri (Kayaps)"
+    },
+    {
+        "codigo": 132,
+        "nome": "Panara, Krenakartre/ Kren-akartre"
+    },
+    {
+        "codigo": 205,
+        "nome": "Kanila Rankocamekra/ Canela Ramkokamekrc"
+    },
+    {
+        "codigo": 223,
+        "nome": "Kreje/ Krenji"
+    },
+    {
+        "codigo": 224,
+        "nome": "Krikatm/ Krinkatm"
+    },
+    {
+        "codigo": 240,
+        "nome": "Gavico Pukobiyi/ Gavico Pukobii"
+    },
+    {
+        "codigo": 251,
+        "nome": "Canela"
+    },
+    {
+        "codigo": 252,
+        "nome": "Kanila Apaniekra/Canela Apaniekrc"
+    },
+    {
+        "codigo": 253,
+        "nome": "Gavico Krikatjjj/ Gavico Krinkateji"
+    },
+    {
+        "codigo": 254,
+        "nome": "Gavico Parkatjjj/ Guats Parakateji/ Gavico do Para"
+    },
+    {
+        "codigo": 255,
+        "nome": "Kraht/ Crao, Krat"
+    },
+    {
+        "codigo": 256,
+        "nome": "Krao Kanela"
+    },
+    {
+        "codigo": 257,
+        "nome": "Kokuiregatjjj/ Kokuiregatejje"
+    },
+    {
+        "codigo": 258,
+        "nome": "Timbira"
+    },
+    {
+        "codigo": 259,
+        "nome": "Xacriaba/ Xakriaba"
+    },
+    {
+        "codigo": 5,
+        "nome": "Xavante/ Xavante"
+    },
+    {
+        "codigo": 6,
+        "nome": "Xerinte"
+    },
+    {
+        "codigo": 188,
+        "nome": "Xokling"
+    },
+    {
+        "codigo": 241,
+        "nome": "Tapayzna"
+    },
+    {
+        "codigo": 260,
+        "nome": "Jj (nco especmfico)"
+    },
+    {
+        "codigo": 50,
+        "nome": "Javai"
+    },
+    {
+        "codigo": 63,
+        "nome": "Karaja"
+    },
+    {
+        "codigo": 185,
+        "nome": "Xambioa"
+    },
+    {
+        "codigo": 92,
+        "nome": "Krenak"
+    },
+    {
+        "codigo": 107,
+        "nome": "Maxakalm"
+    },
+    {
+        "codigo": 261,
+        "nome": "Pataxs"
+    },
+    {
+        "codigo": 262,
+        "nome": "Pataxs Hc Hc Hce/ Pataxs Ha-Ha-Ha"
+    },
+    {
+        "codigo": 129,
+        "nome": "Ofayi"
+    },
+    {
+        "codigo": 142,
+        "nome": "Canoeiros/ Rikbaktsa"
+    },
+    {
+        "codigo": 192,
+        "nome": "Fulni-t/ Yathj"
+    },
+    {
+        "codigo": 187,
+        "nome": "Xipaya"
+    },
+    {
+        "codigo": 250,
+        "nome": "Tupm, Tupi Antigo"
+    },
+    {
+        "codigo": 65,
+        "nome": "Karitiana"
+    },
+    {
+        "codigo": 23,
+        "nome": "Awetm"
+    },
+    {
+        "codigo": 51,
+        "nome": "Jurzna/ Yudja"
+    },
+    {
+        "codigo": 106,
+        "nome": "Mawi"
+    },
+    {
+        "codigo": 200,
+        "nome": "Arara do Aripuana/ Arara do Aripuanc"
+    },
+    {
+        "codigo": 236,
+        "nome": "Surum de Rondtnia"
+    },
+    {
+        "codigo": 263,
+        "nome": "Salamcy"
+    },
+    {
+        "codigo": 19,
+        "nome": "Arua"
+    },
+    {
+        "codigo": 31,
+        "nome": "Cinta Larga/ Cinta-Larga"
+    },
+    {
+        "codigo": 36,
+        "nome": "Gavico (Ikuro, Dig|t), Gavico de Rondtnia/ Ikolen"
+    },
+    {
+        "codigo": 111,
+        "nome": "Mondi, Tupm-Mondi"
+    },
+    {
+        "codigo": 197,
+        "nome": "Zors"
+    },
+    {
+        "codigo": 96,
+        "nome": "Kuruaya"
+    },
+    {
+        "codigo": 112,
+        "nome": "Mundurukz"
+    },
+    {
+        "codigo": 141,
+        "nome": "Purubora"
+    },
+    {
+        "codigo": 66,
+        "nome": "Arara de Rondtnia/ Karo"
+    },
+    {
+        "codigo": 264,
+        "nome": "Ramarama"
+    },
+    {
+        "codigo": 265,
+        "nome": "Urucz/ Urucu"
+    },
+    {
+        "codigo": 2,
+        "nome": "Ajuru/ Wayoro, Ajurz"
+    },
+    {
+        "codigo": 198,
+        "nome": "Akuntsz"
+    },
+    {
+        "codigo": 99,
+        "nome": "Makurap"
+    },
+    {
+        "codigo": 110,
+        "nome": "Sakurabiat/ Kampi"
+    },
+    {
+        "codigo": 171,
+        "nome": "Tuparm"
+    },
+    {
+        "codigo": 7,
+        "nome": "Amanayi"
+    },
+    {
+        "codigo": 11,
+        "nome": "Apiaka"
+    },
+    {
+        "codigo": 17,
+        "nome": "Araweti"
+    },
+    {
+        "codigo": 4,
+        "nome": "Surum do Para/ Surum do Tocantins/ Aikewara"
+    },
+    {
+        "codigo": 20,
+        "nome": "Asurinm do Tocantins"
+    },
+    {
+        "codigo": 237,
+        "nome": "Parakanc"
+    },
+    {
+        "codigo": 21,
+        "nome": "Asurinm do Xingu"
+    },
+    {
+        "codigo": 22,
+        "nome": "Ava-Canoeiro/ Ava-Canoeiro, Ava, Canoeiro"
+    },
+    {
+        "codigo": 37,
+        "nome": "Guaja"
+    },
+    {
+        "codigo": 38,
+        "nome": "Guaranm Kaiowa/ Guarani Kayova"
+    },
+    {
+        "codigo": 39,
+        "nome": "Guaranm Mbya"
+    },
+    {
+        "codigo": 40,
+        "nome": "Guaranm Nhandiva"
+    },
+    {
+        "codigo": 266,
+        "nome": "Guaranm"
+    },
+    {
+        "codigo": 52,
+        "nome": "Ka'apor/ Urubu, Kaapsr"
+    },
+    {
+        "codigo": 59,
+        "nome": "Kamayura"
+    },
+    {
+        "codigo": 76,
+        "nome": "Uru-Eu-Wau-Wau/ Uruewawau"
+    },
+    {
+        "codigo": 199,
+        "nome": "Amondawa"
+    },
+    {
+        "codigo": 208,
+        "nome": "Diahsi/ Diahui"
+    },
+    {
+        "codigo": 215,
+        "nome": "Jzma/ Juma"
+    },
+    {
+        "codigo": 219,
+        "nome": "Karipzna"
+    },
+    {
+        "codigo": 238,
+        "nome": "Parintintmn"
+    },
+    {
+        "codigo": 243,
+        "nome": "Tenharmm/ Tenharim"
+    },
+    {
+        "codigo": 268,
+        "nome": "Kawahmb"
+    },
+    {
+        "codigo": 80,
+        "nome": "Kayabm"
+    },
+    {
+        "codigo": 90,
+        "nome": "Kokama"
+    },
+    {
+        "codigo": 204,
+        "nome": "Kambiba"
+    },
+    {
+        "codigo": 126,
+        "nome": "Lingua Geral Amaztnica, Nheengatu"
+    },
+    {
+        "codigo": 151,
+        "nome": "Tapirapi"
+    },
+    {
+        "codigo": 155,
+        "nome": "Tembi"
+    },
+    {
+        "codigo": 211,
+        "nome": "Guajajara"
+    },
+    {
+        "codigo": 269,
+        "nome": "Turiwara"
+    },
+    {
+        "codigo": 183,
+        "nome": "Wayampm/ Oyampi"
+    },
+    {
+        "codigo": 186,
+        "nome": "Xeta"
+    },
+    {
+        "codigo": 196,
+        "nome": "Zo'i"
+    },
+    {
+        "codigo": 267,
+        "nome": "Lingua De Sinais Ka'apor/ Lmngua de Sinais Urubu-Kaapsr"
+    },
+    {
+        "codigo": 270,
+        "nome": "Tupm-Guaranm"
+    },
+    {
+        "codigo": 283,
+        "nome": "Arawa"
+    },
+    {
+        "codigo": 25,
+        "nome": "Banawa"
+    },
+    {
+        "codigo": 32,
+        "nome": "Denm"
+    },
+    {
+        "codigo": 284,
+        "nome": "Himarimc/ Hi-merimc, Mirimc, Himarima"
+    },
+    {
+        "codigo": 285,
+        "nome": "Jamamadm-Kanamanti/ Jamamadm"
+    },
+    {
+        "codigo": 48,
+        "nome": "Jarawara"
+    },
+    {
+        "codigo": 95,
+        "nome": "Kulmna Madija/ Kulina, Kulmna Madiha (Madija)"
+    },
+    {
+        "codigo": 136,
+        "nome": "Paumarm"
+    },
+    {
+        "codigo": 148,
+        "nome": "Zuruwaha, Suruaha (Zuruaha)"
+    },
+    {
+        "codigo": 13,
+        "nome": "Apurinc"
+    },
+    {
+        "codigo": 60,
+        "nome": "Ashanmnka/ Axanmnka"
+    },
+    {
+        "codigo": 26,
+        "nome": "Banmwa/ Tapiira Tapuya, Kawa Tapuya"
+    },
+    {
+        "codigo": 226,
+        "nome": "Kuripako"
+    },
+    {
+        "codigo": 29,
+        "nome": "Bari"
+    },
+    {
+        "codigo": 145,
+        "nome": "Enawenj-Nawj"
+    },
+    {
+        "codigo": 271,
+        "nome": "Kaixana/ Kayuisiana"
+    },
+    {
+        "codigo": 222,
+        "nome": "Kinikinau, Kinikinawa"
+    },
+    {
+        "codigo": 272,
+        "nome": "Machiniri"
+    },
+    {
+        "codigo": 273,
+        "nome": "Mawayana"
+    },
+    {
+        "codigo": 109,
+        "nome": "Mehinaku"
+    },
+    {
+        "codigo": 131,
+        "nome": "Palikzr"
+    },
+    {
+        "codigo": 133,
+        "nome": "Paresm"
+    },
+    {
+        "codigo": 152,
+        "nome": "Tariana"
+    },
+    {
+        "codigo": 156,
+        "nome": "Terina"
+    },
+    {
+        "codigo": 179,
+        "nome": "Wapixana"
+    },
+    {
+        "codigo": 180,
+        "nome": "Warekina"
+    },
+    {
+        "codigo": 182,
+        "nome": "Wauja/ Waura"
+    },
+    {
+        "codigo": 193,
+        "nome": "Yawalapitm"
+    },
+    {
+        "codigo": 274,
+        "nome": "Aruak"
+    },
+    {
+        "codigo": 307,
+        "nome": "Bsra"
+    },
+    {
+        "codigo": 233,
+        "nome": "Miranha"
+    },
+    {
+        "codigo": 207,
+        "nome": "Chiquitano/ Chiquito"
+    },
+    {
+        "codigo": 53,
+        "nome": "Kadiwiu"
+    },
+    {
+        "codigo": 308,
+        "nome": "Guaikurz"
+    },
+    {
+        "codigo": 18,
+        "nome": "Arikapz/ Jabutm"
+    },
+    {
+        "codigo": 47,
+        "nome": "Djeoromitxm/ Jabotm/ Jabutm"
+    },
+    {
+        "codigo": 10,
+        "nome": "Apalam"
+    },
+    {
+        "codigo": 201,
+        "nome": "Arara do Para, Arara do Xingu"
+    },
+    {
+        "codigo": 24,
+        "nome": "Bakairm"
+    },
+    {
+        "codigo": 35,
+        "nome": "Galibm do Oiapoque, Galibm (Karmqa)"
+    },
+    {
+        "codigo": 43,
+        "nome": "Hixkaryana"
+    },
+    {
+        "codigo": 173,
+        "nome": "Ikpeng/ Ikping"
+    },
+    {
+        "codigo": 45,
+        "nome": "Ingariks"
+    },
+    {
+        "codigo": 58,
+        "nome": "Kalapalo"
+    },
+    {
+        "codigo": 94,
+        "nome": "Kuikzro"
+    },
+    {
+        "codigo": 103,
+        "nome": "Matipz"
+    },
+    {
+        "codigo": 116,
+        "nome": "Nahukwa"
+    },
+    {
+        "codigo": 275,
+        "nome": "Naravzte"
+    },
+    {
+        "codigo": 276,
+        "nome": "Kaxuyana/ Kahyana, Warikyana"
+    },
+    {
+        "codigo": 277,
+        "nome": "Xikuyana/ Sikiyana"
+    },
+    {
+        "codigo": 100,
+        "nome": "Makuxm"
+    },
+    {
+        "codigo": 218,
+        "nome": "Kapon Patamsna/ Kapon Ptamsna"
+    },
+    {
+        "codigo": 153,
+        "nome": "Taulipang"
+    },
+    {
+        "codigo": 167,
+        "nome": "Tiriys/ Tarona"
+    },
+    {
+        "codigo": 177,
+        "nome": "Wai Wai/ Waiwai"
+    },
+    {
+        "codigo": 176,
+        "nome": "Waimirm-Atroarm"
+    },
+    {
+        "codigo": 184,
+        "nome": "Wayana"
+    },
+    {
+        "codigo": 108,
+        "nome": "Yekuana, Mayongong, Makiritare,"
+    },
+    {
+        "codigo": 278,
+        "nome": "Karib"
+    },
+    {
+        "codigo": 67,
+        "nome": "Katawixm"
+    },
+    {
+        "codigo": 61,
+        "nome": "Kanamarm"
+    },
+    {
+        "codigo": 69,
+        "nome": "Katukmna"
+    },
+    {
+        "codigo": 174,
+        "nome": "Tsohom Djapa/ Tsohondjapa (Tsohom Djapa)"
+    },
+    {
+        "codigo": 34,
+        "nome": "Dbw"
+    },
+    {
+        "codigo": 286,
+        "nome": "Hup, Hzpda, Maku, Yuhupde, Yuhzp"
+    },
+    {
+        "codigo": 115,
+        "nome": "Nadkb"
+    },
+    {
+        "codigo": 113,
+        "nome": "Mzra"
+    },
+    {
+        "codigo": 137,
+        "nome": "Pirahc"
+    },
+    {
+        "codigo": 120,
+        "nome": "Negarotj/ Negarote"
+    },
+    {
+        "codigo": 228,
+        "nome": "Lakondj"
+    },
+    {
+        "codigo": 229,
+        "nome": "Latundj"
+    },
+    {
+        "codigo": 230,
+        "nome": "Mamaindj"
+    },
+    {
+        "codigo": 242,
+        "nome": "Tawandj"
+    },
+    {
+        "codigo": 231,
+        "nome": "Mandzka/ Nambikwara do Campo"
+    },
+    {
+        "codigo": 287,
+        "nome": "Alaketesz"
+    },
+    {
+        "codigo": 288,
+        "nome": "Alantesz"
+    },
+    {
+        "codigo": 289,
+        "nome": "Hahaintesz"
+    },
+    {
+        "codigo": 290,
+        "nome": "Halotesz"
+    },
+    {
+        "codigo": 291,
+        "nome": "Kithaulz"
+    },
+    {
+        "codigo": 292,
+        "nome": "Sarari"
+    },
+    {
+        "codigo": 300,
+        "nome": "Sawentesz"
+    },
+    {
+        "codigo": 301,
+        "nome": "Waikisz"
+    },
+    {
+        "codigo": 302,
+        "nome": "Wakalitesz"
+    },
+    {
+        "codigo": 303,
+        "nome": "Wasusz"
+    },
+    {
+        "codigo": 304,
+        "nome": "Nambikwara"
+    },
+    {
+        "codigo": 143,
+        "nome": "Sabanj"
+    },
+    {
+        "codigo": 15,
+        "nome": "Arara do Acre, Shawcdawa"
+    },
+    {
+        "codigo": 68,
+        "nome": "Katukmna do Acre"
+    },
+    {
+        "codigo": 77,
+        "nome": "Kaxararm"
+    },
+    {
+        "codigo": 78,
+        "nome": "Kaxinawa"
+    },
+    {
+        "codigo": 91,
+        "nome": "Korzbo"
+    },
+    {
+        "codigo": 279,
+        "nome": "Kulmna Pano"
+    },
+    {
+        "codigo": 102,
+        "nome": "Marzbo"
+    },
+    {
+        "codigo": 104,
+        "nome": "Matms"
+    },
+    {
+        "codigo": 105,
+        "nome": "Matsis"
+    },
+    {
+        "codigo": 389,
+        "nome": "Maya"
+    },
+    {
+        "codigo": 128,
+        "nome": "Nukinm"
+    },
+    {
+        "codigo": 140,
+        "nome": "Poyanawa"
+    },
+    {
+        "codigo": 246,
+        "nome": "Shanenawa/ Xanenawa, Xawanawa"
+    },
+    {
+        "codigo": 49,
+        "nome": "Yaminawa"
+    },
+    {
+        "codigo": 194,
+        "nome": "Yawanawa"
+    },
+    {
+        "codigo": 280,
+        "nome": "Pano"
+    },
+    {
+        "codigo": 206,
+        "nome": "Chamaksko/ Samzko, Chamacoco"
+    },
+    {
+        "codigo": 14,
+        "nome": "Arapaso"
+    },
+    {
+        "codigo": 28,
+        "nome": "Bara"
+    },
+    {
+        "codigo": 203,
+        "nome": "Barasana"
+    },
+    {
+        "codigo": 33,
+        "nome": "Desana"
+    },
+    {
+        "codigo": 64,
+        "nome": "Karapanc"
+    },
+    {
+        "codigo": 178,
+        "nome": "Wanana/ Guanana"
+    },
+    {
+        "codigo": 93,
+        "nome": "Kubio, Kubewa"
+    },
+    {
+        "codigo": 281,
+        "nome": "Makzna, Yeba-masc"
+    },
+    {
+        "codigo": 282,
+        "nome": "Siriano/ Suriana, Suriana"
+    },
+    {
+        "codigo": 234,
+        "nome": "Tukano / Miriti-Tapuia"
+    },
+    {
+        "codigo": 172,
+        "nome": "Tuyzca / Tuyuca"
+    },
+    {
+        "codigo": 138,
+        "nome": "Piratapzya"
+    },
+    {
+        "codigo": 216,
+        "nome": "Yurutm, Juriti"
+    },
+    {
+        "codigo": 225,
+        "nome": "Kujubmm"
+    },
+    {
+        "codigo": 305,
+        "nome": "Miguelinho/ Migueleno, Miguelenho"
+    },
+    {
+        "codigo": 130,
+        "nome": "Oro Win"
+    },
+    {
+        "codigo": 168,
+        "nome": "Tora"
+    },
+    {
+        "codigo": 175,
+        "nome": "Urupa"
+    },
+    {
+        "codigo": 245,
+        "nome": "Pakaa Nsva/Migueleno, Miguelenho"
+    },
+    {
+        "codigo": 306,
+        "nome": "Txapakzra"
+    },
+    {
+        "codigo": 309,
+        "nome": "Witsto"
+    },
+    {
+        "codigo": 127,
+        "nome": "Ninam"
+    },
+    {
+        "codigo": 146,
+        "nome": "Sanuma"
+    },
+    {
+        "codigo": 190,
+        "nome": "Yanomam/ Yanonman"
+    },
+    {
+        "codigo": 191,
+        "nome": "Yanomami"
+    },
+    {
+        "codigo": 1,
+        "nome": "Aikana/ Aikanc"
+    },
+    {
+        "codigo": 46,
+        "nome": "Irantxe"
+    },
+    {
+        "codigo": 62,
+        "nome": "Kanoi/ Kanoj"
+    },
+    {
+        "codigo": 227,
+        "nome": "Kwaza"
+    },
+    {
+        "codigo": 157,
+        "nome": "Tikzna"
+    },
+    {
+        "codigo": 169,
+        "nome": "Trumai"
+    },
+    {
+        "codigo": 114,
+        "nome": "Mynky/ Mynk}, Meky, Menky, Menki"
+    },
+    {
+        "codigo": 135,
+        "nome": "Galibm Marwsrno/ Galibi Marworno"
+    },
+    {
+        "codigo": 134,
+        "nome": "Karipzna do Amapa"
+    },
+    {
+        "codigo": 310,
+        "nome": "Acona/ Akona"
+    },
+    {
+        "codigo": 311,
+        "nome": "Aimori"
+    },
+    {
+        "codigo": 312,
+        "nome": "Anaci"
+    },
+    {
+        "codigo": 313,
+        "nome": "Apolima - Arara"
+    },
+    {
+        "codigo": 314,
+        "nome": "Arana"
+    },
+    {
+        "codigo": 315,
+        "nome": "Arapiun"
+    },
+    {
+        "codigo": 316,
+        "nome": "Arikin"
+    },
+    {
+        "codigo": 317,
+        "nome": "Arikose"
+    },
+    {
+        "codigo": 318,
+        "nome": "Atikum"
+    },
+    {
+        "codigo": 319,
+        "nome": "Awi"
+    },
+    {
+        "codigo": 320,
+        "nome": "Baenc"
+    },
+    {
+        "codigo": 321,
+        "nome": "Borari"
+    },
+    {
+        "codigo": 322,
+        "nome": "Botocudo"
+    },
+    {
+        "codigo": 323,
+        "nome": "Catokin (Katukmna)"
+    },
+    {
+        "codigo": 324,
+        "nome": "Charrza/ Charrua"
+    },
+    {
+        "codigo": 325,
+        "nome": "Coiupanka"
+    },
+    {
+        "codigo": 326,
+        "nome": "Guara"
+    },
+    {
+        "codigo": 327,
+        "nome": "Guarino"
+    },
+    {
+        "codigo": 328,
+        "nome": "Guaru"
+    },
+    {
+        "codigo": 329,
+        "nome": "Isse"
+    },
+    {
+        "codigo": 330,
+        "nome": "Jaricuna"
+    },
+    {
+        "codigo": 331,
+        "nome": "Jeripancs/ Jeripanks"
+    },
+    {
+        "codigo": 332,
+        "nome": "Kaete"
+    },
+    {
+        "codigo": 333,
+        "nome": "Kaimbi"
+    },
+    {
+        "codigo": 334,
+        "nome": "Kalabassa"
+    },
+    {
+        "codigo": 335,
+        "nome": "Kalanks"
+    },
+    {
+        "codigo": 336,
+        "nome": "Kamba/ Kamba"
+    },
+    {
+        "codigo": 337,
+        "nome": "Kambiwa"
+    },
+    {
+        "codigo": 338,
+        "nome": "Kambiwa Pipipc"
+    },
+    {
+        "codigo": 339,
+        "nome": "Kanindi"
+    },
+    {
+        "codigo": 340,
+        "nome": "Kantaruri"
+    },
+    {
+        "codigo": 341,
+        "nome": "Kapinawa"
+    },
+    {
+        "codigo": 342,
+        "nome": "Karapoto/ Karapots"
+    },
+    {
+        "codigo": 343,
+        "nome": "Karijo"
+    },
+    {
+        "codigo": 344,
+        "nome": "Kariri/ Karirm"
+    },
+    {
+        "codigo": 345,
+        "nome": "Kariri - Xocs/ Karirm-Xocs"
+    },
+    {
+        "codigo": 346,
+        "nome": "Kaxixs"
+    },
+    {
+        "codigo": 347,
+        "nome": "Kayuisiana -(Kaixana)"
+    },
+    {
+        "codigo": 348,
+        "nome": "Kiriri"
+    },
+    {
+        "codigo": 349,
+        "nome": "Kueskue"
+    },
+    {
+        "codigo": 350,
+        "nome": "Manao/ Manao"
+    },
+    {
+        "codigo": 351,
+        "nome": "Maragua"
+    },
+    {
+        "codigo": 352,
+        "nome": "Maytapu"
+    },
+    {
+        "codigo": 353,
+        "nome": "Mucurim"
+    },
+    {
+        "codigo": 354,
+        "nome": "Nawa/ Nawa"
+    },
+    {
+        "codigo": 355,
+        "nome": "Paiaku"
+    },
+    {
+        "codigo": 356,
+        "nome": "Pankara"
+    },
+    {
+        "codigo": 357,
+        "nome": "Pankarari"
+    },
+    {
+        "codigo": 358,
+        "nome": "Pankararz/ Pankarz"
+    },
+    {
+        "codigo": 359,
+        "nome": "Pankararz - Kalanko"
+    },
+    {
+        "codigo": 360,
+        "nome": "Pankararz - Karuazu"
+    },
+    {
+        "codigo": 361,
+        "nome": "Pankaru"
+    },
+    {
+        "codigo": 362,
+        "nome": "Patxthc/ Patxoha"
+    },
+    {
+        "codigo": 363,
+        "nome": "Paumelenho"
+    },
+    {
+        "codigo": 364,
+        "nome": "Piri-Piri/ Pirm-Pirm"
+    },
+    {
+        "codigo": 365,
+        "nome": "Pitaguari/ Pitaguarm"
+    },
+    {
+        "codigo": 366,
+        "nome": "Potiguara/ Potiguara"
+    },
+    {
+        "codigo": 367,
+        "nome": "Puri/ Purm"
+    },
+    {
+        "codigo": 368,
+        "nome": "Sapara/ Sapara"
+    },
+    {
+        "codigo": 369,
+        "nome": "Tabajara"
+    },
+    {
+        "codigo": 370,
+        "nome": "Tapajss"
+    },
+    {
+        "codigo": 371,
+        "nome": "Tapeba"
+    },
+    {
+        "codigo": 372,
+        "nome": "Tapiuns/ Tapiun"
+    },
+    {
+        "codigo": 373,
+        "nome": "Tapuma/ Tapzya"
+    },
+    {
+        "codigo": 374,
+        "nome": "Tingui Bots/ Tingum-Bots"
+    },
+    {
+        "codigo": 375,
+        "nome": "Tremembi"
+    },
+    {
+        "codigo": 376,
+        "nome": "Truka"
+    },
+    {
+        "codigo": 377,
+        "nome": "Tumbalala"
+    },
+    {
+        "codigo": 378,
+        "nome": "Tupinamba"
+    },
+    {
+        "codigo": 379,
+        "nome": "Tupinambarana"
+    },
+    {
+        "codigo": 380,
+        "nome": "Tupiniquim"
+    },
+    {
+        "codigo": 381,
+        "nome": "Tuxa"
+    },
+    {
+        "codigo": 382,
+        "nome": "Waira"
+    },
+    {
+        "codigo": 383,
+        "nome": "Waiana-Apalam"
+    },
+    {
+        "codigo": 384,
+        "nome": "Wajuju/ Wajujz"
+    },
+    {
+        "codigo": 385,
+        "nome": "Wassz (Wasusz)"
+    },
+    {
+        "codigo": 386,
+        "nome": "Xocs"
+    },
+    {
+        "codigo": 387,
+        "nome": "Xucuru/ Xukurz"
+    },
+    {
+        "codigo": 388,
+        "nome": "Xucuru - Kariri/ Xukurz-Karirm"
+    },
+    {
+        "codigo": 999,
+        "nome": "Outras Linguas Indigenas"
+    }
+]

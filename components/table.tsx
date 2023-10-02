@@ -11,6 +11,7 @@ import { router } from 'expo-router';
 
 interface IProps {
     data: Array<IEscola>,
+    onDelete: (inep: string) => void
 }
 
 const Table = (props: IProps) => {
@@ -46,11 +47,11 @@ const Table = (props: IProps) => {
                                     <Text style={{ width: 100, fontSize: 15, textAlign: 'center' }}>{item.id}</Text>
                                     <Text style={{ width: 100, fontSize: 15, textAlign: 'left' }}>{item.inep}</Text>
                                     <Text style={{ width: 350, fontSize: 15, textAlign: 'left' }}>{item.nome}</Text>
-                                    <Text style={{ width: 120, fontSize: 15, textAlign: 'left' }}>{item.tipo}</Text>
+                                    <Text style={{ width: 120, fontSize: 15, textAlign: 'left' }}>{item.status}</Text>
                                     <View style={{ flexDirection: 'row', width: 50, gap: 10 }}>
                                         <TouchableOpacity style={styles.addBtn} onPress={() => router.push(`/viewEstruturaFisicaEscolar/${item.inep}`)}><Ionicons color={COLORS.white} name='eye-outline' size={30} /></TouchableOpacity>
-                                        <TouchableOpacity style={styles.addBtn} onPress={() => router.push({pathname: '/editEstruturaFisicaEscolar', params: {inep: item.inep, tipo: item.tipo}})}><Ionicons color={COLORS.white} name='pencil-outline' size={30} /></TouchableOpacity>
-                                        <TouchableOpacity style={styles.addBtn}><Ionicons color={COLORS.white} name='trash-outline' size={30} /></TouchableOpacity>
+                                        <TouchableOpacity style={styles.addBtn} onPress={() => router.push({pathname: '/editEstruturaFisicaEscolar', params: {inep: item.inep, tipo: item.status}})}><Ionicons color={COLORS.white} name='pencil-outline' size={30} /></TouchableOpacity>
+                                        <TouchableOpacity style={styles.addBtn} onPress={() => props.onDelete(item.inep)}><Ionicons color={COLORS.white} name='trash-outline' size={30} /></TouchableOpacity>
                                     </View>
                                 </View>
                             )

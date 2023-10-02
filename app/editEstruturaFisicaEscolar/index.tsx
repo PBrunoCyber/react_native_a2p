@@ -85,7 +85,6 @@ const EditEstruturaFisica = () => {
     const getData = async () => {
         setIsLoading(true);
         const res: any = await EstruturaFisicaEscolar.getEstruturaFisicaEscolarByInep(inep?.toString() || '');
-        setIsLoading(false);
         if (res != false) {
             setAnswerProjetoPedagogico(res.campo_170);
             setAnswerExameClassificatorio(res.campo_154);
@@ -107,6 +106,7 @@ const EditEstruturaFisica = () => {
             setLinguaMinistrada({ campo_149: res.campo_149, campo_150: res.campo_150, campo_151: res.campo_151, campo_152: res.campo_152, campo_153: res.campo_153 });
             setReservaDeVagas({ campo_155: res.campo_155, campo_156: res.campo_156, campo_157: res.campo_157, campo_158: res.campo_158, campo_159: res.campo_159, campo_160: res.campo_160, campo_161: res.campo_161, campo_162: res.campo_162, campo_163: res.campo_163 });
             setOrgaosColegiados({ campo_164: res.campo_164, campo_165: res.campo_165, campo_166: res.campo_166, campo_167: res.campo_167, campo_168: res.campo_168, campo_169: res.campo_169 });
+            setIsLoading(false);
         }
     }
 
@@ -137,24 +137,15 @@ const EditEstruturaFisica = () => {
         }
 
         setIsLoadingMessage(true);
-        const response = await EstruturaFisicaEscolar.updateEstruturaFisicaEscolar(forms, selectedInep);
+        const response = await EstruturaFisicaEscolar.updateEstruturaFisicaEscolar(forms, selectedInep, 'Rascunho');
         setIsLoadingMessage(false);
         if (response) {
-            const response = await Escola.updateTipoEscola('Rascunho', selectedInep);
-            if (response) {
-                setMessageOk('Rascunho atualizado com sucesso!');
-                setTimeout(() => {
-                    setMessageOk('');
-                    router.push('/');
-                }, 2000);
-                return;
-            } else {
-                setMessageError('Ocorreu algum ao atualizar o status da escola, tente novamente!');
-                setTimeout(() => {
-                    setMessageError('');
-                }, 3000);
-                return;
-            }
+            setMessageOk('Rascunho atualizado com sucesso!');
+            setTimeout(() => {
+                setMessageOk('');
+                router.push('/');
+            }, 2000);
+            return;
 
         } else {
             setMessageError('Ocorreu algum erro ao atualizar os dados, tente novamente!');
@@ -223,25 +214,15 @@ const EditEstruturaFisica = () => {
         }
 
         setIsLoadingMessage(true);
-        const response = await EstruturaFisicaEscolar.updateEstruturaFisicaEscolar(forms, selectedInep);
+        const response = await EstruturaFisicaEscolar.updateEstruturaFisicaEscolar(forms, selectedInep, 'Final');
         setIsLoadingMessage(false);
         if (response) {
-            const response = await Escola.updateTipoEscola('Final', selectedInep);
-            if (response) {
-                setMessageOk('Cadastro atualizado com sucesso!');
-                setTimeout(() => {
-                    setMessageOk('');
-                    router.push('/');
-                }, 2000);
-                return;
-            } else {
-                setMessageError('Ocorreu algum ao atualizar o status da escola, tente novamente!');
-                setTimeout(() => {
-                    setMessageError('');
-                }, 3000);
-                return;
-            }
-
+            setMessageOk('Cadastro atualizado com sucesso!');
+            setTimeout(() => {
+                setMessageOk('');
+                router.push('/');
+            }, 2000);
+            return;
         } else {
             setMessageError('Ocorreu algum erro ao atualizar os dados, tente novamente!');
             setTimeout(() => {
@@ -268,8 +249,8 @@ const EditEstruturaFisica = () => {
                     </View>
                     :
                     <>
-                        {messageOk && <View style={styles.messageOk}><Ionicons name='checkmark-circle-outline' size={40} color={COLORS.green} /><Text style={{ fontWeight: 'bold', color: COLORS.green }}>{messageOk}</Text></View>}
-                        {messageError && <View style={styles.messageError}><Ionicons name='close-circle-outline' size={40} color={COLORS.red} /><Text style={{ fontWeight: 'bold', color: COLORS.red }}>{messageError}</Text></View>}
+                        {messageOk && <View style={styles.messageOk}><Ionicons name='checkmark-circle-outline' size={40} color={COLORS.green} /><Text style={{ fontWeight: 'bold', color: COLORS.green, maxWidth: 260 }}>{messageOk}</Text></View>}
+                        {messageError && <View style={styles.messageError}><Ionicons name='close-circle-outline' size={40} color={COLORS.red} /><Text style={{ fontWeight: 'bold', color: COLORS.red, maxWidth: 260 }}>{messageError}</Text></View>}
                     </>
                 }
                 <ScrollView horizontal={false} style={styles.cardContainer}>
@@ -329,18 +310,18 @@ const EditEstruturaFisica = () => {
                                     <TotalDeProfissionais editData={totalDeProfissionais} formErrors={context.formErrorsTotalDeProfissionais} totalDeProfissionais={(value) => context.onTotalDeProfissionaisChange(value)} />
                                     <InstrumentosEMateriais editData={instrumentosEMateriais} formErrors={context.formErrorsInstrumentosEMateriais} instrumentosEMateriais={(value) => context.onInstrumentosEMateriaisChange(value)} />
                                     <LinguaMinistrada editData={linguaMinistrada} formErrors={context.formErrorsLinguasMinistradas} linguaMinistrada={(value) => context.onLinguasMinistradasChange(value)} answerInstrumentosEMateriais={context.answerInstrumentosEMateriais} />
-                                    <View style={{ marginBottom: 25 }}>
+                                    <View style={{ marginBottom: 25, zIndex: -1 }}>
                                         <RadioGroup options={[1, 0]} value={answerExameClassificatorio} textOption={["SIM", "NÃO"]} color={COLORS.green} fontWeight='bold' question='A escola faz exame de seleção para ingresso de seus aluno(a)s (avaliação por prova e /ou analise curricular)*' onSelect={(option) => setAnswerExameClassificatorio(option)} />
                                     </View>
                                     <ReservaDeVagas editData={reservaDeVagas} formErrors={context.formErrorsReservaDeVagas} reservaDeVagas={(value) => context.onReservaDeVagasChange(value)} exameClassificatorio={answerExameClassificatorio} />
                                     <OrgaosColegiados editData={orgaosColegiados} formErrors={context.formErrorsOrgaosColegiados} orgaosColegiados={(value) => context.onOrgaosColegiadosChange(value)} />
-                                    <View style={{ marginBottom: 25 }}>
+                                    <View style={{ marginBottom: 25, zIndex: -1 }}>
                                         <RadioGroup options={[1, 0]} value={answerProjetoPedagogico} textOption={["SIM", "NÃO"]} color={COLORS.green} fontWeight='bold' question='O projeto político pedagógico ou a proposta pedagógica da escola (conforme art. 12 da LDB) foi atualizada nos últimos 12 meses até a data de referência*' onSelect={(option) => setAnswerProjetoPedagogico(option)} />
                                     </View>
                                 </>
                             }
-                            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', borderTopWidth: 1, borderColor: COLORS.gray, paddingTop: 50, marginTop: 50, marginBottom: 50, gap: 20 }}>
-                                <TouchableOpacity style={styles.btnCancelar} ><Text style={{ color: COLORS.green }}>Cancelar</Text></TouchableOpacity>
+                            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', borderTopWidth: 1, borderColor: COLORS.gray,zIndex: -1, paddingTop: 50, marginTop: 50, marginBottom: 50, gap: 20 }}>
+                                <TouchableOpacity style={styles.btnCancelar} ><Text style={{ color: COLORS.green }} onPress={()=> router.push('/')}>Cancelar</Text></TouchableOpacity>
                                 <TouchableOpacity style={styles.btnSalvar} onPress={onSave}><Text style={{ color: COLORS.white }}>Atualizar</Text></TouchableOpacity>
                             </View>
                         </View>

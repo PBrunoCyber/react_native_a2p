@@ -59,7 +59,7 @@ const OrgaosColegiados = ({ orgaosColegiados, formErrors, data, editData }: IPro
     }, [formErrors])
 
     return (
-        <View style={{ marginTop: 20 }}>
+        <View style={{ marginTop: 20, zIndex: -1 }}>
             <TouchableOpacity onPress={() => { setIsClicked(!isClicked) }}>
                 <View style={styles.titleContainer}>
                     <Text style={isClicked || formErrors && Object.keys(formErrors).length > 0 ? { width: '80%', color: COLORS.green, fontWeight: 'bold' } : { width: '80%', color: COLORS.black }}>XVIII - ÓRGÃOS COLEGIADOS EM FUNCIONAMENTO NA ESCOLA</Text>
