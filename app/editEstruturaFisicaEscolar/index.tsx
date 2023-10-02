@@ -80,7 +80,7 @@ const EditEstruturaFisica = () => {
     const [linguaMinistrada, setLinguaMinistrada] = useState<ILinguaMinistrada>();
     const [reservaDeVagas, setReservaDeVagas] = useState<IReservaDeVagas>();
     const [orgaosColegiados, setOrgaosColegiados] = useState<IOrgaosColegiados>();
-    const { inep, tipo } = useLocalSearchParams();
+    const { inep, tipo, nome } = useLocalSearchParams();
 
     const getData = async () => {
         setIsLoading(true);
@@ -110,19 +110,12 @@ const EditEstruturaFisica = () => {
         }
     }
 
-    const getNome = async () => {
-        const res: any = await Escola.getNomeByInep(inep?.toString() || '');
-        if (res != false) {
-            setSeletedNome(res);
-        }
-    }
-
 
     useFocusEffect(
         useCallback(() => {
             getData();
             setSeletedInep(inep?.toString() || '');
-            getNome();
+            setSeletedNome(nome?.toString() || '');
         }, [])
     )
 
@@ -320,8 +313,8 @@ const EditEstruturaFisica = () => {
                                     </View>
                                 </>
                             }
-                            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', borderTopWidth: 1, borderColor: COLORS.gray,zIndex: -1, paddingTop: 50, marginTop: 50, marginBottom: 50, gap: 20 }}>
-                                <TouchableOpacity style={styles.btnCancelar} ><Text style={{ color: COLORS.green }} onPress={()=> router.push('/')}>Cancelar</Text></TouchableOpacity>
+                            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', borderTopWidth: 1, borderColor: COLORS.gray, zIndex: -1, paddingTop: 50, marginTop: 50, marginBottom: 50, gap: 20 }}>
+                                <TouchableOpacity style={styles.btnCancelar} ><Text style={{ color: COLORS.green }} onPress={() => router.push('/')}>Cancelar</Text></TouchableOpacity>
                                 <TouchableOpacity style={styles.btnSalvar} onPress={onSave}><Text style={{ color: COLORS.white }}>Atualizar</Text></TouchableOpacity>
                             </View>
                         </View>

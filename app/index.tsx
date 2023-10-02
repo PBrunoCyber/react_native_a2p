@@ -165,7 +165,7 @@ const Home = () => {
         }).start();
         setTimeout(() => {
             setDisplay("none");
-        }, 500)
+        }, 500);
     }
 
     const deleteForm = async () => {

@@ -59,9 +59,9 @@ const ViewEstruturaFisica = () => {
     const [linguaMinistrada, setLinguaMinistrada] = useState<ILinguaMinistrada>();
     const [reservaDeVagas, setReservaDeVagas] = useState<IReservaDeVagas>();
     const [orgaosColegiados, setOrgaosColegiados] = useState<IOrgaosColegiados>();
-    const { inep, tipo } = useLocalSearchParams();
+    const { inep, nome } = useLocalSearchParams();
 
-   
+
 
     const getData = async () => {
         setIsLoading(true);
@@ -91,18 +91,11 @@ const ViewEstruturaFisica = () => {
         }
     }
 
-    const getNome = async () => {
-        const res: any = await Escola.getNomeByInep(inep?.toString() || '');
-        if (res != false) {
-            setSeletedNome(res);
-        }
-    }
-
     useFocusEffect(
         useCallback(() => {
             getData();
             setSeletedInep(inep?.toString() || '');
-            getNome();
+            setSeletedNome(nome?.toString() || '');
         }, [])
     )
 

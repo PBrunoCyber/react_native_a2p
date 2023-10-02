@@ -49,8 +49,8 @@ const Table = (props: IProps) => {
                                     <Text style={{ width: 350, fontSize: 15, textAlign: 'left' }}>{item.nome}</Text>
                                     <Text style={{ width: 120, fontSize: 15, textAlign: 'left' }}>{item.status}</Text>
                                     <View style={{ flexDirection: 'row', width: 50, gap: 10 }}>
-                                        <TouchableOpacity style={styles.addBtn} onPress={() => router.push(`/viewEstruturaFisicaEscolar/${item.inep}`)}><Ionicons color={COLORS.white} name='eye-outline' size={30} /></TouchableOpacity>
-                                        <TouchableOpacity style={styles.addBtn} onPress={() => router.push({pathname: '/editEstruturaFisicaEscolar', params: {inep: item.inep, tipo: item.status}})}><Ionicons color={COLORS.white} name='pencil-outline' size={30} /></TouchableOpacity>
+                                        <TouchableOpacity style={styles.addBtn} onPress={() => router.push({ pathname: '/viewEstruturaFisicaEscolar', params: { inep: item.inep, nome: item.nome } })}><Ionicons color={COLORS.white} name='eye-outline' size={30} /></TouchableOpacity>
+                                        <TouchableOpacity style={styles.addBtn} onPress={() => router.push({ pathname: '/editEstruturaFisicaEscolar', params: { inep: item.inep, tipo: item.status, nome: item.nome } })}><Ionicons color={COLORS.white} name='pencil-outline' size={30} /></TouchableOpacity>
                                         <TouchableOpacity style={styles.addBtn} onPress={() => props.onDelete(item.inep)}><Ionicons color={COLORS.white} name='trash-outline' size={30} /></TouchableOpacity>
                                     </View>
                                 </View>
