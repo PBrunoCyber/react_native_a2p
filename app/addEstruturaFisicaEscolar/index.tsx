@@ -288,7 +288,6 @@ const AddEstruturaFisica = (props: IProps) => {
                     </>
                 }
                 <ScrollView horizontal={false} style={styles.cardContainer}>
-
                     <View style={styles.container}>
                         <View style={styles.header}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
@@ -365,7 +364,7 @@ const AddEstruturaFisica = (props: IProps) => {
                             <TotalDeProfissionais formErrors={context.formErrorsTotalDeProfissionais} totalDeProfissionais={(value) => context.onTotalDeProfissionaisChange(value)} />
                             <InstrumentosEMateriais formErrors={context.formErrorsInstrumentosEMateriais} instrumentosEMateriais={(value) => context.onInstrumentosEMateriaisChange(value)} />
                             <LinguaMinistrada formErrors={context.formErrorsLinguasMinistradas} linguaMinistrada={(value) => context.onLinguasMinistradasChange(value)} answerInstrumentosEMateriais={context.answerInstrumentosEMateriais} />
-                            <View style={{ marginBottom: 25, zIndex: -1}}>
+                            <View style={{ marginBottom: 25, zIndex: -1 }}>
                                 <RadioGroup options={[1, 0]} value={answerExameClassificatorio} textOption={["SIM", "NÃO"]} color={COLORS.green} fontWeight='bold' question='A escola faz exame de seleção para ingresso de seus aluno(a)s (avaliação por prova e /ou analise curricular)*' onSelect={(option) => setAnswerExameClassificatorio(option)} />
                             </View>
                             <ReservaDeVagas formErrors={context.formErrorsReservaDeVagas} reservaDeVagas={(value) => context.onReservaDeVagasChange(value)} exameClassificatorio={answerExameClassificatorio} />
@@ -374,7 +373,7 @@ const AddEstruturaFisica = (props: IProps) => {
                                 <RadioGroup options={[1, 0]} value={answerProjetoPedagogico} textOption={["SIM", "NÃO"]} color={COLORS.green} fontWeight='bold' question='O projeto político pedagógico ou a proposta pedagógica da escola (conforme art. 12 da LDB) foi atualizada nos últimos 12 meses até a data de referência*' onSelect={(option) => setAnswerProjetoPedagogico(option)} />
                             </View>
                             <View style={{ flexDirection: 'row', justifyContent: 'flex-end', borderTopWidth: 1, borderColor: COLORS.gray, paddingTop: 50, marginTop: 50, zIndex: -1, marginBottom: 50, gap: 20 }}>
-                                <TouchableOpacity style={styles.btnCancelar} ><Text style={{ color: COLORS.green }} onPress={()=> router.push('/')}>Cancelar</Text></TouchableOpacity>
+                                <TouchableOpacity style={styles.btnCancelar} ><Text style={{ color: COLORS.green }} onPress={() => router.push('/')}>Cancelar</Text></TouchableOpacity>
                                 <TouchableOpacity style={styles.btnSalvar} onPress={onSave}><Text style={{ color: COLORS.white }}>Salvar</Text></TouchableOpacity>
                             </View>
                         </View>

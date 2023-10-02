@@ -84,7 +84,7 @@ const Home = () => {
         if (res != false) {
             getNumberOfPages();
             setData(res);
-        }else{
+        } else {
             setData([]);
         }
     }
@@ -93,7 +93,7 @@ const Home = () => {
         const res: any = await Escola.getWithPagination(limit, (currentPage - 1) * limit);
         if (res != false) {
             setData(res);
-        }else{
+        } else {
             setData([]);
         }
     }
@@ -170,7 +170,7 @@ const Home = () => {
 
     const deleteForm = async () => {
         const res: any = await EstruturaFisicaEscolar.deleteEstruturaFisicaEscolar(inepForDelete);
-        if(res != false){
+        if (res != false) {
             setMessageOk('Formulário excluído com sucesso!');
             onHideDelete();
             initData();
@@ -178,7 +178,7 @@ const Home = () => {
                 setMessageOk('');
             }, 2000);
             return;
-        }else{
+        } else {
             setMessageError('Ocorreu algum erro ao excluir o formulário, tente novamente!');
             setTimeout(() => {
                 setMessageError('');
@@ -204,13 +204,13 @@ const Home = () => {
                     <ActivityIndicator color={COLORS.green} size={40} />
                 </View>
                 :
-                <>      
-                {messageOk ? <View style={styles.messageOk}><Ionicons name='checkmark-circle-outline' size={40} color={COLORS.green} /><Text style={{ fontWeight: 'bold', color: COLORS.green, maxWidth: 260 }}>{messageOk}</Text></View> : null}
-                {messageError ? <View style={styles.messageError}><Ionicons name='close-circle-outline' size={40} color={COLORS.red} /><Text style={{ fontWeight: 'bold', color: COLORS.red, maxWidth: 260 }}>{messageError}</Text></View> : null}
-                    
-                    <ScrollView style={{zIndex: 9999}}>
+                <>
+                    {messageOk ? <View style={styles.messageOk}><Ionicons name='checkmark-circle-outline' size={40} color={COLORS.green} /><Text style={{ fontWeight: 'bold', color: COLORS.green, maxWidth: 260 }}>{messageOk}</Text></View> : null}
+                    {messageError ? <View style={styles.messageError}><Ionicons name='close-circle-outline' size={40} color={COLORS.red} /><Text style={{ fontWeight: 'bold', color: COLORS.red, maxWidth: 260 }}>{messageError}</Text></View> : null}
+
+                    <ScrollView style={{ zIndex: 9999 }}>
                         <View style={{ margin: 20 }}>
-                            <Filtros setSelectedInep={setSelectedInep} setNumberOfPages={(number)=>  setNumberOfPages(number)} initData={initData} limit={limit} />
+                            <Filtros setSelectedInep={setSelectedInep} setNumberOfPages={(number) => setNumberOfPages(number)} initData={initData} limit={limit} />
                             <View style={{ maxWidth: 900, marginTop: 20, alignItems: 'flex-end', alignSelf: 'center', width: '100%' }}>
                                 <TouchableOpacity style={styles.syncBtn}><Ionicons name='reload' size={25} color={COLORS.white} /><Text style={{ color: COLORS.white }}>Sincronizar</Text></TouchableOpacity>
                             </View>
@@ -225,7 +225,7 @@ const Home = () => {
                             <TouchableOpacity disabled={currentPage === numberOfPages ? true : false} onPress={() => paginate('skipForward')}><Ionicons name='play-skip-forward-outline' color={COLORS.white} size={20} style={styles.paginationIcon} /></TouchableOpacity>
                         </View>
                     </ScrollView>
-                    <Animated.View style={deleteContainer(scale,display)}>
+                    <Animated.View style={deleteContainer(scale, display)}>
                         <View style={styles.deleteCard}>
                             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Tem certeza?</Text>
                             <Text>Essa ação irá excluir o quesitonário preenchido, quer continuar?</Text>

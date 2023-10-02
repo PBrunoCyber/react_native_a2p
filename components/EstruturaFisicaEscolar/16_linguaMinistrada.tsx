@@ -59,6 +59,8 @@ const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMat
                 ['campo_153']: ''
             }));
             setCod1(false);
+            setCod2(false);
+            setCod3(false);
         }
 
         if (question === 'campo_151' && !answer) {
@@ -84,7 +86,7 @@ const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMat
         if (txt === '') {
             setLinguas(json);
         } else {
-            setLinguas(json.filter((linguas) => linguas.nome.toLowerCase().includes(txt.toLowerCase())));
+            setLinguas(json.filter((linguas) => linguas.codigo.toString().toLowerCase().includes(txt.toLowerCase()) || linguas.nome.toLowerCase().includes(txt.toLowerCase())));
         }
     }
 
@@ -118,7 +120,7 @@ const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMat
                     <View style={{ marginTop: 40 }}>
                         <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 30, zIndex: 999 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400 }}>a) Código da língua indígena 1*</Text>
-                            <View style={{ maxWidth: 260 }}>
+                            <View style={{ maxWidth: 260, flexGrow: 1 }}>
                                 <TouchableOpacity style={[styles.dropdownSelector, answer.campo_149 !== 1 || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} disabled={answer.campo_149 != 1 || data ? true : false} onPress={() => { setCod1(!cod1); setLinguas(json); }}>
                                     <Text>{answer.campo_151}</Text>
                                     {cod1 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} /> :
@@ -128,7 +130,7 @@ const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMat
                                     <View style={styles.dropdownArea}>
                                         <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center', width: '90%' }}>
                                             <Ionicons name='search-outline' size={30} style={{ position: 'absolute', marginLeft: 5 }} color={COLORS.green} />
-                                            <TextInput placeholder={"Pesquisar por inep"} placeholderTextColor={COLORS.green} style={styles.searchInput} onChangeText={txt => { return searchByNome(txt) }}></TextInput>
+                                            <TextInput placeholder={"Código ou nome"} placeholderTextColor={COLORS.green} style={styles.searchInput} onChangeText={txt => { return searchByNome(txt) }}></TextInput>
                                         </View>
                                         {
                                             linguas.map((item, index) => {
@@ -144,7 +146,7 @@ const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMat
                         </View>
                         <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 30, zIndex: 99 }]}>
                             <Text style={{ flexGrow: 1, maxWidth: 400 }}>b) Código da língua indígena 2*</Text>
-                            <View style={{ maxWidth: 260 }}>
+                            <View style={{ maxWidth: 260, flexGrow: 1 }}>
                                 <TouchableOpacity style={[styles.dropdownSelector, !answer.campo_151 || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} disabled={!answer.campo_151 || data ? true : false} onPress={() => { setCod2(!cod2); setLinguas(json); }}>
                                     <Text>{answer.campo_152}</Text>
                                     {cod2 ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} /> :
@@ -154,7 +156,7 @@ const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMat
                                     <View style={styles.dropdownArea}>
                                         <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center', width: '90%' }}>
                                             <Ionicons name='search-outline' size={30} style={{ position: 'absolute', marginLeft: 5 }} color={COLORS.green} />
-                                            <TextInput placeholder={"Pesquisar por inep"} placeholderTextColor={COLORS.green} style={styles.searchInput} onChangeText={txt => { return searchByNome(txt) }}></TextInput>
+                                            <TextInput placeholder={"Código ou nome"} placeholderTextColor={COLORS.green} style={styles.searchInput} onChangeText={txt => { return searchByNome(txt) }}></TextInput>
                                         </View>
                                         {
                                             linguas.map((item, index) => {
@@ -180,7 +182,7 @@ const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMat
                                     <View style={styles.dropdownArea}>
                                         <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center', width: '90%' }}>
                                             <Ionicons name='search-outline' size={30} style={{ position: 'absolute', marginLeft: 5 }} color={COLORS.green} />
-                                            <TextInput placeholder={"Pesquisar por inep"} placeholderTextColor={COLORS.green} style={styles.searchInput} onChangeText={txt => { return searchByNome(txt) }}></TextInput>
+                                            <TextInput placeholder={"Código ou nome"} placeholderTextColor={COLORS.green} style={styles.searchInput} onChangeText={txt => { return searchByNome(txt) }}></TextInput>
                                         </View>
                                         {
                                             linguas.map((item, index) => {
