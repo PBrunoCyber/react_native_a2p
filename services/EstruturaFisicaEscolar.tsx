@@ -75,7 +75,7 @@ const updateEstruturaFisicaEscolar = (value: IAllValues, inep: string, status: s
 const updateIdRemotoAndSync = (id: number, inep: string) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("UPDATE tb_estrutura_escolar SET id_remoto = ?, sync = ?  WHERE campo_2 = ?", 
+            tx.executeSql("UPDATE tb_estrutura_escolar SET id_remoto = ?, sync = ?  WHERE campo_2 = ?",
                 [id, 1, inep],
                 (_, { rowsAffected }) => {
                     if (rowsAffected > 0)
@@ -92,7 +92,7 @@ const updateIdRemotoAndSync = (id: number, inep: string) => {
     });
 }
 
-const getIdRemoto = (inep: string)=> {
+const getIdRemoto = (inep: string) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql("SELECT id_remoto FROM tb_estrutura_escolar WHERE campo_2 = ?",

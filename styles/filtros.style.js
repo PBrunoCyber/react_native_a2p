@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         borderColor: COLORS.green,
         elevation: 5,
         alignSelf: 'center'
-    }, 
+    },
     schoolsItem: {
         width: '90%',
         height: 50,

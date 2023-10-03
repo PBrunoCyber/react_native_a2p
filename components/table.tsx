@@ -21,11 +21,11 @@ const Table = (props: IProps) => {
     const [isChecked, setIsChecked] = useState<0 | 1>(0);
 
     useFocusEffect(
-        useCallback(()=>{
+        useCallback(() => {
             setIsChecked(0);
-        },[])
+        }, [])
     )
-    
+
     return (
         <ScrollView horizontal={true} style={{ alignSelf: 'center' }}>
             <View style={styles.tableCard} >

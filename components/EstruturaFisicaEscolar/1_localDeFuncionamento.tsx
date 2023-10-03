@@ -55,7 +55,7 @@ const AbastecimentoDeAgua = ({ localDeFuncionamentoChange, formErrors, data, edi
                 ['campo_10']: null
             }));
         }
-        if(question === 'campo_10' && resposta === 0){
+        if (question === 'campo_10' && resposta === 0) {
             setAnswers((prevAnswer) => ({
                 ...prevAnswer,
                 ['campo_11']: '',
@@ -84,7 +84,7 @@ const AbastecimentoDeAgua = ({ localDeFuncionamentoChange, formErrors, data, edi
                     {formErrors?.campo_3 && <Text style={styles.messageError}>{formErrors?.campo_3}</Text>}
                     <RadioGroup options={[1, 2, 3]} marked={data ? true : false} selected={data?.campo_9} disable={answer.campo_3 === 1 && !data ? false : true} value={answer.campo_9} textOption={["Próprio", "Cedido", "Alugado"]} fontWeight='normal' question='a) Tipo de Imóvel*' onSelect={(option) => handleOptionChange('campo_9', option)} />
                     {formErrors?.campo_9 && <Text style={styles.messageError}>{formErrors?.campo_9}</Text>}
-                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_10} disable={answer.campo_3 === 1 && !data ? false : true} value={ answer.campo_10} textOption={textOption} fontWeight='normal' question='b) Prédio Escolar Compartilhado com Outra Escola*' onSelect={(option) => handleOptionChange('campo_10', option)} />
+                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_10} disable={answer.campo_3 === 1 && !data ? false : true} value={answer.campo_10} textOption={textOption} fontWeight='normal' question='b) Prédio Escolar Compartilhado com Outra Escola*' onSelect={(option) => handleOptionChange('campo_10', option)} />
                     {formErrors?.campo_10 && <Text style={styles.messageError}>{formErrors?.campo_10}</Text>}
                     <View style={{ marginTop: 40 }}>
                         <View style={[styles.formFlex, { paddingLeft: '10%', marginBottom: 10 }]}>

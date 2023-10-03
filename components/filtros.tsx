@@ -99,8 +99,8 @@ const Filtros = (props: IProps) => {
                         </TouchableOpacity>
                         {inepClicked ?
                             <View style={styles.dropdownArea}>
-                                <View style={{flexDirection: 'row', alignItems: 'center',alignSelf: 'center', width: '90%'}}>
-                                    <Ionicons name='search-outline' size={30} style={{position: 'absolute', marginLeft: 5}} color={COLORS.green}/>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center', width: '90%' }}>
+                                    <Ionicons name='search-outline' size={30} style={{ position: 'absolute', marginLeft: 5 }} color={COLORS.green} />
                                     <TextInput placeholder={"Pesquisar por inep"} placeholderTextColor={COLORS.green} style={styles.searchInput} onChangeText={txt => { return searchDataByInep(txt) }}></TextInput>
                                 </View>
                                 {
@@ -123,8 +123,8 @@ const Filtros = (props: IProps) => {
                         </TouchableOpacity>
                         {nomeClicked ?
                             <View style={styles.dropdownArea}>
-                                <View style={{flexDirection: 'row', alignItems: 'center',alignSelf: 'center', width: '90%'}}>
-                                    <Ionicons name='search-outline' size={30} style={{position: 'absolute', marginLeft: 5}} color={COLORS.green}/>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center', width: '90%' }}>
+                                    <Ionicons name='search-outline' size={30} style={{ position: 'absolute', marginLeft: 5 }} color={COLORS.green} />
                                     <TextInput placeholder={"Pesquisar por escolas"} placeholderTextColor={COLORS.green} style={styles.searchInput} onChangeText={txt => { return searchDataByNome(txt) }}></TextInput>
                                 </View>
                                 {

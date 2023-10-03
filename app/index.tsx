@@ -149,6 +149,7 @@ const Home = () => {
         useCallback(() => {
             initData();
             setDisplay("none");
+            setSelectedItems([]);
         }, [])
     )
 
@@ -185,21 +186,56 @@ const Home = () => {
     }
 
     const deleteForm = async () => {
-        const res: any = await EstruturaFisicaEscolar.deleteEstruturaFisicaEscolar(inepForDelete);
-        if (res != false) {
-            setMessageOk('Formulário excluído com sucesso!');
-            onHideDelete();
-            initData();
-            setTimeout(() => {
-                setMessageOk('');
-            }, 2000);
-            return;
+        const res: any = await EstruturaFisicaEscolar.getIdRemoto(inepForDelete);
+        if (res) {
+            try {
+                await axios.get(`${url}/disable/${res}`);
+                const response: any = await EstruturaFisicaEscolar.deleteEstruturaFisicaEscolar(inepForDelete);
+                if (response != false) {
+                    setMessageOk('Formulário excluído com sucesso!');
+                    onHideDelete();
+                    initData();
+                    setSelectedItems([]);
+                    setTimeout(() => {
+                        setMessageOk('');
+                    }, 3000);
+                    return;
+                } else {
+                    setMessageError('Ocorreu algum erro ao excluir o formulário localmente!');
+                    onHideDelete();
+                    setTimeout(() => {
+                        setMessageError('');
+                    }, 3000);
+                    return;
+                }
+            } catch (error) {
+                setMessageError('Ocorreu algum erro ao excluir o formulário, verifique a conexão e tente novamente!')
+                onHideDelete();
+                setTimeout(() => {
+                    setMessageError('');
+                }, 3000);
+                return;
+            }
         } else {
-            setMessageError('Ocorreu algum erro ao excluir o formulário, tente novamente!');
-            setTimeout(() => {
-                setMessageError('');
-            }, 2000);
-            return;
+
+            const res: any = await EstruturaFisicaEscolar.deleteEstruturaFisicaEscolar(inepForDelete);
+            if (res != false) {
+                setMessageOk('Formulário excluído com sucesso!');
+                onHideDelete();
+                initData();
+                setSelectedItems([]);
+                setTimeout(() => {
+                    setMessageOk('');
+                }, 2000);
+                return;
+            } else {
+                setMessageError('Ocorreu algum erro ao excluir o formulário, tente novamente!');
+                onHideDelete();
+                setTimeout(() => {
+                    setMessageError('');
+                }, 2000);
+                return;
+            }
         }
     }
 
@@ -213,26 +249,29 @@ const Home = () => {
             }, 3000)
             return;
         }
-        const promise = selectedItems.map(async (item, index) => {
+        const size = selectedItems.length;
+        selectedItems.map(async (item, index) => {
             const res: any = await EstruturaFisicaEscolar.getIdRemoto(item);
-            if (res !== null && res !== false && res !== undefined) {
-                setMessageSyncOk(`(${index + 1}/${selectedItems.length}) Preparando dados...`);
+            if (res) {
+                setMessageSyncOk(`(${index + 1}/${size}) Preparando dados...`);
                 const response: any = await EstruturaFisicaEscolar.getItemsToSendByInep(item);
                 if (response != false) {
-                    setMessageSyncOk(`(${index + 1}/${selectedItems.length}) Enviando dados...`);
+                    setMessageSyncOk(`(${index + 1}/${size}) Enviando dados...`);
                     try {
-                        const res1: any = await axios.patch(`${url}/${res}`, response, {
+                        await axios.patch(`${url}/${res}`, response, {
                             headers: {
                                 "Content-Type": "application/json"
                             }
                         });
-                        setMessageSyncOk(`(${index + 1}/${selectedItems.length}) Atualizando dados...`);
+                        setMessageSyncOk(`(${index + 1}/${size}) Atualizando dados...`);
                         await EstruturaFisicaEscolar.updateIdRemotoAndSync(res, item);
                         initData();
+                        setMessageOk('');
                         setIsLoadingSync(false);
                     } catch (error: any) {
-                        if (error?.response.data.error) {
+                        if (error && error?.response?.data.error) {
                             setMessageSyncError(error?.response.data.error);
+                            setMessageOk('');
                             setTimeout(() => {
                                 setMessageSyncError('');
                                 setIsLoadingSync(false);
@@ -240,6 +279,7 @@ const Home = () => {
                             return;
                         } else {
                             setMessageSyncError("Verifique sua conexão e tente novamente!");
+                            setMessageSyncOk('');
                             setTimeout(() => {
                                 setMessageSyncError('');
                                 setIsLoadingSync(false);
@@ -249,6 +289,7 @@ const Home = () => {
                     }
                 } else {
                     setMessageSyncError("Ocorreu um erro ao preparar os dados!");
+                    setMessageOk('');
                     setTimeout(() => {
                         setMessageSyncError('');
                         setIsLoadingSync(false);
@@ -271,7 +312,7 @@ const Home = () => {
                         initData();
                         setIsLoadingSync(false);
                     } catch (error: any) {
-                        if (error?.response.data.error) {
+                        if (error && error?.response?.data.error) {
                             setMessageSyncError(error?.response.data.error);
                             setTimeout(() => {
                                 setMessageSyncError('');
@@ -282,6 +323,7 @@ const Home = () => {
                             setMessageSyncError("Verifique sua conexão e tente novamente!");
                             setTimeout(() => {
                                 setMessageSyncError('');
+                                setMessageSyncOk('');
                                 setIsLoadingSync(false);
                             }, 3000)
                             return;
@@ -298,7 +340,6 @@ const Home = () => {
 
             }
         });
-        await Promise.all(promise);
     }
 
     useEffect(() => {
@@ -327,7 +368,7 @@ const Home = () => {
                             {messageSyncError ? <View style={styles.messageError}><Ionicons name='close-circle-outline' size={40} color={COLORS.red} /><Text style={{ fontWeight: 'bold', color: COLORS.red, maxWidth: 260 }}>{messageSyncError}</Text></View> : null}
                         </>
                         : null}
-                    <ScrollView style={{ zIndex: 9999 }}>
+                    <ScrollView style={{ zIndex: 9999 }} contentContainerStyle={{ height: 1280 }}>
                         <View style={{ margin: 20 }}>
                             <Filtros setSelectedInep={setSelectedInep} setNumberOfPages={(number) => setNumberOfPages(number)} initData={initData} limit={limit} />
                             <View style={{ maxWidth: 900, marginTop: 20, alignItems: 'flex-end', alignSelf: 'center', width: '100%' }}>
