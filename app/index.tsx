@@ -240,6 +240,8 @@ const Home = () => {
     }
 
     const onSync = async () => {
+        setMessageSyncOk('');
+        setMessageSyncError('');
         setIsLoadingSync(true);
         if (selectedItems.length === 0) {
             setMessageSyncError("Marque a(s) caixinha(s) para começar a sincronizar")
@@ -250,23 +252,25 @@ const Home = () => {
             return;
         }
         const size = selectedItems.length;
-        selectedItems.map(async (item, index) => {
+        let indice = 0;
+        selectedItems.forEach(async (item, index) => {
             const res: any = await EstruturaFisicaEscolar.getIdRemoto(item);
             if (res) {
-                setMessageSyncOk(`(${index + 1}/${size}) Preparando dados...`);
+                setMessageSyncOk(`Preparando dados...`);
                 const response: any = await EstruturaFisicaEscolar.getItemsToSendByInep(item);
                 if (response != false) {
-                    setMessageSyncOk(`(${index + 1}/${size}) Enviando dados...`);
                     try {
+                        setMessageSyncOk(`Enviando dados...`);
                         await axios.patch(`${url}/${res}`, response, {
                             headers: {
                                 "Content-Type": "application/json"
                             }
                         });
-                        setMessageSyncOk(`(${index + 1}/${size}) Atualizando dados...`);
+                        setMessageSyncOk(`Sincronizando...`);
                         await EstruturaFisicaEscolar.updateIdRemotoAndSync(res, item);
                         initData();
                         setMessageOk('');
+                        setSelectedItems([]);
                         setIsLoadingSync(false);
                     } catch (error: any) {
                         if (error && error?.response?.data.error) {
@@ -297,19 +301,20 @@ const Home = () => {
                     return;
                 }
             } else {
-                setMessageSyncOk(`(${index + 1}/${selectedItems.length}) Preparando dados...`);
+                setMessageSyncOk(`Preparando dados...`);
                 const response: any = await EstruturaFisicaEscolar.getItemsToSendByInep(item);
                 if (response != false) {
-                    setMessageSyncOk(`(${index + 1}/${selectedItems.length}) Enviando dados...`);
+                    setMessageSyncOk(`Enviando dados...`);
                     try {
                         const res1: any = await axios.post(`${url}/save-draft/`, response, {
                             headers: {
                                 "Content-Type": "application/json"
                             }
                         });
-                        setMessageSyncOk(`(${index + 1}/${selectedItems.length}) Atualizando dados...`);
+                        setMessageSyncOk(`Sincronizando...`);
                         await EstruturaFisicaEscolar.updateIdRemotoAndSync(res1.data.id_estrutura_escolar, item);
                         initData();
+                        setSelectedItems([]);
                         setIsLoadingSync(false);
                     } catch (error: any) {
                         if (error && error?.response?.data.error) {
@@ -339,7 +344,7 @@ const Home = () => {
                 }
 
             }
-        });
+        })
     }
 
     useEffect(() => {
