@@ -62,7 +62,7 @@ interface IProps {
 const AddEstruturaFisica = (props: IProps) => {
     const context = useContext(EstruturaFisicaEscolarContext);
     const router = useRouter();
-    const [data, setData] = useState<Array<IEscola>>([{ id: 0, nome: '', inep: '', status: '' }]);
+    const [data, setData] = useState<Array<IEscola>>([{ id: 0, nome: '', inep: '', status: '', sync: 0 }]);
     const [isLoading, setIsLoading] = useState(false);
     const [messageOk, setMessageOk] = useState('');
     const [messageError, setMessageError] = useState('');
@@ -319,7 +319,6 @@ const AddEstruturaFisica = (props: IProps) => {
                                             })}
                                         </View> : null}
                                 </View>
-
                                 <View style={{ flexGrow: 10, maxWidth: '100%' }}>
                                     <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Nome da Escola</Text>
                                     <TouchableOpacity style={styles.dropdownSelector} onPress={() => { setNomeClicked(!nomeClicked); initData() }}>

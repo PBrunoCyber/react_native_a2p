@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
     gap: 20,
     marginTop: 35,
     alignItems: 'center',
-    width: '100%'
   },
   checkbox: {
     alignItems: 'center',

@@ -113,7 +113,7 @@ const getEscolaByNome = (nome: string) => {
 const getWithPagination = (limit: number, offset: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT e.id, e.nome, e.inep, efs.status FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.campo_2 LIMIT ? OFFSET ?;",
+            tx.executeSql("SELECT e.id, e.nome, e.inep, efs.status, efs.sync FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.campo_2 LIMIT ? OFFSET ?;",
                 [limit, offset],
                 (_, { rows }) => {
                     if (rows.length > 0) {
@@ -133,7 +133,7 @@ const getWithPagination = (limit: number, offset: number) => {
 const getByInep = (inep: string) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT e.id, e.nome, e.inep, efs.status FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.campo_2 WHERE e.inep = ?;",
+            tx.executeSql("SELECT e.id, e.nome, e.inep, efs.status, efs.sync FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.campo_2 WHERE e.inep = ?;",
                 [inep],
                 (_, { rows }) => {
                     if (rows.length > 0) {

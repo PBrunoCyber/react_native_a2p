@@ -3,4 +3,5 @@ export interface IEscola {
     nome: string,
     inep: string,
     status: string,
+    sync: number
 }

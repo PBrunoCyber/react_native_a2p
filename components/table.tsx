@@ -3,24 +3,30 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from '../styles/table.style';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS } from '../constants/theme'
 import { IEscola } from '../types/Escola';
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import CheckBox from './CheckBox';
 
 interface IProps {
     data: Array<IEscola>,
     onDelete: (inep: string) => void,
-    selectedItems: (inep: string) => void
+    selectedItems: (inep: string) => void,
+    removeItems: (inep: string) => void
 }
 
 const Table = (props: IProps) => {
     const [isChecked, setIsChecked] = useState<0 | 1>(0);
+
+    useFocusEffect(
+        useCallback(()=>{
+            setIsChecked(0);
+        },[])
+    )
+    
     return (
-
-
         <ScrollView horizontal={true} style={{ alignSelf: 'center' }}>
             <View style={styles.tableCard} >
                 <View style={styles.tableHeader}>
@@ -37,7 +43,7 @@ const Table = (props: IProps) => {
                         props.data.map((item, index) => {
                             return (
                                 <View key={index} style={styles.tableContent}>
-                                    <CheckBox fontWeight='normal' label='' value={isChecked} onSelect={(value) => { setIsChecked(value); props.selectedItems(item.inep) }} />
+                                    {item.sync === 1 ? <Ionicons name='checkmark' size={25} color={COLORS.green} /> : <View style={{ width: 25, marginTop: -35 }}><CheckBox fontWeight='normal' label='' value={isChecked} onSelect={(value) => { setIsChecked(value); value === 1 ? props.selectedItems(item.inep) : props.removeItems(item.inep) }} /></View>}
                                     <Text style={{ width: 100, fontSize: 15, textAlign: 'center' }}>{item.id}</Text>
                                     <Text style={{ width: 100, fontSize: 15, textAlign: 'left' }}>{item.inep}</Text>
                                     <Text style={{ width: 350, fontSize: 15, textAlign: 'left' }}>{item.nome}</Text>

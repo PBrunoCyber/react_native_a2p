@@ -14,7 +14,8 @@ import { COLORS } from '../constants/theme'
 import { IEscola } from '../types/Escola';
 import DoubleRing from '../assets/icons/Double_Ring.svg';
 import { ActivityIndicator } from 'react-native';
-
+import axios, { AxiosError } from 'axios';
+import { url } from '../constants/url';
 
 const Home = () => {
 
@@ -32,6 +33,9 @@ const Home = () => {
     const [messageOk, setMessageOk] = useState('');
     const [messageError, setMessageError] = useState('');
     const [selectedItems, setSelectedItems] = useState<Array<string>>([]);
+    const [isLoadingSync, setIsLoadingSync] = useState(false);
+    const [messageSyncOk, setMessageSyncOk] = useState('');
+    const [messageSyncError, setMessageSyncError] = useState('');
 
     const router = useRouter();
 
@@ -121,10 +125,14 @@ const Home = () => {
     }, [selectedInep])
 
     const onSelectedItems = (inep: string) => {
-        const data = [];
-        data.push(inep);
+        let data: Array<string> = [];
+        data.push(...selectedItems, inep);
         setSelectedItems(data);
-        console.log(data);
+    }
+
+    const onRemoveItems = (inep: string) => {
+        const data = selectedItems.filter(value => value !== inep);
+        setSelectedItems(data);
     }
 
     useEffect(() => {
@@ -144,7 +152,6 @@ const Home = () => {
         }, [])
     )
 
-    const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 
     const onShowDelete = (inep: string) => {
         setInepForDelete(inep);
@@ -196,6 +203,104 @@ const Home = () => {
         }
     }
 
+    const onSync = async () => {
+        setIsLoadingSync(true);
+        if (selectedItems.length === 0) {
+            setMessageSyncError("Marque a(s) caixinha(s) para começar a sincronizar")
+            setTimeout(() => {
+                setMessageSyncError('');
+                setIsLoadingSync(false);
+            }, 3000)
+            return;
+        }
+        const promise = selectedItems.map(async (item, index) => {
+            const res: any = await EstruturaFisicaEscolar.getIdRemoto(item);
+            if (res !== null && res !== false && res !== undefined) {
+                setMessageSyncOk(`(${index + 1}/${selectedItems.length}) Preparando dados...`);
+                const response: any = await EstruturaFisicaEscolar.getItemsToSendByInep(item);
+                if (response != false) {
+                    setMessageSyncOk(`(${index + 1}/${selectedItems.length}) Enviando dados...`);
+                    try {
+                        const res1: any = await axios.patch(`${url}/${res}`, response, {
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        });
+                        setMessageSyncOk(`(${index + 1}/${selectedItems.length}) Atualizando dados...`);
+                        await EstruturaFisicaEscolar.updateIdRemotoAndSync(res, item);
+                        initData();
+                        setIsLoadingSync(false);
+                    } catch (error: any) {
+                        if (error?.response.data.error) {
+                            setMessageSyncError(error?.response.data.error);
+                            setTimeout(() => {
+                                setMessageSyncError('');
+                                setIsLoadingSync(false);
+                            }, 3000)
+                            return;
+                        } else {
+                            setMessageSyncError("Verifique sua conexão e tente novamente!");
+                            setTimeout(() => {
+                                setMessageSyncError('');
+                                setIsLoadingSync(false);
+                            }, 3000)
+                            return;
+                        }
+                    }
+                } else {
+                    setMessageSyncError("Ocorreu um erro ao preparar os dados!");
+                    setTimeout(() => {
+                        setMessageSyncError('');
+                        setIsLoadingSync(false);
+                    }, 3000)
+                    return;
+                }
+            } else {
+                setMessageSyncOk(`(${index + 1}/${selectedItems.length}) Preparando dados...`);
+                const response: any = await EstruturaFisicaEscolar.getItemsToSendByInep(item);
+                if (response != false) {
+                    setMessageSyncOk(`(${index + 1}/${selectedItems.length}) Enviando dados...`);
+                    try {
+                        const res1: any = await axios.post(`${url}/save-draft/`, response, {
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        });
+                        setMessageSyncOk(`(${index + 1}/${selectedItems.length}) Atualizando dados...`);
+                        await EstruturaFisicaEscolar.updateIdRemotoAndSync(res1.data.id_estrutura_escolar, item);
+                        initData();
+                        setIsLoadingSync(false);
+                    } catch (error: any) {
+                        if (error?.response.data.error) {
+                            setMessageSyncError(error?.response.data.error);
+                            setTimeout(() => {
+                                setMessageSyncError('');
+                                setIsLoadingSync(false);
+                            }, 3000)
+                            return;
+                        } else {
+                            setMessageSyncError("Verifique sua conexão e tente novamente!");
+                            setTimeout(() => {
+                                setMessageSyncError('');
+                                setIsLoadingSync(false);
+                            }, 3000)
+                            return;
+                        }
+                    }
+                } else {
+                    setMessageSyncError("Ocorreu um erro ao preparar os dados!");
+                    setTimeout(() => {
+                        setMessageSyncError('');
+                        setIsLoadingSync(false);
+                    }, 3000)
+                    return;
+                }
+
+            }
+        });
+        await Promise.all(promise);
+    }
+
     useEffect(() => {
         getWithPagination();
     }, [currentPage]);
@@ -216,16 +321,20 @@ const Home = () => {
                 <>
                     {messageOk ? <View style={styles.messageOk}><Ionicons name='checkmark-circle-outline' size={40} color={COLORS.green} /><Text style={{ fontWeight: 'bold', color: COLORS.green, maxWidth: 260 }}>{messageOk}</Text></View> : null}
                     {messageError ? <View style={styles.messageError}><Ionicons name='close-circle-outline' size={40} color={COLORS.red} /><Text style={{ fontWeight: 'bold', color: COLORS.red, maxWidth: 260 }}>{messageError}</Text></View> : null}
-
+                    {isLoadingSync ?
+                        <>
+                            {messageSyncOk ? <View style={styles.messageOk}><ActivityIndicator color={COLORS.green} /><Text style={{ fontWeight: 'bold', color: COLORS.green, maxWidth: 260 }}>{messageSyncOk}</Text></View> : null}
+                            {messageSyncError ? <View style={styles.messageError}><Ionicons name='close-circle-outline' size={40} color={COLORS.red} /><Text style={{ fontWeight: 'bold', color: COLORS.red, maxWidth: 260 }}>{messageSyncError}</Text></View> : null}
+                        </>
+                        : null}
                     <ScrollView style={{ zIndex: 9999 }}>
                         <View style={{ margin: 20 }}>
                             <Filtros setSelectedInep={setSelectedInep} setNumberOfPages={(number) => setNumberOfPages(number)} initData={initData} limit={limit} />
                             <View style={{ maxWidth: 900, marginTop: 20, alignItems: 'flex-end', alignSelf: 'center', width: '100%' }}>
-                                <TouchableOpacity style={styles.syncBtn}><Ionicons name='reload' size={25} color={COLORS.white} /><Text style={{ color: COLORS.white }}>Sincronizar</Text></TouchableOpacity>
+                                <TouchableOpacity style={styles.syncBtn} onPress={onSync}><Ionicons name='reload' size={25} color={COLORS.white} /><Text style={{ color: COLORS.white }}>Sincronizar</Text></TouchableOpacity>
                             </View>
-                            <Table data={data} selectedItems={onSelectedItems} onDelete={(inep) => onShowDelete(inep)} />
+                            <Table data={data} selectedItems={onSelectedItems} removeItems={onRemoveItems} onDelete={(inep) => onShowDelete(inep)} />
                         </View>
-
                         <View style={[styles.paginationContainer]}>
                             <TouchableOpacity disabled={currentPage === 1 ? true : false} onPress={() => paginate('skipBack')}><Ionicons name='play-skip-back-outline' color={COLORS.white} size={20} style={styles.paginationIcon} /></TouchableOpacity>
                             <TouchableOpacity disabled={currentPage === 1 ? true : false} onPress={() => paginate('back')}><Ionicons name='chevron-back-outline' color={COLORS.white} size={20} style={styles.paginationIcon} /></TouchableOpacity>
