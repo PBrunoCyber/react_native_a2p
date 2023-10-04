@@ -32,6 +32,7 @@ import { IEscola } from '../../types/Escola';
 import EstruturaFisicaEscolar from '../../services/EstruturaFisicaEscolar';
 import EstruturaFisicaEscolarContext from '../../context/EstruturaFisicaEscolar';
 import { ActivityIndicator } from 'react-native';
+import { Drawer } from 'expo-router/drawer';
 
 
 const ViewEstruturaFisica = () => {
@@ -101,11 +102,13 @@ const ViewEstruturaFisica = () => {
 
     return (
         <>
-            <Stack.Screen options={{
-                headerBackVisible: false,
-                title: '',
-                headerLeft: () => <Ionicons name='menu' color={COLORS.white} size={30} />,
-                headerRight: () => <Ionicons name='exit-outline' color={COLORS.white} size={30} />,
+            <Drawer.Screen options={{
+                headerShown: true,
+                title: 'Visualizar Questionário',
+                headerTintColor: COLORS.white,
+                headerTitleAlign: "center",
+                headerLeft: () => <TouchableOpacity onPress={() => router.push('/(drawer)')}><Ionicons name='arrow-back' color={COLORS.white} size={30} style={{ marginLeft: 20 }} /></TouchableOpacity>,
+                headerRight: () => <Ionicons name='exit-outline' color={COLORS.white} size={30} style={{ marginRight: 20 }} />,
                 headerStyle: { backgroundColor: COLORS.green }
             }} />
             <View style={{ backgroundColor: COLORS.white }}>

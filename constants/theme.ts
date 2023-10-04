@@ -10,7 +10,8 @@ const COLORS = {
     blue: "#287bff",
     red: 'red',
     lightRed: '#F5E4E4',
-    darkRed: '#AD3B3B'
+    darkRed: '#AD3B3B',
+    disableGreen: "#229c46"
 }
 
 export { COLORS };

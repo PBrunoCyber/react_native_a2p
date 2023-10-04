@@ -1,21 +1,21 @@
 import { Link, Stack, useFocusEffect, useRouter } from 'expo-router';
 import { View, Text, Image, TextInput, FlatList, Animated, TouchableOpacity } from 'react-native';
-import styles, { deleteBackgroud, deleteContainer } from '../styles/home.style';
+import styles, { deleteBackgroud, deleteContainer } from '../../styles/home.style';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { ScrollView } from 'react-native-gesture-handler';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import Escola from '../services/Escola';
-import EstruturaFisicaEscolar from '../services/EstruturaFisicaEscolar';
-import json from '../json/escolas.json';
-import Filtros from '../components/Filtros';
-import Table from '../components/Table';
-import { COLORS } from '../constants/theme'
-import { IEscola } from '../types/Escola';
+import Escola from '../../services/Escola';
+import EstruturaFisicaEscolar from '../../services/EstruturaFisicaEscolar';
+import json from '../../json/escolas.json';
+import Filtros from '../../components/Filtros';
+import Table from '../../components/Table';
+import { COLORS } from '../../constants/theme'
+import { IEscola } from '../../types/Escola';
 import DoubleRing from '../assets/icons/Double_Ring.svg';
 import { ActivityIndicator } from 'react-native';
 import axios, { AxiosError } from 'axios';
-import { url } from '../constants/url';
+import { url } from '../../constants/url';
 
 const Home = () => {
 
@@ -352,14 +352,11 @@ const Home = () => {
         getWithPagination();
     }, [currentPage]);
 
+
+
+
     return (
         <>
-            <Stack.Screen options={{
-                title: "Home", headerTitleStyle: { color: COLORS.white }, headerShadowVisible: false,
-                headerLeft: () => <Ionicons name='menu' color={COLORS.white} size={30} />,
-                headerRight: () => <Ionicons name='exit-outline' color={COLORS.white} size={30} />,
-                headerStyle: { backgroundColor: COLORS.green }
-            }} />
             {isLoading ?
                 <View style={{ alignItems: 'center', marginTop: 100, justifyContent: 'center', }}>
                     <ActivityIndicator color={COLORS.green} size={40} />

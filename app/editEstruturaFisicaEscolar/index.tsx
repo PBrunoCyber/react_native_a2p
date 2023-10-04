@@ -54,8 +54,13 @@ import ValidateRecursos from '../../services/SalvarRascunho/ValidateRecursosDeAc
 import ValidateQuantidadeDeEquipamentos from '../../services/SalvarRascunho/ValidateQuantidadeDeEquipamentos';
 import ValidateTotalDeProfissionais from '../../services/SalvarRascunho/ValidateTotalDeProfissionais';
 import ValidateLingua from '../../services/SalvarRascunho/ValidateLinguaMinistrada';
+import Drawer from 'expo-router/drawer';
 
-const EditEstruturaFisica = () => {
+interface IProps {
+    navigation: any
+}
+
+const EditEstruturaFisica = ({ navigation }: IProps) => {
     const router = useRouter();
     const context = useContext(EstruturaFisicaEscolarContext);
     const [selectedInep, setSeletedInep] = useState<string>('');
@@ -130,7 +135,7 @@ const EditEstruturaFisica = () => {
         const res_4 = ValidateTotalDeProfissionais.validate(context.answerTotalDeProfissionais);
         const res_5 = ValidateLingua.validate(context.answerLinguasMinistradas);
 
-        if(res_1 || res_2 || res_3 || res_4 || res_5){
+        if (res_1 || res_2 || res_3 || res_4 || res_5) {
             context.setFormErrorsLocalDeFuncionamento(res_1);
             context.setFormErrorsRecursosDeAcessibilidade(res_2);
             context.setFormErrorsQuantidadeDeEquipamentos(res_3);
@@ -256,11 +261,13 @@ const EditEstruturaFisica = () => {
 
     return (
         <>
-            <Stack.Screen options={{
-                headerBackVisible: false,
-                title: '',
-                headerLeft: () => <Ionicons name='menu' color={COLORS.white} size={30} />,
-                headerRight: () => <Ionicons name='exit-outline' color={COLORS.white} size={30} />,
+            <Drawer.Screen options={{
+                headerShown: true,
+                title: 'Editar Questionário',
+                headerTintColor: COLORS.white,
+                headerTitleAlign: "center",
+                headerLeft: () => <TouchableOpacity onPress={() => router.push('/(drawer)')}><Ionicons name='arrow-back' color={COLORS.white} size={30} style={{ marginLeft: 20 }} /></TouchableOpacity>,
+                headerRight: () => <Ionicons name='exit-outline' color={COLORS.white} size={30} style={{ marginRight: 20 }} />,
                 headerStyle: { backgroundColor: COLORS.green }
             }} />
             <View style={{ backgroundColor: COLORS.white }}>
