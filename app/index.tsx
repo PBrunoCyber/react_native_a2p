@@ -256,17 +256,17 @@ const Home = () => {
         selectedItems.forEach(async (item, index) => {
             const res: any = await EstruturaFisicaEscolar.getIdRemoto(item);
             if (res) {
-                setMessageSyncOk(`Preparando dados...`);
+                setMessageSyncOk(`(${index + 1}/${size}) Preparando dados...`);
                 const response: any = await EstruturaFisicaEscolar.getItemsToSendByInep(item);
                 if (response != false) {
                     try {
-                        setMessageSyncOk(`Enviando dados...`);
+                        setMessageSyncOk(`(${index + 1}/${size}) Enviando dados...`);
                         await axios.patch(`${url}/${res}`, response, {
                             headers: {
                                 "Content-Type": "application/json"
                             }
                         });
-                        setMessageSyncOk(`Sincronizando...`);
+                        setMessageSyncOk(`(${index + 1}/${size}) Sincronizando...`);
                         await EstruturaFisicaEscolar.updateIdRemotoAndSync(res, item);
                         initData();
                         setMessageOk('');
@@ -274,7 +274,7 @@ const Home = () => {
                         setIsLoadingSync(false);
                     } catch (error: any) {
                         if (error && error?.response?.data.error) {
-                            setMessageSyncError(error?.response.data.error);
+                            setMessageSyncError(`Ocorreu algum problema durante o preenchimento do formulário. Erro: ${error?.response?.data.error}`);
                             setMessageOk('');
                             setTimeout(() => {
                                 setMessageSyncError('');
@@ -301,24 +301,25 @@ const Home = () => {
                     return;
                 }
             } else {
-                setMessageSyncOk(`Preparando dados...`);
+                setMessageSyncOk(`(${index + 1}/${size}) Preparando dados...`);
                 const response: any = await EstruturaFisicaEscolar.getItemsToSendByInep(item);
                 if (response != false) {
-                    setMessageSyncOk(`Enviando dados...`);
+                    setMessageSyncOk(`(${index + 1}/${size}) Enviando dados...`);
                     try {
                         const res1: any = await axios.post(`${url}/save-draft/`, response, {
                             headers: {
                                 "Content-Type": "application/json"
                             }
                         });
-                        setMessageSyncOk(`Sincronizando...`);
+                        setMessageSyncOk(`(${index + 1}/${size}) Sincronizando...`);
                         await EstruturaFisicaEscolar.updateIdRemotoAndSync(res1.data.id_estrutura_escolar, item);
                         initData();
+                        setMessageSyncOk('');
                         setSelectedItems([]);
                         setIsLoadingSync(false);
                     } catch (error: any) {
                         if (error && error?.response?.data.error) {
-                            setMessageSyncError(error?.response.data.error);
+                            setMessageSyncError(`Ocorreu algum problema durante o preenchimento do formulário. Erro: ${error?.response?.data.error}`);
                             setTimeout(() => {
                                 setMessageSyncError('');
                                 setIsLoadingSync(false);

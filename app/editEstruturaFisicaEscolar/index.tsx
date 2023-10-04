@@ -49,7 +49,11 @@ import { IEscola } from '../../types/Escola';
 import EstruturaFisicaEscolar from '../../services/EstruturaFisicaEscolar';
 import EstruturaFisicaEscolarContext from '../../context/EstruturaFisicaEscolar';
 import { ActivityIndicator } from 'react-native';
-
+import ValidateLocal from '../../services/SalvarRascunho/ValidateLocalDeFuncionamento';
+import ValidateRecursos from '../../services/SalvarRascunho/ValidateRecursosDeAcessibilidade';
+import ValidateQuantidadeDeEquipamentos from '../../services/SalvarRascunho/ValidateQuantidadeDeEquipamentos';
+import ValidateTotalDeProfissionais from '../../services/SalvarRascunho/ValidateTotalDeProfissionais';
+import ValidateLingua from '../../services/SalvarRascunho/ValidateLinguaMinistrada';
 
 const EditEstruturaFisica = () => {
     const router = useRouter();
@@ -120,6 +124,26 @@ const EditEstruturaFisica = () => {
     )
 
     const onSaveRascunho = async () => {
+        const res_1 = ValidateLocal.validate(context.answerLocalDeFuncionamento);
+        const res_2 = ValidateRecursos.validate(context.answerRecursosDeAcessibilidade);
+        const res_3 = ValidateQuantidadeDeEquipamentos.validate(context.answerQuantidadeDeEquipamentos);
+        const res_4 = ValidateTotalDeProfissionais.validate(context.answerTotalDeProfissionais);
+        const res_5 = ValidateLingua.validate(context.answerLinguasMinistradas);
+
+        if(res_1 || res_2 || res_3 || res_4 || res_5){
+            context.setFormErrorsLocalDeFuncionamento(res_1);
+            context.setFormErrorsRecursosDeAcessibilidade(res_2);
+            context.setFormErrorsQuantidadeDeEquipamentos(res_3);
+            context.setFormErrorsTotalDeProfissionais(res_4);
+            context.setFormErrorsLinguasMinistradas(res_5);
+            setMessageError('Há erros no preenchimento do formulário, verique!');
+            setTimeout(() => {
+                setMessageError('');
+            }, 3000);
+            return;
+        }
+
+
         const forms: IAllValues = {
             ...context.answerLocalDeFuncionamento, ...context.answerAbstecimentoDeAgua, ...context.answerEnergiaEletrica,
             ...context.answerEsgotamentoSanitario, ...context.answerDestinacaoDoLixo, ...context.answerTratamentoDoLixo, ...context.answerDependenciasFisicas,
@@ -195,6 +219,10 @@ const EditEstruturaFisica = () => {
             context.setFormErrorsLinguasMinistradas(res_16);
             context.setFormErrorsReservaDeVagas(res_17);
             context.setFormErrorsOrgaosColegiados(res_18);
+            setMessageError('Há erros no preenchimento do formulário, verique!');
+            setTimeout(() => {
+                setMessageError('');
+            }, 3000);
             return;
         }
         const forms: IAllValues = {

@@ -101,30 +101,30 @@ const RecursosDeAcessibilidade = ({ recursosDeAcessibilidade, answerLocalDeFunci
                     <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_85} disable={answer.campo_86 === 1 || data ? true : false} value={answer.campo_85} textOption={textOption} fontWeight='normal' question='8 - Sinalização visual (piso/paredes)*' onSelect={(option) => handleOptionChange('campo_85', option)} />
                     {formErrors?.campo_85 && <Text style={styles.messageError}>{formErrors?.campo_85}</Text>}
                     <View style={{ marginTop: 40 }}>
-                        <View style={[styles.formFlex, { marginBottom: 50 }]}>
-                            <Text style={{ flexGrow: 1, maxWidth: 400 }}>9 - Número de salas de aula utilizadas na escola dentro do prédio escolar*</Text>
-                            <View style={{ maxWidth: 300, flexGrow: 1 }}>
+                        <View style={[styles.formFlex, { marginBottom: 50, flex: 1 }]}>
+                            <Text style={{ maxWidth: 400 }}>9 - Número de salas de aula utilizadas na escola dentro do prédio escolar*</Text>
+                            <View style={{ maxWidth: 260, flexGrow: 1 }}>
                                 <TextInput maxLength={4} value={data?.campo_87 ? data.campo_87 : answerLocalDeFuncionamento?.campo_3 == 1 ? answer.campo_87 : ''} style={[styles.input, answerLocalDeFuncionamento?.campo_3 == 0 || data || answerLocalDeFuncionamento?.campo_3 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answerLocalDeFuncionamento?.campo_3 === 1 && !data ? true : false} onChangeText={(txt) => handleOptionChange('campo_87', txt)} />
                                 {formErrors?.campo_87 && <Text style={styles.messageError}>{formErrors?.campo_87}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 50 }]}>
-                            <Text style={{ flexGrow: 1, maxWidth: 400 }}>10 - Número de salas de aula utilizadas na escola fora do prédio escolar*</Text>
-                            <View style={{ maxWidth: 300, flexGrow: 1 }}>
+                            <Text style={{ maxWidth: 400 }}>10 - Número de salas de aula utilizadas na escola fora do prédio escolar*</Text>
+                            <View style={{ maxWidth: 260, flexGrow: 1 }}>
                                 <TextInput maxLength={4} value={data?.campo_88 ? data.campo_88 : answerLocalDeFuncionamento?.campo_3 == 1 ? answer.campo_88 : ''} style={[styles.input, answerLocalDeFuncionamento?.campo_3 == 0 || data || answerLocalDeFuncionamento?.campo_3 == null ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answerLocalDeFuncionamento?.campo_3 === 1 && !data ? true : false} onChangeText={(txt) => handleOptionChange('campo_88', txt)} />
                                 {formErrors?.campo_88 && <Text style={styles.messageError}>{formErrors?.campo_88}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 50 }]}>
-                            <Text style={{ flexGrow: 1, maxWidth: 400 }}>11 - Número de salas de aula climatizadas (ar condicionado, aquecedor ou climatizador)*</Text>
-                            <View style={{ maxWidth: 300, flexGrow: 1 }}>
+                            <Text style={{ maxWidth: 400 }}>11 - Número de salas de aula climatizadas (ar condicionado, aquecedor ou climatizador)*</Text>
+                            <View style={{ maxWidth: 260, flexGrow: 1 }}>
                                 <TextInput maxLength={4} value={data?.campo_89 ? data.campo_89 : answer?.campo_89} style={[styles.input, (!answer?.campo_87 || !answer.campo_88) || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={(answer?.campo_87 && answer.campo_88) && !data ? true : false} onChangeText={(txt) => handleOptionChange('campo_89', txt)} />
                                 {formErrors?.campo_89 && <Text style={styles.messageError}>{formErrors?.campo_89}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 50 }]}>
-                            <Text style={{ flexGrow: 1, maxWidth: 400 }}>12 - Número de salas de aula com acessibilidade para pessoas com deficiência ou mobilidade reduzida*</Text>
-                            <View style={{ maxWidth: 300, flexGrow: 1 }}>
+                            <Text style={{ maxWidth: 400 }}>12 - Número de salas de aula com acessibilidade para pessoas com deficiência ou mobilidade reduzida*</Text>
+                            <View style={{ maxWidth: 260, flexGrow: 1 }}>
                                 <TextInput maxLength={4} value={data?.campo_90 ? data.campo_90 : answer?.campo_90} style={[styles.input, (!answer?.campo_87 || !answer.campo_88) || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={(answer?.campo_87 && answer.campo_88) && !data ? true : false} onChangeText={(txt) => handleOptionChange('campo_90', txt)} />
                                 {formErrors?.campo_90 && <Text style={styles.messageError}>{formErrors?.campo_90}</Text>}
                             </View>

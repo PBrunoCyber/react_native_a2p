@@ -92,6 +92,25 @@ const validate = (answerLocalDeFuncionamento: ILocalDeFuncionamento | undefined,
     if ((selectedInep && answerLocalDeFuncionamento?.campo_11) && answerLocalDeFuncionamento?.campo_16 === selectedInep) {
         errors.campo_16 = "O campo foi preenchido com o código da escola informante";
     }
+    const valores = [
+        answerLocalDeFuncionamento?.campo_11,
+        answerLocalDeFuncionamento?.campo_12,
+        answerLocalDeFuncionamento?.campo_13,
+        answerLocalDeFuncionamento?.campo_14,
+        answerLocalDeFuncionamento?.campo_15,
+        answerLocalDeFuncionamento?.campo_16
+    ]
+
+
+    var repetidos = valores.some(function (valor, index) {
+        if(valor)
+            return valores.indexOf(valor) !== index;
+    });
+
+    if(repetidos){
+        errors.campos_repetidos = "Há campos repetidos, verifique!";
+    }
+
 
     if (Object.keys(errors).length > 0) {
         return errors;

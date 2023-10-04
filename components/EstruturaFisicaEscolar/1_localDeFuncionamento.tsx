@@ -87,6 +87,7 @@ const AbastecimentoDeAgua = ({ localDeFuncionamentoChange, formErrors, data, edi
                     <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_10} disable={answer.campo_3 === 1 && !data ? false : true} value={answer.campo_10} textOption={textOption} fontWeight='normal' question='b) Prédio Escolar Compartilhado com Outra Escola*' onSelect={(option) => handleOptionChange('campo_10', option)} />
                     {formErrors?.campo_10 && <Text style={styles.messageError}>{formErrors?.campo_10}</Text>}
                     <View style={{ marginTop: 40 }}>
+                        {formErrors?.campos_repetidos && <Text style={[styles.messageError, {paddingLeft: '10%'}]}>{formErrors?.campos_repetidos}</Text>}
                         <View style={[styles.formFlex, { paddingLeft: '10%', marginBottom: 10 }]}>
                             <Text style={{ flexGrow: 1 }}>i) Código da escola com a qual compartilha*</Text>
                             <View style={{ maxWidth: 300, flexGrow: 1 }}>
