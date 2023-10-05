@@ -239,7 +239,97 @@ const Home = () => {
         selectedItems.forEach(async (item, index) => {
             const res: any = await EstruturaFisicaEscolar.getStatusByInep(item);
             if (res === "Final") {
-                console.log("Final");
+                const res: any = await EstruturaFisicaEscolar.getIdRemoto(item);
+                if (res) {
+                    setMessageSyncOk(`(${index + 1}/${size}) Preparando dados...`);
+                    const response: any = await EstruturaFisicaEscolar.getItemsToSendByInep(item);
+                    if (response != false) {
+                        try {
+                            setMessageSyncOk(`(${index + 1}/${size}) Enviando dados...`);
+                            await axios.post(`${url}/finished/`, {res, response}, {
+                                headers: {
+                                    "Content-Type": "application/json"
+                                }
+                            });
+                            setMessageSyncOk(`(${index + 1}/${size}) Sincronizando...`);
+                            await EstruturaFisicaEscolar.updateIdRemotoAndSync(res, item);
+                            initData();
+                            setMessageOk('');
+                            setSelectedItems([]);
+                            setIsLoadingSync(false);
+                        } catch (error: any) {
+                            if (error && error?.response?.data.error) {
+                                setMessageSyncError(`Ocorreu algum problema durante o preenchimento do formulário. Erro: ${error?.response?.data.error}`);
+                                setMessageOk('');
+                                setTimeout(() => {
+                                    setMessageSyncError('');
+                                    setIsLoadingSync(false);
+                                }, 3000)
+                                return;
+                            } else {
+                                setMessageSyncError("Verifique sua conexão e tente novamente!");
+                                setMessageSyncOk('');
+                                setTimeout(() => {
+                                    setMessageSyncError('');
+                                    setIsLoadingSync(false);
+                                }, 3000)
+                                return;
+                            }
+                        }
+                    } else {
+                        setMessageSyncError("Ocorreu um erro ao preparar os dados!");
+                        setMessageOk('');
+                        setTimeout(() => {
+                            setMessageSyncError('');
+                            setIsLoadingSync(false);
+                        }, 3000)
+                        return;
+                    }
+                } else {
+                    setMessageSyncOk(`(${index + 1}/${size}) Preparando dados...`);
+                    const response: any = await EstruturaFisicaEscolar.getItemsToSendByInep(item);
+                    if (response != false) {
+                        setMessageSyncOk(`(${index + 1}/${size}) Enviando dados...`);
+                        try {
+                            const res1: any = await axios.post(`${url}/finished/`, response, {
+                                headers: {
+                                    "Content-Type": "application/json"
+                                }
+                            });
+                            setMessageSyncOk(`(${index + 1}/${size}) Sincronizando...`);
+                            await EstruturaFisicaEscolar.updateIdRemotoAndSync(res1.data.id_estrutura_escolar, item);
+                            initData();
+                            setMessageSyncOk('');
+                            setSelectedItems([]);
+                            setIsLoadingSync(false);
+                        } catch (error: any) {
+                            if (error && error?.response?.data.error) {
+                                setMessageSyncError(`Ocorreu algum problema durante o preenchimento do formulário. Erro: ${error?.response?.data.error}`);
+                                setTimeout(() => {
+                                    setMessageSyncError('');
+                                    setIsLoadingSync(false);
+                                }, 3000)
+                                return;
+                            } else {
+                                setMessageSyncError("Verifique sua conexão e tente novamente!");
+                                setTimeout(() => {
+                                    setMessageSyncError('');
+                                    setMessageSyncOk('');
+                                    setIsLoadingSync(false);
+                                }, 3000)
+                                return;
+                            }
+                        }
+                    } else {
+                        setMessageSyncError("Ocorreu um erro ao preparar os dados!");
+                        setTimeout(() => {
+                            setMessageSyncError('');
+                            setIsLoadingSync(false);
+                        }, 3000)
+                        return;
+                    }
+
+                }
             } else {
                 const res: any = await EstruturaFisicaEscolar.getIdRemoto(item);
                 if (res) {
