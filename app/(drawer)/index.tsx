@@ -62,7 +62,7 @@ const Home = () => {
         if (res != true) {
             setIsLoading(true);
             const promise = json.map(async (item, index) => {
-                await Escola.insertEscola({ inep: item.codINEPEntidade.toString(), id: item.idEntidade, nome: item.nome });
+                await Escola.insertEscola({ inep: item.codINEPEntidade.toString(), cod_gre: item.idEntidade, nome: item.nome });
             })
             await Promise.all(promise);
             initData();
@@ -118,7 +118,7 @@ const Home = () => {
             setData([]);
         }
     }
-
+    
     useEffect(() => {
         if (selectedInep != '')
             getDataByInep();
@@ -136,11 +136,11 @@ const Home = () => {
     }
 
     useEffect(() => {
-        //Escola.dropTBEscola();
-        //EstruturaFisicaEscolar.dropTBEstruturaFisicaEscolar();
-        createOrNotEscola();
-        createOrNotEstruturaFisicaEscolar();
-        insertOrNotEscola();
+        Escola.dropTBEscola();
+        EstruturaFisicaEscolar.dropTBEstruturaFisicaEscolar();
+        // createOrNotEscola();
+        // createOrNotEstruturaFisicaEscolar();
+        // insertOrNotEscola();
         initData();
     }, [])
 

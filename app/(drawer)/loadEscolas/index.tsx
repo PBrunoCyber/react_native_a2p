@@ -9,22 +9,24 @@ import { Text } from 'react-native';
 import styles from '../../../styles/loadEscolas.style'
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { useState } from 'react';
+import Escola from '../../../services/Escola';
+import EstruturaFisicaEscolar from '../../../services/EstruturaFisicaEscolar';
+import axios from 'axios';
 
 interface ILoadEscolas {
     gre: string,
     senha: string
 }
 
-interface IHashDelete {
-    senha: string,
-}
-
 const LoadEscolas = () => {
 
     const [answer, setAnswer] = useState<ILoadEscolas>({ gre: '', senha: '' });
-    const [hashDelete, setHashDelete] = useState<IHashDelete>({ senha: '' });
+    const [answerDelete, setAnswerDelete] = useState<ILoadEscolas>({ gre: '', senha: '' });
     const [isLoadingLoadEscolas, setIsLoadingLoadEscolas] = useState(false);
     const [isLoadingDangerZone, setIsLoadingDangerZone] = useState(false);
+    const [messageError, setMessageError] = useState('');
+    const [messageOk, setMessageOk] = useState('');
+    const [finished, setFinished] = useState(false);
 
     const handleOptionChange = (name: string, value: string) => {
         setAnswer((prev) => ({
@@ -34,59 +36,139 @@ const LoadEscolas = () => {
     }
 
     const handleDeleteChange = (name: string, value: string) => {
-        setHashDelete((prev) => ({
+        setAnswerDelete((prev) => ({
             ...prev,
             [name]: value
         }));
     }
 
-    const carregarEscolas = () => {
-        setIsLoadingLoadEscolas(!isLoadingLoadEscolas);
-        console.log(answer);
+    interface IResponse {
+        nr_cod_inep: string,
+        ds_nome: string,
+        cod_gre: string
     }
 
-    const apagarEscolas = () => {
-        setIsLoadingDangerZone(!isLoadingDangerZone);
-        console.log(hashDelete);
+
+    const createOrNotEscola = async () => {
+        const res: any = await Escola.existsEscola();
+        if (res != true) {
+            await Escola.createTBEscola();
+        }
+    }
+
+    const carregarEscolas = async () => {
+        createOrNotEscola();    
+
+        try {
+            setMessageOk('Baixando Escolas...');
+            const response: Array<IResponse> = await axios.get(`${url}/schools/${answer.gre}/${answer.senha}`);
+            setMessageOk('Inserindo escolas no banco local...')
+            const promise = response.map(async (item, index) => {
+                await Escola.insertEscola({ nome: item.ds_nome, inep: item.nr_cod_inep, cod_gre: parseInt(item.cod_gre) })
+            })
+            await Promise.all(promise);
+            setFinished(true);
+            setMessageOk('Dados carregados com sucesso!');
+            setTimeout(() => {
+                setMessageOk('');
+                setFinished(false);
+            }, 2000);
+            return;
+
+        } catch (error: any) { 
+            if(error && error?.response?.data.error){
+                setMessageOk('');
+                setMessageError(error?.response?.data.error);
+                setTimeout(() => {
+                    setMessageError('');
+                    setFinished(false);
+                }, 2000);
+                return;
+            }else{
+                setMessageOk('');
+                setMessageError("Verifique sua conexão e tente novamente!");
+                setTimeout(() => {
+                    setMessageError('');
+                    setFinished(false);
+                }, 2000);
+                return;
+            }
+        }
+    }
+
+
+    const apagarEscolas = async () => {
+        const response: any = await Escola.getByCodGre(parseInt(answerDelete.gre));
+        setMessageOk(`Apagando questionários da GRE: ${answerDelete.gre} ...`)
+        const promise = response.map(async (item: string, index: number) => {
+            await EstruturaFisicaEscolar.deleteEstruturaFisicaEscolar(item);
+        });
+        await Promise.all(promise);
+        setMessageOk(`Apagando escolas da GRE: ${answerDelete.gre}...`)
+        const res: any = await Escola.deleteByCodGre(parseInt(answerDelete.gre));
+        if (res) {
+            setMessageOk('Escolas e formulários apagados com sucesso!');
+            setFinished(true);
+            setTimeout(() => {
+                setMessageOk('');
+                setFinished(false);
+            }, 2000)
+            return;
+        } else {
+            setMessageError('Ocorreu algum erro ao apagar as escolas..');
+            setTimeout(() => {
+                setMessageError('');
+            }, 3000);
+            return;
+        }
     }
 
     return (
-        <ScrollView contentContainerStyle={{ minHeight: 900 }}>
-            <View style={styles.card}>
-                <Text style={{ fontWeight: 'bold', fontSize: 20, color: COLORS.green }}>Carregar Escolas</Text>
-                <Text style={{ fontSize: 14, marginTop: 10 }}>Digite o número GRE e a senha de acesso para que as escolas sejam adicionadas</Text>
-                <View style={styles.gre_senha}>
-                    <View style={{ flexGrow: 1 }}>
-                        <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Número GRE</Text>
-                        <TextInput onChangeText={(txt) => handleOptionChange('gre', txt)} style={styles.input} />
+        <>
+            {messageOk ? <View style={styles.messageOk}>{finished ? <Ionicons name='checkmark' size={35} color={COLORS.white} /> : <ActivityIndicator color={COLORS.green} />}<Text style={{ fontWeight: 'bold', color: COLORS.green, maxWidth: 260 }}>{messageOk}</Text></View> : null}
+            {messageError ? <View style={styles.messageError}><Ionicons name='close-circle-outline' size={40} color={COLORS.red} /><Text style={{ fontWeight: 'bold', color: COLORS.red, maxWidth: 260 }}>{messageError}</Text></View> : null}
+            <ScrollView contentContainerStyle={{ minHeight: 900 }}>
+                <View style={styles.card}>
+                    <Text style={{ fontWeight: 'bold', fontSize: 20, color: COLORS.green }}>Carregar Escolas</Text>
+                    <Text style={{ fontSize: 14, marginTop: 10 }}>Digite o número GRE e a senha de acesso para que as escolas sejam adicionadas</Text>
+                    <View style={styles.gre_senha}>
+                        <View style={{ flexGrow: 1 }}>
+                            <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Número GRE</Text>
+                            <TextInput onChangeText={(txt) => handleOptionChange('gre', txt)} style={styles.input} />
+                        </View>
+                        <View style={{ flexGrow: 1 }}>
+                            <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Código de Acesso</Text>
+                            <TextInput onChangeText={(txt) => handleOptionChange('senha', txt)} style={styles.input} />
+                        </View>
                     </View>
-                    <View style={{ flexGrow: 1 }}>
-                        <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Código de Acesso</Text>
-                        <TextInput onChangeText={(txt) => handleOptionChange('senha', txt)} style={styles.input} />
-                    </View>
+                    <TouchableOpacity disabled={isLoadingLoadEscolas ? true : false} onPress={() => carregarEscolas()} style={[styles.btnLoad, isLoadingLoadEscolas ? { backgroundColor: COLORS.disableGreen } : { backgroundColor: COLORS.green }]}>
+                        {!isLoadingLoadEscolas ? <><Ionicons name='cloud-download-outline' color={COLORS.white} size={20} />
+                            <Text style={{ color: COLORS.white }}>Carregar Escolas</Text></>
+                            : <ActivityIndicator style={{ width: 160 }} color={COLORS.white} />}
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity disabled={isLoadingLoadEscolas ? true : false} onPress={() => carregarEscolas()} style={[styles.btnLoad, isLoadingLoadEscolas ? { backgroundColor: COLORS.disableGreen } : { backgroundColor: COLORS.green }]}>
-                    {!isLoadingLoadEscolas ? <><Ionicons name='cloud-download-outline' color={COLORS.white} size={20} />
-                        <Text style={{ color: COLORS.white }}>Carregar Escolas</Text></>
-                        : <ActivityIndicator style={{ width: 160 }} color={COLORS.white} />}
-                </TouchableOpacity>
-            </View>
-            <View style={styles.card}>
-                <Text style={{ fontWeight: 'bold', fontSize: 20, color: COLORS.darkRed }}>Danger Zone</Text>
-                <Text style={{ fontSize: 14, marginTop: 10 }}>Essa ação irá apagar todas as escolas e os respectivos formulários do banco local</Text>
-                <View style={styles.gre_senha}>
-                    <View style={{ flexGrow: 1, maxWidth: 400 }}>
-                        <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Código de Acesso</Text>
-                        <TextInput onChangeText={(txt) => handleDeleteChange('senha', txt)} style={styles.input} />
+                <View style={styles.card}>
+                    <Text style={{ fontWeight: 'bold', fontSize: 20, color: COLORS.darkRed }}>Danger Zone</Text>
+                    <Text style={{ fontSize: 14, marginTop: 10 }}>Essa ação irá apagar todas as escolas e os respectivos formulários do banco local</Text>
+                    <View style={styles.gre_senha}>
+                        <View style={{ flexGrow: 1 }}>
+                            <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Número GRE</Text>
+                            <TextInput onChangeText={(txt) => handleOptionChange('gre', txt)} style={styles.input} />
+                        </View>
+                        <View style={{ flexGrow: 1 }}>
+                            <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Código de Acesso</Text>
+                            <TextInput onChangeText={(txt) => handleDeleteChange('senha', txt)} style={styles.input} />
+                        </View>
                     </View>
+                    <TouchableOpacity disabled={isLoadingDangerZone ? true : false} onPress={() => apagarEscolas()} style={[styles.btnLoad, isLoadingDangerZone ? { backgroundColor: COLORS.darkRed } : { backgroundColor: COLORS.darkRed }]}>
+                        {!isLoadingDangerZone ? <><Ionicons name='trash-outline' color={COLORS.white} size={20} />
+                            <Text style={{ color: COLORS.white }}>Apagar Escolas</Text></>
+                            : <ActivityIndicator style={{ width: 160 }} color={COLORS.white} />}
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity disabled={isLoadingDangerZone ? true : false} onPress={() => apagarEscolas()} style={[styles.btnLoad, isLoadingDangerZone ? { backgroundColor: COLORS.darkRed } : { backgroundColor: COLORS.darkRed }]}>
-                    {!isLoadingDangerZone ? <><Ionicons name='trash-outline' color={COLORS.white} size={20} />
-                        <Text style={{ color: COLORS.white }}>Apagar Escolas</Text></>
-                        : <ActivityIndicator style={{ width: 160 }} color={COLORS.white} />}
-                </TouchableOpacity>
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </>
+
     )
 }
 

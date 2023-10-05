@@ -2,33 +2,35 @@ import db from "./SQLiteDatabase";
 import { IEscola } from "../types/Escola";
 
 const dropTBEscola = () => {
-    db.transaction(tx => {
-        tx.executeSql("DROP TABLE tb_escola",
-            [],
-            (_, { rows }) => {
-                console.log("Excluído com sucesso!");
-            },
-            (_, error) => { console.log(error); return false })
-    });
+    return new Promise((resolve, reject) => {
+        db.transaction(tx => {
+            tx.executeSql("DROP TABLE tb_escola",
+                [],
+                (_, { rows }) => {
+                    resolve(true);
+                },
+                (_, error) => {console.log(error);resolve(false); return false })
+        });
+    })
 }
 
 const createTBEscola = () => {
     return new Promise((resolve, reject) => {
 
         db.transaction(tx => {
-            tx.executeSql("CREATE TABLE tb_escola (inep VARCHAR(8) PRIMARY KEY, id INTEGER NOT NULL, nome VARCHAR(400))",
+            tx.executeSql("CREATE TABLE tb_escola (inep VARCHAR(8) PRIMARY KEY, nome VARCHAR(400), cod_gre BIGINT)",
                 [],
                 (_, { rows }) => {
-                    console.log("CRIADO COM SUCESSO!");
+                    resolve(true);
                 },
-                (_, error) => { console.log(error); return false })
+                (_, error) => { console.log(error); resolve(false); return false })
         });
     });
 }
 
 interface IInsert {
     inep: string,
-    id: number,
+    cod_gre: number,
     nome: string,
 }
 
@@ -36,8 +38,8 @@ const insertEscola = (obj: IInsert) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql(
-                "INSERT INTO tb_escola (inep, id, nome) values (?, ?, ?);",
-                [obj.inep, obj.id, obj.nome],
+                "INSERT INTO tb_escola (inep, nome, cod_gre) values (?, ?, ?);",
+                [obj.inep, obj.nome, obj.cod_gre],
                 //-----------------------
                 (_, { rowsAffected, insertId }) => {
                     if (rowsAffected > 0) { resolve(true); }
@@ -59,7 +61,9 @@ const existsEscola = () => {
                 [],
                 //-----------------------
                 (_, { rows }) => {
-                    resolve(true);
+                    if(rows)
+                        resolve(true);
+                    else resolve(false);
                 },
                 (_, error) => { resolve(false); return false; }
             );
@@ -67,6 +71,45 @@ const existsEscola = () => {
     });
 };
 
+const getByCodGre = (cod_gre: number) => {
+    return new Promise((resolve) => {
+        db.transaction((tx) => {
+            //comando SQL modificável
+            tx.executeSql(
+                "SELECT * FROM tb_escola WHERE cod_gre = ?;",
+                [cod_gre],
+                //-----------------------
+                (_, { rows }) => {
+                    const data = [];
+                        for (let index = 0; index < rows.length; index++) {
+                            data.push(rows.item(index).inep);
+                        }
+                        resolve(data);
+                },
+                (_, error) => { resolve(false); return false; }
+            );
+        });
+    });
+}
+
+const deleteByCodGre = (cod_gre: number) => {
+    return new Promise((resolve) => {
+        db.transaction((tx) => {
+            //comando SQL modificável
+            tx.executeSql(
+                "DELETE FROM tb_escola WHERE cod_gre = ?;",
+                [cod_gre],
+                //-----------------------
+                (_, { rowsAffected }) => {
+                    if(rowsAffected > 0)
+                        resolve(true);
+                    else resolve(false);
+                },
+                (_, error) => { console.log(error); resolve(false); return false; }
+            );
+        });
+    });
+}
 
 const getEscolaByInep = (inep: string) => {
     return new Promise((resolve) => {
@@ -113,7 +156,7 @@ const getEscolaByNome = (nome: string) => {
 const getWithPagination = (limit: number, offset: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT e.id, e.nome, e.inep, efs.status, efs.sync FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.campo_2 LIMIT ? OFFSET ?;",
+            tx.executeSql("SELECT e.nome, e.cod_gre, e.inep, efs.status, efs.sync FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.campo_2 LIMIT ? OFFSET ?;",
                 [limit, offset],
                 (_, { rows }) => {
                     if (rows.length > 0) {
@@ -133,7 +176,7 @@ const getWithPagination = (limit: number, offset: number) => {
 const getByInep = (inep: string) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT e.id, e.nome, e.inep, efs.status, efs.sync FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.campo_2 WHERE e.inep = ?;",
+            tx.executeSql("SELECT e.nome, e.inep, e.cod_gre, efs.status, efs.sync FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.campo_2 WHERE e.inep = ?;",
                 [inep],
                 (_, { rows }) => {
                     if (rows.length > 0) {
@@ -230,4 +273,4 @@ const getNumberOfPagesWithInep = (inep: string, limit: number) => {
 }
 
 
-export default { createTBEscola, existsEscola, dropTBEscola, insertEscola, getEscolaByInep, getEscolaByNome, getNumberOfPages, getWithPagination, getNumberOfPagesWithNome, getNumberOfPagesWithInep, getAll, getByInep, getNomeByInep };
+export default { createTBEscola, existsEscola, dropTBEscola, insertEscola, getEscolaByInep, getEscolaByNome, getNumberOfPages, getWithPagination, getNumberOfPagesWithNome, getNumberOfPagesWithInep, getAll, getByInep, getNomeByInep, deleteByCodGre, getByCodGre };

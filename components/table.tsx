@@ -44,7 +44,6 @@ const Table = (props: IProps) => {
                             return (
                                 <View key={index} style={styles.tableContent}>
                                     {item.sync === 1 ? <Ionicons name='checkmark' size={25} color={COLORS.green} /> : <View style={{ width: 25, marginTop: -35 }}><CheckBox fontWeight='normal' label='' value={isChecked} onSelect={(value) => { setIsChecked(value); value === 1 ? props.selectedItems(item.inep) : props.removeItems(item.inep) }} /></View>}
-                                    <Text style={{ width: 100, fontSize: 15, textAlign: 'center' }}>{item.id}</Text>
                                     <Text style={{ width: 100, fontSize: 15, textAlign: 'left' }}>{item.inep}</Text>
                                     <Text style={{ width: 350, fontSize: 15, textAlign: 'left' }}>{item.nome}</Text>
                                     <Text style={{ width: 120, fontSize: 15, textAlign: 'left' }}>{item.status}</Text>
