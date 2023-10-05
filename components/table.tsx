@@ -31,7 +31,6 @@ const Table = (props: IProps) => {
             <View style={styles.tableCard} >
                 <View style={styles.tableHeader}>
                     <View style={{ width: 70 }}></View>
-                    <Text style={{ width: 55, fontSize: 15, fontWeight: 'bold' }}>GRE</Text>
                     <Text style={{ width: 100, fontSize: 15, fontWeight: 'bold' }}>Inep</Text>
                     <Text style={{ width: 350, fontSize: 15, fontWeight: 'bold' }}>Nome da Escola</Text>
                     <Text style={{ width: 120, textAlign: 'left', fontSize: 15, fontWeight: 'bold' }}>Tipo</Text>
@@ -43,8 +42,7 @@ const Table = (props: IProps) => {
                         props.data.map((item, index) => {
                             return (
                                 <View key={index} style={styles.tableContent}>
-                                    {item.sync === 1 ? <Ionicons name='checkmark' size={25} color={COLORS.green} /> : <View style={{ width: 25, marginTop: -35 }}><CheckBox fontWeight='normal' label='' value={isChecked} onSelect={(value) => { setIsChecked(value); value === 1 ? props.selectedItems(item.inep) : props.removeItems(item.inep) }} /></View>}
-                                    <Text style={{ width: 100, fontSize: 15, textAlign: 'left' }}>{item.cod_gre}</Text>
+                                    <View style={{ width: 70 }}>{item.sync === 1 ? <Ionicons name='checkmark' size={25} color={COLORS.green} /> : <View style={{ width: 25, marginTop: -35 }}><CheckBox fontWeight='normal' label='' value={isChecked} onSelect={(value) => { setIsChecked(value); value === 1 ? props.selectedItems(item.inep) : props.removeItems(item.inep) }} /></View>}</View>
                                     <Text style={{ width: 100, fontSize: 15, textAlign: 'left' }}>{item.inep}</Text>
                                     <Text style={{ width: 350, fontSize: 15, textAlign: 'left' }}>{item.nome}</Text>
                                     <Text style={{ width: 120, fontSize: 15, textAlign: 'left' }}>{item.status}</Text>

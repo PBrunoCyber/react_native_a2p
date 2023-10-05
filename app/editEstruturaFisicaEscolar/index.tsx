@@ -191,7 +191,7 @@ const EditEstruturaFisica = ({ navigation }: IProps) => {
         const res_8 = ValidateRecursosDeAcessibilidade.validate(context.answerRecursosDeAcessibilidade, context.answerLocalDeFuncionamento);
         const res_9 = ValidateEquipamentos.validate(context.answerEquipamentos);
         const res_10 = ValidateAcessoInternet.validate(context.answerAcessoInternet);
-        const res_11 = ValidateEquipamentosAlunosInternet.validate(context.answerEquipamentosAlunosInternet, context.answerAcessoInternet);
+        const res_11 = ValidateEquipamentosAlunosInternet.validate(context.answerEquipamentosAlunosInternet, context.answerAcessoInternet, context.answerRedeLocal);
         const res_12 = ValidateQuantidadeEquipamentos.validate(context.answerQuantidadeDeEquipamentos, context.answerEquipamentosAlunosInternet);
         const res_13 = ValidateRedeLocal.validate(context.answerRedeLocal);
         const res_14 = ValidateTotalProfissionais.validate(context.answerTotalDeProfissionais);

@@ -93,6 +93,28 @@ const updateIdRemotoAndSync = (id: number, inep: string) => {
     });
 }
 
+const getStatusByInep = (inep: string) => {
+    return new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql("SELECT status FROM tb_estrutura_escolar WHERE campo_2 = ?",
+                [inep],
+                (_, { rows }) => {
+                    if (rows.length > 0) {
+                        resolve(rows.item(0).status);
+                    } else {
+                        resolve(false);
+                    }
+                },
+                (_, error) => {
+                    console.log(error);
+                    resolve(false);
+                    return false;
+                }
+            );
+        });
+    });
+}
+
 const getIdRemoto = (inep: string) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
@@ -205,4 +227,4 @@ const getEstruturaFisicaEscolarByInep = (inep: string) => {
 
 
 
-export default { dropTBEstruturaFisicaEscolar, createTBEstruturaFisicaEscolar, insertEstruturaFisicaEscolar, updateEstruturaFisicaEscolar, getEstruturaFisicaEscolarByInep, existsEstruturaFisicaEscolar, deleteEstruturaFisicaEscolar, updateIdRemotoAndSync, getIdRemoto, getItemsToSendByInep };
+export default { dropTBEstruturaFisicaEscolar, createTBEstruturaFisicaEscolar, insertEstruturaFisicaEscolar, updateEstruturaFisicaEscolar, getEstruturaFisicaEscolarByInep, existsEstruturaFisicaEscolar, deleteEstruturaFisicaEscolar, updateIdRemotoAndSync, getIdRemoto, getItemsToSendByInep, getStatusByInep };

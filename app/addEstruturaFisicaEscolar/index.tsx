@@ -68,7 +68,7 @@ interface IProps {
 const AddEstruturaFisica = (props: IProps) => {
     const context = useContext(EstruturaFisicaEscolarContext);
     const router = useRouter();
-    const [data, setData] = useState<Array<IEscola>>([{ id: 0, nome: '', inep: '', status: '', sync: 0 }]);
+    const [data, setData] = useState<Array<IEscola>>([{ cod_gre: 0, nome: '', inep: '', status: '', sync: 0 }]);
     const [isLoading, setIsLoading] = useState(false);
     const [messageOk, setMessageOk] = useState('');
     const [messageError, setMessageError] = useState('');
@@ -81,19 +81,6 @@ const AddEstruturaFisica = (props: IProps) => {
     const [answerProjetoPedagogico, setAnswerProjetoPedagogico] = useState<number | null>(null);
     const limit: number = 10;
 
-    const getNomeAcrossInep = (data: Array<IEscola>, inepSelected: number | string) => {
-        const selectedItem = data.find(item => item.inep === inepSelected);
-        if (selectedItem) {
-            setSeletedNome(selectedItem.nome);
-        }
-    }
-
-    const getInepAcrossNome = (data: Array<IEscola>, nomeSelected: string, id: number) => {
-        const filteredItems = data.find(item => item.nome === nomeSelected && item.id === id);
-        if (filteredItems) {
-            setSeletedInep(filteredItems.inep.toString());
-        }
-    }
 
     const searchDataByInep = async (inep: string) => {
         const res: any = await Escola.getEscolaByInep(inep);
@@ -213,7 +200,7 @@ const AddEstruturaFisica = (props: IProps) => {
         const res_8 = ValidateRecursosDeAcessibilidade.validate(context.answerRecursosDeAcessibilidade, context.answerLocalDeFuncionamento);
         const res_9 = ValidateEquipamentos.validate(context.answerEquipamentos);
         const res_10 = ValidateAcessoInternet.validate(context.answerAcessoInternet);
-        const res_11 = ValidateEquipamentosAlunosInternet.validate(context.answerEquipamentosAlunosInternet, context.answerAcessoInternet);
+        const res_11 = ValidateEquipamentosAlunosInternet.validate(context.answerEquipamentosAlunosInternet, context.answerAcessoInternet, context.answerRedeLocal);
         const res_12 = ValidateQuantidadeEquipamentos.validate(context.answerQuantidadeDeEquipamentos, context.answerEquipamentosAlunosInternet);
         const res_13 = ValidateRedeLocal.validate(context.answerRedeLocal);
         const res_14 = ValidateTotalProfissionais.validate(context.answerTotalDeProfissionais);
@@ -342,7 +329,7 @@ const AddEstruturaFisica = (props: IProps) => {
                                             <TextInput placeholder="Pesquisar por inep" placeholderTextColor={COLORS.green} style={styles.searchInput} onChangeText={txt => { return searchDataByInep(txt) }} />
                                             {data.map((item, index) => {
                                                 return (
-                                                    <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedInep(item.inep.toString()); getNomeAcrossInep(data, item.inep); searchDataByInep(item.inep.toString()); setInepClicked(false); }}>
+                                                    <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedInep(item.inep.toString()); setSeletedNome(item.nome); searchDataByInep(item.inep.toString()); setInepClicked(false); }}>
                                                         <Text>{item.inep}</Text>
                                                     </TouchableOpacity>
                                                 )
@@ -361,7 +348,7 @@ const AddEstruturaFisica = (props: IProps) => {
                                             <TextInput placeholder="Pesquisar por nome da escola" placeholderTextColor={COLORS.green} style={styles.searchInput} onChangeText={txt => { return searchDataByNome(txt) }} />
                                             {data.map((item, index) => {
                                                 return (
-                                                    <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedNome(item.nome); getInepAcrossNome(data, item.nome, item.id); searchDataByNome(item.nome); setNomeClicked(false); }}>
+                                                    <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedNome(item.nome); setSeletedInep(item.inep); searchDataByNome(item.nome); setNomeClicked(false); }}>
                                                         <Text>{item.nome}</Text>
                                                     </TouchableOpacity>
                                                 )

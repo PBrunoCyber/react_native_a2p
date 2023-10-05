@@ -198,22 +198,6 @@ const getByInep = (inep: string) => {
     });
 }
 
-const getNomeByInep = (inep: string) => {
-    return new Promise((resolve, reject) => {
-        db.transaction((tx) => {
-            tx.executeSql("SELECT * FROM tb_escola WHERE inep = ?;",
-                [inep],
-                (_, { rows }) => {
-                    if (rows.length > 0) {
-                        resolve(rows.item(0).nome);
-                    } else {
-                        resolve(false)
-                    }
-                },
-                (_, error) => { console.log(error); resolve(false); return false; });
-        });
-    });
-}
 
 const getAll = (limit: number) => {
     return new Promise((resolve, reject) => {
@@ -251,7 +235,7 @@ const getNumberOfPages = (limit: number) => {
 const getNumberOfPagesWithNome = (nome: string, limit: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT COUNT(*) AS total_registros FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.campo_2 WHERE REPLACE(e.nome, '  ', ' ') LIKE ? || '%';",
+            tx.executeSql("SELECT COUNT(*) AS total_registros WHERE REPLACE(e.nome, '  ', ' ') LIKE ? || '%';",
                 [nome],
                 (tx, results) => {
                     const totalRegistros = results.rows.item(0).total_registros;
@@ -265,9 +249,10 @@ const getNumberOfPagesWithNome = (nome: string, limit: number) => {
 const getNumberOfPagesWithInep = (inep: string, limit: number) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT COUNT(*) AS total_registros FROM tb_escola as e INNER JOIN tb_estrutura_escolar as efs ON e.inep = efs.campo_2 WHERE e.inep LIKE ? || '%';",
+            tx.executeSql("SELECT COUNT(*) AS total_registros FROM tb_escola WHERE e.inep = ?;",
                 [inep],
                 (tx, results) => {
+                    console.log(results);
                     const totalRegistros = results.rows.item(0).total_registros;
                     const paginas = Math.ceil(totalRegistros / limit);
                     resolve(paginas);
@@ -277,4 +262,4 @@ const getNumberOfPagesWithInep = (inep: string, limit: number) => {
 }
 
 
-export default { createTBEscola, existsEscola, dropTBEscola, insertEscola, getEscolaByInep, getEscolaByNome, getNumberOfPages, getWithPagination, getNumberOfPagesWithNome, getNumberOfPagesWithInep, getAll, getByInep, getNomeByInep, deleteByCodGre, getByCodGre };
+export default { createTBEscola, existsEscola, dropTBEscola, insertEscola, getEscolaByInep, getEscolaByNome, getNumberOfPages, getWithPagination, getNumberOfPagesWithNome, getNumberOfPagesWithInep, getAll, getByInep, deleteByCodGre, getByCodGre };

@@ -26,6 +26,7 @@ const Home = () => {
     const [data, setData] = useState<Array<IEscola>>([]);
     const [numberOfPages, setNumberOfPages] = useState<number>(1);
     const [selectedInep, setSelectedInep] = useState<string>('');
+    const [selectedNome, setSelectedNome] = useState<string>('');
     const [inepForDelete, setInepForDelete] = useState<string>('');
     const [scale] = useState(new Animated.Value(0));
     const [opacity] = useState(new Animated.Value(0));
@@ -80,7 +81,16 @@ const Home = () => {
         }
     }
 
+    const getNumberOfPagesByInep = async () => {
+        const total: any = await Escola.getNumberOfPagesWithInep(selectedInep, limit);
+        setNumberOfPages(total);
+    }
 
+    const getNumberOfPagesByNome = async () => {
+        const total: any = await Escola.getNumberOfPagesWithNome(selectedNome, limit);
+        console.log(selectedNome);
+        setNumberOfPages(total);
+    }
 
     const getDataByInep = async () => {
         const res: any = await Escola.getByInep(selectedInep);
@@ -92,9 +102,19 @@ const Home = () => {
     }
 
     useEffect(() => {
-        if (selectedInep != '')
+        if (selectedInep != '') {
             getDataByInep();
+            getNumberOfPagesByInep();
+        }
     }, [selectedInep])
+
+    useEffect(() => {
+        if (selectedNome != '') {
+            getNumberOfPagesByNome();
+        }
+    }, [selectedNome])
+
+
 
     const onSelectedItems = (inep: string) => {
         let data: Array<string> = [];
@@ -213,99 +233,105 @@ const Home = () => {
             }, 3000)
             return;
         }
-        const size = selectedItems.length;
-        let indice = 0;
-        selectedItems.forEach(async (item, index) => {
-            const res: any = await EstruturaFisicaEscolar.getIdRemoto(item);
-            if (res) {
-                setMessageSyncOk(`(${index + 1}/${size}) Preparando dados...`);
-                const response: any = await EstruturaFisicaEscolar.getItemsToSendByInep(item);
-                if (response != false) {
-                    try {
-                        setMessageSyncOk(`(${index + 1}/${size}) Enviando dados...`);
-                        await axios.patch(`${url}/${res}`, response, {
-                            headers: {
-                                "Content-Type": "application/json"
-                            }
-                        });
-                        setMessageSyncOk(`(${index + 1}/${size}) Sincronizando...`);
-                        await EstruturaFisicaEscolar.updateIdRemotoAndSync(res, item);
-                        initData();
-                        setMessageOk('');
-                        setSelectedItems([]);
-                        setIsLoadingSync(false);
-                    } catch (error: any) {
-                        if (error && error?.response?.data.error) {
-                            setMessageSyncError(`Ocorreu algum problema durante o preenchimento do formulário. Erro: ${error?.response?.data.error}`);
-                            setMessageOk('');
-                            setTimeout(() => {
-                                setMessageSyncError('');
-                                setIsLoadingSync(false);
-                            }, 3000)
-                            return;
-                        } else {
-                            setMessageSyncError("Verifique sua conexão e tente novamente!");
-                            setMessageSyncOk('');
-                            setTimeout(() => {
-                                setMessageSyncError('');
-                                setIsLoadingSync(false);
-                            }, 3000)
-                            return;
-                        }
-                    }
-                } else {
-                    setMessageSyncError("Ocorreu um erro ao preparar os dados!");
-                    setMessageOk('');
-                    setTimeout(() => {
-                        setMessageSyncError('');
-                        setIsLoadingSync(false);
-                    }, 3000)
-                    return;
-                }
-            } else {
-                setMessageSyncOk(`(${index + 1}/${size}) Preparando dados...`);
-                const response: any = await EstruturaFisicaEscolar.getItemsToSendByInep(item);
-                if (response != false) {
-                    setMessageSyncOk(`(${index + 1}/${size}) Enviando dados...`);
-                    try {
-                        const res1: any = await axios.post(`${url}/save-draft/`, response, {
-                            headers: {
-                                "Content-Type": "application/json"
-                            }
-                        });
-                        setMessageSyncOk(`(${index + 1}/${size}) Sincronizando...`);
-                        await EstruturaFisicaEscolar.updateIdRemotoAndSync(res1.data.id_estrutura_escolar, item);
-                        initData();
-                        setMessageSyncOk('');
-                        setSelectedItems([]);
-                        setIsLoadingSync(false);
-                    } catch (error: any) {
-                        if (error && error?.response?.data.error) {
-                            setMessageSyncError(`Ocorreu algum problema durante o preenchimento do formulário. Erro: ${error?.response?.data.error}`);
-                            setTimeout(() => {
-                                setMessageSyncError('');
-                                setIsLoadingSync(false);
-                            }, 3000)
-                            return;
-                        } else {
-                            setMessageSyncError("Verifique sua conexão e tente novamente!");
-                            setTimeout(() => {
-                                setMessageSyncError('');
-                                setMessageSyncOk('');
-                                setIsLoadingSync(false);
-                            }, 3000)
-                            return;
-                        }
-                    }
-                } else {
-                    setMessageSyncError("Ocorreu um erro ao preparar os dados!");
-                    setTimeout(() => {
-                        setMessageSyncError('');
-                        setIsLoadingSync(false);
-                    }, 3000)
-                    return;
-                }
 
+        const size = selectedItems.length;
+
+        selectedItems.forEach(async (item, index) => {
+            const res: any = await EstruturaFisicaEscolar.getStatusByInep(item);
+            if (res === "Final") {
+                console.log("Final");
+            } else {
+                const res: any = await EstruturaFisicaEscolar.getIdRemoto(item);
+                if (res) {
+                    setMessageSyncOk(`(${index + 1}/${size}) Preparando dados...`);
+                    const response: any = await EstruturaFisicaEscolar.getItemsToSendByInep(item);
+                    if (response != false) {
+                        try {
+                            setMessageSyncOk(`(${index + 1}/${size}) Enviando dados...`);
+                            await axios.patch(`${url}/${res}`, response, {
+                                headers: {
+                                    "Content-Type": "application/json"
+                                }
+                            });
+                            setMessageSyncOk(`(${index + 1}/${size}) Sincronizando...`);
+                            await EstruturaFisicaEscolar.updateIdRemotoAndSync(res, item);
+                            initData();
+                            setMessageOk('');
+                            setSelectedItems([]);
+                            setIsLoadingSync(false);
+                        } catch (error: any) {
+                            if (error && error?.response?.data.error) {
+                                setMessageSyncError(`Ocorreu algum problema durante o preenchimento do formulário. Erro: ${error?.response?.data.error}`);
+                                setMessageOk('');
+                                setTimeout(() => {
+                                    setMessageSyncError('');
+                                    setIsLoadingSync(false);
+                                }, 3000)
+                                return;
+                            } else {
+                                setMessageSyncError("Verifique sua conexão e tente novamente!");
+                                setMessageSyncOk('');
+                                setTimeout(() => {
+                                    setMessageSyncError('');
+                                    setIsLoadingSync(false);
+                                }, 3000)
+                                return;
+                            }
+                        }
+                    } else {
+                        setMessageSyncError("Ocorreu um erro ao preparar os dados!");
+                        setMessageOk('');
+                        setTimeout(() => {
+                            setMessageSyncError('');
+                            setIsLoadingSync(false);
+                        }, 3000)
+                        return;
+                    }
+                } else {
+                    setMessageSyncOk(`(${index + 1}/${size}) Preparando dados...`);
+                    const response: any = await EstruturaFisicaEscolar.getItemsToSendByInep(item);
+                    if (response != false) {
+                        setMessageSyncOk(`(${index + 1}/${size}) Enviando dados...`);
+                        try {
+                            const res1: any = await axios.post(`${url}/save-draft/`, response, {
+                                headers: {
+                                    "Content-Type": "application/json"
+                                }
+                            });
+                            setMessageSyncOk(`(${index + 1}/${size}) Sincronizando...`);
+                            await EstruturaFisicaEscolar.updateIdRemotoAndSync(res1.data.id_estrutura_escolar, item);
+                            initData();
+                            setMessageSyncOk('');
+                            setSelectedItems([]);
+                            setIsLoadingSync(false);
+                        } catch (error: any) {
+                            if (error && error?.response?.data.error) {
+                                setMessageSyncError(`Ocorreu algum problema durante o preenchimento do formulário. Erro: ${error?.response?.data.error}`);
+                                setTimeout(() => {
+                                    setMessageSyncError('');
+                                    setIsLoadingSync(false);
+                                }, 3000)
+                                return;
+                            } else {
+                                setMessageSyncError("Verifique sua conexão e tente novamente!");
+                                setTimeout(() => {
+                                    setMessageSyncError('');
+                                    setMessageSyncOk('');
+                                    setIsLoadingSync(false);
+                                }, 3000)
+                                return;
+                            }
+                        }
+                    } else {
+                        setMessageSyncError("Ocorreu um erro ao preparar os dados!");
+                        setTimeout(() => {
+                            setMessageSyncError('');
+                            setIsLoadingSync(false);
+                        }, 3000)
+                        return;
+                    }
+
+                }
             }
         })
     }
@@ -335,7 +361,7 @@ const Home = () => {
                         : null}
                     <ScrollView style={{ zIndex: 9999 }} contentContainerStyle={{ height: 1280 }}>
                         <View style={{ margin: 20 }}>
-                            <Filtros setSelectedInep={setSelectedInep} setNumberOfPages={(number) => setNumberOfPages(number)} initData={initData} limit={limit} />
+                            <Filtros setSelectedInep={setSelectedInep} setSelectedNome={setSelectedNome} initData={initData} limit={limit} />
                             <View style={{ maxWidth: 900, marginTop: 20, alignItems: 'flex-end', alignSelf: 'center', width: '100%' }}>
                                 <TouchableOpacity style={styles.syncBtn} onPress={onSync}><Ionicons name='reload' size={25} color={COLORS.white} /><Text style={{ color: COLORS.white }}>Sincronizar</Text></TouchableOpacity>
                             </View>

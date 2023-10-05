@@ -11,9 +11,9 @@ import { IEscola } from '../types/Escola';
 
 interface IProps {
     setSelectedInep: React.Dispatch<React.SetStateAction<string>>
+    setSelectedNome: React.Dispatch<React.SetStateAction<string>>
     limit: number,
     initData: () => void,
-    setNumberOfPages: React.Dispatch<React.SetStateAction<number>>
 }
 
 
@@ -55,8 +55,6 @@ const Filtros = (props: IProps) => {
 
     const searchDataByInep = async (inep: string) => {
         const res: any = await Escola.getEscolaByInep(inep);
-        const count: any = await Escola.getNumberOfPagesWithInep(inep, props.limit);
-        props.setNumberOfPages(count);
         if (res != false) {
             setData(res);
         } else {
@@ -67,8 +65,6 @@ const Filtros = (props: IProps) => {
     const searchDataByNome = async (nome: string) => {
         nome = nome.replace('  ', ' ');
         const res: any = await Escola.getEscolaByNome(nome);
-        const count: any = await Escola.getNumberOfPagesWithNome(nome, props.limit);
-        props.setNumberOfPages(count);
         if (res != false) {
             setData(res);
         } else {
@@ -87,7 +83,7 @@ const Filtros = (props: IProps) => {
                 <View style={styles.inep_nome}>
                     <View style={{ flexGrow: 1, maxWidth: '100%', zIndex: 999 }}>
                         <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Inep</Text>
-                        <TouchableOpacity style={styles.dropdownSelector} onPress={() => { setInepClicked(!inepClicked); getData(); props.initData(); props.setSelectedInep('') }}>
+                        <TouchableOpacity style={styles.dropdownSelector} onPress={() => { setInepClicked(!inepClicked); getData(); props.initData(); props.setSelectedInep(''); props.setSelectedNome(''); }}>
                             <Text>{selectedInep}</Text>
                             {inepClicked ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} /> :
                                 <Ionicons name='chevron-down-outline' color={COLORS.green} size={30} />}
@@ -111,7 +107,7 @@ const Filtros = (props: IProps) => {
                     </View>
                     <View style={{ flexGrow: 10, maxWidth: '100%' }}>
                         <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Nome da Escola</Text>
-                        <TouchableOpacity style={styles.dropdownSelector} onPress={() => { setNomeClicked(!nomeClicked); getData(); props.initData(); props.setSelectedInep('') }}>
+                        <TouchableOpacity style={styles.dropdownSelector} onPress={() => { setNomeClicked(!nomeClicked); getData(); props.initData(); props.setSelectedInep(''); props.setSelectedNome(''); }}>
                             <Text>{selectedNome}</Text>
                             {nomeClicked ? <Ionicons name='chevron-up-outline' color={COLORS.green} size={30} /> :
                                 <Ionicons name='chevron-down-outline' color={COLORS.green} size={30} />}
@@ -126,7 +122,7 @@ const Filtros = (props: IProps) => {
                                     (data && data.length > 0) &&
                                     data.map((item, index) => {
                                         return (
-                                            <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedNome(item.nome); setSeletedInep(item.inep); searchDataByNome(item.nome); setNomeClicked(false); }}>
+                                            <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedNome(item.nome); setSeletedInep(item.inep); props.setSelectedNome(item.nome); searchDataByNome(item.nome); setNomeClicked(false); }}>
                                                 <Text>{item.nome}</Text>
                                             </TouchableOpacity>
                                         )

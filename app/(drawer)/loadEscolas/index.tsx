@@ -27,12 +27,15 @@ const LoadEscolas = () => {
     const [messageError, setMessageError] = useState('');
     const [messageOk, setMessageOk] = useState('');
     const [finished, setFinished] = useState(false);
+    const [formErrors, setFormErrors] = useState<ILoadEscolas>();
+    const [formErrorsDelete, setFormErrorsDelete] = useState<ILoadEscolas>();
 
     const handleOptionChange = (name: string, value: string) => {
         setAnswer((prev) => ({
             ...prev,
             [name]: value
         }));
+        setFormErrors({ gre: '', senha: '' });
     }
 
     const handleDeleteChange = (name: string, value: string) => {
@@ -40,6 +43,7 @@ const LoadEscolas = () => {
             ...prev,
             [name]: value
         }));
+        setFormErrorsDelete({ gre: '', senha: '' });
     }
 
     interface IResponse {
@@ -73,6 +77,26 @@ const LoadEscolas = () => {
         createOrNotEscola();
         createOrNotEstruturaFisicaEscolar();
         setIsLoadingLoadEscolas(true);
+
+        const errors: any = {};
+        if (!answer.gre) {
+            errors.gre = "Campo obrigatório"
+        }
+        if (!answer.senha) {
+            errors.senha = "Campo obrigatório"
+        }
+
+        if (answer.gre && !/^\d+$/g.test(answer.gre)) {
+            errors.gre = "Digite apenas números"
+        }
+
+        if (Object.keys(errors).length > 0) {
+            setFormErrors(errors);
+            setIsLoadingLoadEscolas(false);
+            return;
+        }
+
+
         const res: any = await Escola.getByCodGre(parseInt(answer.gre));
         if (res != false) {
             setMessageError("As escolas com a GRE informada já foram carregadas!");
@@ -111,7 +135,6 @@ const LoadEscolas = () => {
                 router.push('/');
             }, 2000);
             return;
-
         } catch (error: any) {
             console.log(error);
             if (error && error?.response?.data.error) {
@@ -139,6 +162,33 @@ const LoadEscolas = () => {
 
     const apagarEscolas = async () => {
         setIsLoadingDangerZone(true);
+
+        const errors: any = {};
+        if (!answerDelete.gre) {
+            errors.gre = "Campo obrigatório"
+        }
+        if (!answerDelete.senha) {
+            errors.senha = "Campo obrigatório"
+        }
+        if (answerDelete.gre && !/^\d+$/g.test(answerDelete.gre)) {
+            errors.gre = "Digite apenas números"
+        }
+
+        if (Object.keys(errors).length > 0) {
+            setFormErrorsDelete(errors);
+            setIsLoadingDangerZone(false);
+            return;
+        }
+        const res_verify: any = await axios.get(`${url}/schools-check-credential/${answerDelete.senha.toString()}`)
+        if (!res_verify?.data) {
+            setMessageError('Credenciais inválidas!');
+            setTimeout(() => {
+                setMessageError('');
+                setIsLoadingDangerZone(false);
+            }, 3000);
+            return;
+        }
+
         const response: any = await Escola.getByCodGre(parseInt(answerDelete.gre));
         if (!response) {
             setMessageError('Escolas com a GRE informada não estão cadastradas no banco local, portanto não há o que excluir!');
@@ -148,6 +198,7 @@ const LoadEscolas = () => {
             }, 4000);
             return;
         }
+
         setMessageOk(`Apagando questionários da GRE: ${answerDelete.gre} ...`)
         const promise = response.map(async (item: string, index: number) => {
             await EstruturaFisicaEscolar.deleteEstruturaFisicaEscolar(item);
@@ -184,13 +235,16 @@ const LoadEscolas = () => {
                     <Text style={{ fontWeight: 'bold', fontSize: 20, color: COLORS.green }}>Carregar Escolas</Text>
                     <Text style={{ fontSize: 14, marginTop: 10 }}>Digite o número GRE e a senha de acesso para que as escolas sejam adicionadas</Text>
                     <View style={styles.gre_senha}>
-                        <View style={{ flexGrow: 1 }}>
+                        <View style={{ flexGrow: 1, flexDirection: 'column', flex: 1 }}>
                             <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Número GRE</Text>
                             <TextInput value={answer.gre} onChangeText={(txt) => handleOptionChange('gre', txt)} style={styles.input} />
+                            {formErrors?.gre ? <Text style={{ color: COLORS.red, marginTop: 5 }}>{formErrors?.gre}</Text> : null}
                         </View>
-                        <View style={{ flexGrow: 1 }}>
+
+                        <View style={{ flexGrow: 1, flexDirection: 'column' }}>
                             <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Código de Acesso</Text>
                             <TextInput value={answer.senha} onChangeText={(txt) => handleOptionChange('senha', txt)} style={styles.input} />
+                            {formErrors?.senha ? <Text style={{ color: COLORS.red, marginTop: 5 }}>{formErrors?.senha}</Text> : null}
                         </View>
                     </View>
                     <TouchableOpacity disabled={isLoadingLoadEscolas ? true : false} onPress={() => carregarEscolas()} style={[styles.btnLoad, isLoadingLoadEscolas ? { backgroundColor: COLORS.disableGreen } : { backgroundColor: COLORS.green }]}>
@@ -206,10 +260,12 @@ const LoadEscolas = () => {
                         <View style={{ flexGrow: 1 }}>
                             <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Número GRE</Text>
                             <TextInput value={answerDelete.gre} onChangeText={(txt) => handleDeleteChange('gre', txt)} style={styles.input} />
+                            {formErrorsDelete?.gre ? <Text style={{ color: COLORS.red, marginTop: 5 }}>{formErrorsDelete?.gre}</Text> : null}
                         </View>
                         <View style={{ flexGrow: 1 }}>
                             <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Código de Acesso</Text>
                             <TextInput value={answerDelete.senha} onChangeText={(txt) => handleDeleteChange('senha', txt)} style={styles.input} />
+                            {formErrorsDelete?.senha ? <Text style={{ color: COLORS.red, marginTop: 5 }}>{formErrorsDelete?.senha}</Text> : null}
                         </View>
                     </View>
                     <TouchableOpacity disabled={isLoadingDangerZone ? true : false} onPress={() => apagarEscolas()} style={[styles.btnLoad, isLoadingDangerZone ? { backgroundColor: COLORS.darkRed } : { backgroundColor: COLORS.darkRed }]}>

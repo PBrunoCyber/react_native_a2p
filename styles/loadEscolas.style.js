@@ -23,9 +23,11 @@ const styles = StyleSheet.create({
     },
     gre_senha: {
         marginTop: 20,
+        display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        alignItems: 'center',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
         gap: 20
     },
     btnLoad: {
