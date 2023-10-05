@@ -56,29 +56,6 @@ const Home = () => {
         }
     }
 
-    const insertOrNotEscola = async () => {
-        const res = await Escola.existsEscola();
-
-        if (res != true) {
-            setIsLoading(true);
-            const promise = json.map(async (item, index) => {
-                await Escola.insertEscola({ inep: item.codINEPEntidade.toString(), cod_gre: item.idEntidade, nome: item.nome });
-            })
-            await Promise.all(promise);
-            initData();
-            setIsLoading(false);
-        }
-
-    }
-
-    const createOrNotEscola = async () => {
-        const res = await Escola.existsEscola();
-        if (res != true) {
-            Escola.createTBEscola();
-        }
-    }
-
-
     const getNumberOfPages = async () => {
         const total: any = await Escola.getNumberOfPages(limit);
         setNumberOfPages(total);
@@ -103,12 +80,7 @@ const Home = () => {
         }
     }
 
-    const createOrNotEstruturaFisicaEscolar = async () => {
-        const res = await EstruturaFisicaEscolar.existsEstruturaFisicaEscolar();
-        if (res != true) {
-            await EstruturaFisicaEscolar.createTBEstruturaFisicaEscolar();
-        }
-    }
+
 
     const getDataByInep = async () => {
         const res: any = await Escola.getByInep(selectedInep);
@@ -118,7 +90,7 @@ const Home = () => {
             setData([]);
         }
     }
-    
+
     useEffect(() => {
         if (selectedInep != '')
             getDataByInep();
@@ -134,16 +106,6 @@ const Home = () => {
         const data = selectedItems.filter(value => value !== inep);
         setSelectedItems(data);
     }
-
-    useEffect(() => {
-        Escola.dropTBEscola();
-        EstruturaFisicaEscolar.dropTBEstruturaFisicaEscolar();
-        // createOrNotEscola();
-        // createOrNotEstruturaFisicaEscolar();
-        // insertOrNotEscola();
-        initData();
-    }, [])
-
 
     useFocusEffect(
         useCallback(() => {

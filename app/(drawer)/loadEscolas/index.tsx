@@ -1,4 +1,4 @@
-import { Stack } from 'expo-router';
+import { Stack, router, useFocusEffect } from 'expo-router';
 import { ActivityIndicator, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { url } from '../../../constants/url';
@@ -8,7 +8,7 @@ import { COLORS } from '../../../constants/theme'
 import { Text } from 'react-native';
 import styles from '../../../styles/loadEscolas.style'
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import Escola from '../../../services/Escola';
 import EstruturaFisicaEscolar from '../../../services/EstruturaFisicaEscolar';
 import axios from 'axios';
@@ -48,6 +48,19 @@ const LoadEscolas = () => {
         cod_gre: string
     }
 
+    useFocusEffect(
+        useCallback(() => {
+            setAnswer({ gre: '', senha: '' });
+            setAnswerDelete({ gre: '', senha: '' });
+        }, [])
+    )
+
+    const createOrNotEstruturaFisicaEscolar = async () => {
+        const res = await EstruturaFisicaEscolar.existsEstruturaFisicaEscolar();
+        if (res != true) {
+            await EstruturaFisicaEscolar.createTBEstruturaFisicaEscolar();
+        }
+    }
 
     const createOrNotEscola = async () => {
         const res: any = await Escola.existsEscola();
@@ -57,38 +70,65 @@ const LoadEscolas = () => {
     }
 
     const carregarEscolas = async () => {
-        createOrNotEscola();    
-
+        createOrNotEscola();
+        createOrNotEstruturaFisicaEscolar();
+        setIsLoadingLoadEscolas(true);
+        const res: any = await Escola.getByCodGre(parseInt(answer.gre));
+        if (res != false) {
+            setMessageError("As escolas com a GRE informada já foram carregadas!");
+            setTimeout(() => {
+                setMessageError('');
+                setIsLoadingLoadEscolas(false);
+                setFinished(false);
+            }, 3000);
+            return;
+        }
         try {
             setMessageOk('Baixando Escolas...');
-            const response: Array<IResponse> = await axios.get(`${url}/schools/${answer.gre}/${answer.senha}`);
+            const response: any = await axios.get(`${url}/schools/${answer.gre}/${answer.senha.toString()}`);
+            console.log(response.data.length);
+            if (response?.data.length === 0) {
+                setMessageError("Não há nenhuma escola com a GRE informada!");
+                setMessageOk('');
+                setTimeout(() => {
+                    setMessageError('');
+                    setIsLoadingLoadEscolas(false);
+                    setFinished(false);
+                }, 3000);
+                return;
+            }
             setMessageOk('Inserindo escolas no banco local...')
-            const promise = response.map(async (item, index) => {
+            const promise = response?.data.map(async (item: IResponse) => {
                 await Escola.insertEscola({ nome: item.ds_nome, inep: item.nr_cod_inep, cod_gre: parseInt(item.cod_gre) })
-            })
+            });
             await Promise.all(promise);
             setFinished(true);
             setMessageOk('Dados carregados com sucesso!');
             setTimeout(() => {
                 setMessageOk('');
+                setIsLoadingLoadEscolas(false);
                 setFinished(false);
+                router.push('/');
             }, 2000);
             return;
 
-        } catch (error: any) { 
-            if(error && error?.response?.data.error){
+        } catch (error: any) {
+            console.log(error);
+            if (error && error?.response?.data.error) {
                 setMessageOk('');
                 setMessageError(error?.response?.data.error);
                 setTimeout(() => {
                     setMessageError('');
+                    setIsLoadingLoadEscolas(false);
                     setFinished(false);
                 }, 2000);
                 return;
-            }else{
+            } else {
                 setMessageOk('');
                 setMessageError("Verifique sua conexão e tente novamente!");
                 setTimeout(() => {
                     setMessageError('');
+                    setIsLoadingLoadEscolas(false);
                     setFinished(false);
                 }, 2000);
                 return;
@@ -98,7 +138,16 @@ const LoadEscolas = () => {
 
 
     const apagarEscolas = async () => {
+        setIsLoadingDangerZone(true);
         const response: any = await Escola.getByCodGre(parseInt(answerDelete.gre));
+        if (!response) {
+            setMessageError('Escolas com a GRE informada não estão cadastradas no banco local, portanto não há o que excluir!');
+            setTimeout(() => {
+                setMessageError('');
+                setIsLoadingDangerZone(false);
+            }, 4000);
+            return;
+        }
         setMessageOk(`Apagando questionários da GRE: ${answerDelete.gre} ...`)
         const promise = response.map(async (item: string, index: number) => {
             await EstruturaFisicaEscolar.deleteEstruturaFisicaEscolar(item);
@@ -111,13 +160,16 @@ const LoadEscolas = () => {
             setFinished(true);
             setTimeout(() => {
                 setMessageOk('');
+                router.push('/');
+                setIsLoadingDangerZone(false);
                 setFinished(false);
-            }, 2000)
+            }, 2000);
             return;
         } else {
             setMessageError('Ocorreu algum erro ao apagar as escolas..');
             setTimeout(() => {
                 setMessageError('');
+                setIsLoadingDangerZone(false);
             }, 3000);
             return;
         }
@@ -125,7 +177,7 @@ const LoadEscolas = () => {
 
     return (
         <>
-            {messageOk ? <View style={styles.messageOk}>{finished ? <Ionicons name='checkmark' size={35} color={COLORS.white} /> : <ActivityIndicator color={COLORS.green} />}<Text style={{ fontWeight: 'bold', color: COLORS.green, maxWidth: 260 }}>{messageOk}</Text></View> : null}
+            {messageOk ? <View style={styles.messageOk}>{finished ? <Ionicons name='checkmark' size={25} color={COLORS.green} /> : <ActivityIndicator color={COLORS.green} />}<Text style={{ fontWeight: 'bold', color: COLORS.green, maxWidth: 260 }}>{messageOk}</Text></View> : null}
             {messageError ? <View style={styles.messageError}><Ionicons name='close-circle-outline' size={40} color={COLORS.red} /><Text style={{ fontWeight: 'bold', color: COLORS.red, maxWidth: 260 }}>{messageError}</Text></View> : null}
             <ScrollView contentContainerStyle={{ minHeight: 900 }}>
                 <View style={styles.card}>
@@ -134,11 +186,11 @@ const LoadEscolas = () => {
                     <View style={styles.gre_senha}>
                         <View style={{ flexGrow: 1 }}>
                             <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Número GRE</Text>
-                            <TextInput onChangeText={(txt) => handleOptionChange('gre', txt)} style={styles.input} />
+                            <TextInput value={answer.gre} onChangeText={(txt) => handleOptionChange('gre', txt)} style={styles.input} />
                         </View>
                         <View style={{ flexGrow: 1 }}>
                             <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Código de Acesso</Text>
-                            <TextInput onChangeText={(txt) => handleOptionChange('senha', txt)} style={styles.input} />
+                            <TextInput value={answer.senha} onChangeText={(txt) => handleOptionChange('senha', txt)} style={styles.input} />
                         </View>
                     </View>
                     <TouchableOpacity disabled={isLoadingLoadEscolas ? true : false} onPress={() => carregarEscolas()} style={[styles.btnLoad, isLoadingLoadEscolas ? { backgroundColor: COLORS.disableGreen } : { backgroundColor: COLORS.green }]}>
@@ -153,11 +205,11 @@ const LoadEscolas = () => {
                     <View style={styles.gre_senha}>
                         <View style={{ flexGrow: 1 }}>
                             <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Número GRE</Text>
-                            <TextInput onChangeText={(txt) => handleOptionChange('gre', txt)} style={styles.input} />
+                            <TextInput value={answerDelete.gre} onChangeText={(txt) => handleDeleteChange('gre', txt)} style={styles.input} />
                         </View>
                         <View style={{ flexGrow: 1 }}>
                             <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Código de Acesso</Text>
-                            <TextInput onChangeText={(txt) => handleDeleteChange('senha', txt)} style={styles.input} />
+                            <TextInput value={answerDelete.senha} onChangeText={(txt) => handleDeleteChange('senha', txt)} style={styles.input} />
                         </View>
                     </View>
                     <TouchableOpacity disabled={isLoadingDangerZone ? true : false} onPress={() => apagarEscolas()} style={[styles.btnLoad, isLoadingDangerZone ? { backgroundColor: COLORS.darkRed } : { backgroundColor: COLORS.darkRed }]}>

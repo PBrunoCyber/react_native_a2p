@@ -9,7 +9,7 @@ const dropTBEscola = () => {
                 (_, { rows }) => {
                     resolve(true);
                 },
-                (_, error) => {console.log(error);resolve(false); return false })
+                (_, error) => { console.log(error); resolve(false); return false })
         });
     })
 }
@@ -61,7 +61,7 @@ const existsEscola = () => {
                 [],
                 //-----------------------
                 (_, { rows }) => {
-                    if(rows)
+                    if (rows)
                         resolve(true);
                     else resolve(false);
                 },
@@ -80,11 +80,15 @@ const getByCodGre = (cod_gre: number) => {
                 [cod_gre],
                 //-----------------------
                 (_, { rows }) => {
-                    const data = [];
+                    if (rows.length > 0) {
+                        const data = [];
                         for (let index = 0; index < rows.length; index++) {
                             data.push(rows.item(index).inep);
                         }
                         resolve(data);
+                    } else {
+                        resolve(false);
+                    }
                 },
                 (_, error) => { resolve(false); return false; }
             );
@@ -101,7 +105,7 @@ const deleteByCodGre = (cod_gre: number) => {
                 [cod_gre],
                 //-----------------------
                 (_, { rowsAffected }) => {
-                    if(rowsAffected > 0)
+                    if (rowsAffected > 0)
                         resolve(true);
                     else resolve(false);
                 },

@@ -29,34 +29,29 @@ const Filtros = (props: IProps) => {
         const res: any = await Escola.getAll(props.limit);
         if (res != false) {
             setData(res);
+        } else {
+            setData([]);
         }
     }
 
-    useEffect(() => {
-        getData();
-    }, []);
 
     useFocusEffect(
         useCallback(() => {
             setSeletedInep('');
             setSeletedNome('');
+            getData();
+            props.initData();
         }, [])
     )
 
-    const getNomeAcrossInep = (data: Array<IEscola>, inepSelected: number | string) => {
-        const selectedItem = data.find(item => item.inep === inepSelected);
-        if (selectedItem) {
-            setSeletedNome(selectedItem.nome);
-        }
-    }
 
-    const getInepAcrossNome = (data: Array<IEscola>, nomeSelected: string, id: number) => {
-        const filteredItems = data.find(item => item.nome === nomeSelected && item.id === id);
-        if (filteredItems) {
-            setSeletedInep(filteredItems.inep.toString());
-            props.setSelectedInep(filteredItems.inep.toString());
-        }
-    }
+    // const getInepAcrossNome = (data: Array<IEscola>, nomeSelected: string, id: number) => {
+    //     const filteredItems = data.find(item => item.nome === nomeSelected && item.id === id);
+    //     if (filteredItems) {
+    //         setSeletedInep(filteredItems.inep.toString());
+    //         props.setSelectedInep(filteredItems.inep.toString());
+    //     }
+    // }
 
     const searchDataByInep = async (inep: string) => {
         const res: any = await Escola.getEscolaByInep(inep);
@@ -107,7 +102,7 @@ const Filtros = (props: IProps) => {
                                     (data && data.length > 0) &&
                                     data.map((item, index) => {
                                         return (
-                                            <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedInep(item.inep); props.setSelectedInep(item.inep); getNomeAcrossInep(data || [{ inep: '', id: 0, nome: '', tipo: '' }], item.inep); searchDataByInep(item.inep); setInepClicked(false); }}>
+                                            <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedInep(item.inep); props.setSelectedInep(item.inep); setSeletedNome(item.nome); searchDataByInep(item.inep); setInepClicked(false); }}>
                                                 <Text>{item.inep}</Text>
                                             </TouchableOpacity>
                                         )
@@ -131,7 +126,7 @@ const Filtros = (props: IProps) => {
                                     (data && data.length > 0) &&
                                     data.map((item, index) => {
                                         return (
-                                            <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedNome(item.nome); getInepAcrossNome(data || [{ inep: '', id: 0, nome: '', tipo: '' }], item.nome, item.id); searchDataByNome(item.nome); setNomeClicked(false); }}>
+                                            <TouchableOpacity key={index} style={styles.schoolsItem} onPress={() => { setSeletedNome(item.nome); setSeletedInep(item.inep); searchDataByNome(item.nome); setNomeClicked(false); }}>
                                                 <Text>{item.nome}</Text>
                                             </TouchableOpacity>
                                         )

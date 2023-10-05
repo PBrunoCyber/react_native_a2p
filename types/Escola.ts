@@ -1,5 +1,5 @@
 export interface IEscola {
-    id: number,
+    cod_gre: number,
     nome: string,
     inep: string,
     status: string,
