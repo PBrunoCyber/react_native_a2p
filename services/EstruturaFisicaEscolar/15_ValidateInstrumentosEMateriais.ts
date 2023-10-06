@@ -58,7 +58,7 @@ const validate = (answer: IInstrumentosEMateriais | undefined) => {
     if (answer?.campo_147 === 0 && answer?.campo_146 === null) {
         errors.campo_146 = "Campo obrigatório";
     }
-    if (answer?.campo_147 === 0 && answer?.campo_148 === null) {
+    if (answer?.campo_148 === null) {
         errors.campo_148 = "Campo obrigatório";
     }
 

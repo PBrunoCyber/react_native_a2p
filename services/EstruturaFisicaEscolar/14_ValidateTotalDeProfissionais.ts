@@ -180,7 +180,7 @@ const validate = (answer: ITotalProfissionais | undefined) => {
     if (answer?.campo_132 && answer?.campo_132.length > 4) {
         errors.campo_132 = "O campo não pode ter mais que 4 caracteres.";
     }
-    if (answer?.campo_133 === 0 && answer?.campo_134 === null) {
+    if (answer?.campo_134 === null) {
         errors.campo_134 = "Campo obrigatório";
     }
 

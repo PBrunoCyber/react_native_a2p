@@ -191,6 +191,7 @@ const Home = () => {
                     return;
                 }
             } catch (error) {
+                console.log(error);
                 setMessageError('Ocorreu algum erro ao excluir o formulário, verifique a conexão e tente novamente!')
                 onHideDelete();
                 setTimeout(() => {
@@ -246,7 +247,8 @@ const Home = () => {
                     if (response != false) {
                         try {
                             setMessageSyncOk(`(${index + 1}/${size}) Enviando dados...`);
-                            await axios.post(`${url}/finished/`, {res, response}, {
+                            const concat = { res, ...response };
+                            await axios.post(`${url}/finished/`, concat, {
                                 headers: {
                                     "Content-Type": "application/json"
                                 }
@@ -258,6 +260,7 @@ const Home = () => {
                             setSelectedItems([]);
                             setIsLoadingSync(false);
                         } catch (error: any) {
+                            console.log(error);
                             if (error && error?.response?.data.error) {
                                 setMessageSyncError(`Ocorreu algum problema durante o preenchimento do formulário. Erro: ${error?.response?.data.error}`);
                                 setMessageOk('');
@@ -291,13 +294,13 @@ const Home = () => {
                     if (response != false) {
                         setMessageSyncOk(`(${index + 1}/${size}) Enviando dados...`);
                         try {
-                            const res1: any = await axios.post(`${url}/finished/`, response, {
+                            const res1: any = await axios.post(`${url}/finished`, response, {
                                 headers: {
                                     "Content-Type": "application/json"
                                 }
                             });
                             setMessageSyncOk(`(${index + 1}/${size}) Sincronizando...`);
-                            await EstruturaFisicaEscolar.updateIdRemotoAndSync(res1.data.id_estrutura_escolar, item);
+                            await EstruturaFisicaEscolar.updateIdRemotoAndSync(res1.data.id, item);
                             initData();
                             setMessageSyncOk('');
                             setSelectedItems([]);
@@ -328,7 +331,6 @@ const Home = () => {
                         }, 3000)
                         return;
                     }
-
                 }
             } else {
                 const res: any = await EstruturaFisicaEscolar.getIdRemoto(item);
@@ -350,6 +352,7 @@ const Home = () => {
                             setSelectedItems([]);
                             setIsLoadingSync(false);
                         } catch (error: any) {
+                            console.log(error);
                             if (error && error?.response?.data.error) {
                                 setMessageSyncError(`Ocorreu algum problema durante o preenchimento do formulário. Erro: ${error?.response?.data.error}`);
                                 setMessageOk('');

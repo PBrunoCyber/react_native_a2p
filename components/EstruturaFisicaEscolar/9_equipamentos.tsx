@@ -19,7 +19,7 @@ interface IProps {
 }
 
 
-const Equipamentos = ({ formErrors, equipamentos, data,editData }: IProps) => {
+const Equipamentos = ({ formErrors, equipamentos, data, editData }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
     const [answer, setAnswers] = useState<IEquipamentos>(data || editData || { campo_91: null, campo_92: null, campo_93: null, campo_94: null, campo_95: null, campo_96: null, campo_97: 0 });
     const textOption = ["SIM", "NÃO"]
@@ -31,7 +31,7 @@ const Equipamentos = ({ formErrors, equipamentos, data,editData }: IProps) => {
 
     useFocusEffect(
         useCallback(() => {
-            setAnswers(data || editData ||{ campo_91: null, campo_92: null, campo_93: null, campo_94: null, campo_95: null, campo_96: null, campo_97: 0 });
+            setAnswers(data || editData || { campo_91: null, campo_92: null, campo_93: null, campo_94: null, campo_95: null, campo_96: null, campo_97: 0 });
             setIsClicked(false);
         }, [])
     )
@@ -87,7 +87,7 @@ const Equipamentos = ({ formErrors, equipamentos, data,editData }: IProps) => {
                     <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_95} disable={answer.campo_97 === 1 || data ? true : false} value={answer.campo_95} textOption={textOption} fontWeight='normal' question='5 - Impressora Multifuncional*' onSelect={(option) => handleOptionChange('campo_95', option)} />
                     {formErrors?.campo_95 && <Text style={styles.messageError}>{formErrors?.campo_95}</Text>}
                     <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_96} disable={answer.campo_97 === 1 || data ? true : false} value={answer.campo_96} textOption={textOption} fontWeight='normal' question='6 - Scanner*' onSelect={(option) => handleOptionChange('campo_96', option)} />
-                    {formErrors?.campo_96 && <Text style={styles.messageError}>{formErrors?.scampo_96}</Text>}
+                    {formErrors?.campo_96 && <Text style={styles.messageError}>{formErrors?.campo_96}</Text>}
                 </View>
                 : null
             }
