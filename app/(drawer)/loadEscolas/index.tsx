@@ -230,7 +230,7 @@ const LoadEscolas = () => {
         <>
             {messageOk ? <View style={styles.messageOk}>{finished ? <Ionicons name='checkmark' size={25} color={COLORS.green} /> : <ActivityIndicator color={COLORS.green} />}<Text style={{ fontWeight: 'bold', color: COLORS.green, maxWidth: 260 }}>{messageOk}</Text></View> : null}
             {messageError ? <View style={styles.messageError}><Ionicons name='close-circle-outline' size={40} color={COLORS.red} /><Text style={{ fontWeight: 'bold', color: COLORS.red, maxWidth: 260 }}>{messageError}</Text></View> : null}
-            <ScrollView contentContainerStyle={{ minHeight: 900 }}>
+            <ScrollView contentContainerStyle={{ minHeight: 900, margin: 20 }}>
                 <View style={styles.card}>
                     <Text style={{ fontWeight: 'bold', fontSize: 20, color: COLORS.green }}>Carregar Escolas</Text>
                     <Text style={{ fontSize: 14, marginTop: 10 }}>Digite o número GRE e a senha de acesso para que as escolas sejam adicionadas</Text>

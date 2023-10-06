@@ -9,7 +9,7 @@ const dropTBEscola = () => {
                 (_, { rows }) => {
                     resolve(true);
                 },
-                (_, error) => { console.log(error); resolve(false); return false })
+                (_, error) => { resolve(false); return false })
         });
     })
 }
@@ -23,7 +23,7 @@ const createTBEscola = () => {
                 (_, { rows }) => {
                     resolve(true);
                 },
-                (_, error) => { console.log(error); resolve(false); return false })
+                (_, error) => { resolve(false); return false })
         });
     });
 }
@@ -109,7 +109,7 @@ const deleteByCodGre = (cod_gre: number) => {
                         resolve(true);
                     else resolve(false);
                 },
-                (_, error) => { console.log(error); resolve(false); return false; }
+                (_, error) => { resolve(false); return false; }
             );
         });
     });
@@ -193,7 +193,7 @@ const getByInep = (inep: string) => {
                         resolve(false)
                     }
                 },
-                (_, error) => { console.log(error); resolve(false); return false; });
+                (_, error) => { resolve(false); return false; });
         });
     });
 }
@@ -252,7 +252,6 @@ const getNumberOfPagesWithInep = (inep: string, limit: number) => {
             tx.executeSql("SELECT COUNT(*) AS total_registros FROM tb_escola WHERE e.inep = ?;",
                 [inep],
                 (tx, results) => {
-                    console.log(results);
                     const totalRegistros = results.rows.item(0).total_registros;
                     const paginas = Math.ceil(totalRegistros / limit);
                     resolve(paginas);

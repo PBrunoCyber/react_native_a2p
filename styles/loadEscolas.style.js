@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         width: '100%',
         maxWidth: 900,
-        marginTop: 20,
+        margin: 20,
         borderRadius: 25,
         padding: 40,
         alignSelf: 'center',

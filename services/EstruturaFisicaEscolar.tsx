@@ -8,7 +8,7 @@ const dropTBEstruturaFisicaEscolar = () => {
                 [],
                 (_, { rows }) => {
                     resolve(true);
-                }, (_, error) => { console.log(error); resolve(false); return false; }
+                }, (_, error) => { resolve(false); return false; }
             );
         });
     });
@@ -20,11 +20,9 @@ const createTBEstruturaFisicaEscolar = () => {
             tx.executeSql("CREATE TABLE tb_estrutura_escolar (id INTEGER PRIMARY KEY AUTOINCREMENT, campo_3 INTEGER, campo_4 INTEGER, campo_5 INTEGER, campo_6 INTEGER, campo_7 INTEGER, campo_8 INTEGER, campo_9 INTEGER, campo_10 INTEGER, campo_11 VARCHAR(8), campo_12 VARCHAR(8), campo_13 VARCHAR(8), campo_14 VARCHAR(8), campo_15 VARCHAR(8), campo_16 VARCHAR(8), campo_17 INTEGER, campo_18 INTEGER, campo_19 INTEGER, campo_20 INTEGER, campo_21 INTEGER, campo_22 INTEGER, campo_23 INTEGER, campo_24 INTEGER, campo_25 INTEGER, campo_26 INTEGER, campo_27 INTEGER, campo_28 INTEGER, campo_29 INTEGER, campo_30 INTEGER, campo_31 INTEGER, campo_32 INTEGER, campo_33 INTEGER, campo_34 INTEGER, campo_35 INTEGER, campo_36 INTEGER, campo_37 INTEGER, campo_38 INTEGER, campo_39 INTEGER, campo_40 INTEGER, campo_41 INTEGER, campo_42 INTEGER, campo_43 INTEGER, campo_44 INTEGER, campo_45 INTEGER, campo_46 INTEGER, campo_47 INTEGER, campo_48 INTEGER, campo_49 INTEGER, campo_50 INTEGER, campo_51 INTEGER, campo_52 INTEGER, campo_53 INTEGER, campo_54 INTEGER, campo_55 INTEGER, campo_56 INTEGER, campo_57 INTEGER, campo_58 INTEGER, campo_59 INTEGER, campo_60 INTEGER, campo_61 INTEGER, campo_62 INTEGER, campo_63 INTEGER, campo_64 INTEGER, campo_65 INTEGER, campo_66 INTEGER, campo_67 INTEGER, campo_68 INTEGER, campo_69 INTEGER, campo_70 INTEGER, campo_71 INTEGER, campo_72 INTEGER, campo_73 INTEGER, campo_74 INTEGER, campo_75 INTEGER, campo_76 INTEGER, campo_77 INTEGER, campo_78 INTEGER, campo_79 INTEGER, campo_80 INTEGE, campo_81 INTEGE, campo_82 INTEGE, campo_83 INTEGE, campo_84 INTEGE, campo_85 INTEGE, campo_86 INTEGE, campo_87 VARCHAR(4), campo_88 VARCHAR(4), campo_89 VARCHAR(4), campo_90 VARCHAR(4), campo_91 INTEGER, campo_92 INTEGER, campo_93 INTEGER, campo_94 INTEGER, campo_95 INTEGER, campo_96 INTEGER, campo_97 INTEGER, campo_98 VARCHAR(4), campo_99 VARCHAR(4), campo_100 VARCHAR(4), campo_101 VARCHAR(4), campo_102 VARCHAR(4), campo_103 VARCHAR(4), campo_104 VARCHAR(4), campo_105 VARCHAR(4), campo_106 INTEGER, campo_107 INTEGER, campo_108 INTEGER, campo_109 INTEGER, campo_110 INTEGER, campo_111 INTEGER, campo_112 INTEGER, campo_113 INTEGER, campo_114 INTEGER, campo_115 INTEGER, campo_116 INTEGER, campo_117 VARCHAR(4), campo_118 VARCHAR(4), campo_119 VARCHAR(4), campo_120 VARCHAR(4), campo_121 VARCHAR(4), campo_122 VARCHAR(4), campo_123 VARCHAR(4), campo_124 VARCHAR(4), campo_125 VARCHAR(4), campo_126 VARCHAR(4), campo_127 VARCHAR(4), campo_128 VARCHAR(4), campo_129 VARCHAR(4), campo_130 VARCHAR(4), campo_131 VARCHAR(4), campo_132 VARCHAR(4), campo_133 INTEGER, campo_134 INTEGER, campo_135 INTEGER, campo_136 INTEGER, campo_137 INTEGER, campo_138 INTEGER, campo_139 INTEGER, campo_140 INTEGER, campo_141 INTEGER, campo_142 INTEGER, campo_143 INTEGER, campo_144 INTEGER, campo_145 INTEGER, campo_146 INTEGER, campo_147 INTEGER, campo_148 INTEGER, campo_149 INTEGER, campo_150 INTEGER, campo_151 VARCHAR(5), campo_152 VARCHAR(5),campo_153 VARCHAR(5), campo_154 INTEGER, campo_155 INTEGER, campo_156 INTEGER, campo_157 INTEGER, campo_158 INTEGER, campo_159 INTEGER, campo_160 INTEGER, campo_161 INTEGER, campo_162 INTEGER, campo_163 INTEGER, campo_164 INTEGER, campo_165 INTEGER, campo_166 INTEGER, campo_167 INTEGER, campo_168 INTEGER, campo_169 INTEGER, campo_170 INTEGER, status VARCHAR(20), sync INTEGER, id_remoto INTEGER, campo_2 VARCHAR(8), FOREIGN KEY(campo_2) REFERENCES escola(inep))",
                 [],
                 (_, { rows }) => {
-                    console.log("Criado com sucesso!");
                     resolve(true);
                 },
                 (_, error) => {
-                    console.log(error);
                     resolve(false);
                     return false;
                 }
@@ -44,7 +42,6 @@ const insertEstruturaFisicaEscolar = (value: IAllValues, status: string) => {
                     else resolve(false);
                 },
                 (_, error) => {
-                    console.log("Erro: ", error);
                     resolve(false);
                     return false;
                 }
@@ -64,7 +61,6 @@ const updateEstruturaFisicaEscolar = (value: IAllValues, inep: string, status: s
                     else resolve(false)
                 },
                 (_, error) => {
-                    console.log(error);
                     resolve(false);
                     return false;
                 }
@@ -84,7 +80,6 @@ const updateIdRemotoAndSync = (id: number, inep: string) => {
                     else resolve(false)
                 },
                 (_, error) => {
-                    console.log(error);
                     resolve(false);
                     return false;
                 }
@@ -106,7 +101,6 @@ const getStatusByInep = (inep: string) => {
                     }
                 },
                 (_, error) => {
-                    console.log(error);
                     resolve(false);
                     return false;
                 }
@@ -128,7 +122,6 @@ const getIdRemoto = (inep: string) => {
                     }
                 },
                 (_, error) => {
-                    console.log(error);
                     resolve(false);
                     return false;
                 }
@@ -150,7 +143,6 @@ const getItemsToSendByInep = (inep: string) => {
                     }
                 },
                 (_, error) => {
-                    console.log(error);
                     resolve(false);
                     return false;
                 }
@@ -193,7 +185,6 @@ const deleteEstruturaFisicaEscolar = (inep: string) => {
                     }
                 },
                 (_, error) => {
-                    console.log(error);
                     resolve(false);
                     return false;
                 });
@@ -216,7 +207,6 @@ const getEstruturaFisicaEscolarByInep = (inep: string) => {
                     }
                 },
                 (_, error) => {
-                    console.log(error);
                     resolve(false);
                     return false;
                 }

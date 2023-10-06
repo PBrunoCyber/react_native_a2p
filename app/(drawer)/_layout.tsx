@@ -40,18 +40,27 @@ export default function Layout() {
                     }} />
                 <Drawer.Screen name='addEstruturaFisicaEscolar/index'
                     options={{
+                        drawerItemStyle: { display: 'none' },
                         drawerLabel: "Novo Formulário",
                         title: "Novo Formulário",
                         drawerActiveTintColor: COLORS.white,
                         drawerIcon: ({ color }) => <Ionicons name='add' size={30} color={color} />,
                     }} />
                 <Drawer.Screen name='editEstruturaFisicaEscolar/index'
-                    redirect={true}
                     options={{
+                        drawerItemStyle: { display: 'none' },
                         drawerLabel: "Editar Formulário",
                         title: 'Editar Formulário',
                         drawerActiveTintColor: COLORS.white,
                         drawerIcon: ({ color }) => <Ionicons name='pencil' size={30} color={color} />,
+                    }} />
+                <Drawer.Screen name='viewEstruturaFisicaEscolar/index'
+                    options={{
+                        drawerItemStyle: { display: 'none' },
+                        drawerLabel: "Visualizar Formulário",
+                        title: 'Visualizar Formulário',
+                        drawerActiveTintColor: COLORS.white,
+                        drawerIcon: ({ color }) => <Ionicons name='eye' size={30} color={color} />,
                     }} />
             </Drawer>
         </Provider>
