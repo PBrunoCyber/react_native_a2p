@@ -15,7 +15,7 @@ interface IProps {
     fonteEnergiaEletricaChange?: (value: IEnergiaEletrica) => void,
     formErrors?: any,
     data?: IEnergiaEletrica,
-    editData?: IEnergiaEletrica 
+    editData?: IEnergiaEletrica
 }
 
 const FonteEnergiaEletrica = ({ formErrors, fonteEnergiaEletricaChange, data, editData }: IProps) => {
@@ -70,7 +70,7 @@ const FonteEnergiaEletrica = ({ formErrors, fonteEnergiaEletricaChange, data, ed
 
                 <View style={styles.formContainer}>
                     {formErrors?.energiaEletrica && <Text style={styles.messageError}>{formErrors?.energiaEletrica}</Text>}
-                    <CheckBox fontWeight='bold' disable={data ? true : false} value={answer.campo_26} label='Não há energia elétrica*' onSelect={(value) => handleOptionChange('campo_26', value)} />
+                    <CheckBox fontWeight='bold' disable={data ? true : false} value={answer.campo_26} label='Não há energia elétrica' onSelect={(value) => handleOptionChange('campo_26', value)} />
                     {formErrors?.campo_26 && <Text style={styles.messageError}>{formErrors?.campo_26}</Text>}
                     <Text style={{ fontWeight: "bold", marginTop: 40, marginBottom: 0 }}>Fonte de energia elétrica*</Text>
                     <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_23} disable={answer.campo_26 === 1 || data ? true : false} value={answer.campo_23} textOption={textOption} fontWeight='normal' question='a) Rede Pública*' onSelect={(option) => handleOptionChange('campo_23', option)} />

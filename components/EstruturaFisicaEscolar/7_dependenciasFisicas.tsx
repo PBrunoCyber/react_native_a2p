@@ -112,7 +112,7 @@ const DependenciasFisicas = ({ formErrors, dependenciasFisicas, data, editData }
             {isClicked === true || formErrors && Object.keys(formErrors).length > 0 ?
                 <View style={styles.formContainer}>
                     {formErrors?.dependenciasFisicas && <Text style={styles.messageError}>{formErrors?.dependenciasFisicas}</Text>}
-                    <CheckBox fontWeight='bold' disable={data ? true : false} value={answer.campo_77} label='Nenhuma das dependências relacionadas*' onSelect={(value) => handleOptionChange('campo_77', value)} />
+                    <CheckBox fontWeight='bold' disable={data ? true : false} value={answer.campo_77} label='Nenhuma das dependências relacionadas' onSelect={(value) => handleOptionChange('campo_77', value)} />
                     {formErrors?.campo_77 && <Text style={styles.messageError}>{formErrors?.campo_77}</Text>}
                     <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_40} disable={answer.campo_77 === 1 || data ? true : false} value={answer.campo_40} textOption={textOption} fontWeight='bold' question='1 - Almoxarifado*' onSelect={(option) => handleOptionChange('campo_40', option)} />
                     {formErrors?.campo_40 && <Text style={styles.messageError}>{formErrors?.campo_40}</Text>}

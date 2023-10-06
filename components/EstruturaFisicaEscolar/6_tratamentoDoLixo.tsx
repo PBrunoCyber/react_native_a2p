@@ -20,7 +20,7 @@ interface IProps {
 
 const TratamentoDoLixo = ({ formErrors, tratamentoDoLixo, data, editData }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<ITratamentoDoLixo>(data || editData ||{ campo_36: null, campo_37: null, campo_38: null, campo_39: 0 });
+    const [answer, setAnswers] = useState<ITratamentoDoLixo>(data || editData || { campo_36: null, campo_37: null, campo_38: null, campo_39: 0 });
     const textOption = ["SIM", "NÃO"]
 
     const handleOptionChange = (question: string, answer: number | string | null) => {
@@ -77,10 +77,10 @@ const TratamentoDoLixo = ({ formErrors, tratamentoDoLixo, data, editData }: IPro
             {isClicked === true || formErrors && Object.keys(formErrors).length > 0 ?
                 <View style={styles.formContainer}>
                     {formErrors?.tratamentoDoLixo && <Text style={styles.messageError}>{formErrors?.tratamentoDoLixo}</Text>}
-                    <CheckBox fontWeight='bold' disable={data ? true : false} value={answer.campo_39} label='Não há tratamento*' onSelect={(value) => handleOptionChange('campo_39', value)} />
+                    <CheckBox fontWeight='bold' disable={data ? true : false} value={answer.campo_39} label='Não há tratamento' onSelect={(value) => handleOptionChange('campo_39', value)} />
                     {formErrors?.campo_39 && <Text style={styles.messageError}>{formErrors?.campo_39}</Text>}
                     <Text style={{ fontWeight: "bold", marginTop: 40, marginBottom: 0 }}>Tratamento do lixo/resíduos</Text>
-                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_36} disable={answer.campo_39 === 1 || data ? true : false} value={answer.campo_36} textOption={textOption} fontWeight='normal' question='a) Separação do lixo/resíduos*' onSelect={(option) => handleOptionChange('campo_36', option)} />
+                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_36} disable={answer.campo_39 === 1 || data ? true : false} value={answer.campo_36} textOption={textOption} fontWeight='normal' question='a) Separação do lixo/resíduos' onSelect={(option) => handleOptionChange('campo_36', option)} />
                     {formErrors?.campo_36 && <Text style={styles.messageError}>{formErrors?.campo_36}</Text>}
                     <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_37} disable={answer.campo_39 === 1 || answer.campo_36 !== 1 || data ? true : false} value={answer.campo_37} textOption={textOption} fontWeight='normal' question='b) Reaproveitamento/reutilização*' onSelect={(option) => handleOptionChange('campo_37', option)} />
                     {formErrors?.campo_37 && <Text style={styles.messageError}>{formErrors?.campo_37}</Text>}

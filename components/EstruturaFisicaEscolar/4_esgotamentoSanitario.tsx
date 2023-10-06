@@ -69,7 +69,7 @@ const EsgotamentoSanitario = ({ formErrors, esgotamentoSanitarioChange, data, ed
             {isClicked === true || formErrors && Object.keys(formErrors).length > 0 ?
                 <View style={styles.formContainer}>
                     {formErrors?.esgotamentoSanitario && <Text style={styles.messageError}>{formErrors?.esgotamentoSanitario}</Text>}
-                    <CheckBox fontWeight='bold' disable={data ? true : false} value={answer.campo_30} label='Não há esgotamento sanitário*' onSelect={(value) => handleOptionChange('campo_30', value)} />
+                    <CheckBox fontWeight='bold' disable={data ? true : false} value={answer.campo_30} label='Não há esgotamento sanitário' onSelect={(value) => handleOptionChange('campo_30', value)} />
                     {formErrors?.campo_30 && <Text style={styles.messageError}>{formErrors?.campo_30}</Text>}
                     <Text style={{ fontWeight: "bold", marginTop: 40, marginBottom: 0 }}>Esgotamento Sanitário</Text>
                     <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_27} disable={answer.campo_30 === 1 || data ? true : false} value={answer.campo_27} textOption={textOption} fontWeight='normal' question='a) Rede Pública*' onSelect={(option) => handleOptionChange('campo_27', option)} />

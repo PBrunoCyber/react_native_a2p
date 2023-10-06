@@ -74,7 +74,7 @@ const Equipamentos = ({ formErrors, equipamentos, data, editData }: IProps) => {
             {isClicked === true || formErrors && Object.keys(formErrors).length > 0 ?
                 <View style={styles.formContainer}>
                     {formErrors?.equipamentos && <Text style={styles.messageError}>{formErrors?.equipamentos}</Text>}
-                    <CheckBox fontWeight='bold' disable={data ? true : false} value={answer.campo_97} label='Nenhum dos equipamentos listados*' onSelect={(value) => handleOptionChange('campo_97', value)} />
+                    <CheckBox fontWeight='bold' disable={data ? true : false} value={answer.campo_97} label='Nenhum dos equipamentos listados' onSelect={(value) => handleOptionChange('campo_97', value)} />
                     {formErrors?.campo_97 && <Text style={styles.messageError}>{formErrors?.campo_97}</Text>}
                     <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_91} disable={answer.campo_97 === 1 || data ? true : false} value={answer.campo_91} textOption={textOption} fontWeight='normal' question='1 - Antena parabólica*' onSelect={(option) => handleOptionChange('campo_91', option)} />
                     {formErrors?.campo_91 && <Text style={styles.messageError}>{formErrors?.campo_91}</Text>}

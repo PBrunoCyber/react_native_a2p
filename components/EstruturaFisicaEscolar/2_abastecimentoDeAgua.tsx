@@ -69,17 +69,17 @@ const AbastecimentoDeAgua = ({ formErrors, abastecimentoDeAguaChange, data, edit
             {isClicked === true || formErrors && Object.keys(formErrors).length > 0 ?
                 <View style={styles.formContainer}>
                     {formErrors?.abastecimentoDeAgua && <Text style={styles.messageError}>{formErrors?.abastecimentoDeAgua}</Text>}
-                    <CheckBox fontWeight='bold' disable={data ? true : false} value={answer.campo_22} label='Não há abastecimento de água*' onSelect={(value) => handleOptionChange('campo_22', value)} />
+                    <CheckBox fontWeight='bold' disable={data ? true : false} value={answer.campo_22} label='Não há abastecimento de água' onSelect={(value) => handleOptionChange('campo_22', value)} />
                     {formErrors?.campo_22 && <Text style={styles.messageError}>{formErrors?.campo_22}</Text>}
                     <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_17} disable={data ? true : false} value={answer.campo_17} textOption={textOption} fontWeight='bold' question='Fornece água potável para consumo humano*' onSelect={(option) => handleOptionChange('campo_17', option)} />
                     {formErrors?.campo_17 && <Text style={styles.messageError}>{formErrors?.campo_17}</Text>}
-                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_18} disable={answer.campo_22 === 1 || data ? true : false} value={answer.campo_18} textOption={textOption} fontWeight='normal' question='a) Rede Pública' onSelect={(option) => handleOptionChange('campo_18', option)} />
+                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_18} disable={answer.campo_22 === 1 || data ? true : false} value={answer.campo_18} textOption={textOption} fontWeight='normal' question='a) Rede Pública*' onSelect={(option) => handleOptionChange('campo_18', option)} />
                     {formErrors?.campo_18 && <Text style={styles.messageError}>{formErrors?.campo_18}</Text>}
-                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_19} disable={answer.campo_22 === 1 || data ? true : false} value={answer.campo_19} textOption={textOption} fontWeight='normal' question='b) Poço Artesiano' onSelect={(option) => handleOptionChange('campo_19', option)} />
+                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_19} disable={answer.campo_22 === 1 || data ? true : false} value={answer.campo_19} textOption={textOption} fontWeight='normal' question='b) Poço Artesiano*' onSelect={(option) => handleOptionChange('campo_19', option)} />
                     {formErrors?.campo_19 && <Text style={styles.messageError}>{formErrors?.campo_19}</Text>}
-                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_20} disable={answer.campo_22 === 1 || data ? true : false} value={answer.campo_20} textOption={textOption} fontWeight='normal' question='c) Cacimba / Cisterna / Poço' onSelect={(option) => handleOptionChange('campo_20', option)} />
+                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_20} disable={answer.campo_22 === 1 || data ? true : false} value={answer.campo_20} textOption={textOption} fontWeight='normal' question='c) Cacimba / Cisterna / Poço*' onSelect={(option) => handleOptionChange('campo_20', option)} />
                     {formErrors?.campo_20 && <Text style={styles.messageError}>{formErrors?.campo_20}</Text>}
-                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_21} disable={answer.campo_22 === 1 || data ? true : false} value={answer.campo_21} textOption={textOption} fontWeight='normal' question='d) Fonte / Rio / Igarapé / Riacho / Córrego' onSelect={(option) => handleOptionChange('campo_21', option)} />
+                    <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_21} disable={answer.campo_22 === 1 || data ? true : false} value={answer.campo_21} textOption={textOption} fontWeight='normal' question='d) Fonte / Rio / Igarapé / Riacho / Córrego*' onSelect={(option) => handleOptionChange('campo_21', option)} />
                     {formErrors?.campo_21 && <Text style={styles.messageError}>{formErrors?.campo_21}</Text>}
                 </View>
                 : null

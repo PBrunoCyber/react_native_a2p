@@ -20,7 +20,7 @@ interface IProps {
 
 const AcessoInternet = ({ acessoInternet, formErrors, data, editData }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IAcessoInternet>(data || editData ||{ campo_106: null, campo_107: null, campo_108: null, campo_109: null, campo_110: 0 });
+    const [answer, setAnswers] = useState<IAcessoInternet>(data || editData || { campo_106: null, campo_107: null, campo_108: null, campo_109: null, campo_110: 0 });
     const textOption = ["SIM", "NÃO"]
 
     useEffect(() => {
@@ -30,7 +30,7 @@ const AcessoInternet = ({ acessoInternet, formErrors, data, editData }: IProps) 
 
     useFocusEffect(
         useCallback(() => {
-            setAnswers(data || editData ||{ campo_106: null, campo_107: null, campo_108: null, campo_109: null, campo_110: 0 });
+            setAnswers(data || editData || { campo_106: null, campo_107: null, campo_108: null, campo_109: null, campo_110: 0 });
             setIsClicked(false);
         }, [])
     )
@@ -70,7 +70,7 @@ const AcessoInternet = ({ acessoInternet, formErrors, data, editData }: IProps) 
             {isClicked === true || formErrors && Object.keys(formErrors).length > 0 ?
                 <View style={styles.formContainer}>
                     {formErrors?.acessoInternet && <Text style={styles.messageError}>{formErrors?.acessoInternet}</Text>}
-                    <CheckBox fontWeight='bold' disable={data ? true : false} value={answer.campo_110} label='Não possui acesso à internet*' onSelect={(value) => handleOptionChange('campo_110', value)} />
+                    <CheckBox fontWeight='bold' disable={data ? true : false} value={answer.campo_110} label='Não possui acesso à internet' onSelect={(value) => handleOptionChange('campo_110', value)} />
                     {formErrors?.campo_110 && <Text style={styles.messageError}>{formErrors?.campo_110}</Text>}
                     <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_106} disable={answer.campo_110 === 1 || data ? true : false} value={answer.campo_106} textOption={textOption} fontWeight='normal' question='1 - Para uso administrativo*' onSelect={(option) => handleOptionChange('campo_106', option)} />
                     {formErrors?.campo_106 && <Text style={styles.messageError}>{formErrors?.campo_106}</Text>}

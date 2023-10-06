@@ -20,7 +20,7 @@ interface IProps {
 
 const OrgaosColegiados = ({ orgaosColegiados, formErrors, data, editData }: IProps) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [answer, setAnswers] = useState<IOrgaosColegiados>(data || editData ||{ campo_164: null, campo_165: null, campo_166: null, campo_167: null, campo_168: null, campo_169: 0 });
+    const [answer, setAnswers] = useState<IOrgaosColegiados>(data || editData || { campo_164: null, campo_165: null, campo_166: null, campo_167: null, campo_168: null, campo_169: 0 });
     const textOption = ["SIM", "NÃO"]
 
     const handleOptionChange = (question: string, answer: number | string | null) => {
@@ -71,7 +71,7 @@ const OrgaosColegiados = ({ orgaosColegiados, formErrors, data, editData }: IPro
             {isClicked === true || formErrors && Object.keys(formErrors).length > 0 ?
                 <View style={styles.formContainer}>
                     {formErrors?.orgaosColegiados && <Text style={styles.messageError}>{formErrors?.orgaosColegiados}</Text>}
-                    <CheckBox fontWeight='bold' disable={data ? true : false} value={answer.campo_169} label='Não há órgãos colegiados em funcionamento*' onSelect={(value) => handleOptionChange('campo_169', value)} />
+                    <CheckBox fontWeight='bold' disable={data ? true : false} value={answer.campo_169} label='Não há órgãos colegiados em funcionamento' onSelect={(value) => handleOptionChange('campo_169', value)} />
                     {formErrors?.campo_169 && <Text style={styles.messageError}>{formErrors?.campo_169}</Text>}
                     <RadioGroup options={[1, 0]} marked={data ? true : false} selected={data?.campo_164} disable={answer.campo_169 === 1 || data ? true : false} value={answer.campo_164} textOption={textOption} fontWeight='normal' question='1 - Associação de Pais*' onSelect={(option) => handleOptionChange('campo_164', option)} />
                     {formErrors?.campo_164 && <Text style={styles.messageError}>{formErrors?.campo_164}</Text>}

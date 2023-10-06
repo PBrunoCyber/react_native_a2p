@@ -145,7 +145,7 @@ const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMat
                             </View>
                         </View>
                         <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 30, zIndex: 99 }]}>
-                            <Text style={{ flexGrow: 1, maxWidth: 400 }}>b) Código da língua indígena 2*</Text>
+                            <Text style={{ flexGrow: 1, maxWidth: 400 }}>b) Código da língua indígena 2</Text>
                             <View style={{ maxWidth: 260, flexGrow: 1 }}>
                                 <TouchableOpacity style={[styles.dropdownSelector, !answer.campo_151 || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} disabled={!answer.campo_151 || data ? true : false} onPress={() => { setCod2(!cod2); setLinguas(json); }}>
                                     <Text>{answer.campo_152}</Text>
@@ -171,7 +171,7 @@ const LinguaMinistrada = ({ formErrors, linguaMinistrada, answerInstrumentosEMat
                             </View>
                         </View>
                         <View style={[styles.formFlex, { paddingLeft: 50, marginBottom: 30, zIndex: 9 }]}>
-                            <Text style={{ flexGrow: 1, maxWidth: 400 }}>c) Código da língua indígena 3*</Text>
+                            <Text style={{ flexGrow: 1, maxWidth: 400 }}>c) Código da língua indígena 3</Text>
                             <View style={{ maxWidth: 260, flexGrow: 1 }}>
                                 <TouchableOpacity style={[styles.dropdownSelector, !answer.campo_152 || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} disabled={!answer.campo_152 || data ? true : false} onPress={() => { setCod3(!cod3); setLinguas(json); }}>
                                     <Text>{answer.campo_153}</Text>

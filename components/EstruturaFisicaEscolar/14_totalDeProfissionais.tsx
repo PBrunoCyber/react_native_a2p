@@ -28,7 +28,7 @@ const TotalDeProfissionais = ({ formErrors, totalDeProfissionais, data, editData
 
     useFocusEffect(
         useCallback(() => {
-            setAnswers(data || editData ||{ campo_117: '', campo_118: '', campo_119: '', campo_120: '', campo_121: '', campo_122: '', campo_123: '', campo_124: '', campo_125: '', campo_126: '', campo_127: '', campo_128: '', campo_129: '', campo_130: '', campo_131: '', campo_132: '', campo_133: 0, campo_134: null });
+            setAnswers(data || editData || { campo_117: '', campo_118: '', campo_119: '', campo_120: '', campo_121: '', campo_122: '', campo_123: '', campo_124: '', campo_125: '', campo_126: '', campo_127: '', campo_128: '', campo_129: '', campo_130: '', campo_131: '', campo_132: '', campo_133: 0, campo_134: null });
             setIsClicked(false);
         }, [])
     )
@@ -80,18 +80,18 @@ const TotalDeProfissionais = ({ formErrors, totalDeProfissionais, data, editData
             {isClicked === true || formErrors && Object.keys(formErrors).length > 0 ?
                 <View style={styles.formContainer}>
                     {formErrors?.totalProfissionais && <Text style={styles.messageError}>{formErrors?.totalProfissionais}</Text>}
-                    <CheckBox fontWeight='bold' disable={data ? true : false} value={answer.campo_133} label='Não há funcionários para as funções listadas*' onSelect={(value) => handleOptionChange('campo_133', value)} />
+                    <CheckBox fontWeight='bold' disable={data ? true : false} value={answer.campo_133} label='Não há funcionários para as funções listadas' onSelect={(value) => handleOptionChange('campo_133', value)} />
                     {formErrors?.campo_133 && <Text style={styles.messageError}>{formErrors?.campo_133}</Text>}
                     <View style={{ marginTop: 40 }}>
                         <View style={[styles.formFlex, { marginBottom: 30 }]}>
-                            <Text style={{  maxWidth: 400, fontWeight: 'normal' }}>1 - Auxiliares de secretaria ou auxiliares administrativos, atendentes*</Text>
+                            <Text style={{ maxWidth: 400, fontWeight: 'normal' }}>1 - Auxiliares de secretaria ou auxiliares administrativos, atendentes*</Text>
                             <View style={{ maxWidth: 260, flexGrow: 1 }}>
                                 <TextInput maxLength={4} value={data?.campo_117 ? data.campo_117 : answer.campo_117} style={[styles.input, answer?.campo_133 == 1 || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 && !data ? true : false} onChangeText={(txt) => handleOptionChange('campo_117', txt)} />
                                 {formErrors?.campo_117 && <Text style={styles.messageError}>{formErrors?.campo_117}</Text>}
                             </View>
                         </View>
                         <View style={[styles.formFlex, { marginBottom: 30 }]}>
-                            <Text style={{  maxWidth: 400, fontWeight: 'normal' }}>2 - Auxiliar de serviços gerais, porteiro(a), zelador(a), faxineiro(a), horticultor(a), jardineiro(a)*</Text>
+                            <Text style={{ maxWidth: 400, fontWeight: 'normal' }}>2 - Auxiliar de serviços gerais, porteiro(a), zelador(a), faxineiro(a), horticultor(a), jardineiro(a)*</Text>
                             <View style={{ maxWidth: 260, flexGrow: 1 }}>
                                 <TextInput maxLength={4} value={data?.campo_118 ? data.campo_118 : answer.campo_118} style={[styles.input, answer?.campo_133 == 1 || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 && !data ? true : false} onChangeText={(txt) => handleOptionChange('campo_118', txt)} />
                                 {formErrors?.campo_118 && <Text style={styles.messageError}>{formErrors?.campo_118}</Text>}
@@ -170,7 +170,7 @@ const TotalDeProfissionais = ({ formErrors, totalDeProfissionais, data, editData
                         <View style={[styles.formFlex, { marginBottom: 40 }]}>
                             <Text style={{ maxWidth: 400, fontWeight: 'normal' }}>13 - Técnicos(as), monitores(as), supervisores(as) ou auxiliares de laboratório(s), de apoio a tecnologias educacionais ou em multimeios/multimídias eletrônico-digitais.*</Text>
                             <View style={{ maxWidth: 260, flexGrow: 1 }}>
-                                <TextInput maxLength={4} value={data?.campo_129 ? data.campo_129 : answer.campo_129} style={[styles.input, answer?.campo_133 == 1 || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 && !data? true : false} onChangeText={(txt) => handleOptionChange('campo_129', txt)} />
+                                <TextInput maxLength={4} value={data?.campo_129 ? data.campo_129 : answer.campo_129} style={[styles.input, answer?.campo_133 == 1 || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 && !data ? true : false} onChangeText={(txt) => handleOptionChange('campo_129', txt)} />
                                 {formErrors?.campo_129 && <Text style={styles.messageError}>{formErrors?.campo_129}</Text>}
                             </View>
                         </View>
@@ -191,7 +191,7 @@ const TotalDeProfissionais = ({ formErrors, totalDeProfissionais, data, editData
                         <View style={[styles.formFlex, { marginBottom: 40 }]}>
                             <Text style={{ maxWidth: 400, fontWeight: 'normal' }}>16 - Tradutor e Intérprete de Libras para atendimento em outros ambientes da escola que não seja sala de aula*</Text>
                             <View style={{ maxWidth: 260, flexGrow: 1 }}>
-                                <TextInput maxLength={4} value={data?.campo_132 ? data.campo_132 : answer.campo_132} style={[styles.input, answer?.campo_133 == 1 || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 && !data? true : false} onChangeText={(txt) => handleOptionChange('campo_132', txt)} />
+                                <TextInput maxLength={4} value={data?.campo_132 ? data.campo_132 : answer.campo_132} style={[styles.input, answer?.campo_133 == 1 || data ? { backgroundColor: COLORS.lightGray } : { backgroundColor: COLORS.white }]} editable={answer?.campo_133 !== 1 && !data ? true : false} onChangeText={(txt) => handleOptionChange('campo_132', txt)} />
                                 {formErrors?.campo_132 && <Text style={styles.messageError}>{formErrors?.campo_132}</Text>}
                             </View>
                         </View>
