@@ -240,21 +240,21 @@ const Home = () => {
         selectedItems.forEach(async (item, index) => {
             const res: any = await EstruturaFisicaEscolar.getStatusByInep(item);
             if (res === "Final") {
-                const res: any = await EstruturaFisicaEscolar.getIdRemoto(item);
-                if (res) {
+                const id: any = await EstruturaFisicaEscolar.getIdRemoto(item);
+                if (id) {
                     setMessageSyncOk(`(${index + 1}/${size}) Preparando dados...`);
                     const response: any = await EstruturaFisicaEscolar.getItemsToSendByInep(item);
                     if (response != false) {
                         try {
                             setMessageSyncOk(`(${index + 1}/${size}) Enviando dados...`);
-                            const concat = { res, ...response };
+                            const concat = { id, ...response };
                             await axios.post(`${url}/finished/`, concat, {
                                 headers: {
                                     "Content-Type": "application/json"
                                 }
                             });
                             setMessageSyncOk(`(${index + 1}/${size}) Sincronizando...`);
-                            await EstruturaFisicaEscolar.updateIdRemotoAndSync(res, item);
+                            await EstruturaFisicaEscolar.updateIdRemotoAndSync(id, item);
                             initData();
                             setMessageOk('');
                             setSelectedItems([]);
